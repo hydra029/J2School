@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION['customer_id'])) { 
-	$customer_id = $_SESSION['customer_id'];
+$customer_id = $_SESSION['customer_id'];
 }
-?>
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,31 +17,11 @@ if (isset($_SESSION['customer_id'])) {
 	$id = $_GET['id'];
 	$sql = "select * from products where id = $id";
 	$result = mysqli_query($connect, $sql);
-	if (isset($_SESSION['error'])) {
-		?>
-		<span class="error">
-			<?php echo $_SESSION['error'] ?>
-		</span>
-		<?php 
-		unset($_SESSION['error']);	
-	}
-	?>
-	<?php
-	if (isset($_SESSION['success'])) {
-		?>
-		<span class="success">
-			<?php echo $_SESSION['success'] ?>
-		</span>
-		<?php 
-		unset($_SESSION['success'])	
-		?>
-		<?php
-	}
-	require 'menu.php';
-	
 	?>
 	<div id="div_tong">
-		
+		<?php 
+		require 'menu.php';
+		?>
 		<div id="div_tren">
 			<h1 style="text-align: center; ">
 				Thông tin sản phẩm
@@ -67,7 +47,7 @@ if (isset($_SESSION['customer_id'])) {
 				if (isset($_SESSION['customer_id'])) { 
 					?>
 					<br>
-					<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase&page=product_detail">
+					<a href="add_to_cart.php">
 						Thêm vào giỏ hàng
 					</a> 
 					<?php
@@ -79,7 +59,6 @@ if (isset($_SESSION['customer_id'])) {
 			<?php endforeach ?>
 		</div>
 		<?php 
-		mysqli_close($connect);
 		require 'footer.php';
 		?>
 	</div>

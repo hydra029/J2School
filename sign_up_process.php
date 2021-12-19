@@ -33,8 +33,6 @@ if (preg_match($password_regex, $password) == 0) {
 $sql = "insert into customers(name, gender, dob, email, password, token)
 values ('$name', '$gender', '$dob', '$email', '$password', '')";
 $result = mysqli_query($connect,$sql);
-mysqli_close($connect);
 $_SESSION['success'] = 'Đăng ký thành công';
 header('location:sign_in.php');
-
 ?>

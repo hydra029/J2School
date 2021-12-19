@@ -27,7 +27,6 @@ if ($rows == 1) {
 	where
 	id = '$id'";
 	mysqli_query($connect,$sql);
-	mysqli_close($connect);
 	setcookie('remember', $token, time() + 60*60*24);	
 	$_SESSION['success'] = 'Đăng nhập thành công';
 	header('location:index.php');
@@ -51,13 +50,11 @@ if ($rows == 1) {
 			id = '$id'";
 			setcookie('remember', $token, time() + 60*60*24);
 			mysqli_query($connect,$sql);
-			mysqli_close($connect);
 		}
 		$_SESSION['success'] = 'Đăng nhập thành công';
 		header('location:index.php');
 	} else {
 		session_start();
-		mysqli_close($connect);
 		$_SESSION['error'] = 'Sai thông tin đăng nhập';
 		header('location:sign_in.php');
 	}
