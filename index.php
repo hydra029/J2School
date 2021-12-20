@@ -32,8 +32,9 @@ if (isset($_SESSION['customer_id'])) {
 
 	$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
 	$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
+	
 	$so_san_pham = $ket_qua_so_san_pham['count(*)'];
-	$so_san_pham_1_trang = 4;
+	$so_san_pham_1_trang = 8;
 	$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
 	$bo_qua = $so_san_pham_1_trang*($trang-1);
 	$sql = "select * from products
@@ -43,13 +44,13 @@ if (isset($_SESSION['customer_id'])) {
 	$result = mysqli_query($connect, $sql);
 	require 'menu.php';
 	if (isset($_SESSION['customer_name'])) { ?>
-		<span style="color: green;">
+		<p style="color: green;">
 			Chào mừng 
 			<?php 
 			echo $_SESSION['customer_name']; 
 			?>
 			đã quay trở lại
-		</span>
+		</p>
 		<?php
 	}
 	if (isset($_SESSION['error'])) {
@@ -100,7 +101,7 @@ if (isset($_SESSION['customer_id'])) {
 						if (isset($_SESSION['customer_id'])) { 
 							?>
 							<br>
-							<a href="add_to_cart.php">
+							<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase&page=index">
 								Thêm vào giỏ hàng
 							</a> 
 							<?php
@@ -110,12 +111,16 @@ if (isset($_SESSION['customer_id'])) {
 				</ul>
 			<?php endforeach ?>
 		</div>
+		<br>
+		
 		<?php for ($i = 1; $i <= $so_trang ; $i++) { ?>
 			<a href="?trang=<?php echo $i ?>&tim_kiem=<?php echo $tim_kiem ?>">
 				<?php echo $i ?>
 			</a>
 		<?php } ?>
-		<?php 
+		
+		<?php
+		mysqli_close($connect);
 		require 'footer.php';
 		?>
 
