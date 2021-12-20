@@ -47,7 +47,7 @@ $customer_id = $_SESSION['customer_id'];
 				if (isset($_SESSION['customer_id'])) { 
 					?>
 					<br>
-					<a href="add_to_cart.php">
+					<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase">
 						Thêm vào giỏ hàng
 					</a> 
 					<?php
@@ -59,6 +59,7 @@ $customer_id = $_SESSION['customer_id'];
 			<?php endforeach ?>
 		</div>
 		<?php 
+		mysqli_close($connect);
 		require 'footer.php';
 		?>
 	</div>

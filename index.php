@@ -69,7 +69,7 @@ if (isset($_SESSION['customer_id'])) {
 						if (isset($_SESSION['customer_id'])) { 
 							?>
 							<br>
-							<a href="add_to_cart.php">
+							<a href="add_to_cart.php?id=<?php echo $each['id']?>&type=increase">
 								Thêm vào giỏ hàng
 							</a> 
 							<?php
@@ -81,6 +81,7 @@ if (isset($_SESSION['customer_id'])) {
 		</div>
 
 		<?php 
+		mysqli_close($connect);
 		require 'footer.php';
 		?>
 	</div>
