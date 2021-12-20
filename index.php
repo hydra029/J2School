@@ -119,10 +119,12 @@ if (isset($_SESSION['customer_id'])) {
 			</a>
 		<?php } ?>
 		
-		<?php
-		mysqli_close($connect);
-		require 'footer.php';
-		?>
+		<div id="div_duoi">
+			<?php
+			mysqli_close($connect);
+			require 'footer.php';
+			?>
+		</div>
 
 	</div>
 </body>

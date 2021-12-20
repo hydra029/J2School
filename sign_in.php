@@ -97,9 +97,11 @@ if (isset($_COOKIE['remember'])) {
 				</table>
 			</form>
 		</div>
-		<?php 
-		require 'footer.php';
-		?>
+<div id="div_duoi">
+			<?php 
+			require 'footer.php';
+			?>
+		</div>
 	</div>
 </body>
 </html>

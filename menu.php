@@ -44,17 +44,26 @@
 		height: 50px;
 	}
 	#div_tong {
-		height: 800px;
+
+		min-height: 800px;
+		max-height: 6000px;
+		position: relative;
 	}
 	#div_tren {
 		text-align: center;
-		height: 10%;
+		height: 150px;
 	}
 	#div_giua {
-		height: 75%;
+		min-height: 500px;
+		max-height: 4900px;
+
 	}
 	#div_duoi {
+		height: 100px;
 		text-align: center;
+		position: relative;
+		bottom: 0px;
+
 	}
 	p {
 		text-align: center;

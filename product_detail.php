@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION['customer_id'])) { 
-$customer_id = $_SESSION['customer_id'];
+	$customer_id = $_SESSION['customer_id'];
 }
- ?>
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,27 @@ $customer_id = $_SESSION['customer_id'];
 	<div id="div_tong">
 		<?php 
 		require 'menu.php';
+		if (isset($_SESSION['error'])) {
+			?>
+			<span class="error">
+				<?php echo $_SESSION['error'] ?>
+			</span>
+			<?php 
+			unset($_SESSION['error']);	
+		}
+		?>
+		<?php
+		if (isset($_SESSION['success'])) {
+			?>
+			<span class="success">
+				<?php echo $_SESSION['success'] ?>
+			</span>
+			<?php 
+			unset($_SESSION['success'])	
+			?>
+			<?php
+		}
+		
 		?>
 		<div id="div_tren">
 			<h1 style="text-align: center; ">
@@ -58,9 +79,11 @@ $customer_id = $_SESSION['customer_id'];
 				</p>
 			<?php endforeach ?>
 		</div>
-		<?php 
-		require 'footer.php';
-		?>
+		<div id="div_duoi">
+			<?php 
+			require 'footer.php';
+			?>
+		</div>
 	</div>
 </body>
 </html>

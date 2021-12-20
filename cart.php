@@ -25,7 +25,6 @@ if (isset($_SESSION['customer_id'])) {
 	<?php 
 
 	$total = 0;
-	require 'menu.php';
 	if (isset($_SESSION['error'])) {
 		?>
 		<span class="error">
@@ -46,6 +45,7 @@ if (isset($_SESSION['customer_id'])) {
 		?>
 		<?php
 	}
+
 	require 'connect.php';
 	$sql = "select
 	products.id as id,
@@ -61,13 +61,15 @@ if (isset($_SESSION['customer_id'])) {
 	$result = mysqli_query($connect,$sql);
 	$rows = mysqli_num_rows($result);
 	?>
+
 	<div id="div_tong">
+		<?php require 'menu.php'; ?>
 		<div id="div_tren">
 			<h3>
 				Đây là giỏ hàng cá nhân
 			</h3>
 		</div>
-		<div id="div_giua">
+		<div id="div_giua" >
 			<?php if ($rows == 0) { ?>
 				<h4 class="center">
 					Giỏ hàng không có gì !!!
@@ -113,7 +115,7 @@ if (isset($_SESSION['customer_id'])) {
 								</a>
 							</td>
 							<td>
-								<img width="200px" height="200px" src="admin/products/<?php echo $each['image']; ?>">
+								<img width="200px" height="150px" src="admin/products/<?php echo $each['image']; ?>">
 							</td>
 							<td>
 								<?php echo $each['manufacturer_name'] ?>
@@ -179,9 +181,11 @@ if (isset($_SESSION['customer_id'])) {
 			}
 			?>
 		</div>
-		<?php 
-		require 'footer.php';
-		?>
+		<div id="div_duoi">
+			<?php 
+			require 'footer.php';
+			?>
+		</div>
 	</div>
 </body>
 </html>
