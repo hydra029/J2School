@@ -1,0 +1,17 @@
+/*-------------------------------validate-------------------------------*/
+span {
+    text-align: center;
+    animation: fadein 3.5s;
+}
+@-webkit-keyframes fadein {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+#span{
+  color: red; 
+  font-size: 40px;
+  position: fixed;
+  top: 6vh;
+  left: 35vw;
+}

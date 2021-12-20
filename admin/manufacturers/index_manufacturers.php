@@ -3,7 +3,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="../indexx.css">
-
+	<link rel="stylesheet" href="../style_validate.css">
 </head>
 <body>
 
