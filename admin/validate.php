@@ -1,9 +1,22 @@
+<link rel="stylesheet" href="indexx.css">
+
 
 <?php if (isset($_GET['error'])){ ?>
-	<span style="color: red; font-size: 20px"><?php echo $_GET['error']; ?></span>
+	<div id = "status">
+		<span id = "span"><?php echo $_GET['error']; ?></span>
+	</div>
 <?php } ?>
 
 <?php if (isset($_GET['success'])){ ?>
-	<span style="color: green; font-size: 20px"><?php echo $_GET['success']; ?></span>
+	<div id = "status">
+		<span id = "span"><?php echo $_GET['success']; ?></span>
+	</div>
 <?php } ?>
   
+
+<script>
+    setTimeout(() => {  
+    var parent = document.getElementById("status");
+    var child = document.getElementById("span");
+    parent.removeChild(child); }, 3500);
+</script>
