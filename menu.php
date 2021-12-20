@@ -1,7 +1,6 @@
 <style type="text/css">
 	a {
 		text-decoration: none;
-
 	}
 	a:link {
 		color: blue;
@@ -19,7 +18,6 @@
 	ul {
 		list-style-type: none;
 		padding: 0;
-
 	}
 	ul li ul li {
 		background: ghostwhite;
@@ -88,7 +86,9 @@
 	.success {
 		color: green;
 	}
-
+	.margin {
+		margin: auto;
+	}
 </style>
 
 <ul>

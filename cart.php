@@ -25,6 +25,26 @@ if (isset($_SESSION['customer_id'])) {
 	<?php 
 	$total = 0;
 	require 'menu.php';
+	if (isset($_SESSION['error'])) {
+		?>
+		<span class="error">
+			<?php echo $_SESSION['error'] ?>
+		</span>
+		<?php 
+		unset($_SESSION['error']);	
+	}
+	?>
+	<?php
+	if (isset($_SESSION['success'])) {
+		?>
+		<span class="success">
+			<?php echo $_SESSION['success'] ?>
+		</span>
+		<?php 
+		unset($_SESSION['success'])	
+		?>
+		<?php
+	}
 	require 'connect.php';
 	$sql = "select
 	products.id as id,
@@ -70,53 +90,55 @@ if (isset($_SESSION['customer_id'])) {
 					<th>
 						Xoá
 					</th>
-					<th>
+					<th width="15%">
 						Thành tiền
 					</th>
 				</tr>
 				<?php foreach ($result as $each): ?>
 					<?php 
 					$sum = $each['price'] * $each['quantity'];
-					 ?>
+					?>
 					<tr>
 						<td>
-						<?php echo $each['name'] ?>
-					</td>
-					<td>
-						<img width="200px" height="200px" src="admin/products/<?php echo $each['image']; ?>">
-					</td>
-					<td>
-						<?php echo $each['manufacturer_name'] ?>
-					</td>
-					<td>
-						<?php echo number_format($each['price']) ?> VNĐ
-					</td>		
-					<td>
-						<?php echo $each['quantity'] ?>
-					</td>
-					<td width=10%>
-						<button>
-							<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=decrease" class="no_decor">
-							&nbsp - &nbsp
-						</a>
-						</button>
-						<span class="center">
-							&nbsp <?php echo $each['quantity'] ?> &nbsp
-						</span>
-						<button>
-							<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase" class="no_decor">
-							&nbsp + &nbsp
-						</a>
-						</button>
-					</td>
-					<td>
-						<a href="delete.php?product_id=<?php echo $each['id']?>">
-							Xoá
-						</a>
-					</td>
-					<td>
-						<?php echo number_format($sum)?> VNĐ
-					</td> 
+							<a href="product_detail.php?id=<?php echo $each['id'] ?>">
+								<?php echo $each['name'] ?>
+							</a>
+						</td>
+						<td>
+							<img width="200px" height="200px" src="admin/products/<?php echo $each['image']; ?>">
+						</td>
+						<td>
+							<?php echo $each['manufacturer_name'] ?>
+						</td>
+						<td>
+							<?php echo number_format($each['price']) ?> VNĐ
+						</td>		
+						<td>
+							<?php echo $each['quantity'] ?>
+						</td>
+						<td width=10%>
+							<button>
+								<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=decrease" class="no_decor">
+									-
+								</a>
+							</button>
+							<span class="center">
+								&nbsp <?php echo $each['quantity'] ?> &nbsp
+							</span>
+							<button >
+								<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase" class="no_decor">
+									+
+								</a>
+							</button>
+						</td>
+						<td>
+							<a href="delete.php?product_id=<?php echo $each['id']?>">
+								Xoá
+							</a>
+						</td>
+						<td>
+							<?php echo number_format($sum)?> VNĐ
+						</td> 
 					</tr>
 					<?php 
 					$total +=  $sum;
@@ -130,6 +152,18 @@ if (isset($_SESSION['customer_id'])) {
 						<?php 
 						echo number_format($total ) . " VNĐ";
 						?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="7" class="right" >
+						
+					</td>
+					<td>
+						<button>
+							<a href="order_form.php">
+								Đặt hàng
+							</a>
+						</button>
 					</td>
 				</tr>
 			</table>
