@@ -15,45 +15,38 @@ $cart = mysqli_fetch_array($result);
 if ($rows < 1) {
 	if ($type = 'increase') {
 		$quantity = 1;
-
 		$sql = "insert into carts(customer_id,product_id,quantity)
 		values ('$customer_id','$product_id','$quantity')";
-
 		mysqli_query($connect,$sql);
 		$_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
 	} 
 }else {
-
 	$quantity = $cart['quantity'];
-	if ($type == 'increase') {
-
-		$quantity ++;
-		$sql = "update carts 
-		set
-		quantity = '$quantity'
-		where
-		customer_id = '$customer_id' and product_id = '$product_id'";
-
-		mysqli_query($connect,$sql);
-		$_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
-
-	} else if ($type == 'decrease') {
-		if ($quantity == 1) {
+	if ($quantity == 1) {
+		if ($type == 'decrease') {
 			$sql = "delete from carts where product_id = '$product_id' and customer_id = '$customer_id'";
 			mysqli_query($connect,$sql);
+			$_SESSION['success'] = 'Xoá khỏi giỏ hàng thành công';
+		} else {
+			$quantity ++;
+			$_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
+		}
+	} else {
+		if ($type == 'increase') {
+			$quantity ++;
+			$_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
 		} else {
 			$quantity --;
-			$sql = "update carts 
-			set
-			quantity = '$quantity'
-			where
-			customer_id = '$customer_id' and product_id = '$product_id'";
-			mysqli_query($connect,$sql);
-			
 			$_SESSION['success'] = 'Xoá khỏi giỏ hàng thành công';
 		}
-	}
+	} 
 }
+$sql = "update carts 
+set
+quantity = '$quantity'
+where
+customer_id = '$customer_id' and product_id = '$product_id'";
+mysqli_query($connect,$sql);
 
 if ($page == 'index') {
 	header("location:index.php");

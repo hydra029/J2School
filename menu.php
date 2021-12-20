@@ -45,7 +45,7 @@
 		height: 50px;
 	}
 	#div_tong {
-		height: 900px;
+		height: 800px;
 	}
 	#div_tren {
 		text-align: center;
