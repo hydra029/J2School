@@ -9,19 +9,21 @@ body{
     background-color: white;
 }
 
-.top{
-	width: 98vw;
-	height: 13vh;
-	background-color: white;
-  
 
-  border: 1px solid black
+.all > .right > .top {
+  height: 10vh;
+  width: 78vw;
+  background-color: white;
+
+  display: flex;
+  flex-direction: row;
 }
 
 .right {
     width: 78vw;
     height: 100vh;
     float: left;
+    background-color: #F6F6F6;
 }
 
 .left {
@@ -29,24 +31,49 @@ body{
     height: 100vh;
     float: left;
     background-color: white;
-
 }
 
+/*---------------------------------Login-----------------------------------*/
+
+
+/*
+.all > .right > .top > .search {
+  width: 40%;
+  height: 100%
+}
+
+.all > .right > .top > .login {
+  width: 30%;
+  height: 100%
+}*/
+
+/*---------------------------------search-----------------------------------*/
+.search{
+  display: flex;
+  justify-content: flex-start;
+
+
+}
 
 /*---------------------------------Login-----------------------------------*/
 .login {
-	float:right;
+display: flex;
+  justify-content: flex-end;
+
+
 }
+
+
+
+
+
 /*---------------------------------header-----------------------------------*/
 .header {
-  text-align: center;
+  margin-top: 25px;
+  background-color: white;
+  padding: 1px;
 }
 
-
-/*---------------------------------search-----------------------------------*/
-.form_search{
-  float: right;
-}
 
 /*---------------------------------table-----------------------------------*/
 
@@ -173,7 +200,7 @@ ul {
 
 
 .card{
-  height: 700px;
+  height: 100vh;
   background-color: #5080FE;
   border-radius: 10px 10px;
 }
@@ -182,6 +209,8 @@ ul {
 .header_menu{
   padding: 5px;
   background-color: #0046FE;
+  height: 9vh;
+
 }
 
 h3{

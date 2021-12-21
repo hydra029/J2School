@@ -2,37 +2,40 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="../indexx.css">
+	<link rel="stylesheet" href="../indexxx.css">
 	<link rel="stylesheet" href="../style_validate.css">
-</head>
-<body bgcolor="ABB1BA">
+</head>  
+<body>
 
-
-
-<div class = "all">
-	<div class="top">
-		<div class = "login">
-			<a href="https://google.com">Đăng nhập</a>
-		</div>
-	</div> 
-
+<div class="all">
 	<div class="left">
 		<?php require '../menu.php'; ?>
-	</div>
+	</div> 
 
-	<div class = "right">
-		<h1 style = "text-align: center;">Thêm nhà sản xuất</h1>
-		<form action = "process_insert_manufacturers.php" method = "post">
-			Tên nhà sản xuất
-			<input type="text" name="name"><br>
-			Số điện thoại
-			<input type="text" name="phone"><br>
-			Địa chỉ
-			<textarea name = "address"></textarea><br>
-			Hình ảnh
-			<input type="text" name="image"><br>
-			<button>Thêm</button>
-		</form>
+
+	<div class="right">
+		<div class="top">
+
+		</div>
+
+		<div class = "bot">
+
+			<div class = "header">
+				<h1 class =  "header" >Thêm nhà sản xuất</h1>
+			</div>
+			<br>
+
+			<form action = "process_insert_manufacturers.php" method = "post">
+				Tên nhà sản xuất
+				<input type="text" name="name"><br>
+				Số điện thoại
+				<input type="text" name="phone"><br>
+				Địa chỉ
+				<textarea name = "address"></textarea><br>
+				Hình ảnh
+				<input type="text" name="image"><br>
+				<button>Thêm</button>
+			</form>
 	</div>
 </div>
 

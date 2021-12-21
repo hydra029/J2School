@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="../indexx.css">
+	<link rel="stylesheet" href="../indexxx.css">
 	<link rel="stylesheet" href="../style_validate.css">
 </head>
-<body bgcolor="ABB1BA">
+<body>
 
 <?php require '../connect_database.php';
 
@@ -20,18 +20,24 @@ if ($count_rows === 1){
 
 
 <div class="all">
-	<div class="top">
-		<div class = "login">
-			<a href="https://google.com">Đăng nhập</a>
-		</div>
-	</div> 
-
 	<div class="left">
 		<?php require '../menu.php'; ?>
-	</div>
+	</div> 
 
-	<div class = "right">
-		<h1 style = "text-align: center;">Sửa nhà sản xuất</h1>
+
+	<div class="right">
+		<div class="top">
+
+		</div>
+
+		<div class = "bot">
+
+			<div class = "header">
+				<h1 class =  "header" >Sửa nhà sản xuất</h1>
+			</div>
+			<br>
+
+
 		<form action = "process_update_manufacturers.php" method = "post">
 			<input type="" name="id" value = "<?php echo $array_manufacturers['id'] ?>" hidden>
 			Tên nhà sản xuất
