@@ -108,7 +108,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			</table>
 
 			<?php for ($index_page = 1; $index_page <= $count_pages; $index_page++) { ?>
-				<a href="?page=<?php echo $index_page ?>&search=<?php echo $search ?>">
+				<a href="?page=<?php echo $index_page ?>&search=<?php echo $content_search ?>">
 					<?php echo $index_page ?>
 				</a>
 
