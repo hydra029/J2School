@@ -9,17 +9,39 @@
 
 <?php require '../connect_database.php';
 
-$content_search_address = '';
-$content_search_name = '';
+
+$content_search = '';
 
 if (isset($_GET['search'])) {
-	$content_search_name = $_GET['search'];	
-	$content_search_address = $_GET['search'];
+	$content_search = $_GET['search'];	
+}
+
+if (isset($_GET['page'])) {
+	$index_page = $_GET['page'];
+} else {
+	$index_page = 1 ;
 }
 
 
 
-$sql_command_select = "select * from manufacturers where name like '%$content_search_name%' or address like '%$content_search_address%'";
+//lấy ra tổng số nhà sản xuất
+$sql_command_count_manufacturers = "select count(*) from manufacturers where name like '%$content_search%'";
+$query_sql_command_count_manufacturers = mysqli_query($connect_database, $sql_command_count_manufacturers);
+$count_manufacturers = mysqli_fetch_array($query_sql_command_count_manufacturers)['count(*)'];
+
+
+
+//tổng số nhà sản xuất trên 1 trang => 4
+$manufacturers_per_page = 4;
+
+//tổng số trang
+$count_pages = ceil($count_manufacturers / $manufacturers_per_page);
+
+//số nhà sx bỏ qua trên 1 trang
+
+$count_skip_manufacturers = ($index_page - 1 ) * $manufacturers_per_page;
+
+$sql_command_select = "select * from manufacturers where name like '%$content_search%' limit $manufacturers_per_page offset $count_skip_manufacturers";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 
@@ -39,6 +61,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			<div class = "search">
 				<form class = "form_search">
 					Tìm kiếm
+					<input type="search" name="search" value = "<?php echo $content_search ?>">
 					<button>
 						<img src="../style/style_image/icon_search.png" width="50px">
 					</button>
@@ -47,7 +70,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 
 			<div class = "login">
 				<a class = "login" href="https://google.com">Đăng nhập</a>
-			</div>
+			</div> 
 		</div>
 
 
@@ -84,9 +107,16 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				</tr>
 				<?php endforeach ?>
 			</table>
+		<?php for ($index_page = 1; $index_page <= $count_pages; $index_page++) { ?>
+			<a href="?page=<?php echo $index_page?>&search=<?php $content_search ?>">
+				<?php echo $index_page ?>
+			</a>
+		
+		<?php } ?>
 
 
 		</div>
+
 	</div>
 
 </div>

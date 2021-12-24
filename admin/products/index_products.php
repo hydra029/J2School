@@ -10,7 +10,37 @@
 
 require '../connect_database.php';
 
-$sql_command_select = "select products.*, manufacturers.name as 'manufacturers_name' from products join manufacturers on manufacturers.id = products.manufacturer_id";
+if (isset($_GET['search'])) {
+	$content_search = $_GET['search'];
+} else {
+	$content_search = '';
+}
+
+if (isset($_GET['page'])) {
+	$index_page = $_GET['page'];
+} else {
+	$index_page = 1;
+}
+
+
+//lấy ra tổng số bài
+$sql_command_count_products = "select count(*) from products where name like '%$content_search%' ";
+$query_sql_command_count_products = mysqli_query($connect_database, $sql_command_count_products);
+$count_products = mysqli_fetch_array($query_sql_command_count_products)['count(*)'];
+
+
+//lấy ra số bài trên 1 trang
+$products_per_page = 4;
+
+
+//lấy ra tổng số trang
+$count_pages = ceil($count_products / $products_per_page);
+
+//lấy ra số trang bỏ qua
+$count_skip_products = ($index_page - 1) * $products_per_page;
+
+
+$sql_command_select = "select products.*, manufacturers.name as 'manufacturers_name' from products join manufacturers on manufacturers.id = products.manufacturer_id where products.name like '%$content_search%' limit $products_per_page offset $count_skip_products ";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 
@@ -28,6 +58,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			<div class = "search">
 				<form class = "form_search">
 					Tìm kiếm
+					<input type="search" name="search" value = "<?php echo $content_search ?>" >
 					<button>
 						<img src="../style/style_image/icon_search.png" width="50px">
 					</button>
@@ -75,6 +106,15 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				</tr>
 				<?php endforeach ?>
 			</table>
+
+			<?php for ($index_page = 1; $index_page <= $count_pages; $index_page++) { ?>
+				<a href="?page=<?php echo $index_page ?>&search=<?php echo $search ?>">
+					<?php echo $index_page ?>
+				</a>
+
+
+			<?php } ?>
+
 	</div>
 </div>
 
