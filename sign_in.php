@@ -1,11 +1,5 @@
 <?php 
-session_start();
-if (isset($_SESSION['customer_id'])) {
-	header('location:index.php');
-} else if (isset($_SESSION['admin_id'])) {
-	header('location:admin/root/index_admin.php');
-}
-
+require 'check_account.php';
 require 'connect.php';
 	$customer_email = '';
 	$customer_password = '';

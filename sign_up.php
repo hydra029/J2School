@@ -1,3 +1,6 @@
+<?php 
+require 'check_account.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>

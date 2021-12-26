@@ -1,13 +1,6 @@
 <?php 
-session_start();
-if (isset($_SESSION['customer_id'])) {
-	$customer_id = $_SESSION['customer_id'];
-
-} else if (isset($_SESSION['admin_id'])) {
-	header('location:admin/root/index_admin.php');
-}
+require 'check_account.php';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,27 +46,9 @@ if (isset($_SESSION['customer_id'])) {
 		</p>
 		<?php
 	}
-	if (isset($_SESSION['error'])) {
-		?>
-		<span class="error">
-			<?php echo $_SESSION['error'] ?>
-		</span>
-		<?php 
-		unset($_SESSION['error']);	
-	}
+	require 'announce.php';
 	?>
-	<?php
-	if (isset($_SESSION['success'])) {
-		?>
-		<span class="success">
-			<?php echo $_SESSION['success'] ?>
-		</span>
-		<?php 
-		unset($_SESSION['success'])	
-		?>
-		<?php
-	}
-	?>
+	
 	<div id="div_tong">
 		<div id="div_tren">
 			<h1 style="text-align: center; ">
@@ -101,7 +76,7 @@ if (isset($_SESSION['customer_id'])) {
 						if (isset($_SESSION['customer_id'])) { 
 							?>
 							<br>
-							<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase&page=index">
+							<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase&page=index">
 								Thêm vào giỏ hàng
 							</a> 
 							<?php

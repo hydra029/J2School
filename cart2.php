@@ -16,7 +16,43 @@ require 'check_account.php';
 </head>
 <body>
 	<?php 
-	require 'announce.php';
+
+	$total = 0;
+	if (isset($_SESSION['error'])) {
+		?>
+		<span class="error">
+			<?php echo $_SESSION['error'] ?>
+		</span>
+		<?php 
+		unset($_SESSION['error']);	
+	}
+	?>
+	<?php
+	if (isset($_SESSION['success'])) {
+		?>
+		<span class="success">
+			<?php echo $_SESSION['success'] ?>
+		</span>
+		<?php 
+		unset($_SESSION['success'])	
+		?>
+		<?php
+	}
+
+	require 'connect.php';
+	$sql = "select
+	products.id as id,
+	products.name as name,
+	products.image as image,
+	manufacturers.name as manufacturer_name,
+	products.price as price,
+	carts.quantity as quantity
+	from carts 
+	join products on products.id = carts.product_id
+	join manufacturers on manufacturers.id = products.manufacturer_id
+	where customer_id = $customer_id";
+	$result = mysqli_query($connect,$sql);
+	$rows = mysqli_num_rows($result);
 	?>
 
 	<div id="div_tong">
@@ -27,14 +63,12 @@ require 'check_account.php';
 			</h3>
 		</div>
 		<div id="div_giua" >
-			<?php if (empty($_SESSION['cart'])) { ?>
+			<?php if ($rows == 0) { ?>
 				<h4 class="center">
 					Giỏ hàng không có gì !!!
 				</h4>
 				<?php	
 			} else {
-				$result = $_SESSION['cart'];
-				$total = 0;
 				?>
 				<table class="border" width="100%">
 					<tr>
@@ -63,9 +97,7 @@ require 'check_account.php';
 							Thành tiền
 						</th>
 					</tr>
-					<?php 
-					foreach ($result as $product_id => $each): 
-						?>
+					<?php foreach ($result as $each): ?>
 						<?php 
 						$sum = $each['price'] * $each['quantity'];
 						?>
@@ -89,7 +121,7 @@ require 'check_account.php';
 							</td>
 							<td width=10%>
 								<button>
-									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=decrease" class="no_decor">
+									<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=decrease" class="no_decor">
 										-
 									</a>
 								</button>
@@ -97,7 +129,7 @@ require 'check_account.php';
 									&nbsp <?php echo $each['quantity'] ?> &nbsp
 								</span>
 								<button >
-									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase" class="no_decor">
+									<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase" class="no_decor">
 										+
 									</a>
 								</button>
@@ -112,10 +144,9 @@ require 'check_account.php';
 							</td> 
 						</tr>
 						<?php 
-
-						$total += $sum;
+						$total +=  $sum;
 						?>
-					<?php endforeach; ?>
+					<?php endforeach ?>
 					<tr>
 						<td colspan="7" class="left" >
 							Tổng cộng:

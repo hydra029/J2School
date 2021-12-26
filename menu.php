@@ -115,36 +115,44 @@
 			if (isset($_SESSION['customer_id'])) {
 				?>
 				<li> 
-				<a href="cart.php">
-					<p>
-						Giỏ hàng
-					</p>
-				</a> 
-			</li><li> 
-				<a href="sign_out.php">
-					<p>
-						Đăng xuất
-					</p>
-				</a> 
-			</li>
+					<a href="cart.php">
+						<p>
+							Giỏ hàng
+						</p>
+					</a> 
+				</li>
+				<li> 
+					<a href="order.php">
+						<p>
+							Hoá đơn
+						</p>
+					</a> 
+				</li>
+				<li> 
+					<a href="sign_out.php">
+						<p>
+							Đăng xuất
+						</p>
+					</a> 
+				</li>
 			<?php } else { ?>
 				<li> 
-				<a href="sign_in.php">
-					<p>
-						Đăng nhập
-					</p>
-				</a> 
-			</li>
-			<li> 
-				<a href="sign_up.php">
-					<p>
-						Đăng ký
-					</p>
-				</a> 
-			</li>
+					<a href="sign_in.php">
+						<p>
+							Đăng nhập
+						</p>
+					</a> 
+				</li>
+				<li> 
+					<a href="sign_up.php">
+						<p>
+							Đăng ký
+						</p>
+					</a> 
+				</li>
 				<?php
 			}
-			 ?>
+			?>
 		</ul>
 	</li>
 </ul>
