@@ -27,17 +27,17 @@ if ($type == 'increase') {
 		endforeach;
 	} else {
 		foreach ($result as $each):
-			$_SESSION['cart'][$product_id]['quantity'] ++;
+			$_SESSION['cart'][$customer_id][$product_id]['quantity'] ++;
 		endforeach;
 	}
 	$_SESSION['success'] = 'Thêm vào giỏ hàng thành công !';
 } else {
 	foreach ($result as $each):
-		$_SESSION['cart'][$product_id]['quantity'] --;
+		$_SESSION['cart'][$customer_id][$product_id]['quantity'] --;
 	endforeach;
 }
 foreach ($result as $each):
-	if ($_SESSION['cart'][$product_id]['quantity'] == 0) {
+	if ($_SESSION['cart'][$customer_id][$product_id]['quantity'] == 0) {
 		unset($_SESSION['cart'][$product_id]);
 	}	
 endforeach;
