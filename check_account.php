@@ -5,7 +5,5 @@ if (isset($_SESSION['customer_id'])) {
 
 } else if (isset($_SESSION['admin_id'])) {
 	header('location:admin/root/index_admin.php');
-} else {
-		header('location:index.php');
 }
 ?>

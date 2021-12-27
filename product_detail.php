@@ -68,7 +68,7 @@ if (isset($_SESSION['customer_id'])) {
 				if (isset($_SESSION['customer_id'])) { 
 					?>
 					<br>
-					<a href="add_to_cart.php?id=<?php echo $each['id'] ?>&type=increase&page=product_detail">
+					<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase&page=product_detail">
 						Thêm vào giỏ hàng
 					</a> 
 					<?php

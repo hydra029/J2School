@@ -27,13 +27,13 @@ require 'check_account.php';
 			</h3>
 		</div>
 		<div id="div_giua" >
-			<?php if (empty($_SESSION['cart'])) { ?>
+			<?php if (empty($_SESSION['cart'][$customer_id])) { ?>
 				<h4 class="center">
 					Giỏ hàng không có gì !!!
 				</h4>
 				<?php	
 			} else {
-				$result = $_SESSION['cart'];
+				$result = $_SESSION['cart'][$customer_id];
 				$total = 0;
 				?>
 				<table class="border" width="100%">

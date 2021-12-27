@@ -1,5 +1,6 @@
 <?php 
 require 'check_account.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,14 +33,6 @@ require 'check_account.php';
 			require 'connect.php';
 			$customer_id = $_SESSION['customer_id'];
 
-			$sql = "select
-			*
-			from receipts			
-			where customer_id = $customer_id";
-			$result = mysqli_query($connect,$sql);
-			$rows = mysqli_num_rows($result);
-			$receipt = mysqli_fetch_array($result);
-			$receipt_id = $receipt['id'];
 			if (empty($_SESSION['order'])) { 
 				?>
 				<h4 class="center">
@@ -47,9 +40,18 @@ require 'check_account.php';
 				</h4>
 				<?php	
 			} else {	
-				$result = $_SESSION['order'];
+				$sql = "select
+				*
+				from receipts			
+				where customer_id = $customer_id";
+				$result = mysqli_query($connect,$sql);
+				$receipt = mysqli_fetch_array($result);
+				$receipt_id = $receipt['id'];	
+				$result = $_SESSION['order'][$customer_id];
 				$num = 0;
-				foreach ($result as $receipt_id => $receipt):				
+
+
+				foreach ($result as $receipt_id => $receipt):			
 					$num ++;
 					?>
 
@@ -82,6 +84,7 @@ require 'check_account.php';
 						<?php
 
 						foreach ($receipt as $product_id => $each):
+							
 							$total += $each['price'] * $each['quantity'];
 							?>
 							<tr>

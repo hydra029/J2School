@@ -21,7 +21,7 @@ foreach ($result as $each) {
     $receipt_id = $each['id'];
 }
 
-$result = $_SESSION['cart'];
+$result = $_SESSION['cart'][$customer_id];
 foreach ($result as $product_id => $each):
     $product_id = $each['id'];
     $quantity = $each['quantity'];
@@ -32,8 +32,9 @@ foreach ($result as $product_id => $each):
     mysqli_query($connect, $sql);
 endforeach;
 
-$_SESSION['order'][$receipt_id] = $_SESSION['cart'];
-unset($_SESSION['cart']);
+$_SESSION['order'][$customer_id][$receipt_id] = $_SESSION['cart'][$customer_id];
+unset($_SESSION['cart'][$customer_id]);
+$_SESSION['success'] = "Đơn hàng đang chờ xét duyệt";
 header('location:order.php');
 mysqli_close($connect);
 ?>
