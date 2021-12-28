@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 28, 2021 at 11:15 AM
+-- Generation Time: Dec 28, 2021 at 12:32 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
@@ -141,20 +141,15 @@ CREATE TABLE `receipts` (
   `receiver_phone` varchar(20) DEFAULT NULL,
   `receiver_address` text,
   `note` text,
-  `status` int NOT NULL,
-  `total_price` int DEFAULT NULL
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `receipts`
 --
 
-INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`, `total_price`) VALUES
-(47, 1, '28-12-2021 04:28:34', '1', '1', '1', '1							\r\n						', 2, NULL),
-(48, 1, '28-12-2021 04:32:47', '2', '2', '2', '2							\r\n						', 2, NULL),
-(49, 1, NULL, NULL, NULL, NULL, NULL, 1, NULL),
-(50, 3, '28-12-2021 05:59:37', 'Mi Mi', '0123456789', 'cacsa', '							\r\n	csacsa					', 2, NULL),
-(51, 3, NULL, NULL, NULL, NULL, NULL, 1, NULL);
+INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`) VALUES
+(52, 3, '28-12-2021 07:14:19', 'huu Loc', '0123465798', 'Le Loi', 'oke oke oke							\r\n						', 2);
 
 -- --------------------------------------------------------
 
@@ -173,14 +168,8 @@ CREATE TABLE `receipt_detail` (
 --
 
 INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
-(47, 3, 4),
-(48, 2, 1),
-(49, 2, 2),
-(49, 3, 1),
-(50, 2, 3),
-(50, 3, 2),
-(51, 3, 1),
-(51, 8, 1);
+(52, 2, 1),
+(52, 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -260,7 +249,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
