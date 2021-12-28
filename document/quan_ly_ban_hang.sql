@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 28, 2021 at 10:35 AM
+-- Generation Time: Dec 28, 2021 at 11:15 AM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
@@ -64,8 +64,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `token`) VALUES
-(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', ''),
-(2, 'hydra', 'male', '2000-09-02', 'longthanh1@gmail.com', 'Long1234', 'user_61c99960006f46.425270491640601952');
+(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', 'user_61c9999558b4b5.698596591640602005'),
+(2, 'hydra', 'male', '2000-09-02', 'longthanh1@gmail.com', 'Long1234', 'user_61c99960006f46.425270491640601952'),
+(3, 'My Mi', 'male', '2021-11-29', 'abc@abc.abc', 'Abcd1234', 'user_61caeef3c18182.522694611640689395');
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,7 @@ CREATE TABLE `receipts` (
   `receiver_address` text,
   `note` text,
   `status` int NOT NULL,
-  `total_price` int NOT NULL
+  `total_price` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -149,8 +150,11 @@ CREATE TABLE `receipts` (
 --
 
 INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`, `total_price`) VALUES
-(47, 1, '28-12-2021 04:28:34', '1', '1', '1', '1							\r\n						', 2, 0),
-(48, 1, '28-12-2021 04:32:47', '2', '2', '2', '2							\r\n						', 2, 0);
+(47, 1, '28-12-2021 04:28:34', '1', '1', '1', '1							\r\n						', 2, NULL),
+(48, 1, '28-12-2021 04:32:47', '2', '2', '2', '2							\r\n						', 2, NULL),
+(49, 1, NULL, NULL, NULL, NULL, NULL, 1, NULL),
+(50, 3, '28-12-2021 05:59:37', 'Mi Mi', '0123456789', 'cacsa', '							\r\n	csacsa					', 2, NULL),
+(51, 3, NULL, NULL, NULL, NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -170,7 +174,13 @@ CREATE TABLE `receipt_detail` (
 
 INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
 (47, 3, 4),
-(48, 2, 1);
+(48, 2, 1),
+(49, 2, 2),
+(49, 3, 1),
+(50, 2, 3),
+(50, 3, 2),
+(51, 3, 1),
+(51, 8, 1);
 
 --
 -- Indexes for dumped tables
@@ -232,7 +242,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `manufacturers`
@@ -250,7 +260,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables
