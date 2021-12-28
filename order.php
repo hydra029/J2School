@@ -32,27 +32,34 @@ require 'check_account.php';
 			<?php 
 			require 'connect.php';
 			$customer_id = $_SESSION['customer_id'];
-
-			if (empty($_SESSION['order'])) { 
+			$sql = "select * from receipts where customer_id = '$customer_id' and status = '2'";
+			$result = mysqli_query($connect,$sql);
+			$rows = mysqli_num_rows($result);
+			if ($rows == 0) { 
 				?>
 				<h4 class="center">
 					Không có đơn hàng !!
 				</h4>
 				<?php	
 			} else {	
-				$sql = "select
-				*
-				from receipts			
-				where customer_id = $customer_id";
-				$result = mysqli_query($connect,$sql);
-				$receipt = mysqli_fetch_array($result);
-				$receipt_id = $receipt['id'];	
-				$result = $_SESSION['order'][$customer_id];
 				$num = 0;
 
 
-				foreach ($result as $receipt_id => $receipt):			
+				foreach ($result as $receipt):			
 					$num ++;
+					$receipt_id = $receipt['id'];
+					$sql = "select
+					receipt_detail.*,
+					products.name as name,
+					products.price as price,
+					products.image as image,
+					manufacturers.name as manufacturer_name
+					from receipt_detail
+					join products on products.id = receipt_detail.product_id
+					join manufacturers on manufacturers.id = products.manufacturer_id
+					where receipt_id = '$receipt_id'";
+
+					$result = mysqli_query($connect,$sql);
 					?>
 
 					<table class="border" width="900px">
@@ -83,9 +90,8 @@ require 'check_account.php';
 						</tr>
 						<?php
 
-						foreach ($receipt as $product_id => $each):
-							
-							$total += $each['price'] * $each['quantity'];
+						foreach ($result as $each): 
+							$sum = $each['price'] * $each['quantity'];
 							?>
 							<tr>
 								<td>
@@ -94,28 +100,38 @@ require 'check_account.php';
 									</a>
 								</td>
 								<td>
-									<img width="100px" height="100px" src="admin/products/<?php echo $each['image']; ?>">
+									<img width="200px" height="150px" src="admin/products/<?php echo $each['image']; ?>">
 								</td>
 								<td>
 									<?php echo $each['manufacturer_name'] ?>
 								</td>
 								<td>
-									<?php echo number_format($each['price']) . " VNĐ"?>
-								</td>
+									<?php echo number_format($each['price']) ?> VNĐ
+								</td>		
 								<td>
 									<?php echo $each['quantity'] ?>
 								</td>
 								<td>
-									<?php echo number_format($total) . " VNĐ" ?>
-								</td>
+									<?php echo number_format($sum)?> VNĐ
+								</td> 
 							</tr>
-
-							<?php
-						endforeach;
-						?>
+							<?php 
+							$total +=  $sum;
+							?>
+						<?php endforeach ?>
+						<tr>
+							<td colspan="5" class="left" >
+								Tổng cộng:
+							</td>
+							<td>
+								<?php 
+								echo number_format($total ) . " VNĐ";
+								?>
+							</td>
+						</tr>
 						<tr>
 							<td colspan="4">
-
+								
 							</td>
 							<td>
 								<a href="delete_order.php">

@@ -16,7 +16,30 @@ require 'check_account.php';
 </head>
 <body>
 	<?php 
+
+	$total = 0;
 	require 'announce.php';
+
+	require 'connect.php';
+	$status = '1';
+	$sql = "select
+	products.id as id,
+	products.name as name,
+	products.image as image,
+	manufacturers.name as manufacturer_name,
+	products.price as price,
+	receipt_detail.quantity as quantity,
+	receipts.customer_id as customer_id,
+	receipts.id as receipt_id,
+	receipts.status as status	
+	from receipt_detail
+	join receipts on receipts.id = receipt_detail.receipt_id
+	join products on products.id = receipt_detail.product_id
+	join manufacturers on products.manufacturer_id = manufacturers.id
+	where receipts.customer_id = $customer_id and receipts.status = '$status'";
+	$result = mysqli_query($connect,$sql);
+
+	$rows = mysqli_num_rows($result);
 	?>
 
 	<div id="div_tong">
@@ -27,14 +50,12 @@ require 'check_account.php';
 			</h3>
 		</div>
 		<div id="div_giua" >
-			<?php if (empty($_SESSION['cart'][$customer_id])) { ?>
+			<?php if ($rows == 0) { ?>
 				<h4 class="center">
 					Giỏ hàng không có gì !!!
 				</h4>
 				<?php	
 			} else {
-				$result = $_SESSION['cart'][$customer_id];
-				$total = 0;
 				?>
 				<table class="border" width="100%">
 					<tr>
@@ -63,9 +84,7 @@ require 'check_account.php';
 							Thành tiền
 						</th>
 					</tr>
-					<?php 
-					foreach ($result as $product_id => $each): 
-						?>
+					<?php foreach ($result as $each): ?>
 						<?php 
 						$sum = $each['price'] * $each['quantity'];
 						?>
@@ -89,7 +108,7 @@ require 'check_account.php';
 							</td>
 							<td width=10%>
 								<button>
-									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=decrease" class="no_decor">
+									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=decrease&page=cart" class="no_decor">
 										-
 									</a>
 								</button>
@@ -97,13 +116,13 @@ require 'check_account.php';
 									&nbsp <?php echo $each['quantity'] ?> &nbsp
 								</span>
 								<button >
-									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase" class="no_decor">
+									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase&page=cart" class="no_decor">
 										+
 									</a>
 								</button>
 							</td>
 							<td>
-								<a href="delete.php?product_id=<?php echo $each['id']?>">
+								<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=delete&page=cart">
 									Xoá
 								</a>
 							</td>
@@ -112,10 +131,9 @@ require 'check_account.php';
 							</td> 
 						</tr>
 						<?php 
-
-						$total += $sum;
+						$total +=  $sum;
 						?>
-					<?php endforeach; ?>
+					<?php endforeach ?>
 					<tr>
 						<td colspan="7" class="left" >
 							Tổng cộng:
