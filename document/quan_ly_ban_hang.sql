@@ -2,9 +2,9 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 28, 2021 at 09:36 AM
--- Server version: 5.7.33
+-- Host: localhost:3306
+-- Generation Time: Dec 28, 2021 at 10:35 AM
+-- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -24,25 +24,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `level` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `level`) VALUES
+(1, 'admin', 'admin@gmail.com', 'qwer1234', 0),
+(2, 'superadmin', 'superadmin@gmail.com', 'qwer1234', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `gender` varchar(200) NOT NULL,
   `dob` date NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `token` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `token`) VALUES
-(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', 'user_61c9999558b4b5.698596591640602005'),
+(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', ''),
 (2, 'hydra', 'male', '2000-09-02', 'longthanh1@gmail.com', 'Long1234', 'user_61c99960006f46.425270491640601952');
 
 -- --------------------------------------------------------
@@ -52,12 +74,12 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `to
 --
 
 CREATE TABLE `manufacturers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `image` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `manufacturers`
@@ -78,13 +100,13 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `description` text NOT NULL,
-  `price` int(11) NOT NULL,
+  `price` int NOT NULL,
   `image` varchar(200) NOT NULL,
-  `manufacturer_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `manufacturer_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
@@ -111,23 +133,24 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 --
 
 CREATE TABLE `receipts` (
-  `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `customer_id` int NOT NULL,
   `order_time` varchar(30) DEFAULT NULL,
   `receiver_name` varchar(50) DEFAULT NULL,
   `receiver_phone` varchar(20) DEFAULT NULL,
   `receiver_address` text,
   `note` text,
-  `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` int NOT NULL,
+  `total_price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `receipts`
 --
 
-INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`) VALUES
-(47, 1, '28-12-2021 04:28:34', '1', '1', '1', '1							\r\n						', 2),
-(48, 1, '28-12-2021 04:32:47', '2', '2', '2', '2							\r\n						', 2);
+INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`, `total_price`) VALUES
+(47, 1, '28-12-2021 04:28:34', '1', '1', '1', '1							\r\n						', 2, 0),
+(48, 1, '28-12-2021 04:32:47', '2', '2', '2', '2							\r\n						', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -136,10 +159,10 @@ INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `rec
 --
 
 CREATE TABLE `receipt_detail` (
-  `receipt_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` tinyint(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `receipt_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` tinyint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `receipt_detail`
@@ -152,6 +175,12 @@ INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customers`
@@ -194,28 +223,34 @@ ALTER TABLE `receipt_detail`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables
