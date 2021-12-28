@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 26, 2021 at 04:05 PM
+-- Generation Time: Dec 28, 2021 at 09:36 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -20,26 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `quan_ly_ban_hang`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `carts`
---
-
-CREATE TABLE `carts` (
-  `customer_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`customer_id`, `product_id`, `quantity`) VALUES
-(2, 2, 3),
-(2, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -62,8 +42,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `token`) VALUES
-(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', ''),
-(2, 'hydra', 'male', '2000-09-02', 'longthanh1@gmail.com', 'Long1234', 'user_61c052a24ce502.011703061639994018');
+(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', 'user_61c9999558b4b5.698596591640602005'),
+(2, 'hydra', 'male', '2000-09-02', 'longthanh1@gmail.com', 'Long1234', 'user_61c99960006f46.425270491640601952');
 
 -- --------------------------------------------------------
 
@@ -133,13 +113,21 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 CREATE TABLE `receipts` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `order_time` varchar(30) NOT NULL,
-  `receiver_name` varchar(50) NOT NULL,
-  `receiver_phone` varchar(20) NOT NULL,
-  `receiver_address` text NOT NULL,
-  `note` text NOT NULL,
+  `order_time` varchar(30) DEFAULT NULL,
+  `receiver_name` varchar(50) DEFAULT NULL,
+  `receiver_phone` varchar(20) DEFAULT NULL,
+  `receiver_address` text,
+  `note` text,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `receipts`
+--
+
+INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`) VALUES
+(47, 1, '28-12-2021 04:28:34', '1', '1', '1', '1							\r\n						', 2),
+(48, 1, '28-12-2021 04:32:47', '2', '2', '2', '2							\r\n						', 2);
 
 -- --------------------------------------------------------
 
@@ -150,20 +138,20 @@ CREATE TABLE `receipts` (
 CREATE TABLE `receipt_detail` (
   `receipt_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `receipt_detail`
+--
+
+INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
+(47, 3, 4),
+(48, 2, 1);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `carts`
---
-ALTER TABLE `carts`
-  ADD PRIMARY KEY (`customer_id`,`product_id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `customers`
@@ -199,7 +187,7 @@ ALTER TABLE `receipts`
 --
 ALTER TABLE `receipt_detail`
   ADD PRIMARY KEY (`receipt_id`,`product_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `receipt_detail_ibfk_1` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -227,18 +215,11 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `carts`
---
-ALTER TABLE `carts`
-  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
-  ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `products`
@@ -256,7 +237,7 @@ ALTER TABLE `receipts`
 -- Constraints for table `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
-  ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `carts` (`product_id`);
+  ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
