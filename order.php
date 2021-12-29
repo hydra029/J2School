@@ -18,7 +18,6 @@ require 'check_account.php';
 <body>
 	<?php 
 	require 'announce.php';
-	$total = 0;
 	?>
 
 	<div id="div_tong">
@@ -53,13 +52,17 @@ require 'check_account.php';
 					products.name as name,
 					products.price as price,
 					products.image as image,
-					manufacturers.name as manufacturer_name
+					manufacturers.name as manufacturer_name,
+					receipts.total as total
 					from receipt_detail
+					join receipts on receipts.id = receipt_detail.receipt_id
 					join products on products.id = receipt_detail.product_id
 					join manufacturers on manufacturers.id = products.manufacturer_id
 					where receipt_id = '$receipt_id'";
 
 					$result = mysqli_query($connect,$sql);
+					$order = mysqli_fetch_array($result);
+					$total = $order['total'];
 					?>
 
 					<table class="border" width="900px">
@@ -115,9 +118,7 @@ require 'check_account.php';
 									<?php echo number_format($sum)?> VNĐ
 								</td> 
 							</tr>
-							<?php 
-							$total +=  $sum;
-							?>
+							
 						<?php endforeach ?>
 						<tr>
 							<td colspan="5" class="left" >

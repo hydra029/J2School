@@ -38,7 +38,7 @@ require 'check_account.php';
 	join manufacturers on products.manufacturer_id = manufacturers.id
 	where receipts.customer_id = $customer_id and receipts.status = '$status'";
 	$result = mysqli_query($connect,$sql);
-
+	
 	$rows = mysqli_num_rows($result);
 	?>
 
@@ -56,6 +56,8 @@ require 'check_account.php';
 				</h4>
 				<?php	
 			} else {
+				$cart = mysqli_fetch_array($result);
+				$receipt_id = $cart['receipt_id'];
 				?>
 				<table class="border" width="100%">
 					<tr>
@@ -132,6 +134,8 @@ require 'check_account.php';
 						</tr>
 						<?php 
 						$total +=  $sum;
+						$sql = "update receipts set total = '$total' where id = '$receipt_id'";
+						mysqli_query($connect,$sql);
 						?>
 					<?php endforeach ?>
 					<tr>
@@ -164,6 +168,7 @@ require 'check_account.php';
 		<div id="div_duoi">
 			<?php 
 			require 'footer.php';
+			mysqli_close($connect);
 			?>
 		</div>
 	</div>
