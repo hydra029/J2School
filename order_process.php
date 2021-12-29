@@ -48,6 +48,6 @@ endforeach;
 
 
 $_SESSION['success'] = "Đơn hàng đang chờ xét duyệt";
-header('location:order.php');
+header('location:order.php?status=2');
 mysqli_close($connect);
 ?>

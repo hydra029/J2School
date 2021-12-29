@@ -24,40 +24,106 @@ require 'check_account.php';
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
 			<table class="border" width="900px">
-					<tr>
-						<td>
-							<a href="">Đã huỷ</a>
-						</td>
-						<td>
-							<a href="order.php?type=process">Chờ xét duyệt</a>
-						</td>
-						<td>
-							<a href="">Không duyệt</a>
-						</td>
-						<td>
-							<a href="">Đã duyệt</a>
-						</td>
-						<td>
-							<a href="">Đang giao hàng</a>
-						</td>
-						<td>
-							<a href="">Đã giao</a>
-						</td>
-						<td>
-							<a href="">Thành công</a>
-						</td>
-					</tr>
-				</table>
-			<h3>
-				Đây là đơn hàng đang chờ xét duyệt !
-			</h3>
+				<tr>
+					<td width="12.3%">
+						<a href="order.php?status=0">Đã huỷ</a>
+					</td>
+					<td width="12.3%">
+						<a href="order.php?status=2">Chờ xét duyệt</a>
+					</td>
+					<td width="12.3%">
+						<a href="order.php?status=3">Không duyệt</a>
+					</td>
+					<td width="12.3%">
+						<a href="order.php?status=4">Đã duyệt</a>
+					</td>
+					<td width="12.3%">
+						<a href="order.php?status=5">Đang giao hàng</a>
+					</td>
+					<td width="12.3%">
+						<a href="order.php?status=6">Đã giao</a>
+					</td>
+					<td width="12.3%">
+						<a href="order.php?status=7">Thành công</a>
+					</td>
+				</tr>
+			</table>
+			<?php 
+			if (empty($_GET['status'])) {
+				$status = 2;
+			} else {
+				$status = $_GET['status'];
+			}
+			switch ($status) {
+				case '0':
+				?>
+				<h3>
+					Đây là đơn hàng đã huỷ !
+				</h3>
+				<?php 
+				break;
+				case '2': 
+				?>
+				<h3>
+					Đây là đơn hàng đang chờ xét duyệt !
+				</h3>
+
+				<?php 
+				break;
+				case '3': 
+				?>
+				<h3>
+					Đây là đơn hàng không qua xét duyệt !
+				</h3>
+				<?php 
+				break;
+				case '4': 
+				?>
+				<h3>
+					Đây là đơn hàng đã xét duyệt !
+				</h3>
+				<?php 
+				break;
+				case '5': 
+				?>
+				<h3>					
+					Đây là đơn hàng đang giao hàng !
+				</h3>				
+				<?php 
+				break;
+				case '6': 
+				?>
+				<h3>
+					Đây là đơn hàng đã giao hàng!
+				</h3>
+				<?php 
+				break;
+				case '7': 
+				?>
+				<h3>
+					Đây là đơn hàng thành công!
+				</h3>
+
+
+				<?php
+				default:
+				?>
+				<h3>
+					Đây là đơn hàng đang chờ xét duyệt !
+				</h3>
+				<?php
+				break;
+			}
+			?>
 		</div>
 		<div id="div_giua" >
 
 			<?php 
 			require 'connect.php';
+
+			
 			$customer_id = $_SESSION['customer_id'];
-			$sql = "select * from receipts where customer_id = '$customer_id' and status = '2'";
+			$sql = "select * from receipts where customer_id = '$customer_id' and status = '$status'";
 			$result = mysqli_query($connect,$sql);
 			$rows = mysqli_num_rows($result);
 			if ($rows == 0) { 
@@ -122,7 +188,7 @@ require 'check_account.php';
 							?>
 							<tr>
 								<td>
-									<a href="product_detail.php?id=<?php echo $each['id'] ?>">
+									<a href="product_detail.php?id=<?php echo $each['product_id'] ?>">
 										<?php echo $each['name'] ?>
 									</a>
 								</td>
@@ -142,7 +208,7 @@ require 'check_account.php';
 									<?php echo number_format($sum)?> VNĐ
 								</td> 
 							</tr>
-							
+
 						<?php endforeach ?>
 						<tr>
 							<td colspan="5" class="left" >
@@ -156,7 +222,7 @@ require 'check_account.php';
 						</tr>
 						<tr>
 							<td colspan="4">
-								
+
 							</td>
 							<td>
 								<a href="delete_order.php">

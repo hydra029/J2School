@@ -122,7 +122,7 @@
 					</a> 
 				</li>
 				<li> 
-					<a href="order.php">
+					<a href="order.php?status=2">
 						<p>
 							Hoá đơn
 						</p>

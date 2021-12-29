@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 29, 2021 at 03:38 AM
+-- Generation Time: Dec 29, 2021 at 06:20 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `admins`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `admins`
 --
 
-INSERT INTO `admin` (`id`, `name`, `email`, `password`, `level`) VALUES
+INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
 (1, 'admin', 'admin@gmail.com', 'qwer1234', 0),
 (2, 'superadmin', 'superadmin@gmail.com', 'qwer1234', 1);
 
@@ -145,14 +145,6 @@ CREATE TABLE `receipts` (
   `total` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `receipts`
---
-
-INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`, `total`) VALUES
-(53, 3, '29-12-2021 09:17:47', '1', '1', '1', '1							\r\n						', 2, 11959000),
-(54, 3, NULL, NULL, NULL, NULL, NULL, 1, 649000);
-
 -- --------------------------------------------------------
 
 --
@@ -166,23 +158,13 @@ CREATE TABLE `receipt_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `receipt_detail`
---
-
-INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
-(53, 3, 1),
-(53, 4, 1),
-(54, 6, 1),
-(54, 7, 1);
-
---
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `admins`
 --
-ALTER TABLE `admin`
+ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -190,8 +172,7 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `manufacturers`
@@ -226,9 +207,9 @@ ALTER TABLE `receipt_detail`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `admins`
 --
-ALTER TABLE `admin`
+ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -253,7 +234,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
