@@ -191,7 +191,7 @@ ALTER TABLE `admin`
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `email_2` (`email`);
+
 
 --
 -- Indexes for table `manufacturers`
