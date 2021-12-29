@@ -1,12 +1,13 @@
+<?php require '../check_admin_login.php' ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="../indexxx.css">
-	<link rel="stylesheet" href="../style_validate.css">
+	<link rel="stylesheet" href="../index1.css">
+	<link rel="stylesheet" href="../style_validate1.css">
 </head>
 <body>
-<?php 
+<?php
 
 require '../connect_database.php';
 
@@ -78,7 +79,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			<br>
 
 			<?php require '../validate.php' ?>
-			<table class = table>
+			<table class = "table">
 				<tr>
 					<th>Mã</th>
 					<th>Tên sản phẩm</th>
@@ -108,7 +109,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			</table>
 
 			<?php for ($index_page = 1; $index_page <= $count_pages; $index_page++) { ?>
-				<a href="?page=<?php echo $index_page ?>&search=<?php echo $content_search ?>">
+				<a href="?page=<?php echo $index_page?>&search=<?php echo $content_search ?>">
 					<?php echo $index_page ?>
 				</a>
 

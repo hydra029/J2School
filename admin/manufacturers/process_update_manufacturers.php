@@ -1,3 +1,4 @@
+<?php require '../check_super_admin_login.php' ?>
 <?php 
 
 $id = $_POST['id'];

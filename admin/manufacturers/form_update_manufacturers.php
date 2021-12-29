@@ -1,9 +1,10 @@
+<?php require '../check_super_admin_login.php' ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="../indexxx.css">
-	<link rel="stylesheet" href="../style_validate.css">
+	<link rel="stylesheet" href="../index1.css">
+	<link rel="stylesheet" href="../style_validate1.css">
 </head>
 <body>
 

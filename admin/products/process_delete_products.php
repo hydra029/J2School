@@ -1,3 +1,4 @@
+<?php require '../check_admin_login.php' ?>
 <?php 
 
 $id = $_GET['id'];

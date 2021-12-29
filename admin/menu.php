@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="indexxx.css">
+<link rel="stylesheet" href="index1.css">
 
 
 
@@ -21,6 +21,7 @@
 					</li>
 				</ul>
 			</li>
+			
 			<li>
 				Quản lí sản phẩm
 				<ul>
@@ -31,6 +32,11 @@
 						<a href="../products/form_insert_products.php">Thêm sản phẩm</a>
 					</li>
 				</ul>
+			</li>
+
+			<li>
+				
+				<a href="../receipts/index_receipts.php"><span style = "color: white">Quản lí hóa đơn</span></a>
 			</li>
 		</ul>
 	</div>
