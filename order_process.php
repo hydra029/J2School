@@ -46,8 +46,7 @@ foreach ($result as $product_id => $each):
     mysqli_query($connect, $sql);
 endforeach;
 
-$_SESSION['order'][$customer_id][$receipt_id] = $_SESSION['cart'][$customer_id];
-unset($_SESSION['cart'][$customer_id]);
+
 $_SESSION['success'] = "Đơn hàng đang chờ xét duyệt";
 header('location:order.php');
 mysqli_close($connect);
