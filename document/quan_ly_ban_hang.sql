@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 29, 2021 at 02:41 AM
+-- Generation Time: Dec 29, 2021 at 03:38 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` text NOT NULL,
+  `password` mediumtext NOT NULL,
   `level` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -103,7 +103,7 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
-  `description` text NOT NULL,
+  `description` mediumtext NOT NULL,
   `price` int(11) NOT NULL,
   `image` varchar(200) NOT NULL,
   `manufacturer_id` int(11) NOT NULL
@@ -139,8 +139,8 @@ CREATE TABLE `receipts` (
   `order_time` varchar(30) DEFAULT NULL,
   `receiver_name` varchar(50) DEFAULT NULL,
   `receiver_phone` varchar(20) DEFAULT NULL,
-  `receiver_address` text,
-  `note` text,
+  `receiver_address` mediumtext,
+  `note` mediumtext,
   `status` int(11) NOT NULL,
   `total` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -150,7 +150,8 @@ CREATE TABLE `receipts` (
 --
 
 INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`, `total`) VALUES
-(53, 3, '29-12-2021 09:17:47', '1', '1', '1', '1							\r\n						', 2, 11959000);
+(53, 3, '29-12-2021 09:17:47', '1', '1', '1', '1							\r\n						', 2, 11959000),
+(54, 3, NULL, NULL, NULL, NULL, NULL, 1, 649000);
 
 -- --------------------------------------------------------
 
@@ -170,7 +171,9 @@ CREATE TABLE `receipt_detail` (
 
 INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
 (53, 3, 1),
-(53, 4, 1);
+(53, 4, 1),
+(54, 6, 1),
+(54, 7, 1);
 
 --
 -- Indexes for dumped tables
@@ -250,7 +253,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Constraints for dumped tables
@@ -272,7 +275,8 @@ ALTER TABLE `receipts`
 -- Constraints for table `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
-  ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_2` FOREIGN KEY (`receipt_id`) REFERENCES `receipts` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

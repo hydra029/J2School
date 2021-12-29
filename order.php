@@ -23,11 +23,37 @@ require 'check_account.php';
 	<div id="div_tong">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
+			<table class="border" width="900px">
+					<tr>
+						<td>
+							<a href="">Đã huỷ</a>
+						</td>
+						<td>
+							<a href="order.php?type=process">Chờ xét duyệt</a>
+						</td>
+						<td>
+							<a href="">Không duyệt</a>
+						</td>
+						<td>
+							<a href="">Đã duyệt</a>
+						</td>
+						<td>
+							<a href="">Đang giao hàng</a>
+						</td>
+						<td>
+							<a href="">Đã giao</a>
+						</td>
+						<td>
+							<a href="">Thành công</a>
+						</td>
+					</tr>
+				</table>
 			<h3>
-				Đây là đơn hàng đã đặt
+				Đây là đơn hàng đang chờ xét duyệt !
 			</h3>
 		</div>
 		<div id="div_giua" >
+
 			<?php 
 			require 'connect.php';
 			$customer_id = $_SESSION['customer_id'];
@@ -42,8 +68,6 @@ require 'check_account.php';
 				<?php	
 			} else {	
 				$num = 0;
-
-
 				foreach ($result as $receipt):			
 					$num ++;
 					$receipt_id = $receipt['id'];
@@ -136,7 +160,7 @@ require 'check_account.php';
 							</td>
 							<td>
 								<a href="delete_order.php">
-									Xoá
+									Huỷ
 								</a>
 							</td>
 							<td>
