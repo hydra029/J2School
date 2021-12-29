@@ -11,10 +11,30 @@
 <?php 
 require '../connect_database.php';
 
+if (isset($_GET['index'])) {
+	$i = $_GET['index'];
+} else {
+	$i = 1;
+}
 
 
+//lấy ra tổng số hóa đơn
+$sql_command_select_receipts = "select count(*) from receipts";
+$query_sql_command_select_receipts = mysqli_query($connect_database, $sql_command_select_receipts);
+$count_receipts = mysqli_fetch_array($query_sql_command_select_receipts)['count(*)'];
 
-$sql_command_select = "select receipts.*, customers.name from receipts join customers on receipts.customer_id = customers.id ";
+//lấy ra số hóa đơn trên 1 trang
+$receipts_on_page = 5;
+
+
+//lấy ra số trang
+$count_pages = ceil ($count_receipts / $receipts_on_page);
+
+//lấy ra số trang bỏ qua theo thú tự trang
+$skip_receipts_page = ( $i - 1 ) * $receipts_on_page;
+
+
+$sql_command_select = "select receipts.*, customers.name from receipts join customers on receipts.customer_id = customers.id limit $receipts_on_page offset $skip_receipts_page";
 
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
@@ -23,6 +43,8 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 
  ?>
 	
+
+
 <div class="all">
 	<div class="left">
 		<?php require '../menu.php'; ?>
@@ -115,6 +137,12 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				<?php endforeach ?>
 				 
 			</table>
+
+			<?php for ($i = 1; $i <= $count_pages; $i++ ) { ?>
+				<a href = "?index=<?php echo $i ?>">
+					<?php echo $i ?>
+				</a>
+			<?php } ?>
 		</div>
 	</div>
 </div>
