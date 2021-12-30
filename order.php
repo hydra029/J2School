@@ -19,7 +19,6 @@ require 'check_account.php';
 	<?php 
 	require 'announce.php';
 	?>
-
 	<div id="div_tong">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
@@ -230,12 +229,13 @@ require 'check_account.php';
 								</a>
 							</td>
 							<td>
-								<a href="order_detail.php">
+								<a href="order_detail.php?id=<?php echo $each['receipt_id'] ?>">
 									Xem chi tiết >>>
 								</a>
 							</td>
 						</tr>
 					</table>
+					<br>
 					<br>
 					<?php
 				endforeach; 

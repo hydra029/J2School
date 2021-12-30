@@ -43,7 +43,7 @@ if (isset($_SESSION['customer_id'])) {
 	products.name like '%$tim_kiem%'
 	limit $so_san_pham_1_trang offset $bo_qua";
 	$result = mysqli_query($connect, $sql);
-	require 'menu.php';
+	
 	if (isset($_SESSION['customer_name'])) { ?>
 		<p style="color: green;">
 			Chào mừng 
@@ -58,6 +58,7 @@ if (isset($_SESSION['customer_id'])) {
 	?>
 	
 	<div id="div_tong">
+		<?php require 'menu.php'; ?>
 		<div id="div_tren">
 			<h1 style="text-align: center; ">
 				Chào mừng đến với Website của chúng tôi

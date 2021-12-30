@@ -33,7 +33,7 @@
 		display: block;
 		position: absolute;
 		top: 51px;
-		left: -1px;
+		left: -153px;
 	}
 	ul li {	
 		float: left;
@@ -98,19 +98,20 @@
 
 <ul>
 	<li> 
+		<a href="index.php">
+			<p>
+				Trang chủ
+			</p>
+		</a> 
+	</li>
+	<li> 
 		<a href="#">
 			<p>
 				Menu
 			</p>
 		</a>
 		<ul>
-			<li> 
-				<a href="index.php">
-					<p>
-						Trang chủ
-					</p>
-				</a> 
-			</li>	
+
 			<?php 
 			if (isset($_SESSION['customer_id'])) {
 				?>
@@ -125,6 +126,13 @@
 					<a href="order.php?status=2">
 						<p>
 							Hoá đơn
+						</p>
+					</a> 
+				</li>
+				<li> 
+					<a href="receiver.php">
+						<p>
+							Địa chỉ giao hàng
 						</p>
 					</a> 
 				</li>
