@@ -6,7 +6,7 @@ $num = $_GET['id'];
 $sql = "select * from receivers where customer_id = '$customer_id'";
 $result = mysqli_query($connect,$sql);
 $rows = mysqli_num_rows($result);
-$sql = "delete from receivers where id = '$num'";
+$sql = "delete from receivers where id = '$num' and customer_id = '$customer_id'";
 mysqli_query($connect,$sql);
 $rows = (int)$rows;
 for ($i = $num + 1 ; $i <= $rows; $i++ ) {

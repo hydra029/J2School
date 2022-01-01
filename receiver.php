@@ -17,6 +17,11 @@ require 'check_account.php';
 	<?php 
 	require 'connect.php';
 	require 'announce.php';
+	if (isset($_GET['page'])) {
+		$_SESSION['page'] = $_GET['page'];
+	} else {
+		$_SESSION['page'] = 'receiver';
+	}
 	$customer_id = $_SESSION['customer_id'];
 	$sql = "select * from receivers where customer_id = '$customer_id'";
 	$result = mysqli_query($connect,$sql);
@@ -36,7 +41,7 @@ require 'check_account.php';
 				<h3  class="center">
 					Chưa có thông tin người nhận, 
 					<span>
-						<a href="receiver_form.php?type='create'">
+						<a href="receiver_form.php">
 							mời tạo thêm !
 						</a>
 					</span>
@@ -45,7 +50,7 @@ require 'check_account.php';
 			} else { 
 				?>
 				<p>
-					<a href="receiver_form.php?type='create'" class="center">
+					<a href="receiver_form.php" class="center">
 						Tạo thêm
 					</a>
 				</p>

@@ -39,10 +39,10 @@ $receipt_id = $_GET['id'];
                     receivers.phone as receiver_phone,
                     receivers.address as receiver_address,
                     receipts.note as note
-                    from receipts
-                    join receivers on receivers.id = receipts.receiver_id
+                    from receivers
+                    join receipts on receivers.id = receipts.receiver_id
                     where
-                    receipts.id = '$receipt_id'";
+                    receipts.id = '$receipt_id' and receivers.status = '1'";
                     $result = mysqli_query($connect,$sql);
                     ?>
                     <td colspan="2" class="border">

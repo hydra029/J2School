@@ -55,7 +55,7 @@ require 'check_account.php';
 								?>
 							</td>
 							<td style=" vertical-align: text-top; text-align: right;">
-								<a href="receiver.php">
+								<a href="receiver.php?page=order">
 									Thay dổi
 								</a>
 							</td>	
@@ -97,7 +97,7 @@ require 'check_account.php';
 								<br>
 								<img width="100px" height="50px" src="admin/products/<?php echo $each['product_image']; ?>">
 							</td>
-							<td class="border" style=" vertical-align: text-top; text-align: right;">
+							<td class="border" style="vertical-align: text-top; text-align: right;">
 								<?php echo number_format($each['product_price']) ?> VNĐ
 								
 								<br>

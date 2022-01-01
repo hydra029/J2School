@@ -1,6 +1,5 @@
 <?php 
 require 'check_account.php';
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +24,6 @@ require 'check_account.php';
 			<table class="border" width="900px">
 				<tr>
 					<td width="12.3%">
-						<a href="order.php?status=0">Đã huỷ</a>
-					</td>
-					<td width="12.3%">
 						<a href="order.php?status=2">Chờ xét duyệt</a>
 					</td>
 					<td width="12.3%">
@@ -45,6 +41,9 @@ require 'check_account.php';
 					<td width="12.3%">
 						<a href="order.php?status=7">Thành công</a>
 					</td>
+					<td width="12.3%">
+						<a href="order.php?status=8">Đã huỷ</a>
+					</td>
 				</tr>
 			</table>
 			<?php 
@@ -54,19 +53,11 @@ require 'check_account.php';
 				$status = $_GET['status'];
 			}
 			switch ($status) {
-				case '0':
-				?>
-				<h3>
-					Đây là đơn hàng đã huỷ !
-				</h3>
-				<?php 
-				break;
 				case '2': 
 				?>
 				<h3>
 					Đây là đơn hàng đang chờ xét duyệt !
 				</h3>
-
 				<?php 
 				break;
 				case '3': 
@@ -102,9 +93,16 @@ require 'check_account.php';
 				<h3>
 					Đây là đơn hàng thành công!
 				</h3>
+				<?php 
+				break;
+				case '8':
+				?>
+				<h3>
+					Đây là đơn hàng đã huỷ !
+				</h3>
+				<?php 
+				break;
 
-
-				<?php
 				default:
 				?>
 				<h3>
@@ -116,11 +114,9 @@ require 'check_account.php';
 			?>
 		</div>
 		<div id="div_giua" >
-
 			<?php 
 			require 'connect.php';
 
-			
 			$customer_id = $_SESSION['customer_id'];
 			$sql = "select * from receipts where customer_id = '$customer_id' and status = '$status'";
 			$result = mysqli_query($connect,$sql);
@@ -148,12 +144,10 @@ require 'check_account.php';
 					join products on products.id = receipt_detail.product_id
 					join manufacturers on manufacturers.id = products.manufacturer_id
 					where receipt_id = '$receipt_id'";
-
 					$result = mysqli_query($connect,$sql);
 					$order = mysqli_fetch_array($result);
 					$total = $order['total'];
 					?>
-
 					<table class="border" width="900px">
 						<tr>
 							<th colspan="6">
@@ -181,7 +175,6 @@ require 'check_account.php';
 							</td>
 						</tr>
 						<?php
-
 						foreach ($result as $each): 
 							$sum = $each['price'] * $each['quantity'];
 							?>
@@ -207,7 +200,6 @@ require 'check_account.php';
 									<?php echo number_format($sum)?> VNĐ
 								</td> 
 							</tr>
-
 						<?php endforeach ?>
 						<tr>
 							<td colspan="5" class="left" >
@@ -221,12 +213,35 @@ require 'check_account.php';
 						</tr>
 						<tr>
 							<td colspan="4">
-
 							</td>
 							<td>
-								<a href="delete_order.php">
+								<?php 
+								switch ($status) {
+									case '2':
+									case '3':
+									case '4':
+									?>
+									<a href="delete_order.php">
 									Huỷ
-								</a>
+									</a>
+									<?php
+									break;
+									case '5':
+										// code...
+									break;
+									case '6':
+										?>
+									<a href="order_success.php">
+									Xác nhận
+									</a>
+									<?php
+									break;
+									
+									default:
+										// code...
+									break;
+								}
+								?>
 							</td>
 							<td>
 								<a href="order_detail.php?id=<?php echo $each['receipt_id'] ?>">

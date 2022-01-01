@@ -13,15 +13,14 @@ require 'check_account.php';
 	require 'connect.php';
 	require 'announce.php';
 	$customer_id = $_SESSION['customer_id'];
-	$type = $_GET['type'];
 	?>
 	<div id="div_tong">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
-			<?php if ($type == 'change') {
+			<?php if (isset($_GET['type'])) {
+				$type = $_GET['type'];
 				$num = $_GET['id'];
-				$num = $num;
-				$sql = "select * from receivers where id = '$num'";
+				$sql = "select * from receivers where id = '$num' and customer_id = '$customer_id'";
 				$result = mysqli_query($connect,$sql);
 				$each = mysqli_fetch_array($result);
 				?>
@@ -46,8 +45,9 @@ require 'check_account.php';
 			} ?>
 		</div>
 		<div id="div_giua">
-			<form method="post" action="receiver_process.php" type="create">
+			<form method="post" action="receiver_update.php">
 				<table height="300px" class="border" >
+					<input type="hidden" name="id" value="<?php echo $num ?>">
 					<tr>
 						<th colspan="2">
 							Thông tin số <?php echo $num ?>
