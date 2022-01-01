@@ -29,7 +29,7 @@ require 'check_account.php';
 				<table width="700px" height="300px"	class="border left">
 					<tr>
 						<?php
-						$sql = "select * from receivers where status = '1'";
+						$sql = "select * from receivers where status = '1' and customer_id = '$customer_id'";
 						$result = mysqli_query($connect,$sql);
 						$rows = mysqli_num_rows($result);
 						if ($rows == 0) { ?>
