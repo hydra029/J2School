@@ -221,7 +221,7 @@ require 'check_account.php';
 									case '3':
 									case '4':
 									?>
-									<a href="delete_order.php">
+									<a href="delete_order.php?id=<?php echo $receipt_id ?>&status=<?php echo $status ?>">
 									Huỷ
 									</a>
 									<?php
