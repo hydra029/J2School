@@ -10,9 +10,7 @@ mysqli_close($connect);
 $_SESSION['success'] = "Xoá đơn hàng thành công";
 if ($status == 2) {
   header('location:order.php?status=2');
-} else if ($status == 3) {
-  header('location:order.php?status=3');
 } else {
-     header('location:order.php?status=4');
+  header('location:order.php?status=3');
 }
 ?>

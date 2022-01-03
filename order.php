@@ -70,39 +70,31 @@ require 'check_account.php';
 				case '4': 
 				?>
 				<h3>
-					Đây là đơn hàng đã xét duyệt !
+					Đây là đơn hàng đang giao hàng !
 				</h3>
 				<?php 
 				break;
 				case '5': 
 				?>
 				<h3>					
-					Đây là đơn hàng đang giao hàng !
+					Đây là đơn hàng đã giao hàng!
 				</h3>				
 				<?php 
 				break;
 				case '6': 
 				?>
 				<h3>
-					Đây là đơn hàng đã giao hàng!
+					Đây là đơn hàng thành công!
 				</h3>
 				<?php 
 				break;
 				case '7': 
 				?>
 				<h3>
-					Đây là đơn hàng thành công!
-				</h3>
-				<?php 
-				break;
-				case '8':
-				?>
-				<h3>
 					Đây là đơn hàng đã huỷ !
 				</h3>
 				<?php 
 				break;
-
 				default:
 				?>
 				<h3>
@@ -219,10 +211,9 @@ require 'check_account.php';
 								switch ($status) {
 									case '2':
 									case '3':
-									case '4':
 									?>
 									<a href="delete_order.php?id=<?php echo $receipt_id ?>&status=<?php echo $status ?>">
-									Huỷ
+										Huỷ
 									</a>
 									<?php
 									break;
@@ -230,9 +221,9 @@ require 'check_account.php';
 										// code...
 									break;
 									case '6':
-										?>
+									?>
 									<a href="order_success.php">
-									Xác nhận
+										Xác nhận
 									</a>
 									<?php
 									break;
