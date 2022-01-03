@@ -34,8 +34,7 @@ $count_pages = ceil ($count_receipts / $receipts_on_page);
 $skip_receipts_page = ( $i - 1 ) * $receipts_on_page;
 
 
-$sql_command_select = "select receipts.*, customers.name from receipts join customers on receipts.customer_id = customers.id limit $receipts_on_page offset $skip_receipts_page";
-
+$sql_command_select = "select receipts.*, customers.name as 'customer_name', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address'  from receipts join customers on receipts.customer_id = customers.id join receivers on receivers.customer_id = customers.id limit $receipts_on_page offset $skip_receipts_page";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 
@@ -96,10 +95,10 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 					<td>
 						<?php echo $array_receipts['receiver_name'] ?><br>
 						<?php echo $array_receipts['receiver_phone'] ?><br>
-						<?php echo $array_receipts['receiver_address'] ?>
+						<?php echo $array_receipts['receiver_address'] ?><br>
 					</td>
 					<td>
-						<?php echo $array_receipts['name'] ?><br>
+						<?php echo $array_receipts['customer_name'] ?><br>
 					</td>
 					<td>
 						<?php 
