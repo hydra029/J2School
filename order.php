@@ -30,16 +30,16 @@ require 'check_account.php';
 						<a href="order.php?status=3">Không duyệt</a>
 					</td>
 					<td width="16.6%">
-						<a href="order.php?status=5">Đang giao hàng</a>
+						<a href="order.php?status=4">Đang giao hàng</a>
 					</td>
 					<td width="16.6%">
-						<a href="order.php?status=6">Đã giao</a>
+						<a href="order.php?status=5">Đã giao</a>
 					</td>
 					<td width="16.6%">
-						<a href="order.php?status=7">Thành công</a>
+						<a href="order.php?status=6">Thành công</a>
 					</td>
 					<td width="16.6%">
-						<a href="order.php?status=8">Đã huỷ</a>
+						<a href="order.php?status=7">Đã huỷ</a>
 					</td>
 				</tr>
 			</table>
