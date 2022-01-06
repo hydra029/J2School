@@ -2,9 +2,9 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 30, 2021 at 04:40 PM
--- Server version: 5.7.33
+-- Host: localhost:3306
+-- Generation Time: Jan 06, 2022 at 12:21 PM
+-- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` mediumtext NOT NULL,
   `level` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `admins`
@@ -50,23 +50,24 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
 --
 
 CREATE TABLE `customers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `gender` varchar(200) NOT NULL,
   `dob` date NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `token` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `token`) VALUES
-(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', 'user_61c9999558b4b5.698596591640602005'),
+(1, 'Hydra', 'male', '2021-12-15', 'longthanh@gmail.com', 'Long1234', 'user_61d6d260aacd66.476282551641468512'),
 (2, 'hydra', 'male', '2000-09-02', 'longthanh1@gmail.com', 'Long1234', 'user_61c99960006f46.425270491640601952'),
-(3, 'My Mi', 'male', '2021-11-29', 'abc@abc.abc', 'Abcd1234', 'user_61cbc3291fd306.214497391640743721');
+(3, 'My Mi', 'male', '2021-11-29', 'abc@abc.abc', 'Abcd1234', 'user_61cbc3291fd306.214497391640743721'),
+(4, 'My My', 'male', '2022-01-19', 'admin123@gmail.com', 'Admin123', 'user_61d014557d9238.626900311641026645');
 
 -- --------------------------------------------------------
 
@@ -75,12 +76,12 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `to
 --
 
 CREATE TABLE `manufacturers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `image` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `manufacturers`
@@ -101,13 +102,13 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `description` mediumtext NOT NULL,
-  `price` int(11) NOT NULL,
+  `price` int NOT NULL,
   `image` varchar(200) NOT NULL,
-  `manufacturer_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `manufacturer_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
@@ -133,23 +134,26 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 --
 
 CREATE TABLE `receipts` (
-  `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `customer_id` int NOT NULL,
   `order_time` varchar(30) DEFAULT NULL,
   `receiver_id` varchar(50) DEFAULT NULL,
   `note` mediumtext,
-  `status` int(11) NOT NULL,
-  `total` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` int NOT NULL,
+  `total` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `receipts`
 --
 
 INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
-(1, 3, '30-12-2021 10:53:51', '1', '							', 0, 11580000),
-(2, 3, '30-12-2021 10:55:56', '2', '							', 2, 620000),
-(3, 3, '30-12-2021 11:03:22', '1', '							', 2, 18040000);
+(8, 1, '06-01-2022 06:44:17', '1', '							', 2, 29790000),
+(9, 1, '06-01-2022 06:49:21', '2', '							', 2, 1138000),
+(10, 1, '06-01-2022 07:15:35', '2', '							', 2, 18370000),
+(11, 1, '06-01-2022 07:15:58', '2', '							', 2, 23040000),
+(12, 1, '06-01-2022 07:16:12', '2', '							', 2, 649000),
+(13, 1, '06-01-2022 07:16:20', '2', '							', 3, 80000);
 
 -- --------------------------------------------------------
 
@@ -158,22 +162,29 @@ INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`
 --
 
 CREATE TABLE `receipt_detail` (
-  `receipt_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `receipt_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` tinyint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `receipt_detail`
 --
 
 INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
-(1, 2, 2),
-(1, 4, 1),
-(2, 2, 3),
-(2, 6, 2),
-(3, 4, 1),
-(3, 5, 1);
+(8, 4, 2),
+(8, 5, 1),
+(8, 6, 1),
+(9, 9, 2),
+(10, 2, 2),
+(10, 4, 1),
+(10, 5, 1),
+(10, 6, 1),
+(11, 2, 1),
+(11, 4, 2),
+(12, 9, 1),
+(12, 10, 1),
+(13, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -182,21 +193,25 @@ INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
 --
 
 CREATE TABLE `receivers` (
-  `customer_id` int(11) NOT NULL,
-  `id` int(11) NOT NULL,
+  `customer_id` int NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `address` varchar(200) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `receivers`
 --
 
 INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `status`) VALUES
-(3, 1, '1', '1', '1', 1),
-(3, 2, '2', '2', '2', 0);
+(1, 1, 'Mi Mi', '0951847632', 'Le Loi', 0),
+(1, 2, 'Hang Nga', '0369852147', 'Nguyen Trai', 1),
+(3, 1, '1', '1', '1', 0),
+(3, 2, '2', '2', '2', 0),
+(4, 1, 'Bui Huu Loc', '0987614523', 'Le Loi', 0),
+(4, 2, 'Nguyen Nguyen', '0369258147', 'Nguyen Trai', 0);
 
 --
 -- Indexes for dumped tables
@@ -257,31 +272,31 @@ ALTER TABLE `receivers`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
