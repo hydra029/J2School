@@ -19,7 +19,7 @@ if (isset($_GET['index'])) {
 
 
 //lấy ra tổng số hóa đơn
-$sql_command_select_receipts = "select count(*) from receipts";
+$sql_command_select_receipts = "select count(*) from receipts where status = 2 or status = 4";
 $query_sql_command_select_receipts = mysqli_query($connect_database, $sql_command_select_receipts);
 $count_receipts = mysqli_fetch_array($query_sql_command_select_receipts)['count(*)'];
 
@@ -34,7 +34,8 @@ $count_pages = ceil ($count_receipts / $receipts_on_page);
 $skip_receipts_page = ( $i - 1 ) * $receipts_on_page;
 
 
-$sql_command_select = "select receipts.*, customers.name as 'customer_name', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address'  from receipts join customers on receipts.customer_id = customers.id join receivers on receivers.customer_id = customers.id limit $receipts_on_page offset $skip_receipts_page";
+$sql_command_select = "select receipts.*, customers.name as 'customer_name', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address'  from receipts join customers on receipts.customer_id = customers.id join receivers on receivers.customer_id = customers.id where receipts.receiver_id = receivers.id and (receipts.status = 2 or receipts.status = 4 ) limit $receipts_on_page offset $skip_receipts_page";
+
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 
@@ -88,7 +89,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				</tr>
 
 				<?php foreach ($query_sql_command_select as $array_receipts) : ?>
-				<?php if ($array_receipts['status'] == 2 || $array_receipts['status'] == 5 || $array_receipts['status'] == 6 ) { ?>
+				<?php if ($array_receipts['status'] == 2 || $array_receipts['status'] == 4 ) { ?>
 				<tr>
 					<td><?php echo $array_receipts['id'] ?></td>
 					<td><?php echo $array_receipts['order_time'] ?></td>
@@ -105,15 +106,9 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 						switch ($array_receipts['status']) {
 							case 2:
 								echo 'Chưa duyệt';
-								break;
-							case 3:
-								echo 'Đã hủy';
-								break;								
-							case 5:
+								break;							
+							case 4:
 								echo 'Đang giao hàng';
-								break;
-							case 6:
-								echo 'Đã giao hàng';
 								break;
 						}
 						 ?>
@@ -124,15 +119,15 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 						<a href="detail_receipt.php?id=<?php echo $array_receipts['id'] ?>">Xem</a>
 					</td>
 					<td>
-						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=5">Duyệt đơn hàng</a>
+						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=4">Duyệt đơn hàng</a>
 						<br>
-						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=6">Hoàn thành đơn hàng</a>
+						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=5">Giao thành công</a>
 						<br>
 						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=3">Hủy đơn hàng</a>
 					</td>
-					<?php } ?>
+					
 				</tr>
-				
+				<?php } ?>
 				<?php endforeach ?>
 				 
 			</table>
