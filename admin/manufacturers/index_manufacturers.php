@@ -1,4 +1,6 @@
-<?php require '../check_super_admin_login.php' ?>
+<?php require '../check_super_admin_login.php'; 
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,8 +47,17 @@ $count_skip_manufacturers = ($index_page - 1 ) * $manufacturers_per_page;
 $sql_command_select = "select * from manufacturers where name like '%$content_search%' limit $manufacturers_per_page offset $count_skip_manufacturers";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
+//kiểm tra trang có hợp lệ (index_page)
+// if ( $index_page > $count_pages ) {
+// 	$_SESSION['error'] = 'Không tìm thấy trang';
+// 	$index_page = 1;
+// }
+
 
 ?>
+
+
+
 
 
  

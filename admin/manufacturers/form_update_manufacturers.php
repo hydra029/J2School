@@ -15,10 +15,11 @@ $sql_command_select = "select * from manufacturers where id = '$id'";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 $array_manufacturers = mysqli_fetch_array($query_sql_command_select);
 
+//validate nếu nhập id sai
 $count_rows = mysqli_num_rows($query_sql_command_select);
 if ($count_rows === 1){
  ?>
-
+ 
 
 <div class="all">
 	<div class="left">
@@ -56,8 +57,11 @@ if ($count_rows === 1){
 </div>
 
 <?php }else{ ?>
-<h1>Không tìm thấy bài theo mã này</h1>
+<h1>Không tìm thấy nhà sản xuất theo mã này</h1>
 <?php } ?>
+
+<?php mysqli_close($connect_database); ?>
+
 
 </body>
 </html>

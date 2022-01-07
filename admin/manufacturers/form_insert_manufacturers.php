@@ -1,4 +1,7 @@
-<?php require '../check_super_admin_login.php' ?>
+<?php 
+require '../check_super_admin_login.php';
+require '../validate.php'; 
+?>
 <!DOCTYPE html>
 <html>
 <head>

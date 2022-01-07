@@ -9,12 +9,14 @@ $image = $_POST['image'];
 
 
 if (empty($id)){
-	header('location:index_manufacturers.php?error=Chưa nhập id bài cần sửa');
+	$_SESSION['error'] = 'Chưa nhập id bài cần sửa';
+	header('location:index_manufacturers.php');
 	exit;
 }
 
 if (empty($name) || empty($phone) || empty($address) || empty($image)){
-	header('location:index_manufacturers.php?error=Chưa nhập đầy đủ thông tin');
+	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
+	header('location:index_manufacturers.php');
 	exit;
 }
 
@@ -30,15 +32,18 @@ image = '$image' where id = '$id' ";
 
 mysqli_query($connect_database, $sql_command_update);
 
-
-
 $error = mysqli_error($connect_database);
 
+mysqli_close($connect_database);
+
 if (empty($error)) {
-	header('location:index_manufacturers.php?success=Sửa thành công');
+	$_SESSION['success'] = 'Sửa thành công';
+	header('location:index_manufacturers.php');
+	exit();
 }else {
-	header('location:index_manufacturers.php?error=Lỗi truy vấn');	
+	$_SESSION['success'] = 'Lỗi truy vấn';
+	header('location:index_manufacturers.php');	
+	exit();
 }
 
 
-mysql_close($connect_database);

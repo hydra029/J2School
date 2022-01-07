@@ -1,4 +1,9 @@
-<?php require '../check_super_admin_login.php' ?>
+<?php
+
+require '../check_super_admin_login.php';
+
+ ?>
+
 <?php 
 
 $name = $_POST['name'];
@@ -7,7 +12,8 @@ $address = $_POST['address'];
 $image = $_POST['image'];
 
 if (empty($name) || empty($phone) || empty($address) || empty($image)){
-	header('location:form_insert_manufacturers.php?error=Chưa nhập đầy đủ thông tin');
+	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
+	header('location:form_insert_manufacturers.php');
 	exit;
 }
 
@@ -19,12 +25,16 @@ mysqli_query($connect_database, $sql_command_insert);
 
 $error = mysqli_error($connect_database);
 
+mysqli_close($connect_database);
+
 if (empty($error)) {
-	header('location:index_manufacturers.php?success=Thêm nhà sản xuất thành công');	
+	$_SESSION['success'] = 'Thêm nhà sản xuất thành công';
+	header('location:index_manufacturers.php');	
 }else {
-	header('location:index_manufacturers.php?error=Lỗi truy vấn');	
+	$_SESSION['error'] = 'Lỗi truy vấn';
+	header('location:index_manufacturers.php');	
 }
  
 
-mysql_close($connect_database);
+
  ?>

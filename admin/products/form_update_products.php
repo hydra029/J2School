@@ -12,6 +12,20 @@
 <?php 
 require '../connect_database.php';
 $id = $_GET['id'];
+
+//kiểm tra id nhập vào có đúng
+$sql_command_select = "select * from products where id = '$id' ";
+$query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
+$array_products = mysqli_fetch_array($query_sql_command_select);
+$check = mysqli_num_rows($query_sql_command_select);
+if ( $check !== 1 ) {
+	echo $check;
+	$_SESSION['error'] = 'Sai id sẩn phẩm';
+	header('location:index_products.php');
+	exit();
+}
+
+
 $sql_command_select_products = "select * from products where id = '$id' ";
 $query_sql_command_select_products = mysqli_query($connect_database, $sql_command_select_products);
 
