@@ -10,6 +10,25 @@
 
     <div class = "ul_items">
 		<ul>
+			
+			<li>
+				Thống kê
+				<ul>
+					<li>
+						<a href="../list_receipts/index.php">Thống kê hóa đơn</a>	
+					</li>
+					<li>
+						<a href="../manufacturers/form_insert_manufacturers.php">Thống kê sản phẩm</a>
+					</li>
+					<li>
+						<a href="../manufacturers/form_insert_manufacturers.php">Doanh thu theo thời gian</a>
+					</li>
+					<li>
+						<a href="../manufacturers/form_insert_manufacturers.php">Khách hàng tiềm năng</a>
+					</li>
+				</ul>
+			</li>
+
 			<li>
 				Quản lí nhà sản xuất
 				<ul>
