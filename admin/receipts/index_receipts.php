@@ -41,6 +41,7 @@ join customers on customers.id = receipts.customer_id
 where receipts.status in (2, 4)
 GROUP BY receipts.id
  limit $receipts_on_page offset $skip_receipts_page";
+
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 

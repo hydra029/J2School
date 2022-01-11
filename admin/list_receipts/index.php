@@ -52,23 +52,50 @@ require '../connect_database.php';
 			<div class = "list_item">
 				<form method="post" action="process_view_receipts.php?type=date">
 					<span style="font-size: 25px"><?php 
-					if ( isset($_SESSION['count']) ) {
-						echo $_SESSION['count'];
+					if ( isset($_SESSION['count_by_date']) ) {
+						echo $_SESSION['count_by_date'];
 					}
 					 ?></span>
 					
 					đơn hàng thành công kể từ 
-					<input type="date" name="start_date">
+					<input type="date" name="start_date" value="<?php echo $_SESSION['start_date'] ?>">
 					đến
-					<input type="date" name="end_date">
+					<input type="date" name="end_date" value="<?php echo $_SESSION['end_date'] ?>">
 					<button>Xem</button>
 				</form>				
 			</div>
 
-		</div>
-	</div>
-</div>
+			<div class = "list_item">
+				<form method="post" action="process_view_receipts.php?type=month">
+					<span style="font-size: 25px"><?php 
+					if ( isset($_SESSION['count_by_month']) ) {
+						echo $_SESSION['count_by_month'];
+					}
+					 ?></span>
+					
+					đơn hàng thành công kể từ đầu
+					<input type="month" name="start_date" value="<?php echo $_SESSION['start_year_month'] ?>">
+					đến
+					<input type="month" name="end_date" value="<?php echo $_SESSION['end_year_month'] ?>">
+					<button>Xem</button>
+				</form>				
+			</div>
 
+			<div class = "list_item">
+				<form method="post" action="process_view_receipts.php?type=week">
+					<span style="font-size: 25px"><?php 
+					if ( isset($_SESSION['count_by_week']) ) {
+						echo $_SESSION['count_by_week'];
+					}
+					 ?></span>
+					
+					đơn hàng thành công kể từ đầu
+					<input type="week" name="start_date" value="<?php echo $_SESSION['start_year_week'] ?>">
+					đến
+					<input type="week" name="end_date" value="<?php echo $_SESSION['end_year_week'] ?>">
+					<button>Xem</button>
+				</form>				
+			</div>
 
 </body>
 </html>
