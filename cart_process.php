@@ -16,6 +16,7 @@ $rows = mysqli_num_rows($result);
 if ($rows != 1) {
 	$sql = "insert into receipts(customer_id, status)
 	values ('$customer_id', '$status')";
+
 	mysqli_query($connect, $sql);
 	$sql = "select * from receipts where customer_id = $customer_id and status = '$status'";
 	$result = mysqli_query($connect, $sql);

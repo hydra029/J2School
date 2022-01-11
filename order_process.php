@@ -21,7 +21,7 @@ $receiver_id = $receiver['id'];
 $status = 2;
 $sql = "update receipts
 set 
-order_time = '$order_time',
+order_time = CURRENT_TIMESTAMP,
 receiver_id = '$receiver_id',
 note = '$note',
 status = '$status'

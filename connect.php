@@ -1,4 +1,4 @@
 <?php 
-$connect = mysqli_connect('localhost','root','','quan_ly_ban_hang');
+$connect = mysqli_connect('localhost','root','','31');
 mysqli_set_charset($connect,'utf8');
 ?>

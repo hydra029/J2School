@@ -33,7 +33,7 @@ CREATE TABLE `admins` (
   `email` varchar(200) NOT NULL,
   `password` mediumtext NOT NULL,
   `level` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admins`
@@ -57,7 +57,7 @@ CREATE TABLE `customers` (
   `email` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `token` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customers`
@@ -81,7 +81,7 @@ CREATE TABLE `manufacturers` (
   `address` varchar(200) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `image` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `manufacturers`
@@ -108,7 +108,7 @@ CREATE TABLE `products` (
   `price` int NOT NULL,
   `image` varchar(200) NOT NULL,
   `manufacturer_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
@@ -136,24 +136,17 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 CREATE TABLE `receipts` (
   `id` int NOT NULL,
   `customer_id` int NOT NULL,
-  `order_time` varchar(30) DEFAULT NULL,
+  `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `receiver_id` varchar(50) DEFAULT NULL,
   `note` mediumtext,
   `status` int NOT NULL,
   `total` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `receipts`
 --
 
-INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
-(8, 1, '06-01-2022 06:44:17', '1', '							', 2, 29790000),
-(9, 1, '06-01-2022 06:49:21', '2', '							', 2, 1138000),
-(10, 1, '06-01-2022 07:15:35', '2', '							', 2, 18370000),
-(11, 1, '06-01-2022 07:15:58', '2', '							', 2, 23040000),
-(12, 1, '06-01-2022 07:16:12', '2', '							', 2, 649000),
-(13, 1, '06-01-2022 07:16:20', '2', '							', 3, 80000);
 
 -- --------------------------------------------------------
 
@@ -165,26 +158,13 @@ CREATE TABLE `receipt_detail` (
   `receipt_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `receipt_detail`
 --
 
-INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
-(8, 4, 2),
-(8, 5, 1),
-(8, 6, 1),
-(9, 9, 2),
-(10, 2, 2),
-(10, 4, 1),
-(10, 5, 1),
-(10, 6, 1),
-(11, 2, 1),
-(11, 4, 2),
-(12, 9, 1),
-(12, 10, 1),
-(13, 2, 2);
+
 
 -- --------------------------------------------------------
 
@@ -199,7 +179,7 @@ CREATE TABLE `receivers` (
   `phone` varchar(20) NOT NULL,
   `address` varchar(200) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `receivers`

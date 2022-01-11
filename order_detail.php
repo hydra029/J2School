@@ -19,13 +19,34 @@ $receipt_id = $_GET['id'];
         ?>
         <div id="div_tren">
             <h1 style="text-align: center; ">
-                Đặt hàng
+                Đơn hàng chi tiết
             </h1>
             <form>
                 <input type="search" name="tim_kiem" value="" placeholder="tìm kiếm">
             </form>
         </div>
         <div id="div_giua" class="center">
+            <?php
+            $sql = "select
+            receivers.name as receiver_name,
+            receivers.phone as receiver_phone,
+            receivers.address as receiver_address,
+            receipts.note as note,
+            from receivers
+            
+            where
+            receipts.id = '$receipt_id' and customer_id = '$customer_id'";
+            $result = mysqli_query($connect,$sql);
+            print_r($sql);
+            // $receipt = mysqli_fetch_array($result);
+            // $id = $receipt['customer_id'];
+
+            die($id);
+            
+            if ($id != $customer_id) {
+                header('location:index.php');
+            }
+            ?>
             <table width="700px" height="300px" class="border left">
                 <tr>
                     <th colspan="2" class="border">
@@ -33,18 +54,6 @@ $receipt_id = $_GET['id'];
                     </th>
                 </tr>
                 <tr>
-                    <?php
-                    $sql = "select
-                    receivers.name as receiver_name,
-                    receivers.phone as receiver_phone,
-                    receivers.address as receiver_address,
-                    receipts.note as note
-                    from receivers
-                    join receipts on receivers.id = receipts.receiver_id
-                    where
-                    receipts.id = '$receipt_id' and receivers.status = '1'";
-                    $result = mysqli_query($connect,$sql);
-                    ?>
                     <td colspan="2" class="border">
                         <?php
                         foreach ($result as $each) : ?>
@@ -80,7 +89,7 @@ $receipt_id = $_GET['id'];
                 join products on products.id = receipt_detail.product_id
                 where
                 receipts.id = '$receipt_id'";
-             
+
                 $result = mysqli_query($connect,$sql);
                 $receipt = mysqli_fetch_array($result);
                 foreach ($result as $each) {
