@@ -27,25 +27,28 @@ $receipt_id = $_GET['id'];
         </div>
         <div id="div_giua" class="center">
             <?php
-            $sql = "select
-            receivers.name as receiver_name,
-            receivers.phone as receiver_phone,
-            receivers.address as receiver_address,
-            receipts.note as note,
-            from receivers
-            
-            where
-            receipts.id = '$receipt_id' and customer_id = '$customer_id'";
+            $sql = "select customer_id, receiver_id from receipts where id = '$receipt_id'";
             $result = mysqli_query($connect,$sql);
-            print_r($sql);
-            // $receipt = mysqli_fetch_array($result);
-            // $id = $receipt['customer_id'];
-
-            die($id);
-            
-            if ($id != $customer_id) {
+            $receipt = mysqli_fetch_array($result);
+            $receiver_id = $receipt['receiver_id'];
+            $id = $receipt['customer_id'];
+            if ($customer_id != $id) {
                 header('location:index.php');
             }
+            $sql = "select * from receivers where customer_id= '$customer_id' and id = '$receiver_id'";
+            $result = mysqli_query($connect,$sql);
+            $receiver = mysqli_fetch_array($result);
+
+            $sql = "select note
+            from receipts
+            where
+            receipts.id = '$receipt_id' and receipts.receiver_id = '$receiver_id'";
+            $result = mysqli_query($connect,$sql);
+            $note = mysqli_fetch_array($result);
+         
+         
+            
+         
             ?>
             <table width="700px" height="300px" class="border left">
                 <tr>
@@ -55,21 +58,20 @@ $receipt_id = $_GET['id'];
                 </tr>
                 <tr>
                     <td colspan="2" class="border">
-                        <?php
-                        foreach ($result as $each) : ?>
+                      
+                        
                             Họ và Tên:
-                            <?php echo $each['receiver_name'] ?>
+                            <?php echo $receiver['name'] ?>
                             <br>
                             Số điện thoại:
-                            <?php echo $each['receiver_phone'] ?>
+                            <?php echo $receiver['phone'] ?>
                             <br>  
                             Địa chỉ:
-                            <?php echo $each['receiver_address'] ?>
+                            <?php echo $receiver['address'] ?>
                             <br>
                             Note:
-                            <?php echo $each['note'];
-                        endforeach;
-                        ?>
+                            <?php echo $note['note'];
+                                               ?>
                     </td>
                 </tr>
                 <tr>
