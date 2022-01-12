@@ -18,7 +18,7 @@
 						<a href="../list_receipts/index.php">Thống kê hóa đơn</a>	
 					</li>
 					<li>
-						<a href="../manufacturers/form_insert_manufacturers.php">Thống kê sản phẩm</a>
+						<a href="../list_products/index.php">Thống kê sản phẩm</a>
 					</li>
 					<li>
 						<a href="../manufacturers/form_insert_manufacturers.php">Doanh thu theo thời gian</a>
