@@ -19,7 +19,6 @@ if (isset($_SESSION['customer_id'])) {
 		require 'menu.php';
 		?>
 		<?php 
-		session_start();
 		if (isset($_SESSION['error'])) {
 			?>
 			<span class="error">
@@ -41,12 +40,12 @@ if (isset($_SESSION['customer_id'])) {
 		}
 		?>
 		<div id="div_tren">
-			<h3>
+			<h3 id=header>
 				Đăng ký
 			</h3>
 		</div>
 		<div id="div_giua">
-			<form method="post" action="sign_up_process.php">
+			<form method="post" action="sign_up_process.php" onsubmit="kiem_tra();">
 				<table class="border">
 					<tr>
 						<th colspan="2">
@@ -58,7 +57,8 @@ if (isset($_SESSION['customer_id'])) {
 							Họ và Tên:
 						</td>
 						<td>
-							<input type="text" name="name">
+							<input type="text" name="name" id="name">
+							<span class="error_span" id="name_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -68,6 +68,7 @@ if (isset($_SESSION['customer_id'])) {
 						<td>
 							<input type="radio" name="gender" value="male"> Nam
 							<input type="radio" name="gender" value="female"> Nữ
+							<span class="error_span" id="gender_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -75,7 +76,8 @@ if (isset($_SESSION['customer_id'])) {
 							Ngày sinh:
 						</td>
 						<td>
-							<input type="date" name="dob">
+							<input type="date" name="dob" id="dob">
+							<span class="error_span" id="dob_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -83,7 +85,8 @@ if (isset($_SESSION['customer_id'])) {
 							Email:
 						</td>
 						<td>
-							<input type="text" name="email">
+							<input type="text" name="email" id="email">
+							<span class="error_span" id="email_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -91,7 +94,8 @@ if (isset($_SESSION['customer_id'])) {
 							Mật khẩu:
 						</td>
 						<td>
-							<input type="password" name="password">
+							<input type="password" name="password" id="password">
+							<span class="error_span" id="password_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -103,6 +107,79 @@ if (isset($_SESSION['customer_id'])) {
 					</tr>
 				</table>
 			</form>
+			<script type="text/javascript">
+				function kiem_tra() {
+					check = false;
+					//name_check
+					let ten = document.getElementById('name').value;
+					if (ten.length === 0){
+						event.preventDefault();
+						document.getElementById('name_error').innerHTML = 'Tên không được để trống';
+						check = true;
+					} else {
+						let name_regex = /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*)*$/
+						if (name_regex.test(ten) == false){
+							event.preventDefault();
+							document.getElementById('name_error').innerHTML = 'Tên không hợp lệ';
+							check = true;
+						} else {
+							document.getElementById('name_error').innerHTML = '';
+						}
+					}
+					//Gender_check
+					let gender = document.getElementsByName('gender');
+					if (gender[0].checked == true || gender[1].checked == true) {
+						document.getElementById('gender_error').innerHTML = '';
+					} else {
+						event.preventDefault();
+						document.getElementById('gender_error').innerHTML = 'Giới tính không được để trống';
+					}
+					//DoB_check
+					let dob = document.getElementById('dob').value;
+					if (dob.length === 0){
+						event.preventDefault();
+						document.getElementById('dob_error').innerHTML = 'Ngày sinh không được để trống';
+						check = true;
+					} else {
+						document.getElementById('dob_error').innerHTML = '';
+					}
+					//Email_check
+					let email = document.getElementById('email').value;
+					if (email.length === 0){
+						event.preventDefault();
+						document.getElementById('email_error').innerHTML = 'Email không được để trống';	
+						check = true;
+					} else {
+						let email_regex = /^\w([\.]?\w)*@[a-z]*\.[a-z]*/;
+						if (email_regex.test(email) == false){
+							document.getElementById('email_error').innerHTML = 'Email không hợp lệ';
+							check = true;
+						} else {
+							document.getElementById('email_error').innerHTML = '';
+						}
+					}
+					//password_check
+					let password = document.getElementById('password').value;
+					if (password.length === 0){
+						event.preventDefault();
+						document.getElementById('password_error').innerHTML = 'Mật khẩu không được để trống';	
+						check = true;
+					} else {
+						let password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})/;
+						if (password_regex.test(password) == false){
+							event.preventDefault();
+							document.getElementById('password_error').innerHTML = 'Mật khẩu ít nhất 8 kí tự, bao gồm chữ hoa, chữ thường, số';
+							check = true;
+						} else {
+							document.getElementById('password_error').innerHTML = '';
+						}
+					}
+					//check_dung
+					if (check) {
+						return false;
+					}
+				}
+			</script>
 		</div>
 		<div id="div_duoi">
 			<?php 

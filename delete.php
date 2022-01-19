@@ -8,4 +8,4 @@ mysqli_query($connect, $sql);
 $_SESSION['success'] = "Xoá sản phẩm khỏi giỏ hàng thành công !";
 mysqli_close($connect);
 header('location:cart.php')
-?>
+?>	 

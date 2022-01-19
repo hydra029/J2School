@@ -16,10 +16,8 @@ require 'check_account.php';
 </head>
 <body>
 	<?php 
-
 	$total = 0;
 	require 'announce.php';
-
 	require 'connect.php';
 	$status = '1';
 	$sql = "select
@@ -38,10 +36,8 @@ require 'check_account.php';
 	join manufacturers on products.manufacturer_id = manufacturers.id
 	where receipts.customer_id = $customer_id and receipts.status = '$status'";
 	$result = mysqli_query($connect,$sql);
-	
 	$rows = mysqli_num_rows($result);
 	?>
-
 	<div id="div_tong">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
@@ -49,7 +45,7 @@ require 'check_account.php';
 				Đây là giỏ hàng cá nhân
 			</h3>
 		</div>
-		<div id="div_giua" >
+		<div id="div_giua">
 			<?php if ($rows == 0) { ?>
 				<h4 class="center">
 					Giỏ hàng không có gì !!!
@@ -59,7 +55,8 @@ require 'check_account.php';
 				$cart = mysqli_fetch_array($result);
 				$receipt_id = $cart['receipt_id'];
 				?>
-				<table class="border" width="100%">
+				<h4 class="center empty"></h4>
+				<table class="border table" width="100%">
 					<tr>
 						<th width="20%">
 							Tên sản phẩm
@@ -75,9 +72,6 @@ require 'check_account.php';
 						</th>
 						<th>
 							Số lượng
-						</th>
-						<th>
-							Sửa
 						</th>
 						<th>
 							Xoá
@@ -103,33 +97,31 @@ require 'check_account.php';
 								<?php echo $each['manufacturer_name'] ?>
 							</td>
 							<td>
-								<?php echo number_format($each['price']) ?> VNĐ
-							</td>		
-							<td>
-								<?php echo $each['quantity'] ?>
-							</td>
-							<td width=10%>
-								<button>
-									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=decrease&page=cart" class="no_decor">
-										-
-									</a>
-								</button>
-								<span class="center">
-									&nbsp <?php echo $each['quantity'] ?> &nbsp
+								<span class="span-price">
+									<?php echo number_format($each['price']) ?> VNĐ
 								</span>
-								<button >
-									<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase&page=cart" class="no_decor">
-										+
-									</a>
+							</td>		
+							<td width=10%>
+								<button class="btn-decre" data-id="<?php echo $each['id'] ?>" data-type="decrease">
+									-
+								</button>
+								<span class="span-quantity">
+									<?php echo $each['quantity'] ?>
+								</span>
+								<button class="btn-incre" data-id="<?php echo $each['id'] ?>" data-type="increase">
+									+
 								</button>
 							</td>
 							<td>
-								<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=delete&page=cart">
+								<button class="btn-del" data-id="<?php echo $each['id'] ?>" data-type="delete">
 									Xoá
-								</a>
+								</button>
 							</td>
 							<td>
-								<?php echo number_format($sum)?> VNĐ
+								<span class="span-sum">
+									<?php echo number_format($sum)?>
+								</span>
+								VNĐ
 							</td> 
 						</tr>
 						<?php 
@@ -139,18 +131,22 @@ require 'check_account.php';
 						?>
 					<?php endforeach ?>
 					<tr>
-						<td colspan="7" class="left" >
+						<td colspan="6" class="left" >
 							Tổng cộng:
 						</td>
 						<td>
-							<?php 
-							echo number_format($total ) . " VNĐ";
-							?>
+							<span id="total">
+								<span class="span-total">
+									<?php 
+									echo number_format($total);
+									?>
+								</span>
+								VNĐ
+							</span>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="7" class="right" >
-
+						<td colspan="6" class="right" >
 						</td>
 						<td>
 							<button>
@@ -172,5 +168,98 @@ require 'check_account.php';
 			?>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".btn-del").click(function() {
+				let btn = $(this);
+				let id = btn.data('id');
+				let type = btn.data('type');
+				$.ajax({
+					url: 'cart_process.php',
+					type: 'GET',
+					data: {id, type},
+				})
+				.done(function() {
+					let table_row = $(".table > tbody > tr").length;
+					if (table_row == 4) {
+						btn.parents('table').remove();
+						$(".empty").text("Giỏ hàng không có gì !!");
+					} else {
+						btn.parents('tr').remove();
+						$(".span-del").each(function() {
+							total += parseFloat(($(this).text()).replace(/,/g, ''));
+						});
+						total = total.toLocaleString();
+						$('.span-total').text(total);
+					}
+				})
+			});
+			$(".btn-incre").click(function() {
+				let btn = $(this);
+				let id = btn.data('id');
+				let type = btn.data('type');
+				$.ajax({
+					url: 'cart_process.php',
+					type: 'GET',
+					data: {id, type},
+				})
+				.done(function() {
+					let parent_tr = btn.parents('tr');
+					let quantity = parseFloat(parent_tr.find('.span-quantity').text());
+					let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
+					quantity ++;
+					let sum = price * quantity;
+					sum = sum.toLocaleString();
+					parent_tr.find('.span-quantity').text(quantity);
+					parent_tr.find('.span-sum').text(sum);
+					let total = 0;
+					$(".span-sum").each(function() {
+						total += parseFloat(($(this).text()).replace(/,/g, ''));
+					});
+					total = total.toLocaleString();
+					$('.span-total').text(total);
+				})
+			});
+			$(".btn-decre").click(function(event) {
+				let btn = $(this);
+				let id = btn.data('id');
+				let type = btn.data('type');
+				$.ajax({
+					url: 'cart_process.php',
+					type: 'GET',
+					data: {id, type},
+				})
+				.done(function() {
+					let parent_tr = btn.parents('tr');
+					let quantity = parseFloat(parent_tr.find('.span-quantity').text());
+					let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
+					quantity --;
+					if (quantity == 0) {
+						let table_row = $(".table > tbody > tr").length;
+						if (table_row == 4) {
+							btn.parents('table').remove();
+							$(".empty").text("Giỏ hàng không có gì !!");
+						} else {
+							parent_tr.remove();
+						}
+					} else {
+						let sum = price * quantity;
+						sum = sum.toLocaleString();
+						parent_tr.find('.span-quantity').text(quantity);
+						parent_tr.find('.span-sum').text(sum);
+					}
+					let total = 0;
+					$(".span-sum").each(function() {
+						total += parseFloat(($(this).text()).replace(/,/g, ''));
+					});
+					total = total.toLocaleString();
+					$('.span-total').text(total);
+					let table_row = ($('.table')).rows.length;
+					$('.span-total').text(table_row);
+				})
+			});
+		});
+	</script>
 </body>
 </html>

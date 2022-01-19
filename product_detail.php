@@ -68,9 +68,9 @@ if (isset($_SESSION['customer_id'])) {
 				if (isset($_SESSION['customer_id'])) { 
 					?>
 					<br>
-					<a href="cart_process.php?id=<?php echo $each['id'] ?>&type=increase&page=product_detail">
+					<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
 						Thêm vào giỏ hàng
-					</a> 
+					</button>
 					<?php
 				}
 				?>
@@ -85,5 +85,25 @@ if (isset($_SESSION['customer_id'])) {
 			?>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".btn-add-to-cart").click(function(event) {
+				let id = $(this).data('id');
+				let type = $(this).data('type');
+				$.ajax({
+					url: 'cart_process.php',
+					type: 'GET',
+					data: {id, type},
+				})
+				.done(function() {
+					alert('Thêm vào giỏ hàng thành công');
+				})
+				.fail(function() {
+					alert('Thêm vào giỏ hàng thất bại');
+				})		
+			});
+		});
+	</script>
 </body>
 </html>

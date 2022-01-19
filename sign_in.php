@@ -1,15 +1,13 @@
 <?php 
-
 session_start();
 if (isset($_SESSION['customer_id'])) {
 	header('location:index.php');
 } else if (isset($_SESSION['admin_id'])) {
 	header('location:admin/root/index_admin.php');
 }
-
 require 'connect.php';
-	$customer_email = '';
-	$customer_password = '';
+$customer_email = '';
+$customer_password = '';
 if (isset($_COOKIE['remember'])) {
 	$token = $_COOKIE['remember'];
 	$sql = "select * from customers where token = '$token'";
@@ -17,8 +15,8 @@ if (isset($_COOKIE['remember'])) {
 	$customer = mysqli_fetch_array($result);
 	$rows = mysqli_num_rows($result);
 	if ($rows == 1) {
-	$customer_email = $customer['email'];
-	$customer_password = $customer['password'];
+		$customer_email = $customer['email'];
+		$customer_password = $customer['password'];
 	}
 }
 ?>
@@ -55,10 +53,9 @@ if (isset($_COOKIE['remember'])) {
 		}
 		?>
 		<div id="div_tren">
-
 		</div>
 		<div id="div_giua">
-			<form method="post" action="sign_in_process.php">
+			<form method="post" action="sign_in_process.php" onsubmit="kiem_tra()">
 				<table class="border">
 					<tr >
 						<th colspan="2">
@@ -72,7 +69,8 @@ if (isset($_COOKIE['remember'])) {
 							Tài khoản:
 						</td>
 						<td>
-							<input type="text" name="email" value="<?php echo $customer_email ?>">
+							<input type="text" name="email" id="email" value="<?php echo $customer_email ?>">
+							<span class="error_span" id="email_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -80,7 +78,8 @@ if (isset($_COOKIE['remember'])) {
 							Mật khẩu:
 						</td>
 						<td>
-							<input type="password" name="password" value="<?php echo $customer_password ?>">
+							<input type="password" name="password" id="password" value="<?php echo $customer_password ?>">
+							<span class="error_span" id="password_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -97,8 +96,45 @@ if (isset($_COOKIE['remember'])) {
 					</tr>
 				</table>
 			</form>
+			<script type="text/javascript">
+				function kiem_tra() {
+					check = false;
+					//Email_check
+					let email = document.getElementById('email').value;
+					if (email.length === 0){
+					// 	event.preventDefault();
+					// 	document.getElementById('email_error').innerHTML = 'Email không được để trống';	
+					// 	check = true;
+					// } else {
+						let email_regex = /^\w([\.]?\w)*@[a-z]*\.[a-z]*/;
+						if (email_regex.test(email) == false){
+							event.preventDefault();
+							document.getElementById('email_error').innerHTML = 'Email không hợp lệ';
+							check = true;
+						}
+					}
+					//password_check
+					let password = document.getElementById('password').value;
+					if (password.length === 0){
+						event.preventDefault();
+						document.getElementById('password_error').innerHTML = 'Mật khẩu không được để trống';	
+						check = true;
+					} else {
+						let password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})/;
+						if (password_regex.test(password) == false){
+							event.preventDefault();
+							document.getElementById('password_error').innerHTML = 'Mật khẩu quá non !!!';
+							check = true;
+						}
+					}
+					//check_dung
+					if (check) {
+						return false;
+					}
+				}
+			</script>
 		</div>
-<div id="div_duoi">
+		<div id="div_duoi">
 			<?php 
 			require 'footer.php';
 			?>

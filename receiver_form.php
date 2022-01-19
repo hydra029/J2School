@@ -45,7 +45,7 @@ require 'check_account.php';
 			} ?>
 		</div>
 		<div id="div_giua">
-			<form method="post" action="receiver_update.php">
+			<form method="post" action="receiver_update.php" onsubmit="kiem_tra()">
 				<table height="300px" class="border" >
 					<input type="hidden" name="id" value="<?php echo $num ?>">
 					<tr>
@@ -58,7 +58,8 @@ require 'check_account.php';
 							Tên người nhận:
 						</td>
 						<td>
-							<input type="text" name="name" value="<?php echo $each['name'] ?>">
+							<input type="text" name="name" id="name" value="<?php echo $each['name'] ?>">
+							<span id="name_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -66,7 +67,8 @@ require 'check_account.php';
 							Số điện thoại người nhận:
 						</td>
 						<td>
-							<input type="text" name="phone" value="<?php echo $each['phone'] ?>">
+							<input type="text" name="phone" id="phone" value="<?php echo $each['phone'] ?>">
+							<span id="phone_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -74,7 +76,8 @@ require 'check_account.php';
 							Địa chỉ người nhận:
 						</td>
 						<td>
-							<textarea name="address"><?php echo $each['address'] ?></textarea>
+							<textarea name="address" id="address"><?php echo $each['address'] ?></textarea>
+							<span id="address_error"></span>
 						</td>
 					</tr>
 					<tr>
@@ -86,6 +89,56 @@ require 'check_account.php';
 					</tr>
 				</table>
 			</form>
+			<script type="text/javascript">
+				function kiem_tra() {
+					check = false;
+					//name_check
+					let ten = document.getElementById('name').value;
+					if (ten.length === 0){
+						event.preventDefault();
+						document.getElementById('name_error').innerHTML = 'Tên không được để trống';
+						check = true;
+					} else {
+						let name_regex = /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*)*$/
+						if (name_regex.test(ten) == false){
+							event.preventDefault();
+							document.getElementById('name_error').innerHTML = 'Tên không hợp lệ';
+							check = true;
+						} else {
+							document.getElementById('name_error').innerHTML = '';
+						}
+					}
+					//phone_check
+					let so_dien_thoai = document.getElementById('phone').value;
+					if (so_dien_thoai.length === 0){
+						event.preventDefault();
+						document.getElementById('phone_error').innerHTML = 'Số điện thoại không được để trống';
+						check = true;
+					} else {
+						let phone_regex = /^((\+84|84|0)[3|5|7|8|9])+([0-9]{8})\b/
+						if (phone_regex.test(so_dien_thoai) == false){
+							event.preventDefault();
+							document.getElementById('phone_error').innerHTML = 'Số điện thoại không hợp lệ';
+							check = true;
+						} else {
+							document.getElementById('phone_error').innerHTML = '';
+						}
+					}
+					//address_check
+					let dia_chi = document.getElementById('address').value;
+					if (dia_chi.length === 0){
+						event.preventDefault();
+						document.getElementById('address_error').innerHTML = 'Tên không được để trống';
+						check = true;
+					} else {
+						document.getElementById('address_error').innerHTML = '';
+					}
+					//check_dung
+					if (check) {
+						return false;
+					}
+				}
+			</script>
 		</div>
 		<div id="div_duoi">
 			<?php 
