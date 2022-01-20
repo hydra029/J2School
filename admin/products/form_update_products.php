@@ -59,7 +59,7 @@ $array_products = mysqli_fetch_array($query_sql_command_select_products);
 			<br>
 
 
-			<form method="post" action = "process_update_products.php" enctype="multipart/form-data">
+			<form method="post" action = "process_update_products.php" enctype="multipart/form-data" id ="form-update-products">
 				<input type="" name="id" value = "<?php echo $array_products['id'] ?>" hidden>
 				Tên sản phẩm
 				<input type="text" name="name" value = "<?php echo $array_products['name'] ?>"><br>
@@ -94,6 +94,61 @@ $array_products = mysqli_fetch_array($query_sql_command_select_products);
 	</div>
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$.validator.addMethod("validate_name", function (value, element) {
+        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ 0-9]+$/.test(value);
+    }, "Tên nhà sản phẩm sai định dạng");
+
+	$.validator.addMethod("validate_price", function (value, element) {
+        return this.optional(element) || /^[0-9]+$/.test(value);
+    }, "Giá sản phẩm không hợp lệ");
+
+
+	$("#form-update-products").validate({
+		rules: {
+			"name": {
+				required: true,
+				minlength: 3,
+				validate_name: true
+			},
+			"description": {
+				required: true,
+				minlength: 10
+				
+			},
+			"price": {
+				required: true,
+				validate_price: true
+			},
+			"image": {
+				required: true,
+			}
+		},
+		messages: {
+			"name": {
+				required: "Bắt buộc nhập tên",
+				minlength: "Hãy nhập ít nhất 3 ký tự"
+			},
+			"description": {
+				required: "Bắt buộc nhập mô tả",
+				minlength: "Hãy nhập ít nhất 10 ký tự"
+			},
+			"price": {
+				required: "Bắt buộc nhập vào giá sản phẩm",
+			},
+			"image": {
+				required: "Bắt buộc chọn hình ảnh"
+			},
+		}
+	});
+})
+
+
+</script>
 
 </body>
 </html>
