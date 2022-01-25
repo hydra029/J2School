@@ -1,25 +1,24 @@
 <?php require '../check_admin_login.php' ?>
 <?php 
+
+if (empty($_POST['id'])){
+	$_SESSION['error'] = 'Chưa nhập id sản phẩm cần sửa';
+	header('location:form_update_products.php');
+	exit;
+}
+
+if (empty($_POST['name']) || empty($_POST['description']) || empty($_POST['price']) ){
+	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
+	header('location:form_update_products.php');
+	exit;
+}
+
 $id = $_POST['id'];
 $name = $_POST['name'];
 $description = $_POST['description'];
 $price = $_POST['price'];
 $image_new = $_FILES['image_new'];
 $manufacturer_id = $_POST['manufacturer_id'];
-
-if (empty($id)){
-	$_SESSION['error'] = 'Chưa nhập id sản phẩm cần sửa';
-	header('location:form_update_products.php');
-	exit;
-}
-
-if (empty($name) || empty($description) || empty($price) ){
-	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
-	header('location:form_update_products.php');
-	exit;
-}
-
-
 
 if ($image_new['size'] > 0) {
 	$folder = 'images/';
