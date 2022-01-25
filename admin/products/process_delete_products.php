@@ -1,13 +1,14 @@
 <?php require '../check_admin_login.php' ?>
 <?php 
 
-$id = $_GET['id'];
-
-if (empty($id)){
+if (empty($_GET['id'])){
 	$_SESSION['error'] = 'Chưa nhập id sản phẩm cần xóa';
 	header('location:form_insert_products.php');
 	exit;
 }
+
+$id = $_GET['id'];
+
 
 require '../connect_database.php';
 

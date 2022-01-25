@@ -1,17 +1,18 @@
 <?php require '../check_admin_login.php' ?>
 <?php 
 
+if (empty($_POST['name']) || empty($_POST['description']) || empty($_POST['price']) || empty($_FILES['image']) || empty($_POST['manufacturer_id']) ) {
+	$_SESSION['error'] = 'Chưa điền đầy đủ thông tin';
+	header('location:form_insert_products.php');
+	exit();
+}
+
 $name = $_POST['name'];
 $description = $_POST['description'];
 $price = $_POST['price'];
 $image = $_FILES['image'];
 $manufacturers_id = $_POST['manufacturer_id'];
 
-if (empty($name) || empty($description) || empty($price) || empty($image) || empty($manufacturers_id) ) {
-	$_SESSION['error'] = 'Chưa điền đầy đủ thông tin';
-	header('location:form_insert_products.php');
-	exit();
-}
 
 $folder = 'images/';
 $file_type = explode('.', $image["name"])[1];

@@ -68,12 +68,12 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$.validator.addMethod("validate_name", function (value, element) {
+$.validator.addMethod("validate_name", function (value, element) {
         return this.optional(element) || /^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ
 fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTu
 UùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ 0-9]+$/.test(value);
     }, "Tên nhà sản phẩm sai định dạng");
+
 
 	$.validator.addMethod("validate_price", function (value, element) {
         return this.optional(element) || /^[0-9]+$/.test(value);

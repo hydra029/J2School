@@ -1,13 +1,15 @@
 <?php require '../check_super_admin_login.php' ?>
 <?php 
 
-$id = $_GET['id'];
 
-if (empty($id)){
+if (empty($_GET['id'])){
 	$_SESSION['error'] = 'Chưa nhập id nhà sản xuất cần xóa';
 	header('location:index_manufacturers.php');
 	exit;
 }
+
+$id = $_GET['id'];
+
 require '../connect_database.php';
 
 //kiểm tra xem có id cần xóa không

@@ -1,25 +1,23 @@
 <?php require '../check_super_admin_login.php' ?>
-<?php 
+<?php
+
+if (empty($_POST['id'])){
+	$_SESSION['error'] = 'Chưa nhập id bài cần sửa';
+	header('location:index_manufacturers.php');
+	exit;
+}
+
+if (empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['address']) || empty($_POST['image'])){
+	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
+	header('location:index_manufacturers.php');
+	exit;
+}
 
 $id = $_POST['id'];
 $name = $_POST['name'];
 $phone = $_POST['phone'];
 $address = $_POST['address'];
 $image = $_POST['image'];
-
-
-if (empty($id)){
-	$_SESSION['error'] = 'Chưa nhập id bài cần sửa';
-	header('location:index_manufacturers.php');
-	exit;
-}
-
-if (empty($name) || empty($phone) || empty($address) || empty($image)){
-	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
-	header('location:index_manufacturers.php');
-	exit;
-}
-
 
 
 require '../connect_database.php';

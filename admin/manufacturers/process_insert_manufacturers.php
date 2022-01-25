@@ -6,16 +6,16 @@ require '../check_super_admin_login.php';
 
 <?php 
 
-$name = $_POST['name'];
-$phone = $_POST['phone'];
-$address = $_POST['address'];
-$image = $_POST['image'];
-
-if (empty($name) || empty($phone) || empty($address) || empty($image)){
+if (empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['address']) || empty($_POST['image'])){
 	$_SESSION['error'] = 'Chưa nhập đầy đủ thông tin';
 	header('location:form_insert_manufacturers.php');
 	exit;
 }
+
+$name = $_POST['name'];
+$phone = $_POST['phone'];
+$address = $_POST['address'];
+$image = $_POST['image'];
 
 require '../connect_database.php';
 
@@ -35,6 +35,4 @@ if (empty($error)) {
 	header('location:index_manufacturers.php');	
 }
  
-
-
  ?>
