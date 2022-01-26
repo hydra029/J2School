@@ -10,7 +10,11 @@
 
     <div class = "ul_items">
 		<ul>
-			
+			<li>
+				<a href="../root/index.php">
+					<span style = "color: white">Trang chủ admin</span>
+				</a>
+			</li>
 			<li>
 				Thống kê
 				<ul>
@@ -54,8 +58,9 @@
 			</li>
 
 			<li>
-				
-				<a href="../receipts/index_receipts.php"><span style = "color: white">Quản lí hóa đơn</span></a>
+				<a href="../receipts/index_receipts.php">
+					<span style = "color: white">Quản lí hóa đơn</span>
+				</a>
 			</li>
 		</ul>
 	</div>
