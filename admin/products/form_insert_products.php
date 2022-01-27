@@ -5,13 +5,14 @@
 	<title></title>
 	<link rel="stylesheet" href="../index1.css">
 	<link rel="stylesheet" href="../style_validate1.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css">
 </head>
 <body>
 
 <?php 
 require '../connect_database.php';
-$sql_command_select = "select * from manufacturers";
-$query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
+$sql_select_manufacturees = "select * from manufacturers";
+$query_sql_select_manufacturees = mysqli_query($connect_database, $sql_select_manufacturees);
 
 
 
@@ -48,17 +49,17 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				Hình ảnh
 				<input type="file" name="image"><br>
 				Nhà sản xuất
-				
-				
 				<select name = "manufacturer_id">
-					<?php foreach ($query_sql_command_select as $array_manufacturers): ?>
+					<?php foreach ($query_sql_select_manufacturees as $array_manufacturers): ?>
 						<option value = "<?php echo $array_manufacturers['id'] ?>">
 							<?php echo $array_manufacturers['name'] ?>
 						</option>
 					<?php endforeach ?>
 				</select>
-				
-
+				<br>
+				Thể loại
+				<input type="text" name="type_id[]" id = "type">
+				<br>
 				<button>Thêm</button>
 
 			</form>
@@ -67,57 +68,77 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js"></script>
+<script src="typeahead.bundle.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$.validator.addMethod("validate_name", function (value, element) {
-    return this.optional(element) || /^[a-zA-ZaAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ 0-9]+$/.test(value);
-}, "Tên nhà sản phẩm sai định dạng");
-
-
-$.validator.addMethod("validate_price", function (value, element) {
-    return this.optional(element) || /^[0-9]+$/.test(value);
-}, "Giá sản phẩm không hợp lệ");
-
-
-$("#form-insert-products").validate({
-	rules: {
-		"name": {
-			required: true,
-			minlength: 3,
-			validate_name: true
-		},
-		"description": {
-			required: true,
-			minlength: 10
-			
-		},
-		"price": {
-			required: true,
-			validate_price: true
-		},
-		"image": {
-			required: true,
+	var bestPictures = new Bloodhound({
+		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		remote: {
+			url: 'list_type.php?q=%QUERY',
+			wildcard: '%QUERY'
 		}
-	},
-	messages: {
-		"name": {
-			required: "Bắt buộc nhập tên",
-			minlength: "Hãy nhập ít nhất 3 ký tự"
-		},
-		"description": {
-			required: "Bắt buộc nhập mô tả",
-			minlength: "Hãy nhập ít nhất 10 ký tự"
-		},
-		"price": {
-			required: "Bắt buộc nhập vào giá sản phẩm",
-		},
-		"image": {
-			required: "Bắt buộc chọn hình ảnh"
-		},
-	}
-});
+	})
 
+
+	$('#type').typeahead(null, {
+		name: 'best-pictures',
+		display: 'name',
+		source: bestPictures
+	})
+
+})
+
+
+$(document).ready(function() {
+	$.validator.addMethod("validate_name", function (value, element) {
+        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ 0-9]+$/.test(value);
+    }, "Tên nhà sản phẩm sai định dạng");
+
+	$.validator.addMethod("validate_price", function (value, element) {
+        return this.optional(element) || /^[0-9]+$/.test(value);
+    }, "Giá sản phẩm không hợp lệ");
+
+
+	$("#form-insert-products").validate({
+		rules: {
+			"name": {
+				required: true,
+				minlength: 3,
+				validate_name: true
+			},
+			"description": {
+				required: true,
+				minlength: 10
+				
+			},
+			"price": {
+				required: true,
+				validate_price: true
+			},
+			"image": {
+				required: true,
+			}
+		},
+		messages: {
+			"name": {
+				required: "Bắt buộc nhập tên",
+				minlength: "Hãy nhập ít nhất 3 ký tự"
+			},
+			"description": {
+				required: "Bắt buộc nhập mô tả",
+				minlength: "Hãy nhập ít nhất 10 ký tự"
+			},
+			"price": {
+				required: "Bắt buộc nhập vào giá sản phẩm",
+			},
+			"image": {
+				required: "Bắt buộc chọn hình ảnh"
+			},
+		}
 	});
+})
 
 
 </script>
