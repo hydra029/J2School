@@ -12,7 +12,7 @@ $description = $_POST['description'];
 $price = $_POST['price'];
 $image = $_FILES['image'];
 $manufacturers_id = $_POST['manufacturer_id'];
-
+$types_id = $_POST['type_id'];
 
 $folder = 'images/';
 $file_type = explode('.', $image["name"])[1];
@@ -27,8 +27,17 @@ require '../connect_database.php';
 $sql_command_insert = "insert into products(name, description, price, image, manufacturer_id) 
 values('$name', '$description', '$price', '$file_path', '$manufacturers_id') ";
 
-
 mysqli_query($connect_database, $sql_command_insert);
+
+$product_id = mysqli_insert_id($connect_database);
+
+
+foreach ($types_id as $type_id) {
+	$sql_command_insert = "insert into product_type(product_id, type_id)
+	values('$product_id', '$type_id')";
+	mysqli_query($connect_database, $sql_command_insert);
+}
+
 
 $error = mysqli_error($connect_database);
 

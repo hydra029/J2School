@@ -25,10 +25,10 @@
 						<a href="../list_products/index.php">Thống kê sản phẩm</a>
 					</li>
 					<li>
-						<a href="../manufacturers/form_insert_manufacturers.php">Doanh thu theo thời gian</a>
+						<a href="../list_cash_earn/index.php">Doanh thu theo thời gian</a>
 					</li>
 					<li>
-						<a href="../manufacturers/form_insert_manufacturers.php">Khách hàng tiềm năng</a>
+						<a href="../list_vip_customer/index.php">Khách hàng tiềm năng</a>
 					</li>
 				</ul>
 			</li>
