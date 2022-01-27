@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 06, 2022 at 12:21 PM
+-- Generation Time: Jan 27, 2022 at 07:13 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` int NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `password` mediumtext NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
   `level` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
@@ -51,13 +51,13 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
 
 CREATE TABLE `customers` (
   `id` int NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `gender` varchar(200) NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `gender` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `dob` date NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `token` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `email` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
@@ -77,23 +77,25 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `to
 
 CREATE TABLE `manufacturers` (
   `id` int NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `image` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(200) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `manufacturers`
 --
 
 INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
-(3, 'Fissler', 'Đức', '0123456789', 'https://lh3.googleusercontent.com/proxy/o7ojTkGBn2LbPieb7TRVw6wHlnpHYCpXuABugZgbZBxMTX6XCwc3VRPoQkdEJ9UkiIlc6w1R79gJCelYZGPjGoydR42T-Nx35lsYCwMlYLlGnrMQ'),
+(3, 'Fisslerrrrr', 'Đức', '0123456789', 'https://lh3.googleusercontent.com/proxy/o7ojTkGBn2LbPieb7TRVw6wHlnpHYCpXuABugZgbZBxMTX6XCwc3VRPoQkdEJ9UkiIlc6w1R79gJCelYZGPjGoydR42T-Nx35lsYCwMlYLlGnrMQ'),
 (4, 'Silit', 'Đức', '0987654321', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Silit-logo.svg/2560px-Silit-logo.svg.png'),
 (6, 'Minh Châu', 'Việt Nam', '0147258369', 'https://suminhchau.vn/wp-content/uploads/2019/11/su-minh-chau-fav-400x400.png'),
 (7, 'Bodoca', 'Việt Nam', '0369258147', 'https://thietbimiennam.com/wp-content/uploads/2016/10/logo-bodoca.png'),
 (8, 'Điện máy xanh', 'Việt Nam', '095184762', 'https://prices.vn/photos/7/store/ma-giam-gia-dienmayxanh.png'),
-(9, 'SunHouse', 'Việt Nam', '0159236478', 'https://upload.wikimedia.org/wikipedia/vi/e/ed/Logo_cong_ty_sunhouse.png');
+(9, 'SunHouse', 'Việt Nam', '0159236478', 'https://upload.wikimedia.org/wikipedia/vi/e/ed/Logo_cong_ty_sunhouse.png'),
+(10, 'csacsacsac', 'sacsa', '0132456789894', 'asc'),
+(11, 'cascasc', 'cascsa', 'csacsa', 'csa');
 
 -- --------------------------------------------------------
 
@@ -103,12 +105,12 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
 
 CREATE TABLE `products` (
   `id` int NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `description` mediumtext NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
-  `image` varchar(200) NOT NULL,
+  `image` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `manufacturer_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
@@ -125,7 +127,22 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 (10, 'Bơm Thông hút bồn cầu', 'Sản phẩm là 1 cái bơm\r\nDùng để Thông tắc bồn cầu\r\nKhi bồn cầu bị tắc bạn cần đổ 1 gói Thông cống vào để khoảng 1-2 tiếng xả nước rồi cho bơm vào bơm\r\nĐảm bảo hết tắc\r\nNếu vẫn tắc bạn cần đổ 2 chai CoCa cô la vào để qua đêm, rồi dùng bơm hút sẽ hết tắc', 80000, 'images/1639990223.jpg', 8),
 (11, 'Máy hút bụi không túi FC9351/01', 'Máy hút bụi không túi Philips Dòng 3000 với kích cỡ nhỏ gọn, sử dụng công nghệ PowerCyclone 5 và đầu hút MultiClean cho hiệu suất hút cao giúp bạn vệ sinh sạch sẽ mọi ngóc ngách bên trong nhà', 3499000, 'images/1639990283.jpg', 8),
 (12, 'Tủ 2 Cửa 1 Ngăn Kéo Modulo Home KAI1334-2', 'Tủ 2 Cửa 1 Ngăn Kéo Modulo Home KAI1334-2 được làm hoàn toàn bằng chất liệu gỗ công nghiệp cao cấp phủ giấy PU vân gỗ, không cong vênh, không co ngót, có độ bền cao và rất thân thiện với môi trường. Qua quá trình xử lý, bề mặt tủ có độ bóng đẹp và nhẵn mịn, các góc cạnh được gia công kỹ lưỡng để không gây trầy xước cho người dùng trong suốt quá trình sử dụng.\r\nTủ được thiết kế với 3 ngăn (trong đó có 01 ngăn kéo phía trên, 2 ngăn dưới kèm cửa đóng) tiện lợi để bạn có thể phân loại và sắp xếp đồ đạc phù hợp với nhiều mục đích sử dụng khác nhau. Bạn có thể sử dụng các ngăn tủ để cất giữ những bộ quần áo, lưu trữ sách, các loại băng đĩa hay đồ lưu niệm một cách gọn gàng và trang nhã. Mỗi ngăn kéo, cửa tủ đều có một tay cầm nhỏ gọn và chắc chắn, đóng mở rất chắc chắn và dễ dàng.\r\nTủ Modulo Home Kai - 1334-2 có màu nâu tự nhiên của gỗ mang đến vẻ đẹp sang trọng. Bạn có thể kết hợp tủ với bàn, ghế hay kệ cùng tông màu để không gian nội thất trong nhà thêm sang trọng, hiện đại.\r\nSản phẩm được giao hàng tháo rời, đóng gói trong thùng carton. Khách hàng lắp ráp sản phẩm tại nhà theo hướng dẫn lắp ráp kèm theo bao bì. Dịch vụ lắp ráp tại nhà có thu phí khu vực Tp. HCM, điện thoại 028 2223 7788', 1250000, 'images/1639990377.jpg', 7),
-(13, 'Đèn ngủ LED di động TaoTronics TT-DL23, pin 4000mAh, 110 giờ sử dụng, ánh sáng 360 độ', 'Đèn ngủ di động cao cấp ánh sáng 360 độ.\r\nThiết kế không dây an toàn và di động: Đèn sử dụng bộ điều khiển tích hợp sẵn để có thêm tính di động ở nhà, trong văn phòng và ngay cả khi không có ổ cắm điện xung quanh, như cắm trại và dã ngoại ngoài trời.\r\nPin 110 giờ: Được hưởng lợi từ pin sạc có thể sạc lại với dung lượng lên tới 4000mAh sẽ vượt xa nhu cầu và mong đợi của bạn - lên tới 110 giờ với ánh sáng luôn ở độ sáng tối thiểu.\r\nÁnh sáng 360 ° thân thiện với mắt: Đừng lo lắng về việc đánh thức người đang ngủ bên cạnh bạn (bao gồm cả em bé của bạn) Với bảng điều khiển 360 ° cung cấp tia sáng đồng đều và tinh tế hơn.\r\nĐiều chỉnh độ sáng: Đặt ngón tay của bạn trên bảng điều khiển cảm ứng và tùy chỉnh độ sáng. Tận hưởng nhiều lựa chọn hơn mà không cần phải cài đặt trước.\r\nĐiều khiển một chạm: Dễ dàng bật / tắt đèn bằng cách nhấn một lần bảng điều khiển cảm ứng được đặt ở phía trên cùng của đèn.\r\nSản phẩm chính hãng thương hiệu TaoTronics (Mỹ) bảo hành 12 tháng toàn quốc.', 390000, 'images/1639991046.jpg', 8);
+(13, 'Đèn ngủ LED di động TaoTronics TT-DL23, pin 4000mAh, 110 giờ sử dụng, ánh sáng 360 độ', 'Đèn ngủ di động cao cấp ánh sáng 360 độ.\r\nThiết kế không dây an toàn và di động: Đèn sử dụng bộ điều khiển tích hợp sẵn để có thêm tính di động ở nhà, trong văn phòng và ngay cả khi không có ổ cắm điện xung quanh, như cắm trại và dã ngoại ngoài trời.\r\nPin 110 giờ: Được hưởng lợi từ pin sạc có thể sạc lại với dung lượng lên tới 4000mAh sẽ vượt xa nhu cầu và mong đợi của bạn - lên tới 110 giờ với ánh sáng luôn ở độ sáng tối thiểu.\r\nÁnh sáng 360 ° thân thiện với mắt: Đừng lo lắng về việc đánh thức người đang ngủ bên cạnh bạn (bao gồm cả em bé của bạn) Với bảng điều khiển 360 ° cung cấp tia sáng đồng đều và tinh tế hơn.\r\nĐiều chỉnh độ sáng: Đặt ngón tay của bạn trên bảng điều khiển cảm ứng và tùy chỉnh độ sáng. Tận hưởng nhiều lựa chọn hơn mà không cần phải cài đặt trước.\r\nĐiều khiển một chạm: Dễ dàng bật / tắt đèn bằng cách nhấn một lần bảng điều khiển cảm ứng được đặt ở phía trên cùng của đèn.\r\nSản phẩm chính hãng thương hiệu TaoTronics (Mỹ) bảo hành 12 tháng toàn quốc.', 390000, 'images/1639991046.jpg', 8),
+(17, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://webbanca.com', 10, 'images/1642778700.jpg', 3),
+(18, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://webbanca.com', 10, 'images/1642843722.jpg', 3),
+(19, 'Nhà csi 88 uy tín hàng đầ Việt nam', 'https://gamebanca.com', 10, 'images/1642846981.jpg', 3),
+(20, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://gamebanca.com', 10, 'images/1642856902.jpg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_type`
+--
+
+CREATE TABLE `product_type` (
+  `product_id` int NOT NULL,
+  `type_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -137,16 +154,24 @@ CREATE TABLE `receipts` (
   `id` int NOT NULL,
   `customer_id` int NOT NULL,
   `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `receiver_id` varchar(50) DEFAULT NULL,
-  `note` mediumtext,
+  `receiver_id` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `note` mediumtext COLLATE utf8mb4_general_ci,
   `status` int NOT NULL,
   `total` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `receipts`
 --
 
+INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
+(14, 1, '2022-01-03 14:01:12', '1', NULL, 7, 100000),
+(15, 2, '2022-01-11 14:02:19', '1', NULL, 6, 2000),
+(16, 2, '2022-01-04 14:02:19', '2', NULL, 5, 900000),
+(17, 3, '2022-01-05 14:02:19', '3', NULL, 4, 500000),
+(18, 4, '2022-01-10 14:02:19', '1', NULL, 6, 330000),
+(19, 1, '2022-01-11 15:28:03', '2', '							', 2, 11580000),
+(20, 1, '2022-01-11 15:28:24', '2', '							', 2, 6540000);
 
 -- --------------------------------------------------------
 
@@ -158,13 +183,16 @@ CREATE TABLE `receipt_detail` (
   `receipt_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `receipt_detail`
 --
 
-
+INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
+(19, 2, 2),
+(19, 4, 1),
+(20, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -175,11 +203,11 @@ CREATE TABLE `receipt_detail` (
 CREATE TABLE `receivers` (
   `customer_id` int NOT NULL,
   `id` int NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `address` varchar(200) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `receivers`
@@ -192,6 +220,25 @@ INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `statu
 (3, 2, '2', '2', '2', 0),
 (4, 1, 'Bui Huu Loc', '0987614523', 'Le Loi', 0),
 (4, 2, 'Nguyen Nguyen', '0369258147', 'Nguyen Trai', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type`
+--
+
+CREATE TABLE `type` (
+  `id` int NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `type`
+--
+
+INSERT INTO `type` (`id`, `name`) VALUES
+(1, 'nhà cửa'),
+(2, 'nấu ăn');
 
 --
 -- Indexes for dumped tables
@@ -225,6 +272,13 @@ ALTER TABLE `products`
   ADD KEY `manufacturer_id` (`manufacturer_id`);
 
 --
+-- Indexes for table `product_type`
+--
+ALTER TABLE `product_type`
+  ADD PRIMARY KEY (`product_id`,`type_id`),
+  ADD KEY `type_id` (`type_id`);
+
+--
 -- Indexes for table `receipts`
 --
 ALTER TABLE `receipts`
@@ -243,6 +297,12 @@ ALTER TABLE `receipt_detail`
 --
 ALTER TABLE `receivers`
   ADD PRIMARY KEY (`customer_id`,`id`);
+
+--
+-- Indexes for table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -264,19 +324,25 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `type`
+--
+ALTER TABLE `type`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -287,6 +353,13 @@ ALTER TABLE `receipts`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`id`);
+
+--
+-- Constraints for table `product_type`
+--
+ALTER TABLE `product_type`
+  ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `product_type_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `receipts`
