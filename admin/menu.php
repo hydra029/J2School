@@ -16,7 +16,7 @@
 				</a>
 			</li>
 			<li>
-				Thống kê
+				Thống kê dạng bảng
 				<ul>
 					<li>
 						<a href="../list_receipts/index.php">Thống kê hóa đơn</a>	
@@ -32,7 +32,23 @@
 					</li>
 				</ul>
 			</li>
-
+			<li>
+				Thống kê dạng biểu đồ
+				<ul>
+					<li>
+						<a href="../list_by_chart_receipts/index.php">Thống kê hóa đơn</a>	
+					</li>
+					<li>
+						<a href="../list_products/index.php">Thống kê sản phẩm</a>
+					</li>
+					<li>
+						<a href="../list_cash_earn/index.php">Doanh thu theo thời gian</a>
+					</li>
+					<li>
+						<a href="../list_vip_customer/index.php">Khách hàng tiềm năng</a>
+					</li>
+				</ul>
+			</li>
 			<li>
 				Quản lí nhà sản xuất
 				<ul>
@@ -60,6 +76,11 @@
 			<li>
 				<a href="../receipts/index_receipts.php">
 					<span style = "color: white">Quản lí hóa đơn</span>
+				</a>
+			</li>
+			<li>
+				<a href="../receipts/index_receipts.php">
+					<span style = "color: white">Lịch sử hoạt động</span>
 				</a>
 			</li>
 		</ul>
