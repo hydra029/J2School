@@ -15,7 +15,7 @@ if ( mysqli_num_rows($query_sql_command_select) == 1) {
 	$_SESSION['id'] = $array_admin['id'];
 	$_SESSION['name'] = $array_admin['name'];
 	$_SESSION['level'] = $array_admin['level'];	
-	header('location:root/index_admin.php');
+	header('location:root/index.php');
 	exit();
 } 
 
