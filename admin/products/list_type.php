@@ -3,7 +3,7 @@
 $q = $_GET['q'];
 
 require '../connect_database.php';
-$sql_command_select_type = "select * from type where name like '%$q%' ";
+$sql_command_select_type = "select * from types where name like '%$q%' ";
 $query_sql_select_type = mysqli_query($connect_database, $sql_command_select_type);
 
 $array = [];

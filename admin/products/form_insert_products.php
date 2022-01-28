@@ -5,7 +5,11 @@
 	<title></title>
 	<link rel="stylesheet" href="../index1.css">
 	<link rel="stylesheet" href="../style_validate1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
+
 </head>
 <body>
 
@@ -58,7 +62,7 @@ $query_sql_select_manufacturees = mysqli_query($connect_database, $sql_select_ma
 				</select>
 				<br>
 				Thể loại
-				<input type="text" name="type_id[]" id = "type">
+				<input type="text" name="types_name" id = "type">
 				<br>
 				<button>Thêm</button>
 
@@ -72,7 +76,12 @@ $query_sql_select_manufacturees = mysqli_query($connect_database, $sql_select_ma
 <script src="typeahead.bundle.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	var bestPictures = new Bloodhound({
+	$("form").keypress(function(event) {
+		if ( event.keyCode === 13 ) {
+			event.preventDefault()
+		}
+	})
+	var types = new Bloodhound({
 		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
@@ -80,12 +89,14 @@ $(document).ready(function() {
 			wildcard: '%QUERY'
 		}
 	})
+	types.initialize();
 
-
-	$('#type').typeahead(null, {
-		name: 'best-pictures',
-		display: 'name',
-		source: bestPictures
+	$('#type').tagsinput({
+		typeaheadjs: {
+			displayKey: 'name',
+			valueKey: 'name',
+			source: types.ttAdapter()
+		}
 	})
 
 })
