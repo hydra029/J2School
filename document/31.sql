@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 27, 2022 at 07:13 PM
+-- Generation Time: Jan 28, 2022 at 01:04 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
@@ -224,21 +224,21 @@ INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `statu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type`
+-- Table structure for table `types`
 --
 
-CREATE TABLE `type` (
+CREATE TABLE `types` (
   `id` int NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `type`
+-- Dumping data for table `types`
 --
 
-INSERT INTO `type` (`id`, `name`) VALUES
-(1, 'nhà cửa'),
-(2, 'nấu ăn');
+INSERT INTO `types` (`id`, `name`) VALUES
+(2, 'nấu ăn'),
+(1, 'nhà cửa');
 
 --
 -- Indexes for dumped tables
@@ -299,10 +299,11 @@ ALTER TABLE `receivers`
   ADD PRIMARY KEY (`customer_id`,`id`);
 
 --
--- Indexes for table `type`
+-- Indexes for table `types`
 --
-ALTER TABLE `type`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -339,9 +340,9 @@ ALTER TABLE `receipts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `type`
+-- AUTO_INCREMENT for table `types`
 --
-ALTER TABLE `type`
+ALTER TABLE `types`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -358,7 +359,7 @@ ALTER TABLE `products`
 -- Constraints for table `product_type`
 --
 ALTER TABLE `product_type`
-  ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `product_type_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
