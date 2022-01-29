@@ -39,13 +39,13 @@
 						<a href="../list_by_chart_receipts/index.php">Thống kê hóa đơn</a>	
 					</li>
 					<li>
-						<a href="../list_products/index.php">Thống kê sản phẩm</a>
+						<a href="../list_by_chart_products/index.php">Thống kê sản phẩm</a>
 					</li>
 					<li>
-						<a href="../list_cash_earn/index.php">Doanh thu theo thời gian</a>
+						<a href="../list_by_chart_cash_earn/index.php">Doanh thu theo thời gian</a>
 					</li>
 					<li>
-						<a href="../list_vip_customer/index.php">Khách hàng tiềm năng</a>
+						<a href="../list_by_chart_vip_customer/index.php">Khách hàng tiềm năng</a>
 					</li>
 				</ul>
 			</li>
@@ -79,7 +79,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="../receipts/index_receipts.php">
+				<a href="../activity_log/index.php">
 					<span style = "color: white">Lịch sử hoạt động</span>
 				</a>
 			</li>
