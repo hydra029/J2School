@@ -4,7 +4,7 @@ $max_day_of_this_month_to_get = $_GET['days'];
 
 require '../connect_database.php';
 $sql_command_select = "
-	SELECT sum(total_price) as 'cash_each_day', DATE_FORMAT(order_time, '%e-%m') as 'day'
+	SELECT sum(total) as 'cash_each_day', DATE_FORMAT(order_time, '%e-%m') as 'day'
 	FROM receipts
 	WHERE DATE(order_time) >= (CURDATE() - INTERVAL '$max_day_of_this_month_to_get' DAY)
 	GROUP BY DATE_FORMAT(order_time, '%d-%m')
