@@ -26,10 +26,15 @@ if ($count_rows !== 1){
 $sql_command_delete = "delete from manufacturers where id = '$id'";
 mysqli_query($connect_database, $sql_command_delete);
 
+//insert vào bảng activity
+$person = $_SESSION['name'];
+$name = $array_manufacturers['name'];
+$activity_log = "$person đã xóa nhà sản xuất $name" ;
+require '../activity_log/insert_activity.php';
+
+
 $error = mysqli_error($connect_database);
-
 mysqli_close($connect_database);
-
 if ( empty($error) ) {
 	$_SESSION['success'] = 'Xóa nhà sản xuất thành công';
 	header('location:index_manufacturers.php');	

@@ -22,10 +22,16 @@ if ( $check !== 1 ) {
 	header('location:index_products.php');
 	exit();
 }
-
-
 $sql_command_delete = "delete from products where id = $id";
 mysqli_query($connect_database, $sql_command_delete);
+
+//insert vào bảng activity
+$name = $array_products['name'];
+$person = $_SESSION['name'];
+$activity_log = "$person đã xóa sản phẩm $name" ;
+require '../activity_log/insert_activity.php';
+
+
 
 $error = mysqli_error($connect_database);
 mysqli_close($connect_database);
