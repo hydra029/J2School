@@ -14,12 +14,34 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 $array = [];
 
 foreach ($query_sql_command_select as $each_receipt) {
+	switch ($each_receipt['status']) {
+		case 2:
+			$status_name = "Đơn hàng đang chờ xét duyệt";
+			break;
+		case 3:
+			$status_name = "Đơn hàng không được duyệt";
+			break;
+		case 4:
+			$status_name = "Đơn hàng đang giao";
+			break;
+		case 5:
+			$status_name = "Đơn hàng đã giao";
+			break;
+		case 6:
+			$status_name = "Đơn hàng thành công";
+			break;
+		case 7:
+			$status_name = "Đơn hàng khách hàng hủy";
+			break;
+		case 1:
+			$status_name = "Đơn hàng đang trong giỏ";
+			break;
+	}
 	$array[$each_receipt['status']] = [
-		'name' => $each_receipt['status'],
+		'name' => $status_name,
 		'y' => (float)$each_receipt['percent']
 	];
 }
-
 
 echo json_encode($array);
 

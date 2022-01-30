@@ -7,31 +7,33 @@ if (empty($_POST['name']) || empty($_POST['description']) || empty($_POST['price
 	exit();
 }
 
+
 $name = $_POST['name'];
 $description = $_POST['description'];
 $price = $_POST['price'];
 $image = $_FILES['image'];
 $manufacturers_id = $_POST['manufacturer_id'];
 $types_name = explode(',', $_POST['types_name']);
-
 $folder = 'images/';
 $file_type = explode('.', $image["name"])[1];
-
 $file_name = time() . '.' . $file_type;
-
 $file_path = $folder . $file_name;
-
 move_uploaded_file($image["tmp_name"], $file_path);
+
 
 require '../connect_database.php';
 $sql_command_insert = "insert into products(name, description, price, image, manufacturer_id) 
 values('$name', '$description', '$price', '$file_path', '$manufacturers_id') ";
-
 mysqli_query($connect_database, $sql_command_insert);
 
+
+//insert vào bảng activity
+$person = $_SESSION['name'];
+$activity_log = "$person đã thêm sản phẩm $name" ;
+require '../activity_log/insert_activity.php';
+
+
 $product_id = mysqli_insert_id($connect_database);
-
-
 foreach ($types_name as $type_name) {
 	$sql_select_type = "select * from types where name = '$types_name' ";
 	$query_sql_select_type = mysqli_query($sql_select_type);
@@ -50,7 +52,6 @@ foreach ($types_name as $type_name) {
 
 
 $error = mysqli_error($connect_database);
-
 if (empty($error)) {
 	$_SESSION['success'] = 'Thêm sản phẩm thành công';
 	header('location:index_products.php');	

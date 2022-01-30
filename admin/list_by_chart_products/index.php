@@ -52,7 +52,7 @@
 			</div>
 			<br>
 			<?php require '../validate.php' ?>
-			
+			<input type="date" name="">
 			<figure class="highcharts-figure">
 				<div id="container_1"></div>
 			</figure>

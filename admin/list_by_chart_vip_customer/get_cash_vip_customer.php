@@ -2,7 +2,7 @@
 
 require '../connect_database.php';
 $sql_select = "
-	SELECT customers.name as 'name', sum(receipts.total) as 'cash'
+	SELECT customers.name as 'name', sum(receipts.total_price) as 'cash'
 	FROM receipts
 	JOIN customers on customers.id = receipts.customer_id
 	GROUP BY customers.id

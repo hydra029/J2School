@@ -24,22 +24,9 @@ values ('$name', '$phone', '$address', '$image')";
 mysqli_query($connect_database, $sql_command_insert);
 
 //insert vào bảng activity
-$sql_select_last_id_activity = "
-	SELECT id from activities 
-	ORDER BY id DESC
-	LIMIT 1
-";
-$last_activity_id = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_last_id_activity))['id'];
-$activity_id = $last_activity_id + 1;
 $person = $_SESSION['name'];
 $activity_log = "$person đã thêm nhà sản xuất $name" ;
-$sql_insert_activities = "
-	INSERT INTO activities(id, activity)
-	VALUES('$activity_id', '$activity_log')
-";
-
-mysqli_query($connect_database, $sql_insert_activities);
-
+require '../activity_log/insert_activity.php';
 
 //kiểm tra xem có lỗi
 $error = mysqli_error($connect_database);

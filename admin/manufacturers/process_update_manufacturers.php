@@ -27,11 +27,15 @@ name = '$name',
 phone = '$phone',
 address = '$address',
 image = '$image' where id = '$id' ";
-
 mysqli_query($connect_database, $sql_command_update);
 
-$error = mysqli_error($connect_database);
+//insert vào bảng activity
+$person = $_SESSION['name'];
+$activity_log = "$person đã cập nhật nhà sản xuất $name" ;
+require '../activity_log/insert_activity.php';
 
+
+$error = mysqli_error($connect_database);
 mysqli_close($connect_database);
 
 if (empty($error)) {

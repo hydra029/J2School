@@ -39,11 +39,16 @@ description = '$description',
 price = '$price',
 image = '$file_path',
 manufacturer_id = '$manufacturer_id' where id = '$id' ";
-
 mysqli_query($connect_database, $sql_command_update);
 
-$error = mysqli_error($connect_database);
 
+//insert vào bảng activity
+$person = $_SESSION['name'];
+$activity_log = "$person đã cập nhật sản phẩm $name" ;
+require '../activity_log/insert_activity.php';
+
+
+$error = mysqli_error($connect_database);
 if (empty($error)) {
 	$_SESSION['success'] = 'Sửa sản phẩm thành công';
 	header('location:index_products.php');	
