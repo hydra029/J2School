@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 28, 2022 at 01:04 PM
+-- Generation Time: Jan 29, 2022 at 05:16 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
@@ -18,8 +18,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quan_ly_ban_hang`
+-- Database: `31`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activities`
+--
+
+CREATE TABLE `activities` (
+  `id` int NOT NULL,
+  `activity` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -131,7 +143,9 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 (17, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://webbanca.com', 10, 'images/1642778700.jpg', 3),
 (18, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://webbanca.com', 10, 'images/1642843722.jpg', 3),
 (19, 'Nhà csi 88 uy tín hàng đầ Việt nam', 'https://gamebanca.com', 10, 'images/1642846981.jpg', 3),
-(20, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://gamebanca.com', 10, 'images/1642856902.jpg', 3);
+(20, 'Nhà cái 88 uy tín hàng đầu Việt Nam', 'https://gamebanca.com', 10, 'images/1642856902.jpg', 3),
+(21, 'csacsacacacascasc', 'csacsacacacascasc', 34, 'images/1643398332.png', 3),
+(22, 'camscsamncjkasnck', 'camscsamncjkasnck', 50, 'images/1643398385.png', 3);
 
 -- --------------------------------------------------------
 
@@ -143,6 +157,19 @@ CREATE TABLE `product_type` (
   `product_id` int NOT NULL,
   `type_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_type`
+--
+
+INSERT INTO `product_type` (`product_id`, `type_id`) VALUES
+(21, 4),
+(21, 5),
+(21, 6),
+(21, 7),
+(22, 8),
+(22, 9),
+(22, 10);
 
 -- --------------------------------------------------------
 
@@ -165,12 +192,12 @@ CREATE TABLE `receipts` (
 --
 
 INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
-(14, 1, '2022-01-03 14:01:12', '1', NULL, 7, 100000),
+(14, 1, '2022-01-03 14:01:12', '1', NULL, 6, 100000),
 (15, 2, '2022-01-11 14:02:19', '1', NULL, 6, 2000),
-(16, 2, '2022-01-04 14:02:19', '2', NULL, 5, 900000),
-(17, 3, '2022-01-05 14:02:19', '3', NULL, 4, 500000),
+(16, 2, '2022-01-04 14:02:19', '2', NULL, 6, 900000),
+(17, 3, '2022-01-05 14:02:19', '3', NULL, 6, 500000),
 (18, 4, '2022-01-10 14:02:19', '1', NULL, 6, 330000),
-(19, 1, '2022-01-11 15:28:03', '2', '							', 2, 11580000),
+(19, 1, '2022-01-11 15:28:03', '2', '							', 6, 11580000),
 (20, 1, '2022-01-11 15:28:24', '2', '							', 2, 6540000);
 
 -- --------------------------------------------------------
@@ -237,12 +264,25 @@ CREATE TABLE `types` (
 --
 
 INSERT INTO `types` (`id`, `name`) VALUES
+(6, 'c'),
+(4, 'casc'),
+(5, 'csa'),
+(10, 'dieuchi'),
+(9, 'emthay'),
+(8, 'khibenanh'),
 (2, 'nấu ăn'),
-(1, 'nhà cửa');
+(1, 'nhà cửa'),
+(7, 'sa');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `activities`
+--
+ALTER TABLE `activities`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `admins`
@@ -331,7 +371,7 @@ ALTER TABLE `manufacturers`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `receipts`
@@ -343,7 +383,7 @@ ALTER TABLE `receipts`
 -- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
