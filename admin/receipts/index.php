@@ -94,22 +94,22 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 					<th>Duyệt</th>
 				</tr>
 
-				<?php foreach ($query_sql_command_select as $array_receipts) : ?>
-				<?php if ($array_receipts['status'] == 2 || $array_receipts['status'] == 4 ) { ?>
+				<?php foreach ($query_sql_command_select as $each_receipt) : ?>
+				<?php if ($each_receipt['status'] == 2 || $each_receipt['status'] == 4 ) { ?>
 				<tr>
-					<td><?php echo $array_receipts['id'] ?></td>
-					<td><?php echo $array_receipts['order_time'] ?></td>
+					<td><?php echo $each_receipt['id'] ?></td>
+					<td><?php echo $each_receipt['order_time'] ?></td>
 					<td>
-						<?php echo $array_receipts['receiver_name'] ?><br>
-						<?php echo $array_receipts['receiver_phone'] ?><br>
-						<?php echo $array_receipts['receiver_address'] ?><br>
+						<?php echo $each_receipt['receiver_name'] ?><br>
+						<?php echo $each_receipt['receiver_phone'] ?><br>
+						<?php echo $each_receipt['receiver_address'] ?><br>
 					</td>
 					<td>
-						<?php echo $array_receipts['customer_name'] ?><br>
+						<?php echo $each_receipt['customer_name'] ?><br>
 					</td>
 					<td>
 						<?php 
-						switch ($array_receipts['status']) {
+						switch ($each_receipt['status']) {
 							case 2:
 								echo 'Chưa duyệt';
 								break;							
@@ -120,16 +120,20 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 						 ?>
 						
 					</td>
-					<td><?php echo $array_receipts['total'] ?></td>
+					<td><?php echo $each_receipt['total'] ?></td>
 					<td>
-						<a href="detail_receipt.php?id=<?php echo $array_receipts['id'] ?>">Xem</a>
+						<a href="detail_receipt.php?id=<?php echo $each_receipt['id'] ?>">Xem</a>
 					</td>
 					<td>
-						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=4">Duyệt đơn hàng</a>
+						<?php if ( $each_receipt['status'] == 2 ) { ?>
+							<a href="update_receipt.php?id=<?php echo $each_receipt['id'] ?>&status=4">Duyệt đơn hàng</a>
+						<?php } ?>
 						<br>
-						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=5">Giao thành công</a>
+						<?php if ( $each_receipt['status'] == 4 ) { ?>
+							<a href="update_receipt.php?id=<?php echo $each_receipt['id'] ?>&status=5">Giao thành công</a>
+						<?php } ?>
 						<br>
-						<a href="update_receipt.php?id=<?php echo $array_receipts['id'] ?>&status=3">Hủy đơn hàng</a>
+						<a href="update_receipt.php?id=<?php echo $each_receipt['id'] ?>&status=3">Hủy đơn hàng</a>
 					</td>
 					
 				</tr>

@@ -11,9 +11,28 @@
 <body>
 
 <?php require '../connect_database.php';
+if ( empty($_GET['page']) ) {
+	$index_page = 1;
+} else {
+	$index_page = $_GET['page'];	
+}
 
-$sql_select_activity = "SELECT * FROM activities ORDER BY id DESC";
+// lấy ra tổng số hoạt động
+$sql_select_count_activity = "SELECT count(*) FROM activities";
+$count_activities = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_count_activity))['count(*)'] ;
+// số hoạt động trên 1 trang
+$activities_per_page = 14;
+// số trang skip khi chuyển trang
+$activities_skipped = ( $index_page - 1 ) * $activities_per_page;
+//lấy ra tổng số trang
+$pages = ceil($count_activities / $activities_per_page);
+
+$sql_select_activity = "
+	SELECT * FROM activities ORDER BY id DESC
+	LIMIT $activities_per_page OFFSET $activities_skipped
+";
 $query_sql_select_activity = mysqli_query($connect_database, $sql_select_activity);
+
 ?>
 
 
@@ -22,10 +41,8 @@ $query_sql_select_activity = mysqli_query($connect_database, $sql_select_activit
 		<?php require '../menu.php'; ?>
 	</div> 
 
-
 	<div class="right">
 		<div class="top">
-
 			<div class = "search">
 				<form class = "form_search">
 					Tìm kiếm
@@ -63,7 +80,9 @@ $query_sql_select_activity = mysqli_query($connect_database, $sql_select_activit
 				</tr>
 				<?php endforeach ?>
 			</table>
-
+			<?php for ($i=1; $i <= $pages; $i++) {  ?>
+				<a href = "?page=<?php echo $i ?>"><?php echo $i ?></a>
+			<?php } ?>
 		</div>
 
 	</div>
