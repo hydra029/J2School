@@ -74,7 +74,13 @@
 			</li>
 
 			<li>
-				<a href="../receipts/index_receipts.php">
+				<a href="../customers/index.php">
+					<span style = "color: white">Quản lí khách hàng</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="../receipts/index.php">
 					<span style = "color: white">Quản lí hóa đơn</span>
 				</a>
 			</li>
