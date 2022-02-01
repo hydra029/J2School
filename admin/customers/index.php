@@ -11,56 +11,36 @@
 <body>
 
 <?php require '../connect_database.php';
-
-
-$content_search = '';
-
-if (isset($_GET['search'])) {
-	$content_search = $_GET['search'];	
-}
-
-if (isset($_GET['page'])) {
-	$index_page = $_GET['page'];
+if ( empty($_GET['index_page']) ) {
+	$index_page = 1;
 } else {
-	$index_page = 1 ;
+	$index_page = $_GET['index_page'];
 }
 
 
+//lấy ra tổng số khách hàng
+$sql_count_customers = "SELECT count(*) FROM customers";
+$count_customers = mysqli_fetch_array(mysqli_query($connect_database, $sql_count_customers))['count(*)'];
+//lấy ra số khách hàng trên 1 trang
+$customers_per_page = 14;
+//lấy ra số trang
+$pages = ceil($count_customers / $customers_per_page);
+//lấy ra số khách hàng bỏ qua khi chuyển trang
+$customers_skipped = ( $index_page - 1) * $customers_per_page;
 
-//lấy ra tổng số nhà sản xuất
-$sql_command_count_manufacturers = "select count(*) from manufacturers where name like '%$content_search%'";
-$query_sql_command_count_manufacturers = mysqli_query($connect_database, $sql_command_count_manufacturers);
-$count_manufacturers = mysqli_fetch_array($query_sql_command_count_manufacturers)['count(*)'];
 
-
-
-//tổng số nhà sản xuất trên 1 trang => 4
-$manufacturers_per_page = 4;
-
-//tổng số trang
-$count_pages = ceil($count_manufacturers / $manufacturers_per_page);
-
-//số nhà sx bỏ qua trên 1 trang
-
-$count_skip_manufacturers = ($index_page - 1 ) * $manufacturers_per_page;
-
-$sql_command_select = "select * from manufacturers where name like '%$content_search%' limit $manufacturers_per_page offset $count_skip_manufacturers";
-$query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
-
-//kiểm tra trang có hợp lệ (index_page)
-// if ( $index_page > $count_pages ) {
-// 	$_SESSION['error'] = 'Không tìm thấy trang';
-// 	$index_page = 1;
-// }
-
+$sql_select_customers = "
+	SELECT customers.id as 'id', customers.name as 'name', customers.address as 'address', IFNULL(sum(receipts.total_price),0) as 'money', IFNULL(MAX(receipts.order_time), 'Chưa mua lần nào') as 'last_time'
+	FROM receipts
+	RIGHT JOIN customers ON receipts.customer_id = customers.id
+	GROUP BY customers.id
+	LIMIT $customers_per_page
+	OFFSET $customers_skipped
+";
+$query_sql_select_customers = mysqli_query($connect_database, $sql_select_customers);
 
 ?>
 
-
-
-
-
- 
 <div class="all">
 	<div class="left">
 		<?php require '../menu.php'; ?>
@@ -89,43 +69,35 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 		<div class = "bot">
 
 			<div class = "header">
-				<h1 class =  "header" >KHÁCH HÀNG</h1>
+				<h1 class = "header" >KHÁCH HÀNG</h1>
 			</div>
 			<br>
 			<?php require '../validate.php' ?>
-			<table class="table">
+			<table class = "table">
 				<tr>
 					<th>Mã</th>
-					<th>Tên nhà sản xuất</th>
-					<th>Số điện thoại</th>
+					<th>Tên khách hàng</th>
 					<th>Địa chỉ</th>
-					<th>Hình ảnh</th>
-					<th>Sửa</th>
-					<th>Xóa</th>
+					<th>Lần cuối mua hàng</th>
+					<th>Số tiền bỏ ra</th>
+					<th>Xem chi tiết</th>
 				</tr>
-				<?php foreach ($query_sql_command_select as $array_manufacturers): ?>
+				<?php foreach ($query_sql_select_customers as $each_customer) { ?>
 				<tr>
-					<td><?php echo $array_manufacturers['id'] ?></td>
-					<td><?php echo $array_manufacturers['name'] ?></td>
-					<td><?php echo $array_manufacturers['phone'] ?></td>
-					<td><?php echo $array_manufacturers['address'] ?></td>
-					<td><img src="<?php echo $array_manufacturers['image'] ?>" height = "100px"></td>
+					<td><?php echo $each_customer['id'] ?></td>
+					<td><?php echo $each_customer['name'] ?></td>
+					<td><?php echo $each_customer['address'] ?></td>
+					<td><?php echo $each_customer['last_time'] ?></td>
+					<td><?php echo $each_customer['money'] ?></td>
 					<td>
-						<a href="form_update_manufacturers.php?id=<?php echo $array_manufacturers['id'] ?>">Sửa</a>
-					</td>
-					<td>
-						<a href="process_delete_manufacturers.php?id=<?php echo $array_manufacturers['id'] ?>">Xóa</a>
+						<a href="detail_customer.php?id=<?php echo $each_customer['id'] ?>">Xem</a>
 					</td>
 				</tr>
-				<?php endforeach ?>
+				<?php } ?>
 			</table>
-		<?php for ($index_page = 1; $index_page <= $count_pages; $index_page++) { ?>
-			<a href="?page=<?php echo $index_page?>&search=<?php $content_search ?>">
-				<?php echo $index_page ?>
-			</a>
-		
-		<?php } ?>
-
+			<?php for ( $i = 1; $i <= $pages; $i++) {  ?>
+				<a href="?index_page=<?php echo $i ?>"><?php echo $i ?></a>
+			<?php } ?>
 
 		</div>
 
