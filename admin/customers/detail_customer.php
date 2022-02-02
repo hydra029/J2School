@@ -14,7 +14,7 @@
 $id = $_GET['id'];
 
 $sql_select_customers = "
-	SELECT customers.*, IFNULL(sum(receipts.total_price),0) as 'money', IFNULL(MAX(receipts.order_time), 'Chưa mua lần nào') as 'last_time'
+	SELECT customers.*, IFNULL(sum(receipts.total),0) as 'money', IFNULL(MAX(receipts.order_time), 'Chưa mua lần nào') as 'last_time'
 	FROM receipts
 	RIGHT JOIN customers ON receipts.customer_id = customers.id
 	WHERE  customers.id = '$id'
@@ -83,14 +83,6 @@ $each_customer = mysqli_fetch_array($query_sql_select_customers);
 				<tr>
 					<td>Email</td>
 					<td><?php echo $each_customer['email'] ?></td>
-				</tr>
-				<tr>
-					<td>Điện thoại</td>
-					<td><?php echo $each_customer['phone'] ?></td>
-				</tr>
-				<tr>
-					<td>Địa chỉ</td>
-					<td><?php echo $each_customer['address'] ?></td>
 				</tr>
 				<tr>
 					<td>Lần cuối mua hàng</td>

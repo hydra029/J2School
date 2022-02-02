@@ -30,13 +30,14 @@ $customers_skipped = ( $index_page - 1) * $customers_per_page;
 
 
 $sql_select_customers = "
-	SELECT customers.id as 'id', customers.name as 'name', customers.address as 'address', IFNULL(sum(receipts.total_price),0) as 'money', IFNULL(MAX(receipts.order_time), 'Chưa mua lần nào') as 'last_time'
+	SELECT customers.id as 'id', customers.name as 'name', IFNULL(sum(receipts.total),0) as 'money', IFNULL(MAX(receipts.order_time), 'Chưa mua lần nào') as 'last_time'
 	FROM receipts
 	RIGHT JOIN customers ON receipts.customer_id = customers.id
 	GROUP BY customers.id
 	LIMIT $customers_per_page
 	OFFSET $customers_skipped
 ";
+
 $query_sql_select_customers = mysqli_query($connect_database, $sql_select_customers);
 
 ?>
@@ -77,7 +78,6 @@ $query_sql_select_customers = mysqli_query($connect_database, $sql_select_custom
 				<tr>
 					<th>Mã</th>
 					<th>Tên khách hàng</th>
-					<th>Địa chỉ</th>
 					<th>Lần cuối mua hàng</th>
 					<th>Số tiền bỏ ra</th>
 					<th>Xem chi tiết</th>
@@ -86,7 +86,6 @@ $query_sql_select_customers = mysqli_query($connect_database, $sql_select_custom
 				<tr>
 					<td><?php echo $each_customer['id'] ?></td>
 					<td><?php echo $each_customer['name'] ?></td>
-					<td><?php echo $each_customer['address'] ?></td>
 					<td><?php echo $each_customer['last_time'] ?></td>
 					<td><?php echo $each_customer['money'] ?></td>
 					<td>
