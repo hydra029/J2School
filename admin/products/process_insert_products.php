@@ -25,18 +25,17 @@ require '../connect_database.php';
 $sql_command_insert = "insert into products(name, description, price, image, manufacturer_id) 
 values('$name', '$description', '$price', '$file_path', '$manufacturers_id') ";
 mysqli_query($connect_database, $sql_command_insert);
-
+//lấy ra product id để insert vào type
+$product_id = mysqli_insert_id($connect_database);
 
 //insert vào bảng activity
 $person = $_SESSION['name'];
 $activity_log = "$person đã thêm sản phẩm $name" ;
 require '../activity_log/insert_activity.php';
 
-
-$product_id = mysqli_insert_id($connect_database);
 foreach ($types_name as $type_name) {
-	$sql_select_type = "select * from types where name = '$types_name' ";
-	$query_sql_select_type = mysqli_query($sql_select_type);
+	$sql_select_type = "select * from types where name = '$type_name' ";
+	$query_sql_select_type = mysqli_query($connect_database, $sql_select_type);
 	$type = mysqli_fetch_array($query_sql_select_type);
 	if ( empty($type)) {
 		$sql_insert_type = "insert into types(name) values('$type_name')";
@@ -47,6 +46,7 @@ foreach ($types_name as $type_name) {
 	}
 	$sql_command_insert = "insert into product_type(product_id, type_id)
 	values('$product_id', '$type_id')";
+	
 	mysqli_query($connect_database, $sql_command_insert);
 }
 
