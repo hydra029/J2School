@@ -17,11 +17,11 @@ if (!isset($_GET['type'])) {
 $type = $_GET['type'];
 
 $sql_command_select = "
-	SELECT customers.id as 'id_khach_hang', customers.name as 'ten_khach_hang', ifnull(SUM(receipts.total), 0) as 'tien_bo_ra' 
+	SELECT customers.id as 'id_khach_hang', customers.name as 'ten_khach_hang', ifnull(SUM(receipts.total_price), 0) as 'tien_bo_ra' 
 	FROM customers
 	LEFT JOIN receipts on customers.id = receipts.customer_id 
 	GROUP BY customers.id
-	ORDER BY SUM(receipts.total) $type, customers.id $type
+	ORDER BY SUM(receipts.total_price) $type, customers.id $type
 ";
 
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
@@ -56,7 +56,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 
 		<div class = "bot">
 			<div class = "header">
-				<h1 class = "header">THỐNG KÊ KHÁCH HÀNG TIỀM NĂNG</h1>		
+				<h1 class = "header">THỐNG KÊ KHÁCH HÀNG THÂN THIẾT</h1>		
 			</div>
 			<?php require '../validate.php' ?>
 
@@ -73,8 +73,8 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			<table class = "table">
 				<tr>
 					<th>ID</th>
-					<th>Tên tên khách hàng</th>
-					<th>Số tiền khách hàng đã ủng hộ</th>
+					<th>Tên khách hàng</th>
+					<th>Số tiền khách hàng bỏ ra</th>
 				</tr>
 
 				<?php foreach ($query_sql_command_select as $array_products) :?>
