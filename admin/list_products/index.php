@@ -25,6 +25,7 @@ $sql_command_select = "
 	GROUP BY products.id
 	ORDER BY sum(receipt_detail.quantity) $type, products.id $type
 ";
+
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 

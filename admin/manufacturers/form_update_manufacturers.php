@@ -3,10 +3,11 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="../index1.css">
+	<link rel="stylesheet" href="../index3.css">
 	<link rel="stylesheet" href="../style_validate1.css">
+	<link rel="stylesheet" type="text/css" href="../style_table.css">
 </head>
-<body>
+
 
 <?php require '../connect_database.php';
 
@@ -21,40 +22,45 @@ if ($count_rows === 1){
  ?>
  
 
-<div class="all">
-	<div class="left">
-		<?php require '../menu.php'; ?>
-	</div> 
-
-
-	<div class="right">
-		<div class="top">
-
-		</div>
-
-		<div class = "bot">
-
-			<div class = "header">
-				<h1 class =  "header" >Sửa nhà sản xuất</h1>
-			</div>
-			<br>
-
-
-		<form action = "process_update_manufacturers.php" method = "post" id = "form-update-manufactures">
-			<input type="" name="id" value = "<?php echo $array_manufacturers['id'] ?>" hidden>
-			Tên nhà sản xuất
-			<input type="text" name="name" value="<?php echo $array_manufacturers['name'] ?>"><br>
-			Số điện thoại
-			<input type="text" name="phone" value="<?php echo $array_manufacturers['phone'] ?>"><br>
-			Địa chỉ
-			<textarea name = "address"><?php echo $array_manufacturers['address'] ?></textarea><br>
-			Hình ảnh
-			<input type="text" name="image" value="<?php echo $array_manufacturers['image'] ?>"><br>
-			<button>Sửa</button>
+<body> 
+<?php require '../menu.php'; ?>
+<div class="top">
+	<div class = "search">
+		<form class = "form_search">
+			Tìm kiếm
+			<input type="search" name="search" value = "<?php echo $content_search ?>">
+			<button>
+				<img src="../style/style_image/icon_search.png" width="50px">
+			</button>
 		</form>
 	</div>
 
+	<div class = "login">
+		<a class = "login" href="https://google.com">Đăng nhập</a>
+	</div> 
 </div>
+
+<div class = "bot">
+	<div class = "header">
+		<h1 class =  "header" >Sửa nhà sản xuất</h1>
+	</div>
+	<br>
+
+
+	<form action = "process_update_manufacturers.php" method = "post" id = "form-update-manufactures">
+		<input type="" name="id" value = "<?php echo $array_manufacturers['id'] ?>" hidden>
+		Tên nhà sản xuất
+		<input type="text" name="name" value="<?php echo $array_manufacturers['name'] ?>"><br>
+		Số điện thoại
+		<input type="text" name="phone" value="<?php echo $array_manufacturers['phone'] ?>"><br>
+		Địa chỉ
+		<textarea name = "address"><?php echo $array_manufacturers['address'] ?></textarea><br>
+		Hình ảnh
+		<input type="text" name="image" value="<?php echo $array_manufacturers['image'] ?>"><br>
+		<button>Sửa</button>
+	</form>
+</div>
+
 
 <?php }else{ ?>
 <h1>Không tìm thấy nhà sản xuất theo mã này</h1>
