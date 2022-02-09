@@ -1,7 +1,7 @@
 <?php require '../check_admin_login.php' ?>
 
 <?php 
-session_start();
+
 if (empty($_GET['id'])){
 	$_SESSION['error'] = 'Chưa nhập id đơn hàng';
 	header('location:index.php');
@@ -42,6 +42,12 @@ require '../activity_log/insert_activity.php';
 $error = mysqli_error($connect_database);
 mysqli_close($connect_database);
 if (empty($error)) {
+	if ( isset($_GET['customer_id']) ) {
+		$customer_id = $_GET['customer_id'];
+		$header = "location:../customers/view_receipt.php?id=$customer_id";
+		header($header);
+		exit();
+	}
 	$_SESSION['success'] = 'Cập nhật hóa đơn thành công';
 	header('location:index.php');
 }else {
