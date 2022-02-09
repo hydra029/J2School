@@ -1,54 +1,10 @@
-<?php 
-session_start();
-if (isset($_SESSION['customer_id'])) {
-	header('location:index.php');
-} else if (isset($_SESSION['admin_id'])) {
-	header('location:admin/root/index_admin.php');
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
-	<div id="div_tong">
-		<?php 
-		require 'menu.php';
-		?>
-		<?php 
-		if (isset($_SESSION['error'])) {
-			?>
-			<span class="error">
-				<?php echo $_SESSION['error'] ?>
-			</span>
-			<?php 
-			unset($_SESSION['error'])	
-			?>
-			<?php
-		}if (isset($_SESSION['success'])) {
-			?>
-			<span class="success">
-				<?php echo $_SESSION['success'] ?>
-			</span>
-			<?php 
-			unset($_SESSION['success'])	
-			?>
-			<?php
-		}
-		?>
-		<div id="div_tren">
-			<h3 id=header>
-				Đăng ký
-			</h3>
-		</div>
-		<div id="div_giua">
-			<form method="post" action="sign_up_process.php" onsubmit="kiem_tra();">
-				<table class="border">
+<div class="modal" id="modal-signup">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form id="form-signup">
+				<table class="border" width="500px">
 					<tr>
-						<th colspan="2">
+						<th colspan="2" class="center">
 							Điền đầy đủ các thông tin
 						</th>
 					</tr>
@@ -100,92 +56,44 @@ if (isset($_SESSION['customer_id'])) {
 					</tr>
 					<tr>
 						<td colspan="2" class="center">
-							<button>
+							<button id="btn-submit-signup">
 								Đăng ký
 							</button>
 						</td>
 					</tr>
 				</table>
 			</form>
-			<script type="text/javascript">
-				function kiem_tra() {
-					check = false;
-					//name_check
-					let ten = document.getElementById('name').value;
-					if (ten.length === 0){
-						event.preventDefault();
-						document.getElementById('name_error').innerHTML = 'Tên không được để trống';
-						check = true;
-					} else {
-						let name_regex = /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*)*$/
-						if (name_regex.test(ten) == false){
-							event.preventDefault();
-							document.getElementById('name_error').innerHTML = 'Tên không hợp lệ';
-							check = true;
-						} else {
-							document.getElementById('name_error').innerHTML = '';
-						}
-					}
-					//Gender_check
-					let gender = document.getElementsByName('gender');
-					if (gender[0].checked == true || gender[1].checked == true) {
-						document.getElementById('gender_error').innerHTML = '';
-					} else {
-						event.preventDefault();
-						document.getElementById('gender_error').innerHTML = 'Giới tính không được để trống';
-					}
-					//DoB_check
-					let dob = document.getElementById('dob').value;
-					if (dob.length === 0){
-						event.preventDefault();
-						document.getElementById('dob_error').innerHTML = 'Ngày sinh không được để trống';
-						check = true;
-					} else {
-						document.getElementById('dob_error').innerHTML = '';
-					}
-					//Email_check
-					let email = document.getElementById('email').value;
-					if (email.length === 0){
-						event.preventDefault();
-						document.getElementById('email_error').innerHTML = 'Email không được để trống';	
-						check = true;
-					} else {
-						let email_regex = /^\w([\.]?\w)*@[a-z]*\.[a-z]*/;
-						if (email_regex.test(email) == false){
-							document.getElementById('email_error').innerHTML = 'Email không hợp lệ';
-							check = true;
-						} else {
-							document.getElementById('email_error').innerHTML = '';
-						}
-					}
-					//password_check
-					let password = document.getElementById('password').value;
-					if (password.length === 0){
-						event.preventDefault();
-						document.getElementById('password_error').innerHTML = 'Mật khẩu không được để trống';	
-						check = true;
-					} else {
-						let password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})/;
-						if (password_regex.test(password) == false){
-							event.preventDefault();
-							document.getElementById('password_error').innerHTML = 'Mật khẩu ít nhất 8 kí tự, bao gồm chữ hoa, chữ thường, số';
-							check = true;
-						} else {
-							document.getElementById('password_error').innerHTML = '';
-						}
-					}
-					//check_dung
-					if (check) {
-						return false;
-					}
-				}
-			</script>
-		</div>
-		<div id="div_duoi">
-			<?php 
-			require 'footer.php';
-			?>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+					Cancel
+				</button>
+			</div>
 		</div>
 	</div>
-</body>
-</html>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if(window.location.href.indexOf('#modal-signup') != -1) {
+			$('#modal-signup').modal('show');
+		}
+		$('#form-signup').submit(function(event) {
+			event.preventDefault();
+			$.ajax({
+				url: 'sign_up_process.php',
+				type: 'POST',
+				dataType: 'html',
+				data: $(this).serializeArray(),
+			})
+			.done(function(response) {
+				if (response !== 1) {
+					$("$div-error").text(response);
+					$("$div-error").show();
+				} else {
+					$("#modal-signup").toggle();
+					$("#menu-customer").show();
+					$("#menu-guest").hide();
+				}
+			})
+		});
+	});
+</script>

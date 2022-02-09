@@ -7,6 +7,10 @@ require 'check_account.php';
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="menu.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style type="text/css">
 		th, td {
 			border:  1px solid black;
@@ -15,7 +19,9 @@ require 'check_account.php';
 	</style>
 </head>
 <body>
-	<?php 
+	<?php
+	include 'order_form.php';
+	include 'receiver_modal.php';
 	$total = 0;
 	require 'announce.php';
 	require 'connect.php';
@@ -38,7 +44,7 @@ require 'check_account.php';
 	$result = mysqli_query($connect,$sql);
 	$rows = mysqli_num_rows($result);
 	?>
-	<div id="div_tong">
+	<div id="div_tong" class="container">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
 			<h3>
@@ -56,29 +62,43 @@ require 'check_account.php';
 				$receipt_id = $cart['receipt_id'];
 				?>
 				<h4 class="center empty"></h4>
-				<table class="border table" width="100%">
+				<table class="border" width="100%" style="border:  1px solid black; margin: auto;">
 					<tr>
-						<th width="20%">
-							Tên sản phẩm
-						</th>
-						<th>
-							Hình ảnh
-						</th>
-						<th>
-							Nhà sản xuất
-						</th>
-						<th>
-							Giá
-						</th>
-						<th>
-							Số lượng
-						</th>
-						<th>
-							Xoá
-						</th>
-						<th width="15%">
-							Thành tiền
-						</th>
+						<td width="20%">
+							<b>
+								Tên sản phẩm
+							</b>
+						</td>
+						<td>
+							<b>
+								Hình ảnh
+							</b>
+						</td>
+						<td>
+							<b>
+								Nhà sản xuất
+							</b>
+						</td>
+						<td>
+							<b>
+								Giá
+							</b>
+						</td>
+						<td>
+							<b>
+								Số lượng
+							</b>
+						</td>
+						<td>
+							<b>
+								Xoá
+							</b>
+						</td>
+						<td width="15%">
+							<b>
+								Thành tiền
+							</b>
+						</td>
 					</tr>
 					<?php foreach ($result as $each): ?>
 						<?php 
@@ -150,7 +170,7 @@ require 'check_account.php';
 						</td>
 						<td>
 							<button>
-								<a href="order_form.php">
+								<a data-toggle="modal" href="#modal-order" id="btn-order-form">
 									Đặt hàng
 								</a>
 							</button>
@@ -162,13 +182,15 @@ require 'check_account.php';
 			?>
 		</div>
 		<div id="div_duoi">
-			<?php 
-			require 'footer.php';
+			<?php
 			mysqli_close($connect);
+			require 'footer.php';
 			?>
 		</div>
 	</div>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".btn-del").click(function() {

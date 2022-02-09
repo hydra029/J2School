@@ -7,6 +7,8 @@ $receipt_id = $_GET['id'];
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="menu.css">
+
     <title></title>
 </head>
 <body>
@@ -45,10 +47,10 @@ $receipt_id = $_GET['id'];
             receipts.id = '$receipt_id' and receipts.receiver_id = '$receiver_id'";
             $result = mysqli_query($connect,$sql);
             $note = mysqli_fetch_array($result);
-         
-         
+
+
             
-         
+
             ?>
             <table width="700px" height="300px" class="border left">
                 <tr>
@@ -58,20 +60,20 @@ $receipt_id = $_GET['id'];
                 </tr>
                 <tr>
                     <td colspan="2" class="border">
-                      
-                        
-                            Họ và Tên:
-                            <?php echo $receiver['name'] ?>
-                            <br>
-                            Số điện thoại:
-                            <?php echo $receiver['phone'] ?>
-                            <br>  
-                            Địa chỉ:
-                            <?php echo $receiver['address'] ?>
-                            <br>
-                            Note:
-                            <?php echo $note['note'];
-                                               ?>
+
+
+                        Họ và Tên:
+                        <?php echo $receiver['name'] ?>
+                        <br>
+                        Số điện thoại:
+                        <?php echo $receiver['phone'] ?>
+                        <br>  
+                        Địa chỉ:
+                        <?php echo $receiver['address'] ?>
+                        <br>
+                        Note:
+                        <?php echo $note['note'];
+                        ?>
                     </td>
                 </tr>
                 <tr>

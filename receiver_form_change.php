@@ -2,23 +2,22 @@
 require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
 ?>
-<div class="modal fade" id="modal-receiver-form">
+<div class="modal fade" id="modal-receiver-form-change">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<?php 
-				$sql = "select * from receivers where customer_id = '$customer_id'";
+				$num = $_GET['id'];
+				$sql = "select * from receivers where id = '$num' and customer_id = '$customer_id'";
 				$result = mysqli_query($connect,$sql);
-				$rows = mysqli_num_rows($result);
-				$rows = (int)$rows;
-				$num = $rows + 1;
+				$each = mysqli_fetch_array($result);
 				?>
 				<h3 style="text-align: center; ">
-					Thêm thông tin người nhận hàng
+					Sửa thông tin người nhận hàng
 				</h3>
 			</div>
 			<div class="modal-body">
-				<form id="form-receiver">
+				<form id="form-receiver-change">
 					<table height="300px" class="border" width="400px">
 						<input type="hidden" name="id" value="<?php echo $num ?>">
 						<tr>
@@ -31,7 +30,7 @@ $customer_id = $_SESSION['customer_id'];
 								Tên người nhận:
 							</td>
 							<td>
-								<input type="text" name="name" id="name"">
+								<input type="text" name="name" id="name" value="<?php echo $each['name'] ?>">
 							</td>
 						</tr>
 						<tr>
@@ -39,7 +38,7 @@ $customer_id = $_SESSION['customer_id'];
 								Số điện thoại người nhận:
 							</td>
 							<td>
-								<input type="text" name="phone" id="phone">
+								<input type="text" name="phone" id="phone" value="<?php echo $each['phone'] ?>">
 							</td>
 						</tr>
 						<tr>
@@ -47,7 +46,7 @@ $customer_id = $_SESSION['customer_id'];
 								Địa chỉ người nhận:
 							</td>
 							<td>
-								<textarea name="address" id="address"></textarea>
+								<textarea name="address" id="address"><?php echo $each['address'] ?></textarea>
 								<span id="address_error"></span>
 							</td>
 						</tr>
@@ -71,13 +70,21 @@ $customer_id = $_SESSION['customer_id'];
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#form-receiver').submit(function(event) {
+		$('#form-receiver-change').submit(function(event) {
 			event.preventDefault();
 			$.ajax({
-				url: 'receiver_process_create.php',
+				url: 'receiver_update.php',
 				type: 'POST',
 				dataType: 'html',
 				data: $(this).serializeArray(),
+			})
+			.done(function(response) {
+				if (response !== 1) {
+					$("$div-error").text(response);
+					$("$div-error").show();
+				} else {
+					$("#modal-receiver").toggle();
+				}
 			})
 		});
 	});

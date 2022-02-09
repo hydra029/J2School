@@ -1,8 +1,8 @@
 <?php 
 require 'connect.php';
-$sql = "drop database quan_ly_ban_hang";
+$sql = "drop database 31";
 mysqli_query($connect,$sql);
-$sql = "create database quan_ly_ban_hang SET utf8mb4 COLLATE utf8mb4_general_ci";
+$sql = "create database 31 SET utf8mb4 COLLATE utf8mb4_general_ci";
 mysqli_query($connect,$sql);
 mysqli_close($connect);
  ?>

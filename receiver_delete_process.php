@@ -15,7 +15,6 @@ for ($i = $num + 1 ; $i <= $rows; $i++ ) {
 	$result = mysqli_query($connect,$sql);
 }
 mysqli_close($connect);
-$_SESSION['success'] = "Xoá địa chỉ thành công";
 header('location:receiver.php');
 
 ?>

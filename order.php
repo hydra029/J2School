@@ -7,6 +7,7 @@ require 'check_account.php';
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="menu.css">
 	<style type="text/css">
 		th, td {
 			border:  1px solid black;
@@ -18,9 +19,11 @@ require 'check_account.php';
 	<?php 
 	require 'announce.php';
 	?>
-	<div id="div_tong">
+	<div id="div_tong" class="container">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
+			<br>
+			<br>
 			<table class="border" width="900px">
 				<tr>
 					<td width="16.6%">
@@ -105,7 +108,6 @@ require 'check_account.php';
 		<div id="div_giua" >
 			<?php 
 			require 'connect.php';
-
 			$customer_id = $_SESSION['customer_id'];
 			$sql = "select * from receipts where customer_id = '$customer_id' and status = '$status'";
 			$result = mysqli_query($connect,$sql);
@@ -224,7 +226,6 @@ require 'check_account.php';
 									</a>
 									<?php
 									break;
-									
 									default:
 										// code...
 									break;
@@ -245,6 +246,7 @@ require 'check_account.php';
 			} ?>
 		</div>
 		<div id="div_duoi">
+			<br>
 			<?php 
 			require 'footer.php';
 			?>
