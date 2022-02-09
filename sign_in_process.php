@@ -61,7 +61,3 @@ if ($rows == 1) {
 }
 ?>
 
-<script type="text/javascript">
-	$('#name').text = '1';
-</script>
-<input type="text" id="name" value="<?php echo $_SESSION['customer_name'] ?>">
