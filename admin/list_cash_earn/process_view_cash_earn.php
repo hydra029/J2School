@@ -8,7 +8,7 @@ require '../connect_database.php';
 $start_day_month_year = date("Y-m-d", strtotime($start_date));
 $end_day_month_year = date("Y-m-d", strtotime($end_date));
 
-$sql_command_select = "SELECT sum(total) as 'tong_tien' from receipts
+$sql_command_select = "SELECT sum(total_price) as 'tong_tien' from receipts
 	where status = 6
 	and order_time >= '$start_day_month_year'
 	and order_time <= '$end_day_month_year'

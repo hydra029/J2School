@@ -2,49 +2,41 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="../index1.css">
+	<link rel="stylesheet" href="../index3.css">
 	<link rel="stylesheet" type="text/css" href="style_chart.css">
+	<link rel="stylesheet" type="text/css" href="../style_table.css">
 </head>
-<body>
 
-<div class="all">
-	<div class="left">
-		<?php require '../menu.php'; ?>
-	</div> 
-
-	<div class="right">
-		<div class="top">
-
-			<div class = "search">
-				<form class = "form_search">
-					Tìm kiếm
-					<!-- <input type="search" name="search" value = "<?php echo $content_search ?>"> -->
-					<button>
-						<img src="../style/style_image/icon_search.png" width="50px">
-					</button>
-				</form>
-			</div>
-
-			<div class = "login">
-				<a class = "login" href="https://google.com">Đăng nhập</a>
-			</div> 
-		</div>
-
-
-		<div class = "bot">
-
-			<div class = "header">
-				<h1 class =  "header" >THỐNG KÊ HÓA ĐƠN THEO TRẠNG THÁI</h1>
-			</div>
-			<input type="date" name="">
-			
-			<figure class="highcharts-figure">
-				<div id="container"></div>
-			</figure>
-
-		</div>
-
+<body> 
+<?php require '../menu.php'; ?>
+<div class="top">
+	<div class = "search">
+		<form class = "form_search">
+			Tìm kiếm
+			<input type="search" name="search" value = "<?php echo $content_search ?>">
+			<button>
+				<img src="../style/style_image/icon_search.png" width="50px">
+			</button>
+		</form>
 	</div>
+
+	<div class = "login">
+		<a class = "login" href="https://google.com">Đăng nhập</a>
+	</div> 
+</div>
+
+<div class = "bot">
+	<div class = "header">
+		<h1 class =  "header" >THỐNG KÊ HÓA ĐƠN THEO TRẠNG THÁI</h1>
+	</div>
+	<input type="date" name="">
+	
+	<figure class="highcharts-figure">
+		<div id="container"></div>
+	</figure>
+
+
+</div>
 
 </div>
 
