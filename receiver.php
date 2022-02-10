@@ -8,7 +8,6 @@ require 'check_account.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
 	<link rel="stylesheet" type="text/css" href="menu.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -17,7 +16,6 @@ require 'check_account.php';
 			border: 1px solid black;
 		}
 	</style>
-
 </head>
 <body>
 	<?php 
@@ -55,96 +53,111 @@ require 'check_account.php';
 						Tạo thêm
 					</a>
 				</p>
-				<table width="700px" class="border" id="table1">
-					<tr>
-						<td>
-							<b>
-								STT
-							</b>
-						</td>
-						<td>
-							<b>
-								Tên người nhận:
-							</b>
-						</td>
-						<td>
-							<b>
-								Số điện thoại:
-							</b>
-						</td>
-						<td width="200px" >
-							<b>
-								Địa chỉ:
-							</b>
-						</td>
-						<td>
-							<b>
-								Xoá
-							</b>
-						</td>
-						<td>
-							<b>
-								Sửa
-							</b>
-						</td>
-						<td>
-							<b>
-								Mặc đình
-							</b>
-						</td>
-					</tr>
-					<?php 
-					foreach ($result as $each):
-						$num ++;
-						?>
+				<div id="div_table">
+					<table width="700px" class="border" id="table1">
 						<tr>
 							<td>
-								<?php echo $num ?>
+								<b>
+									STT
+								</b>
 							</td>
 							<td>
-								<?php echo $each['name'] ?>
+								<b>
+									Tên người nhận:
+								</b>
 							</td>
 							<td>
-								<?php echo $each['phone'] ?>
+								<b>
+									Số điện thoại:
+								</b>
 							</td>
-							<td height="70px">
-								<?php echo $each['address'] ?>
+							<td width="200px" >
+								<b>
+									Địa chỉ:
+								</b>
 							</td>
 							<td>
-								<a href="receiver_delete_process.php?id=<?php echo $num ?>">
+								<b>
 									Xoá
-								</a>
+								</b>
 							</td>
 							<td>
-								<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-type="change">
+								<b>
 									Sửa
-								</a>
+								</b>
 							</td>
-							<td class="center">
-								<?php if ($each['status'] == 0) { ?>
-									<button>
-										<a data-toggle="modal" href="#modal-receiver" id="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
-											Chọn
-										</a>
-									</button>
-								<?php } else {?>
+							<td>
+								<b>
 									Mặc định
-								<?php } ?>
+								</b>
 							</td>
 						</tr>
-						<?php
-					endforeach;
-				}
-				?>
-
-			</table>
+						<?php 
+						foreach ($result as $each):
+							$num ++;
+							?>
+							<tr>
+								<td>
+									<?php echo $num ?>
+								</td>
+								<td>
+									<?php echo $each['name'] ?>
+								</td>
+								<td>
+									<?php echo $each['phone'] ?>
+								</td>
+								<td height="70px">
+									<?php echo $each['address'] ?>
+								</td>
+								<td>
+									<a href="receiver_delete_process.php?id=<?php echo $num ?>">
+										Xoá
+									</a>
+								</td>
+								<td>
+									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-type="change">
+										Sửa
+									</a>
+								</td>
+								<td class="center">
+									<?php if ($each['status'] == 0) { ?>
+										<button>
+											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
+												<span>
+													Chọn
+												</span>
+											</a>
+										</button>
+										<span style="display: none;" class="span-dfl">
+											Mặc định
+										</span>
+									<?php } else {?>
+										<button style="display: none;">
+											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
+												<span>
+													Chọn
+												</span>
+											</a>
+										</button>
+										<span class="span-dfl">
+											Mặc định
+										</span>
+									<?php } ?>
+								</td>
+							</tr>
+							<?php
+						endforeach;
+					}
+					?>
+				</table>
+			</div>
 			<br>
 		</div>
 		<div id="div_duoi">
 			<?php 
 			require 'footer.php';
 			include 'receiver_form.php';
-			// include 'receiver_form_change.php';
+			include 'receiver_form_change.php';
 			?>
 		</div>
 	</div>
@@ -155,6 +168,8 @@ require 'check_account.php';
 		$(".btn-receiver").click(function() {
 			event.preventDefault();
 			let btn = $(this);
+			let parent_tr = btn.parents("tr");
+			let parent_tb = btn.parents("table");
 			let id = btn.data('id');
 			let type = btn.data('type');
 			$.ajax({
@@ -163,7 +178,10 @@ require 'check_account.php';
 				data: {id, type},
 			})
 			.done(function(response) {
-				$("")
+				parent_tb.find('button').show();
+				parent_tr.find('button').hide();
+				parent_tb.find('.span-dfl').hide();
+				parent_tr.find('.span-dfl').show();
 			})
 		});
 	});
