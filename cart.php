@@ -20,8 +20,6 @@ require 'check_account.php';
 </head>
 <body>
 	<?php
-	include 'order_form.php';
-	include 'receiver_modal.php';
 	$total = 0;
 	require 'announce.php';
 	require 'connect.php';
@@ -188,94 +186,104 @@ require 'check_account.php';
 			?>
 		</div>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".btn-del").click(function() {
-				let btn = $(this);
-				let id = btn.data('id');
-				let type = btn.data('type');
-				let table_row = $("#table > tbody > tr").length;
-				if (table_row == 4) {
-					btn.parents('table').remove();
-					$("#empty").text("Giỏ hàng không có gì !!");
-				}			
-				$.ajax({
-					url: 'cart_process.php',
-					type: 'GET',
-					data: {id, type},
-				})
-				.done(function() {
-					btn.parents('tr').remove();
-					$(".span-del").each(function() {
-						total += parseFloat(($(this).text()).replace(/,/g, ''));
-					});
-					total = total.toLocaleString();
-					$('.span-total').text(total);
-				})
-			});
-			$(".btn-incre").click(function() {
-				let btn = $(this);
-				let id = btn.data('id');
-				let type = btn.data('type');
-				$.ajax({
-					url: 'cart_process.php',
-					type: 'GET',
-					data: {id, type},
-				})
-				.done(function() {
-					let parent_tr = btn.parents('tr');
-					let quantity = parseFloat(parent_tr.find('.span-quantity').text());
-					let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
-					quantity ++;
-					let sum = price * quantity;
-					sum = sum.toLocaleString();
-					parent_tr.find('.span-quantity').text(quantity);
-					parent_tr.find('.span-sum').text(sum);
-					let total = 0;
-					$(".span-sum").each(function() {
-						total += parseFloat(($(this).text()).replace(/,/g, ''));
-					});
-					total = total.toLocaleString();
-					$('.span-total').text(total);
-				})
-			});
-			$(".btn-decre").click(function(event) {
-				let btn = $(this);
-				let id = btn.data('id');
-				let type = btn.data('type');
-				$.ajax({
-					url: 'cart_process.php',
-					type: 'GET',
-					data: {id, type},
-				})
-				.done(function() {
-					let parent_tr = btn.parents('tr');
-					let quantity = parseFloat(parent_tr.find('.span-quantity').text());
-					let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
-					quantity --;
-					if (quantity == 0) {
-					// 	let table_row = $("#table > tbody > tr").length;
-					// 	if (table_row == 3) {
-					// 		btn.parents('table').remove();
-					// 		$("#empty").text("Giỏ hàng không có gì !!");
-					// 	} else {
-						parent_tr.remove();
-					}
-					// } else {
-						let sum = price * quantity;
-						sum = sum.toLocaleString();
-						parent_tr.find('.span-quantity').text(quantity);
-						parent_tr.find('.span-sum').text(sum);
-					// }
-					let total = 0;
-					$(".span-sum").each(function() {
-						total += parseFloat(($(this).text()).replace(/,/g, ''));
-					});
-					total = total.toLocaleString();
-					$('.span-total').text(total);
-				})
-			});
-		});
-	</script>
 </body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".btn-incre").click(function(event) {
+			let btn = $(this);
+			let id = btn.data('id');
+			let type = btn.data('type');
+			$.ajax({
+				url: 'cart_process.php',
+				type: 'GET',
+				data: {id, type},
+			})
+			.done(function() {
+				let parent_tr = btn.parents("tr");
+				let quantity = parseFloat(parent_tr.find('.span-quantity').text());
+				let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
+				quantity ++;
+				let sum = price * quantity;
+				sum = sum.toLocaleString();
+				parent_tr.find('.span-quantity').text(quantity);
+				parent_tr.find('.span-sum').text(sum);
+				let total = 0;
+				$(".span-sum").each(function() {
+					total += parseFloat(($(this).text()).replace(/,/g, ''));
+				});
+				total = total.toLocaleString();
+				$('.span-total').text(total);
+			})
+		});
+		$(".btn-decre").click(function(event) {
+			let btn = $(this);
+			let id = btn.data('id');
+			let type = btn.data('type');
+			$.ajax({
+				url: 'cart_process.php',
+				type: 'GET',
+				data: {id, type},
+			})
+			.done(function() {
+				let parent_tr = btn.parents("tr");
+				let quantity = parseFloat(parent_tr.find('.span-quantity').text());
+				let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
+				quantity --;
+				let sum = price * quantity;
+				if (sum == 0) {
+					parent_tr.remove();
+				}
+				sum = sum.toLocaleString();
+				parent_tr.find('.span-quantity').text(quantity);
+				parent_tr.find('.span-sum').text(sum);
+				let total = 0;
+				$(".span-sum").each(function() {
+					total += parseFloat(($(this).text()).replace(/,/g, ''));
+				});
+				total = total.toLocaleString();
+				if (total == 0) {
+					btn.parents('table').remove();
+					$("#empty").text("Giỏ hàng không có gì !!!" );
+				}
+				$('.span-total').text(total);
+			})
+		});
+		$(".btn-del").click(function(event) {
+			let btn = $(this);
+			let id = btn.data('id');
+			let type = btn.data('type');
+			$.ajax({
+				url: 'cart_process.php',
+				type: 'GET',
+				data: {id, type},
+			})
+			.done(function() {
+				let parent_tr = btn.parents("tr");
+				let quantity = 0;
+				let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
+				let sum = price * quantity;
+				if (sum == 0) {
+					parent_tr.remove();
+				}
+				sum = sum.toLocaleString();
+				parent_tr.find('.span-quantity').text(quantity);
+				parent_tr.find('.span-sum').text(sum);
+				let total = 0;
+				$(".span-sum").each(function() {
+					total += parseFloat(($(this).text()).replace(/,/g, ''));
+				});
+				total = total.toLocaleString();
+				if (total == 0) {
+					btn.parents('table').remove();
+					$("#empty").text("Giỏ hàng không có gì !!!" );
+				}
+				$('.span-total').text(total);
+			})
+		});
+	});
+</script>
+<?php 
+include 'order_form.php';
+include 'receiver_modal.php';
+?>
