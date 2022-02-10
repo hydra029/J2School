@@ -243,7 +243,7 @@ require 'check_account.php';
 				});
 				total = total.toLocaleString();
 				if (total == 0) {
-					btn.parents('table').remove();
+					$("#table").hide();
 					$("#empty").text("Giỏ hàng không có gì !!!" );
 				}
 				$('.span-total').text(total);
@@ -273,11 +273,12 @@ require 'check_account.php';
 				$(".span-sum").each(function() {
 					total += parseFloat(($(this).text()).replace(/,/g, ''));
 				});
-				total = total.toLocaleString();
 				if (total == 0) {
-					btn.parents('table').remove();
+					$("#table").hide();
 					$("#empty").text("Giỏ hàng không có gì !!!" );
 				}
+				total = total.toLocaleString();
+
 				$('.span-total').text(total);
 			})
 		});
