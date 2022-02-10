@@ -28,7 +28,7 @@ if ($rows == 1) {
 	id = '$id'";
 	mysqli_query($connect,$sql);
 	setcookie('remember', $token, time() + 60*60*24);	
-	echo 1;
+	echo $customer['name'] . ',';
 } else {
 	//check tài khoản admin
 	$sql = "select * from admins where email = '$email' and password = '$password'";
@@ -50,12 +50,12 @@ if ($rows == 1) {
 			setcookie('remember', $token, time() + 60*60*24);
 			mysqli_query($connect,$sql);
 		}
-		echo 1;
+		echo $admin['name'];
 		// $_SESSION['success'] = 'Đăng nhập thành công';
 		// header('location:index.php');
 	} else {
 		session_start();
-		echo 'Sai thông tin đăng nhập';
+		echo 1;
 		// header('location:sign_in.php');
 	}
 }

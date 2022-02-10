@@ -90,7 +90,6 @@ if (isset($_SESSION['customer_id'])) {
 			width: 700px;
 			text-align: center;
 			position: absolute;
-
 		}
 		ul > li:hover ul {
 			margin-top: 0;
@@ -114,15 +113,15 @@ if (isset($_SESSION['customer_id'])) {
 	</style>
 </head>
 <body>
-	<?php 
-	require 'connect.php';
-	$id = $_GET['id'];
-	$sql = "select * from products where id = $id";
-	$result = mysqli_query($connect, $sql);
-	?>
 	<div id="div_tong" class="container">
 		<?php 
+		require 'connect.php';
 		require 'menu.php';
+		$id = $_GET['id'];
+		$sql = "select * from products where id = $id";
+		$result = mysqli_query($connect, $sql);
+		?>
+		<?php 
 		if (isset($_SESSION['error'])) {
 			?>
 			<span class="error">
@@ -143,7 +142,6 @@ if (isset($_SESSION['customer_id'])) {
 			?>
 			<?php
 		}
-		
 		?>
 		<div id="div_tren" >
 			<h1 style="text-align: center; ">
@@ -170,13 +168,17 @@ if (isset($_SESSION['customer_id'])) {
 				<?php 
 				if (isset($_SESSION['customer_id'])) { 
 					?>
-	
 					<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
 						Thêm vào giỏ hàng
 					</button>
 					<?php
 				}
 				?>
+				<div class="btn-cus" style="display: none;">
+					<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
+						Thêm vào giỏ hàng
+					</button>
+				</div>
 				<br>
 				<br>
 				<p>
@@ -190,7 +192,6 @@ if (isset($_SESSION['customer_id'])) {
 			?>
 		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".btn-add-to-cart").click(function(event) {
@@ -202,10 +203,8 @@ if (isset($_SESSION['customer_id'])) {
 					data: {id, type},
 				})
 				.done(function() {
-					alert('Thêm vào giỏ hàng thành công');
 				})
 				.fail(function() {
-					alert('Thêm vào giỏ hàng thất bại');
 				})		
 			});
 		});

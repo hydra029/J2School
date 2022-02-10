@@ -91,7 +91,6 @@ if (isset($_SESSION['customer_id'])) {
 			width: 700px;
 			text-align: center;
 			position: absolute;
-
 		}
 		ul > li:hover ul {
 			margin-top: 0;
@@ -118,7 +117,6 @@ if (isset($_SESSION['customer_id'])) {
 	<div id="div_tong" class="container">
 		<?php 
 		require 'connect.php';
-
 		$trang = 1;
 		if (isset($_GET['trang'])) {
 			$trang = $_GET['trang'];
@@ -136,14 +134,12 @@ if (isset($_SESSION['customer_id'])) {
 		$so_san_pham_1_trang = 8;
 		$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
 		$bo_qua = $so_san_pham_1_trang*($trang-1);
-		
 		require 'menu.php';
 		$sql = "select * from products
 		where
 		products.name like '%$tim_kiem%'
 		limit $so_san_pham_1_trang offset $bo_qua";
 		$result = mysqli_query($connect, $sql);
-
 		?>
 		<div id="div_tren">
 			<h1 style="text-align: center; background: lightblue;">
@@ -159,46 +155,34 @@ if (isset($_SESSION['customer_id'])) {
 				?>
 				<ul>
 					<li style="width: 25%; height: 300px; text-align: center;">
+						<div style="height: 13%">
+							<?php echo $each['name'] ?>
+						</div>
+						<div style="height: 60%">
+							<img height="170px" width="170px" src="admin/products/<?php echo $each['image']; ?>">
+						</div>
+						<div style="height: 9%">
+							<?php echo number_format($each['price']) ?> VNĐ
+						</div>
+						<div style="height: 9%">
+							<a href="product_detail.php?id=<?php echo $each['id'] ?>">
+								Xem chi tiết >>>
+							</a>
+						</div>
 						<?php 
 						if (isset($_SESSION['customer_id'])) { 
 							?>
-							<div style="height: 13%">
-								<?php echo $each['name'] ?>
-							</div>
-							<div style="height: 60%">
-								<img height="170px" width="170px" src="admin/products/<?php echo $each['image']; ?>">
-							</div>
-							<div style="height: 9%">
-								<?php echo number_format($each['price']) ?> VNĐ
-							</div>
-							<div style="height: 9%">
-								<a href="product_detail.php?id=<?php echo $each['id'] ?>">
-									Xem chi tiết >>>
-								</a>
-							</div>
-							<div style="height: 9%">
-								<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
-									Thêm vào giỏ hàng
-								</button>
-							</div>
+							<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
+								Thêm vào giỏ hàng
+							</button>
 							<?php
-						} else {
-							?>
-							<div style="height: 15%">
-								<?php echo $each['name'] ?>
-							</div>
-							<div style="height: 65%">
-								<img height="170px" src="admin/products/<?php echo $each['image']; ?>">
-							</div>
-							<div style="height: 10%">
-								<?php echo number_format($each['price']) ?> VNĐ
-							</div>
-							<div style="height: 10%">
-								<a href="product_detail.php?id=<?php echo $each['id'] ?>">
-									Xem chi tiết >>>
-								</a>
-							</div>
-						<?php } ?>
+						}
+						?>
+						<div class="btn-cus" style="height: 9%; display: none;">
+							<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
+								Thêm vào giỏ hàng
+							</button>
+						</div>
 					</li>
 				</ul>
 			<?php endforeach ?>

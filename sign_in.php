@@ -77,9 +77,9 @@ if (isset($_COOKIE['remember'])) {
 	$(document).ready(function() {
 
 
-	// if(window.location.href.indexOf('#modal-signin') != -1) {
-		// 	// $('#modal-signin').modal('show');
-		// }
+		if(window.location.href.indexOf('#modal-signin') != -1) {
+			$('#modal-signin').modal('show');
+		}
 		$('#form-signin').submit(function(event) {
 			event.preventDefault();
 			$.ajax({
@@ -89,14 +89,15 @@ if (isset($_COOKIE['remember'])) {
 				data: $(this).serializeArray(),
 			})
 			.done(function(response) {
-				if (response != 1) {
-					$("$div-error").text(response);
+				if (response == 1) {
+					$("$div-error").text() = "Sai thông tin đăng nhập";
 					$("$div-error").show();
 				} else {
 					$("#modal-signin").modal('toggle');
 					$("#menu-customer").show();
 					$("#menu-guest").hide();
-					$("#span-name").text() = js.name; 
+					$(".btn-cus").show();
+					$("#span-name").text(response);
 				}
 			})
 		});

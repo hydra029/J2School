@@ -42,9 +42,8 @@ if (empty($_SESSION['customer_id'])) {
 			</a>
 			| Xin chào 
 			<span style="color: red" id="span-name">
-				
+				,
 			</span>
-			,
 			<a href="sign_out.php">
 				Đăng xuất
 			</a> 

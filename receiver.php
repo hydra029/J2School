@@ -55,7 +55,7 @@ require 'check_account.php';
 						Tạo thêm
 					</a>
 				</p>
-				<table width="700px" class="border">
+				<table width="700px" class="border" id="table1">
 					<tr>
 						<td>
 							<b>

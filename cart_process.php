@@ -21,7 +21,7 @@ if ($rows != 1) {
 	$sql = "insert into receipt_detail(receipt_id, product_id, quantity)
 	values ('$receipt_id', '$product_id', '$quantity')";
 	mysqli_query($connect, $sql);
-	$_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
+	// $_SESSION['success'] = 'Thêm vào giỏ hàng thành công';
 } else {									 //đã có giỏ hàng
 	$sql = "select * from receipts where customer_id = $customer_id and status = '$status'";
 	$result = mysqli_query($connect, $sql);
@@ -36,13 +36,13 @@ if ($rows != 1) {
 		$quantity = $cart['quantity'];				
 		if ($type == 'decrease') {
 			$quantity --;
-			$_SESSION['success'] = "Giảm sản phẩm khỏi giỏ hàng thành công !";
+			// $_SESSION['success'] = "Giảm sản phẩm khỏi giỏ hàng thành công !";
 		} else if ($type == 'increase') {
 			$quantity ++;
-			$_SESSION['success'] = "Thêm sản phẩm vào giỏ hàng thành công !";
+			// $_SESSION['success'] = "Thêm sản phẩm vào giỏ hàng thành công !";
 		} else {
 			$quantity = 0;
-			$_SESSION['success'] = "Xoá sản phẩm khỏi giỏ hàng thành công !";
+			// $_SESSION['success'] = "Xoá sản phẩm khỏi giỏ hàng thành công !";
 		}
 		if ($quantity > 0) {
 			$sql = "update receipt_detail
@@ -59,7 +59,7 @@ if ($rows != 1) {
 		$sql = "insert into receipt_detail(receipt_id, product_id, quantity)
 		values ('$receipt_id', '$product_id', '$quantity')";
 		mysqli_query($connect,$sql);
-		$_SESSION['success'] = "Thêm sản phẩm vào giỏ hàng thành công !";
+		// $_SESSION['success'] = "Thêm sản phẩm vào giỏ hàng thành công !";
 	}
 }
 mysqli_close($connect);
