@@ -37,7 +37,9 @@
 						<a href="../list_by_chart_receipts/index.php" class="collapse__sublink">Thống&nbspkê&nbsphóa&nbspđơn</a>
 						<a href="../list_by_chart_cash_earn/index.php" class="collapse__sublink">Thống&nbspkê&nbspthu&nbspnhập</a>
 						<a href="../hashtags/index.php" class="collapse__sublink">Quản&nbsplí&nbspgắn&nbspthẻ</a>
+						<a href="../hashtags/index_insert_hashtags_to_product.php" class="collapse__sublink">Thêm&nbspthẻ&nbspvào&nbspsản&nbspphẩm</a>
 					</ul>
+
 				</div>
 				<div  class="nav__link collapse">
 					<ion-icon name="folder-outline" class="nav__icon"></ion-icon>

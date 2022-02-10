@@ -51,6 +51,7 @@ $query_sql_select = mysqli_query($connect_database, $sql_select);
 			<th>Mã</th>
 			<th>Tên thẻ</th>
 			<th>Xem sản phẩm sử dụng thẻ này</th>
+			<th>Thêm sản phẩm vào thẻ này</th>
 			<th>Đổi tên thẻ</th>
 			<th>Xóa thẻ</th>
 		</tr>
@@ -65,6 +66,11 @@ $query_sql_select = mysqli_query($connect_database, $sql_select);
 			<td>
 				<a href = "products_linked_hashtag.php?id=<?php echo $each_type['id'] ?>">
 					Xem sản phẩm
+				</a>
+			</td>
+			<td>
+				<a href = "index_insert_products_to_hashtag.php?type_id=<?php echo $each_type['id']?>">
+					Thêm sản phẩm
 				</a>
 			</td>
 			<td>

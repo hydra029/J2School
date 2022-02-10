@@ -15,7 +15,14 @@
 <?php 
 $id = $_GET['id'];
 
+
 require '../connect_database.php';
+$sql_select_type = "SELECT name FROM types WHERE id = '$id' ";
+$type_name = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_type))['name'];
+
+
+$sql_select_type_name = "SELECT name FROM types WHERE id = '$id'";
+$type_name = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_type_name))['name'] ;
 $sql_select = "
 	SELECT products.*, product_type.type_id as 'type_id', types.name as 'type_name', manufacturers.name as 'manufacturers_name'
 	FROM products
@@ -26,7 +33,6 @@ $sql_select = "
 ";
 $query_sql_select = mysqli_query($connect_database, $sql_select);
 $type = mysqli_fetch_array($query_sql_select);
-
 ?>
 	
 <body> 
@@ -49,7 +55,13 @@ $type = mysqli_fetch_array($query_sql_select);
 
 <div class = "bot">
 	<div class = "header">
-		<h1 class =  "header" >CÁC SẢN PHẨM ĐƯỢC GẮN THẺ <?php echo $type['type_name'] ?></h1>
+		<?php if ( empty($type) ) { ?>
+			<h1 class =  "header" >KHÔNG CÓ SẢN PHẨM NÀO ĐƯỢC GẮN THẺ <?php echo $type_name ?></h1>
+		<?php } else { ?>
+			<h1 class =  "header" >CÁC SẢN PHẨM ĐƯỢC GẮN THẺ <?php echo $type['type_name'] ?></h1>
+		<?php } ?>
+		<br>
+		-> <a href = "index_insert_products_to_hashtag.php?type_id=<?php echo $id ?>">THÊM SẢN PHẨM VÀO THẺ <?php echo $type_name ?> TẠI ĐÂY</a>
 	</div>
 	<br>
 	<?php require '../validate.php' ?>
@@ -78,10 +90,10 @@ $type = mysqli_fetch_array($query_sql_select);
 				<a href = "delete_product_type.php?product_id=<?php echo $each_product['id'] ?>&type_id=<?php echo $each_product['type_id'] ?>">Xóa thẻ</a>
 			</td>
 			<td>
-				<a href="../products/form_update_products.php?id=<?php echo $each_product['id'] ?>">Sửa</a>
+				<a href="../products/form_update_products.php?id=<?php echo $each_product['id'] ?>&type_id=<?php echo $each_product['type_id'] ?>">Sửa</a>
 			</td>
 			<td>
-				<a href="../products/process_delete_products.php?id=<?php echo $each_product['id'] ?>">Xóa</a>
+				<a href="../products/process_delete_products.php?id=<?php echo $each_product['id'] ?>&type_id=<?php echo $each_product['type_id'] ?>">Xóa</a>
 			</td>
 		</tr>
 		<?php endforeach ?>

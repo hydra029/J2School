@@ -12,6 +12,9 @@
 <?php 
 require '../connect_database.php';
 $id = $_GET['id'];
+if ( isset($_GET['type_id']) ) {
+	$type_id = $_GET['type_id'];
+}
 
 //kiểm tra id nhập vào có đúng
 $sql_command_select = "select * from products where id = '$id' ";
@@ -65,7 +68,8 @@ $array_products = mysqli_fetch_array($query_sql_command_select_products);
 	<br>
 
 	<form method="post" action = "process_update_products.php" enctype="multipart/form-data" id ="form-update-products">
-		<input type="" name="id" value = "<?php echo $array_products['id'] ?>" hidden>
+		<input type="hidden" name="id" value = "<?php echo $array_products['id'] ?>">
+		<input type="hidden" name="type_id" value = "<?php echo $type_id ?>">
 		Tên sản phẩm
 		<input type="text" name="name" value = "<?php echo $array_products['name'] ?>"><br>
 		Mô tả
