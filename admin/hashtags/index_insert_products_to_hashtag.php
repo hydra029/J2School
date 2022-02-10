@@ -18,11 +18,18 @@ $type_name = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_type
 $sql_select = "
 	SELECT products.*, manufacturers.name AS 'manufacturers_name', IFNULL(product_type.type_id, 'Chưa có thẻ nào') AS 'type_id', types.name AS 'type_name'
 	FROM products
-	JOIN manufacturers ON manufacturers.id = products.manufacturer_id
+	LEFT JOIN manufacturers ON manufacturers.id = products.manufacturer_id
 	LEFT JOIN product_type ON product_type.product_id = products.id
 	LEFT JOIN types ON types.id = product_type.type_id
-	WHERE types.id <> '$type_id' OR types.id IS NULL
+	WHERE products.name not in (
+        select products.name
+		FROM products 
+        JOIN product_type ON product_type.product_id = products.id
+        JOIN types ON types.id = product_type.type_id
+        where type_id = '$type_id') OR product_type.type_id IS NULL
+	GROUP BY products.id
 ";
+
 $query_sql_select = mysqli_query($connect_database, $sql_select);
 
 ?>
