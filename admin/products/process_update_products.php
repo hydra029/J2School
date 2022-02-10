@@ -50,6 +50,12 @@ require '../activity_log/insert_activity.php';
 
 $error = mysqli_error($connect_database);
 if (empty($error)) {
+	if ( isset($_POST['type_id']) ) {
+		$type_id = $_POST['type_id'];
+		$header = "location:../hashtags/products_linked_hashtag.php?id=$type_id";
+		header($header);
+		exit();
+	}
 	$_SESSION['success'] = 'Sửa sản phẩm thành công';
 	header('location:index_products.php');	
 }else {

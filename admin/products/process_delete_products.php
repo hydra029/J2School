@@ -45,6 +45,12 @@ if ( $error ) {
 }
 
 //nếu không có trong giỏ hàng thì báo xóa sản phẩm
+if ( isset($_GET['type_id']) ) {
+	$type_id = $_GET['type_id'];
+	$header = "location:../hashtags/products_linked_hashtag.php?id=$type_id";
+	header($header);
+	exit();
+}
 $_SESSION['success'] = 'Xóa sản phẩm thành công';
 header('location:index_products.php');
 
