@@ -36,6 +36,7 @@
 						<a href="../receipts/index.php" class="collapse__sublink">Quản&nbsplí&nbsphóa&nbspđơn</a>
 						<a href="../list_by_chart_receipts/index.php" class="collapse__sublink">Thống&nbspkê&nbsphóa&nbspđơn</a>
 						<a href="../list_by_chart_cash_earn/index.php" class="collapse__sublink">Thống&nbspkê&nbspthu&nbspnhập</a>
+						<a href="../hashtags/index.php" class="collapse__sublink">Quản&nbsplí&nbspgắn&nbspthẻ</a>
 					</ul>
 				</div>
 				<div  class="nav__link collapse">
