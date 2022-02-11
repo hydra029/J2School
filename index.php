@@ -1,10 +1,5 @@
 <?php 
-session_start();
-if (isset($_SESSION['customer_id'])) {
-	$customer_id = $_SESSION['customer_id'];
-} else if (isset($_SESSION['admin_id'])) {
-	header('location:admin/root/index_admin.php');
-}
+require "check_account.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -115,36 +110,46 @@ if (isset($_SESSION['customer_id'])) {
 </head>
 <body>
 	<div id="div_tong" class="container">
-		<?php 
-		require 'connect.php';
-		$trang = 1;
-		if (isset($_GET['trang'])) {
-			$trang = $_GET['trang'];
-		}  
-		$tim_kiem = '';
-		if (isset($_GET['tim_kiem'])) {
-			$tim_kiem = $_GET['tim_kiem'];
-		}
-		$sql_so_san_pham = "select count(*) from products
-		where
-		name like '%$tim_kiem%'";
-		$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
-		$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
-		$so_san_pham = $ket_qua_so_san_pham['count(*)'];
-		$so_san_pham_1_trang = 8;
-		$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
-		$bo_qua = $so_san_pham_1_trang*($trang-1);
-		require 'menu.php';
-		$sql = "select * from products
-		where
-		products.name like '%$tim_kiem%'
-		limit $so_san_pham_1_trang offset $bo_qua";
-		$result = mysqli_query($connect, $sql);
-		?>
 		<div id="div_tren">
-			<h1 style="text-align: center; background: lightblue;">
-				Chào mừng đến với Website của chúng tôi
-			</h1>
+			<?php 
+			require 'connect.php';
+			$trang = 1;
+			if (isset($_GET['trang'])) {
+				$trang = $_GET['trang'];
+			}  
+			$tim_kiem = '';
+			$type_id = '';
+			if (isset($_GET['tim_kiem'])) {
+				$tim_kiem = $_GET['tim_kiem'];
+			}
+			$sql_so_san_pham = "select count(*) from products
+			where
+			name like '%$tim_kiem%'";
+			if (isset($_GET['type_id'])) {
+				$type_id = $_GET['type_id'];
+				$sql_so_san_pham = "select count(*) from products
+				join product_type on product_type.product_id = products.id
+				where
+				name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'";
+			}
+			
+			$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
+			$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
+			$so_san_pham = $ket_qua_so_san_pham['count(*)'];
+			$so_san_pham_1_trang = 8;
+			$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
+			$bo_qua = $so_san_pham_1_trang*($trang-1);
+			require 'menu.php';
+			$sql = "select
+			products.*,
+			product_type.type_id as type_id
+			from products
+			join product_type on product_type.product_id = products.id
+			where
+			products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
+			limit $so_san_pham_1_trang offset $bo_qua";
+			$result = mysqli_query($connect, $sql);
+			?>
 			<form>
 				<input type="search" name="tim_kiem" value="" placeholder="tìm kiếm">
 			</form>
@@ -188,14 +193,17 @@ if (isset($_SESSION['customer_id'])) {
 			<?php endforeach ?>
 		</div>
 	</div>
-	<div id="div_duoi" class="container">
+	<div style="text-align: center; background: aliceblue" class="container">
 		<div>
 			<?php for ($i = 1; $i <= $so_trang ; $i++) { ?>
-				<a href="?trang=<?php echo $i ?>&tim_kiem=<?php echo $tim_kiem ?>">
+				<a href="?trang=<?php echo $i ?>&tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $type_id ?>">
 					<?php echo $i ?>
 				</a>
 			<?php } ?>
 		</div>
+	</div>
+	<div id="div_duoi" class="container" style="background: sandybrown;">
+		<br>
 		<br>
 		<div>
 			<?php

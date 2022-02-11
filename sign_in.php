@@ -97,7 +97,7 @@ if (isset($_COOKIE['remember'])) {
 					$("#menu-customer").show();
 					$("#menu-guest").hide();
 					$(".btn-cus").show();
-					$("#span-name").val(response);
+					$("#span-name").text(response);
 				}
 			})
 		});

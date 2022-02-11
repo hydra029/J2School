@@ -1,4 +1,3 @@
-
 <?php 
 if (empty($_SESSION['customer_id'])) {
 	?>
@@ -70,12 +69,31 @@ if (empty($_SESSION['customer_id'])) {
 				Địa chỉ giao hàng
 			</a>
 			| Xin chào 
-			<span style="color: red">
-				<?php echo $_SESSION['customer_name']; ?>,
-			</span> 
+			<a href="user.php">
+				<span style="color: red">
+					<?php echo $_SESSION['customer_name']; ?>,
+				</span> 
+			</a>
 			<a href="sign_out.php">
 				Đăng xuất
 			</a> 
 		</div>
 	</div>
 <?php } ?>
+<div class="left">
+	Phân loại sản phẩm: 
+	<span>
+		<a href="index.php">Tất cả</a> | 
+	</span>
+	<?php 
+	$sql = "select * from types";
+	$result = mysqli_query($connect,$sql);
+	foreach ($result as $each) {
+		?>
+		<a href="index.php?type_id=<?php echo $each['id'] ?>">
+			<?php echo $each["name"] ?> | 
+		</a>
+		<?php
+	}
+	?>
+</div>
