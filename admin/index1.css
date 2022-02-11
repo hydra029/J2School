@@ -1,0 +1,76 @@
+/*---------------------------------page-----------------------------------*/
+body{
+  padding: 0px;
+  margin: 0px;
+}
+
+.all {
+    width: 98vw;
+    background-color: white;
+}
+
+
+.all > .right > .top {
+  height: 10vh;
+  width: 78vw;
+  background-color: white;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.right {
+    width: 78vw;
+    height: 100vh;
+    float: left;
+    background-color: #F6F6F6;
+}
+
+.left {
+    width: 20vw;
+    height: 100vh;
+    float: left;
+    background-color: white;
+}
+
+/*---------------------------------Login-----------------------------------*/
+
+
+/*
+.all > .right > .top > .search {
+  width: 40%;
+  height: 100%
+}
+
+.all > .right > .top > .login {
+  width: 30%;
+  height: 100%
+}*/
+
+/*---------------------------------search-----------------------------------*/
+.search{
+  display: flex;
+  justify-content: flex-start;
+
+
+}
+
+/*---------------------------------Login-----------------------------------*/
+.login {
+display: flex;
+  justify-content: flex-end;
+
+
+}
+
+
+
+
+
+/*---------------------------------header-----------------------------------*/
+.header {
+  margin-top: 25px;
+  background-color: white;
+  padding: 1px;
+}
+
