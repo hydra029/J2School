@@ -1,9 +1,8 @@
 <?php 
 
-$max_day_of_this_month_to_get = $_GET['days'];
-
-require '../connect_database.php';
-$sql_command_select = "
+if ( isset($_GET['days']) ) {
+	$max_day_of_this_month_to_get = $_GET['days'];
+	$sql_command_select = "
 	SELECT products.id as 'ma_san_pham', products.name as 'ten_san_pham', sum(receipt_detail.quantity) as 'so_san_pham_ban_duoc', DATE_FORMAT(order_time, '%e-%m') as 'ngay_ban'
 	FROM receipts
 	join receipt_detail on receipt_detail.receipt_id = receipts.id
@@ -11,22 +10,58 @@ $sql_command_select = "
 	WHERE DATE(order_time) >= (CURDATE() - INTERVAL '$max_day_of_this_month_to_get' DAY)
 	GROUP BY products.id, DATE_FORMAT(order_time, '%d-%m')
 ";
+}
+
+if ( isset($_GET['day_to_day_1'], $_GET['day_to_day_2']) ) {	
+	$day_to_day_1 = $_GET['day_to_day_1'];
+	$day_to_day_2 = $_GET['day_to_day_2'];
+	$sql_command_select = "
+	SELECT products.id as 'ma_san_pham', products.name as 'ten_san_pham', sum(receipt_detail.quantity) as 'so_san_pham_ban_duoc', DATE_FORMAT(order_time, '%e-%m') as 'ngay_ban'
+	FROM receipts
+	join receipt_detail on receipt_detail.receipt_id = receipts.id
+	join products on products.id = receipt_detail.product_id
+	WHERE order_time >= '$day_to_day_1' and order_time <= '$day_to_day_2'
+	GROUP BY products.id, DATE_FORMAT(order_time, '%d-%m')
+";
+
+}
+if ( isset($_GET['month']) ) {
+	$month = $_GET['month'];
+	$max_day_of_month = date("t", strtotime($month));
+	$day_1 = $month . '-01';
+	$day_2 = $month . '-' . $max_day_of_month;
+	$sql_command_select = "
+	SELECT products.id as 'ma_san_pham', products.name as 'ten_san_pham', sum(receipt_detail.quantity) as 'so_san_pham_ban_duoc', DATE_FORMAT(order_time, '%e-%m') as 'ngay_ban'
+	FROM receipts
+	join receipt_detail on receipt_detail.receipt_id = receipts.id
+	join products on products.id = receipt_detail.product_id
+	WHERE order_time >= '$day_1' and order_time <= '$day_2'
+	GROUP BY products.id, DATE_FORMAT(order_time, '%d-%m')
+";
+
+}
+
+
+require '../connect_database.php';
+
+
+
 
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 $day_today = date('d');
 
-if ( $max_day_of_this_month_to_get > $day_today ) {
-	$get_days_last_month = $max_day_of_this_month_to_get - $day_today;
-	$previous_month = date("m",strtotime("-1 month"));
-	$max_day_of_previous_month = date("t", strtotime($previous_month));
-	$start_day_of_last_month = $max_day_of_previous_month - $get_days_last_month;	
+// if ( $max_day_of_this_month_to_get > $day_today ) {
+// 	$get_days_last_month = $max_day_of_this_month_to_get - $day_today;
+// 	$previous_month = date("m",strtotime("-1 month"));
+// 	$max_day_of_previous_month = date("t", strtotime($previous_month));
+// 	$start_day_of_last_month = $max_day_of_previous_month - $get_days_last_month;	
 
 	
-	$start_day_of_this_month = 1;
-} else {
-	$start_day_of_this_month = $day_today - $max_day_of_this_month_to_get;
-}
+// 	$start_day_of_this_month = 1;
+// } else {
+// 	$start_day_of_this_month = $day_today - $max_day_of_this_month_to_get;
+// }
 
 $array = [];
 
