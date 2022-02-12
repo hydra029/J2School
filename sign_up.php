@@ -86,10 +86,8 @@
 			})
 			.done(function(response) {
 				if (response == 1) {
-					$("$div-error").text("Thông tin lỗi");
-					$("$div-error").show();
 				} else {
-					$("#modal-signup").modal('toggle');
+					$("#modal-signup").modal('hide');
 				}
 			})
 		});

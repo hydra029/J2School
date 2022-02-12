@@ -6,10 +6,9 @@ $result = mysqli_query($connect,$sql);
 $rows = mysqli_num_rows($result);
 $num = 0;
 mysqli_close($connect);
-
 ?>
 <div class="modal fade" id="modal-receiver">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="width: 700px;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h1 style="text-align: center ">
@@ -35,7 +34,7 @@ mysqli_close($connect);
 							Tạo thêm
 						</a>
 					</p>
-					<table width="500px" class="border">
+					<table width="600px" class="border">
 						<tr>
 							<td>
 								STT
@@ -79,14 +78,14 @@ mysqli_close($connect);
 									</a>
 								</td>
 								<td class="center">
-									<?php if ($each['status'] == 0) { ?>
+									<?php if ($each['status'] != 2) { ?>
 										<button>
 											<a data-toggle="modal" href="#modal-receiver" id="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="slc">
 												Chọn
 											</a>
 										</button>
 									<?php } else {?>
-										Mặc định
+										Đang dùng
 									<?php } ?>
 								</td>
 							</tr>
@@ -110,29 +109,20 @@ include 'receiver_form.php';
 ?>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".btn-receiver").click(function() {
+		$("#btn-receiver").click(function() {
 			event.preventDefault();
 			let btn = $(this);
 			let id = btn.data('id');
 			let type = btn.data('type');
-			<?php 
-			$sql = "select receivers where status = '1' and customer_id = '$customer_id'";
-			$result = mysqli_query($connect,$sql);
-			$receiver = mysqli_fetch_array($result);
-			?>
-			let a = "<?php echo $receiver["name"] ?>"
-			alert("a");
-			$("#span-name").text(a);
-			alert("<?php echo $receiver["name"] ?>");
 			$.ajax({
 				url: 'receiver_process.php',
 				type: 'GET',
+				dataType: 'json',
 				data: {id, type},
 			})
 			.done(function(response) {
-				
-				
-				$("#modal-receiver").modal('hide');
+				alert(response);
+				// $("#modal-receiver").modal('hide');
 			})
 		});
 		$(".btn-receiver-form").click(function() {

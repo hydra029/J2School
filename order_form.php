@@ -2,7 +2,7 @@
 require 'connect.php';
 ?>
 <div class="modal fade" id="modal-order" >
-	<div class="modal-dialog" style="width: 750px;">
+	<div class="modal-dialog" style="width: 800px;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h1 style="text-align: center; ">
@@ -126,6 +126,9 @@ require 'connect.php';
 		$(".btn-order-form").click(function() {
 			$('#modal-order').modal('show');
 		});
+		$("#btn-chg-rcv").click(function() {
+			$('#modal-order').modal('hide');
+		});
 		$('#form-order').submit(function(event) {
 			event.preventDefault();
 			$.ajax({
@@ -141,5 +144,6 @@ require 'connect.php';
 		if(window.location.href.indexOf('#modal-receiver') != -1) {
 			$('#modal-receiver').modal('show');
 		}
+
 	});
 </script>
