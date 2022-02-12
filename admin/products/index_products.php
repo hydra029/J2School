@@ -81,6 +81,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			<th>Giá</th>
 			<th>Hình ảnh</th>
 			<th>Nhà sản xuất</th>
+			<th>Xem chi tiết</th>
 			<th>Sửa</th>
 			<th>Xóa</th>
 		</tr>
@@ -93,6 +94,9 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				<img src="<?php echo $array_products['image'] ?>" height = "100px">
 			</td>
 			<td><?php echo $array_products['manufacturers_name'] ?></td>
+			<td>
+				<a href = "detail_product.php?id=<?php echo $array_products['id'] ?>">Xem chi tiết</a>
+			</td>
 			<td>
 				<a href="form_update_products.php?id=<?php echo $array_products['id'] ?>">Sửa</a>
 			</td>
