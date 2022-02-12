@@ -1,9 +1,5 @@
 <?php 
-if (isset($_SESSION['customer_id'])) {
-	header('location:index.php');
-} else if (isset($_SESSION['admin_id'])) {
-	header('location:admin/root/index_admin.php');
-}
+
 require 'connect.php';
 $customer_email = '';
 $customer_password = '';
@@ -92,6 +88,7 @@ if (isset($_COOKIE['remember'])) {
 					$("$div-error").show();
 				} else {
 					location.reload();
+					// $.notify("Đăng nhập thành công", "success");
 					// $("#modal-signin").modal('toggle');
 					// $("#menu-customer").show();
 					// $("#menu-guest").hide();

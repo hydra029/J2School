@@ -88,6 +88,7 @@
 				if (response == 1) {
 				} else {
 					$("#modal-signup").modal('hide');
+					$.notify("Đăng ký thành công", "success");
 				}
 			})
 		});

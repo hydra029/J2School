@@ -11,6 +11,8 @@ require 'check_account.php';
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="notify/notify.js"></script>
+	<script src="notify/notify.min.js"></script>
 	<style type="text/css">
 		th, td {
 			border:  1px solid black;
@@ -19,7 +21,6 @@ require 'check_account.php';
 	</style>
 </head>
 <body>
-	
 	<div id="div_tong" class="container">
 		<?php
 		$total = 0;
@@ -215,6 +216,7 @@ require 'check_account.php';
 				});
 				total = total.toLocaleString();
 				$('.span-total').text(total);
+				$.notify("Đã thêm một sản phẩm", "success");
 			})
 		});
 		$(".btn-decre").click(function(event) {
@@ -248,6 +250,7 @@ require 'check_account.php';
 					$("#empty").text("Giỏ hàng không có gì !!!" );
 				}
 				$('.span-total').text(total);
+				$.notify("Đã giảm một sản phẩm", "success");
 			})
 		});
 		$(".btn-del").click(function(event) {
@@ -279,8 +282,8 @@ require 'check_account.php';
 					$("#empty").text("Giỏ hàng không có gì !!!" );
 				}
 				total = total.toLocaleString();
-
 				$('.span-total').text(total);
+				$.notify("Xoá khỏi giỏ thành công", "success");
 			})
 		});
 	});

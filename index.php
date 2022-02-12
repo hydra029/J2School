@@ -1,5 +1,10 @@
 <?php 
-require "check_account.php";
+session_start();
+if (isset($_SESSION['customer_id'])) {
+	$customer_id = $_SESSION['customer_id'];
+} else if (isset($_SESSION['admin_id'])) {
+	header('location:admin/root/index_admin.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,6 +14,8 @@ require "check_account.php";
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="notify/notify.js"></script>
+	<script src="notify/notify.min.js"></script>
 	<title></title>
 	<style type="text/css">
 		a {
@@ -257,7 +264,10 @@ require "check_account.php";
 				url: 'cart_process.php',
 				type: 'GET',
 				data: {id, type},
-			})	
+			})
+			.done(function(response) {
+				$.notify("Thêm vào giỏ hàng thành công", "success");
+			})
 		});
 	});
 </script>

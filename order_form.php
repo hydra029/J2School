@@ -139,6 +139,8 @@ require 'connect.php';
 			})
 			.done(function(response) {
 				$('#modal-order').modal('hide');
+				$.notify("Đặt hàng thành công", "success");
+
 			})
 		});
 		if(window.location.href.indexOf('#modal-receiver') != -1) {
