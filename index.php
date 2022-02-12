@@ -28,16 +28,16 @@ require "check_account.php";
 			color: yellow;
 		}
 		#div_tong {
-			padding-bottom: 50px;
+			padding-bottom: 15px;
 			background: aliceblue;
-			min-height: 800px;
+			min-height: 700px;
 			max-height: 6000px;
 			position: relative;
 			margin: auto;
 		}
 		#div_tren {
 			text-align: center;
-			height: 150px;
+			height: 100px;
 		}
 		#div_giua {
 			max-height: 4900px;
@@ -132,7 +132,6 @@ require "check_account.php";
 				where
 				name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'";
 			}
-			
 			$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
 			$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
 			$so_san_pham = $ket_qua_so_san_pham['count(*)'];
@@ -140,6 +139,26 @@ require "check_account.php";
 			$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
 			$bo_qua = $so_san_pham_1_trang*($trang-1);
 			require 'menu.php';
+			?>
+			<div class="left">
+				Phân loại sản phẩm: 
+				<span>
+					<a href="index.php">Tất cả</a>
+				</span>
+				<?php 
+				require "connect.php";
+				$sql = "select * from types";
+				$result = mysqli_query($connect,$sql);
+				foreach ($result as $each) {
+					?>
+					<a href="index.php?tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $each['id'] ?>">
+						| <?php echo $each["name"] ?>
+					</a>
+					<?php
+				}
+				?>
+			</div>
+			<?php
 			$sql = "select
 			products.*,
 			product_type.type_id as type_id
@@ -201,6 +220,7 @@ require "check_account.php";
 				</a>
 			<?php } ?>
 		</div>
+		<br>
 	</div>
 	<div id="div_duoi" class="container" style="background: sandybrown;">
 		<br>

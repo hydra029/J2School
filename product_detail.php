@@ -186,8 +186,13 @@ if (isset($_SESSION['customer_id'])) {
 				</p>
 			<?php endforeach ?>
 		</div>
-		<div id="div_duoi">
-			<?php 
+	</div>
+	<div id="div_duoi" class="container" style="background: sandybrown;">
+		<br>
+		<br>
+		<div>
+			<?php
+			mysqli_close($connect);
 			require 'footer.php';
 			?>
 		</div>

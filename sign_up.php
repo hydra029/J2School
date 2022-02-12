@@ -85,13 +85,11 @@
 				data: $(this).serializeArray(),
 			})
 			.done(function(response) {
-				if (response !== 1) {
-					$("$div-error").text(response);
+				if (response == 1) {
+					$("$div-error").text("Thông tin lỗi");
 					$("$div-error").show();
 				} else {
-					$("#modal-signup").toggle();
-					$("#menu-customer").show();
-					$("#menu-guest").hide();
+					$("#modal-signup").modal('toggle');
 				}
 			})
 		});

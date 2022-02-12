@@ -115,16 +115,24 @@ include 'receiver_form.php';
 			let btn = $(this);
 			let id = btn.data('id');
 			let type = btn.data('type');
-			$('#modal-order').modal('toggle');
+			<?php 
+			$sql = "select receivers where status = '1' and customer_id = '$customer_id'";
+			$result = mysqli_query($connect,$sql);
+			$receiver = mysqli_fetch_array($result);
+			?>
+			let a = "<?php echo $receiver["name"] ?>"
+			alert("a");
+			$("#span-name").text(a);
+			alert("<?php echo $receiver["name"] ?>");
 			$.ajax({
 				url: 'receiver_process.php',
 				type: 'GET',
 				data: {id, type},
 			})
 			.done(function(response) {
+				
+				
 				$("#modal-receiver").modal('hide');
-				$('#modal-order').modal('show');
-				$(".rcv").text = 
 			})
 		});
 		$(".btn-receiver-form").click(function() {

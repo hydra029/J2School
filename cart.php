@@ -19,31 +19,32 @@ require 'check_account.php';
 	</style>
 </head>
 <body>
-	<?php
-	$total = 0;
-	require 'announce.php';
-	require 'connect.php';
-	$status = '1';
-	$sql = "select
-	products.id as id,
-	products.name as name,
-	products.image as image,
-	manufacturers.name as manufacturer_name,
-	products.price as price,
-	receipt_detail.quantity as quantity,
-	receipts.customer_id as customer_id,
-	receipts.id as receipt_id,
-	receipts.status as status	
-	from receipt_detail
-	join receipts on receipts.id = receipt_detail.receipt_id
-	join products on products.id = receipt_detail.product_id
-	join manufacturers on products.manufacturer_id = manufacturers.id
-	where receipts.customer_id = $customer_id and receipts.status = '$status'";
-	$result = mysqli_query($connect,$sql);
-	$rows = mysqli_num_rows($result);
-	?>
+	
 	<div id="div_tong" class="container">
-		<?php require 'menu.php'; ?>
+		<?php
+		$total = 0;
+		require 'announce.php';
+		require 'connect.php';
+		require 'menu.php';
+		$status = '1';
+		$sql = "select
+		products.id as id,
+		products.name as name,
+		products.image as image,
+		manufacturers.name as manufacturer_name,
+		products.price as price,
+		receipt_detail.quantity as quantity,
+		receipts.customer_id as customer_id,
+		receipts.id as receipt_id,
+		receipts.status as status	
+		from receipt_detail
+		join receipts on receipts.id = receipt_detail.receipt_id
+		join products on products.id = receipt_detail.product_id
+		join manufacturers on products.manufacturer_id = manufacturers.id
+		where receipts.customer_id = $customer_id and receipts.status = '$status'";
+		$result = mysqli_query($connect,$sql);
+		$rows = mysqli_num_rows($result);
+		?>
 		<div id="div_tren">
 			<h3>
 				Đây là giỏ hàng cá nhân

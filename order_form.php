@@ -31,11 +31,12 @@ require 'connect.php';
 									foreach ($result as $each) : ?>
 										Người nhận:
 										<br>
-										<?php echo $each['name'] ?>
+										<span id="span-name"><?php echo $each['name'] ?></span>
 										<br>
-										<?php echo $each['phone'] ?>
+										<span id="span-phone"><?php echo $each['phone'] ?></span>
 										<br>
-										<?php echo $each['address'];
+										<span id="span-address"><?php echo $each['address'] ?></span>
+										<?php
 									endforeach;
 									?>
 								</td>

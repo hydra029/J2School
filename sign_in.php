@@ -75,8 +75,6 @@ if (isset($_COOKIE['remember'])) {
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-
-
 		if(window.location.href.indexOf('#modal-signin') != -1) {
 			$('#modal-signin').modal('show');
 		}
@@ -90,14 +88,15 @@ if (isset($_COOKIE['remember'])) {
 			})
 			.done(function(response) {
 				if (response == 1) {
-					$("$div-error").text() = "Sai thông tin đăng nhập";
+					$("$div-error").text("Sai thông tin đăng nhập");
 					$("$div-error").show();
 				} else {
-					$("#modal-signin").modal('toggle');
-					$("#menu-customer").show();
-					$("#menu-guest").hide();
-					$(".btn-cus").show();
-					$("#span-name").text(response);
+					location.reload();
+					// $("#modal-signin").modal('toggle');
+					// $("#menu-customer").show();
+					// $("#menu-guest").hide();
+					// $(".btn-cus").show();
+					// $("#span-name").text(response);
 				}
 			})
 		});
