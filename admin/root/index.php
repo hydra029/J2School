@@ -30,11 +30,18 @@
 		<h1 class =  "header" >TRANG CHỦ</h1>
 	</div>
 
-	<figure class="highcharts-figure">
-		<div id="container"></div>
-		<br>
-		<div id="container_1"></div>
-	</figure>
+	<table border="1px solid black">
+		<figure class="highcharts-figure">
+			<tr>
+				<td><div id="container"></div></td>
+				<td><div id="container_1"></div></td>
+			</tr>
+			<tr>
+				<td><div id="container_2"></div></td>
+				<td><div id="container_3"></div></td>
+			</tr>
+		</figure>
+	</table>
 
 </div>
 
@@ -46,6 +53,8 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/cylinder.js"></script>
 <script type="text/javascript">
 var days = 30
 $(document).ready(function() {
@@ -183,6 +192,117 @@ $(document).ready(function() {
 		})
 	
 })
+
+$(document).ready(function() {
+	$.ajax({
+		url: 'get_receipts.php',
+		type: 'get',
+		dataType: 'json',
+		data: {days},
+	})
+	.done(function(response) {
+		const array = Object.values(response)
+		get_chart(array, days)
+	})
+		
+function get_chart(array, days) {
+	Highcharts.chart('container_2', {
+	  chart: {
+	    plotBackgroundColor: null,
+	    plotBorderWidth: null,
+	    plotShadow: false,
+	    type: 'pie'
+	  },
+	  title: {
+	    text: 'Thống kê hóa đơn theo trạng thái trong ' + days + ' gần đây'
+	  },
+	  tooltip: {
+	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	  },
+	  accessibility: {
+	    point: {
+	      valueSuffix: '%'
+	    }
+	  },
+	  plotOptions: {
+	    pie: {
+	      allowPointSelect: true,
+	      cursor: 'pointer',
+	      dataLabels: {
+	        enabled: true,
+	        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+	      }
+	    }
+	  },
+	  series: [{
+	    name: 'Brands',
+	    colorByPoint: true,
+	    data: array
+	  }]
+	});
+}
+	
+})
+
+$(document).ready(function() {
+	$.ajax({
+			url: 'get_cash_vip_customer.php',
+			dataType: 'json',
+		})
+		.done(function(response) {
+			var arrayX1 = Object.keys(response)
+			var arrayY1 = Object.values(response)
+			console.log(arrayX1)
+			console.log(arrayY1)
+			get_chart_customer(arrayX1, arrayY1)
+		})
+})
+
+function get_chart_customer(arrayX1, arrayY1) {
+	Highcharts.chart('container_3', {
+		chart: {
+			type: 'cylinder',
+			options3d: {
+				enabled: true,
+				alpha: 15,
+				beta: 15,
+				depth: 50,
+				viewDistance: 25
+			}
+		},
+		title: {
+			text: 'Khách hàng thân thiết'
+		},
+		plotOptions: {
+			series: {
+				depth: 25,
+				colorByPoint: true
+			}
+		},
+		xAxis: {
+			title: {
+				text: 'Số tiền khách hàng đầu tư'
+			},
+			categories: arrayX1,
+			labels: {
+				skew3d: true,
+				style: {
+					fontSize: '16px'
+				}
+			}
+		},
+		yAxis: {
+			title: {
+				text: 'Đồng'
+			}
+		},
+		series: [{
+			data: arrayY1,
+			name: 'Số tiền đầu tư',
+			showInLegend: false
+		}]
+	})
+}
 </script>
 </body>
 </html>
