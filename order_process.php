@@ -17,7 +17,6 @@ $sql = "select * from receivers where customer_id = '$customer_id' and status = 
 $result = mysqli_query($connect,$sql);
 $rows = mysqli_num_rows($result);
 
-
 $status = 2;
 if ($rows = 0) {
     $sql = "select * from receivers where customer_id = '$customer_id' and status = '$status'";
@@ -51,7 +50,6 @@ foreach ($result as $product_id => $each):
 endforeach;
 $sql = "update receivers set status = '0' where id = '$receiver_id' and customer_id = '$customer_id'";
 mysqli_query($connect,$sql);
-
 
 $_SESSION['success'] = "Đơn hàng đang chờ xét duyệt";
 header('location:order.php?status=2');

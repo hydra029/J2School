@@ -80,7 +80,6 @@ $customer_id = $_SESSION['customer_id'];
 				data: $(this).serializeArray(),
 			})
 			.done(function() {
-				$("#modal-receiver-form").modal("toggle");
 				location.reload();
 			})
 		});

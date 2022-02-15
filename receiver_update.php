@@ -16,6 +16,5 @@ address = '$address'
 where
 id = '$id' and customer_id = '$customer_id'";
 mysqli_query($connect,$sql);
-echo 1;
 
 ?>

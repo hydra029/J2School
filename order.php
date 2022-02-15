@@ -8,6 +8,11 @@ require 'check_account.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="menu.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="notify/notify.js"></script>
+	<script src="notify/notify.min.js"></script>
 	<style type="text/css">
 		th, td {
 			border:  1px solid black;
@@ -117,7 +122,8 @@ require 'check_account.php';
 				<h4 class="center">
 					Không có đơn hàng !!
 				</h4>
-				<?php	
+				<?php
+
 			} else {	
 				$num = 0;
 				foreach ($result as $receipt):			
@@ -233,7 +239,7 @@ require 'check_account.php';
 								?>
 							</td>
 							<td>
-								<a href="order_detail.php?id=<?php echo $each['receipt_id'] ?>">
+								<a  data-toggle="modal" href="#modal-order-detail" id="btn-order-detail" data-id="<?php echo $each['id'] ?>">
 									Xem chi tiết >>>
 								</a>
 							</td>
@@ -243,14 +249,43 @@ require 'check_account.php';
 					<br>
 					<?php
 				endforeach; 
+
 			} ?>
 		</div>
 		<div id="div_duoi">
 			<br>
 			<?php 
+
 			require 'footer.php';
+
+			include 'order_detail.php';
+			print_r($rows);
+			exit;
 			?>
 		</div>
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#btn-order-detail").click(function() {
+			let btn = $(this);
+			let id = btn.data('id');
+			$.ajax({
+				url: 'order_detail.php',
+				type: 'default GET (Other values: POST)',
+				dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+				data: {id},
+			})
+			.done(function() {
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+	});
+</script>
