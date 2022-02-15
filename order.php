@@ -122,7 +122,8 @@ require 'check_account.php';
 				<h4 class="center">
 					Không có đơn hàng !!
 				</h4>
-				<?php	
+				<?php
+
 			} else {	
 				$num = 0;
 				foreach ($result as $receipt):			
@@ -238,7 +239,7 @@ require 'check_account.php';
 								?>
 							</td>
 							<td>
-								<a  data-toggle="modal" href="#modal-signup" id="btn-order-detail" data-id="<?php echo $each['id'] ?>">
+								<a  data-toggle="modal" href="#modal-order-detail" id="btn-order-detail" data-id="<?php echo $each['id'] ?>">
 									Xem chi tiết >>>
 								</a>
 							</td>
@@ -248,13 +249,18 @@ require 'check_account.php';
 					<br>
 					<?php
 				endforeach; 
+
 			} ?>
 		</div>
 		<div id="div_duoi">
 			<br>
 			<?php 
+
 			require 'footer.php';
+
 			include 'order_detail.php';
+			print_r($rows);
+			exit;
 			?>
 		</div>
 	</div>
@@ -280,7 +286,6 @@ require 'check_account.php';
 			.always(function() {
 				console.log("complete");
 			});
-			
 		});
 	});
 </script>

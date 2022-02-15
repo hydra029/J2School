@@ -20,7 +20,7 @@ require 'connect.php';
                 $receiver_id = $receipt['receiver_id'];
                 $id = $receipt['customer_id'];
                 if ($customer_id != $id) {
-                    header('location:index.php');
+                    // header('location:index.php');
                 }
                 $sql = "select * from receivers where customer_id= '$customer_id' and id = '$receiver_id'";
                 $result = mysqli_query($connect,$sql);
