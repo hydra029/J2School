@@ -79,12 +79,7 @@ $customer_id = $_SESSION['customer_id'];
 				data: $(this).serializeArray(),
 			})
 			.done(function(response) {
-				if (response !== 1) {
-					$("$div-error").text(response);
-					$("$div-error").show();
-				} else {
-					$("#modal-receiver").toggle();
-				}
+				$("#modal-receiver").toggle();
 			})
 		});
 	});
