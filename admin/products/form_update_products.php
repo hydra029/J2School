@@ -69,7 +69,9 @@ $array_products = mysqli_fetch_array($query_sql_command_select_products);
 
 	<form method="post" action = "process_update_products.php" enctype="multipart/form-data" id ="form-update-products">
 		<input type="hidden" name="id" value = "<?php echo $array_products['id'] ?>">
-		<input type="hidden" name="type_id" value = "<?php echo $type_id ?>">
+		<?php if ( isset($_GET['type_id']) ) { ?>
+			<input type="hidden" name="type_id" value = "<?php echo $type_id; ?>">
+		<?php } ?>
 		Tên sản phẩm
 		<input type="text" name="name" value = "<?php echo $array_products['name'] ?>"><br>
 		Mô tả
