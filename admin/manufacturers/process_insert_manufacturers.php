@@ -24,8 +24,11 @@ values ('$name', '$phone', '$address', '$image')";
 mysqli_query($connect_database, $sql_command_insert);
 
 //insert vào bảng activity
-$person = $_SESSION['name'];
-$activity_log = "$person đã thêm nhà sản xuất $name" ;
+$admin_id = $_SESSION['id'];
+$admin_name = $_SESSION['name'];
+$activity = "thêm";
+$object = "nhà cung cấp";
+$object_name = $name;
 require '../activity_log/insert_activity.php';
 
 //kiểm tra xem có lỗi

@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 10, 2022 at 11:40 AM
--- Server version: 8.0.27
--- PHP Version: 7.4.19
+-- Máy chủ: localhost:3306
+-- Thời gian đã tạo: Th2 17, 2022 lúc 08:37 AM
+-- Phiên bản máy phục vụ: 8.0.27
+-- Phiên bản PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,131 +18,110 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `31`
+-- Cơ sở dữ liệu: `31`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `activities`
+-- Cấu trúc bảng cho bảng `activities`
 --
 
 CREATE TABLE `activities` (
   `id` int NOT NULL,
-  `activity` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `admin_id` int NOT NULL,
+  `activity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `object` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `object_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `activities`
+-- Đang đổ dữ liệu cho bảng `activities`
 --
 
-INSERT INTO `activities` (`id`, `activity`, `time`) VALUES
-(1, 'superadmin đã thêm nhà sản xuất Test nha san xuat', '2022-01-29 18:27:48'),
-(2, 'superadmin đã cập nhật sản phẩm Cây lau nhà DMX CL00555', '2022-01-30 19:12:00'),
-(3, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đang giao', '2022-01-31 05:45:49'),
-(4, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đã giao', '2022-01-31 05:46:09'),
-(5, 'superadmin đã cập nhật nhà sản xuất Fisslerrrrrrr', '2022-01-31 05:47:44'),
-(6, 'superadmin đã cập nhật nhà sản xuất Fisslerrrrr', '2022-01-31 05:47:48'),
-(7, 'superadmin đã cập nhật nhà sản xuất Fisslerrrr', '2022-01-31 05:47:50'),
-(8, 'superadmin đã cập nhật nhà sản xuất Fisslerrr', '2022-01-31 05:47:53'),
-(9, 'superadmin đã cập nhật nhà sản xuất Fisslerr', '2022-01-31 05:47:55'),
-(10, 'superadmin đã cập nhật nhà sản xuất Fissler', '2022-01-31 05:47:59'),
-(11, 'superadmin đã cập nhật nhà sản xuất Fisslerrr', '2022-01-31 05:48:01'),
-(12, 'superadmin đã cập nhật nhà sản xuất Fisslerr', '2022-01-31 05:48:05'),
-(13, 'superadmin đã cập nhật nhà sản xuất Fisslerrrrrr', '2022-01-31 05:48:09'),
-(14, 'superadmin đã cập nhật nhà sản xuất Fisslerrrr', '2022-01-31 05:48:17'),
-(15, 'superadmin đã cập nhật nhà sản xuất Fisslerrrrrr', '2022-01-31 05:48:26'),
-(16, 'superadmin đã thêm sản phẩm cacsa', '2022-02-05 06:34:42'),
-(17, 'superadmin đã cập nhật trạng thái của đơn hàng số 15 thành trạng thái đang giao', '2022-02-05 06:36:27'),
-(18, 'superadmin đã cập nhật trạng thái của đơn hàng số 15 thành trạng thái đã giao', '2022-02-08 04:59:59'),
-(19, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đang giao', '2022-02-08 05:00:01'),
-(20, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đang giao', '2022-02-08 05:20:58'),
-(21, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đã giao', '2022-02-08 05:21:00'),
-(22, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đang giao', '2022-02-08 05:21:03'),
-(23, 'superadmin đã cập nhật trạng thái của đơn hàng số 15 thành trạng thái đang giao', '2022-02-08 05:21:04'),
-(24, 'superadmin đã cập nhật trạng thái của đơn hàng số 15 thành trạng thái đã giao', '2022-02-08 05:21:05'),
-(25, 'superadmin đã cập nhật trạng thái của đơn hàng số 16 thành trạng thái đang giao', '2022-02-08 05:21:08'),
-(26, 'superadmin đã cập nhật trạng thái của đơn hàng số 16 thành trạng thái đã giao', '2022-02-08 05:21:09'),
-(27, 'superadmin đã hủy đơn hàng số 17', '2022-02-08 05:21:46'),
-(28, 'superadmin đã cập nhật nhà sản xuất Fissler', '2022-02-08 05:33:38'),
-(29, 'superadmin đã xóa nhà sản xuất Test nha san xuat', '2022-02-08 05:33:44'),
-(30, 'superadmin đã cập nhật sản phẩm Cây lau nhà DMX CL005515', '2022-02-08 05:33:58'),
-(31, 'superadmin đã xóa sản phẩm cacsa', '2022-02-08 05:34:04'),
-(32, 'superadmin đã thêm sản phẩm cascascsacasc', '2022-02-08 05:34:42'),
-(33, 'superadmin đã thêm sản phẩm san pham moi oke', '2022-02-08 05:36:43'),
-(34, 'superadmin đã thêm sản phẩm san pham moi nhat nek', '2022-02-08 05:39:09'),
-(35, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:42:41'),
-(36, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:43:15'),
-(37, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:43:26'),
-(38, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:44:39'),
-(39, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:44:59'),
-(40, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:45:43'),
-(41, 'superadmin đã thêm sản phẩm them san pham', '2022-02-08 05:46:19'),
-(42, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đang giao', '2022-02-08 05:51:21'),
-(43, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đã giao', '2022-02-09 15:33:52'),
-(44, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đã giao', '2022-02-09 15:33:58'),
-(45, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đang giao', '2022-02-09 15:34:26'),
-(46, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đang giao', '2022-02-09 15:35:18'),
-(47, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đã giao', '2022-02-09 15:35:19'),
-(48, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đã giao', '2022-02-09 15:35:21'),
-(49, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đang giao', '2022-02-09 15:35:23'),
-(50, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đã giao', '2022-02-09 15:35:24'),
-(51, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đang giao', '2022-02-09 15:36:42'),
-(52, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đã giao', '2022-02-09 15:36:44'),
-(53, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đang giao', '2022-02-09 15:37:19'),
-(54, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đang giao', '2022-02-09 15:37:20'),
-(55, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đã giao', '2022-02-09 15:37:21'),
-(56, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đang giao', '2022-02-09 15:37:22'),
-(57, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đã giao', '2022-02-09 15:37:23'),
-(58, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đã giao', '2022-02-09 15:37:24'),
-(59, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đang giao', '2022-02-09 15:37:25'),
-(60, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đã giao', '2022-02-09 15:37:26'),
-(61, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đang giao', '2022-02-09 15:38:10'),
-(62, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đang giao', '2022-02-09 15:38:11'),
-(63, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đã giao', '2022-02-09 15:38:12'),
-(64, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đã giao', '2022-02-09 15:38:13'),
-(65, 'superadmin đã cập nhật trạng thái của đơn hàng số 20 thành trạng thái đang giao', '2022-02-09 15:38:14'),
-(66, 'superadmin đã hủy đơn hàng số 21', '2022-02-09 15:38:15'),
-(67, 'superadmin đã hủy đơn hàng số 20', '2022-02-09 15:38:37'),
-(68, 'superadmin đã hủy đơn hàng số 14', '2022-02-09 15:39:12'),
-(69, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đang giao', '2022-02-09 15:39:27'),
-(70, 'superadmin đã cập nhật trạng thái của đơn hàng số 19 thành trạng thái đã giao', '2022-02-09 15:39:28'),
-(71, 'superadmin đã hủy đơn hàng số 20', '2022-02-09 15:40:45'),
-(72, 'superadmin đã hủy đơn hàng số 20', '2022-02-09 15:41:03'),
-(73, 'superadmin đã hủy đơn hàng số 21', '2022-02-09 15:41:41'),
-(74, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đang giao', '2022-02-09 15:42:00'),
-(75, 'superadmin đã cập nhật trạng thái của đơn hàng số 14 thành trạng thái đã giao', '2022-02-09 15:42:01'),
-(76, 'superadmin đã hủy đơn hàng số 19', '2022-02-09 15:42:02'),
-(77, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đang giao', '2022-02-09 15:43:06'),
-(78, 'superadmin đã cập nhật trạng thái của đơn hàng số 21 thành trạng thái đã giao', '2022-02-09 15:43:07'),
-(79, 'superadmin đã xóa sản phẩm Nồi từ FISSLER PRO COLLECTION HIGH STOCK POT 28CM 14L', '2022-02-10 10:03:23'),
-(80, 'superadmin đã xóa sản phẩm Nồi từ FISSLER PRO COLLECTION HIGH STOCK POT 28CM 14L', '2022-02-10 10:04:14'),
-(81, 'superadmin đã cập nhật sản phẩm Nồi từ FISSLER PROOO COLLECTION HIGH STOCK POT 28CM 14L', '2022-02-10 10:04:49'),
-(82, 'superadmin đã xóa sản phẩm Nồi từ FISSLER PROOO COLLECTION HIGH STOCK POT 28CM 14L', '2022-02-10 10:04:51'),
-(83, 'superadmin đã xóa sản phẩm Nồi từ FISSLER PROOO COLLECTION HIGH STOCK POT 28CM 14L', '2022-02-10 10:06:00'),
-(84, 'superadmin đã xóa sản phẩm Nồi từ FISSLER PROOO COLLECTION HIGH STOCK POT 28CM 14L', '2022-02-10 10:06:01'),
-(85, 'superadmin đã xóa sản phẩm Bộ nồi chảo Silit Pisa 10 Món', '2022-02-10 10:11:30'),
-(86, 'superadmin đã xóa sản phẩm Bộ nồi chảo Silit Pisa 10 Món', '2022-02-10 10:11:31'),
-(87, 'superadmin đã xóa sản phẩm Bộ nồi chảo Silit Pisa 10 Món', '2022-02-10 10:11:33'),
-(88, 'superadmin đã cập nhật nhà sản xuất Fissler', '2022-02-10 11:31:50');
+INSERT INTO `activities` (`id`, `admin_id`, `activity`, `object`, `object_name`, `time`) VALUES
+(1, 1, 'thêm', 'sản phẩm', 'Cây lau nhà', '2022-02-17 03:15:13'),
+(2, 1, 'cập nhật', 'đơn hàng', 'số 3', '2022-02-17 03:15:13'),
+(3, 2, 'thêm', 'nhà cung cấp', 'sản sản', '2022-02-17 03:27:51'),
+(4, 2, 'xóa', 'nhà cung cấp', '', '2022-02-17 03:37:44'),
+(5, 2, 'thêm', 'nhà cung cấp', 'cascsacacasccacascas', '2022-02-17 03:40:32'),
+(6, 2, 'xóa', 'nhà cung cấp', 'cascsacacasccacascas', '2022-02-17 03:40:39'),
+(7, 2, 'cập nhật', 'nhà cung cấp', 'số 3', '2022-02-17 03:43:45'),
+(8, 2, 'thêm', 'sản phẩm', 'Sản phẩm mới nhất', '2022-02-17 03:47:39'),
+(9, 2, 'thêm', 'sản phẩm', 'Cây chổi new', '2022-02-17 03:49:57'),
+(10, 2, 'thêm', 'thẻ', 'thẻ mới', '2022-02-17 03:49:57'),
+(11, 2, 'thêm', 'thẻ', 'thẻ oke', '2022-02-17 03:49:57'),
+(12, 2, 'cập nhật', 'nhà cung cấp', 'Fisslerrrr', '2022-02-17 04:04:01'),
+(13, 2, 'cập nhật', 'sản phẩm', 'Cây lau nh5555555 ', '2022-02-17 04:04:34'),
+(14, 2, 'xóa', 'sản phẩm', 'Cây chổi new', '2022-02-17 04:05:44'),
+(15, 2, 'duyệt', 'đơn hàng', 'số 10', '2022-02-17 04:08:46'),
+(16, 2, 'hoàn thành', 'đơn hàng', 'số 10', '2022-02-17 04:08:52'),
+(17, 2, 'hủy', 'đơn hàng', 'số 12', '2022-02-17 04:08:58'),
+(18, 2, 'xóa', 'thẻ', 'khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 04:16:30'),
+(19, 2, 'xóa', 'thẻ', '', '2022-02-17 04:19:07'),
+(20, 2, 'xóa', 'thẻ', 'thẻ mới', '2022-02-17 04:19:19'),
+(21, 2, 'xóa', 'sản phẩm', 'Cây chổi new', '2022-02-17 04:19:22'),
+(22, 2, 'xóa', 'thẻ', 'khỏi sản phẩm Cây chổi new', '2022-02-17 04:19:25'),
+(23, 2, 'xóa', 'sản phẩm', 'Cây chổi new', '2022-02-17 04:20:33'),
+(24, 2, 'xóa', 'sản phẩm', 'san pham moi', '2022-02-17 04:21:17'),
+(25, 2, 'xóa', 'sản phẩm', 'san pham moi', '2022-02-17 04:21:23'),
+(26, 2, 'xóa', 'sản phẩm', 'san pham moi', '2022-02-17 04:21:23'),
+(27, 2, 'xóa', 'sản phẩm', 'san pham moi', '2022-02-17 04:21:23'),
+(28, 2, 'xóa', 'sản phẩm', 'san pham moi', '2022-02-17 04:21:23'),
+(29, 2, 'xóa', 'sản phẩm', 'san pham moi', '2022-02-17 04:30:25'),
+(30, 2, 'xóa', 'thẻ', 'khỏi sản phẩm san pham moi', '2022-02-17 04:34:01'),
+(31, 2, 'xóa', 'thẻ', '', '2022-02-17 04:40:15'),
+(32, 2, 'xóa', 'thẻ', 'cacsac', '2022-02-17 04:42:01'),
+(33, 2, 'xóa', 'thẻ', 'cacsac khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 04:42:06'),
+(34, 2, 'xóa', 'thẻ', '', '2022-02-17 04:42:15'),
+(35, 2, 'xóa', 'thẻ', 'cs khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 04:43:46'),
+(36, 2, 'xóa', 'thẻ', '', '2022-02-17 04:43:50'),
+(37, 2, 'xóa', 'thẻ', '', '2022-02-17 04:47:30'),
+(38, 2, 'xóa', 'thẻ', 'sc khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 04:48:11'),
+(39, 2, 'xóa', 'thẻ', 'sc', '2022-02-17 04:48:19'),
+(40, 2, 'đổi tên', 'thẻ', ' thành Vật dụng WCC', '2022-02-17 04:58:28'),
+(41, 2, 'đổi tên', 'thẻ', ' thành Vật dụng WC', '2022-02-17 04:58:48'),
+(42, 2, 'đổi tên', 'thẻ', 'Vật dụng WC thành Vật dụng WCCCCC', '2022-02-17 04:59:36'),
+(43, 2, 'đổi tên', 'thẻ', 'Vật dụng WCCCCC thành Vật dụng WC', '2022-02-17 04:59:41'),
+(44, 2, 'xóa', 'thẻ', 'ác', '2022-02-17 05:05:36'),
+(45, 2, 'xóa', 'thẻ', 'ác khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 05:05:39'),
+(46, 2, 'xóa', 'thẻ', 'ác', '2022-02-17 05:05:45'),
+(47, 2, 'xóa', 'thẻ', 'sacasc khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 05:12:02'),
+(48, 2, 'xóa', 'thẻ', 'sacasc', '2022-02-17 05:12:05'),
+(49, 2, 'xóa', 'thẻ', 'sac khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 05:12:08'),
+(50, 2, 'xóa', 'thẻ', 'sac', '2022-02-17 05:12:10'),
+(51, 2, 'xóa', 'thẻ', 'csa', '2022-02-17 05:12:51'),
+(52, 2, 'xóa', 'thẻ', 'sa', '2022-02-17 05:12:51'),
+(53, 2, 'xóa', 'thẻ', 'asc', '2022-02-17 05:12:52'),
+(54, 2, 'xóa', 'thẻ', 'cnasjkcnajcc', '2022-02-17 05:12:53'),
+(55, 2, 'xóa', 'thẻ', 'csa', '2022-02-17 05:14:14'),
+(56, 2, 'xóa', 'thẻ', 'as', '2022-02-17 05:14:14'),
+(57, 2, 'thêm', 'thẻ', 'sac', '2022-02-17 05:16:16'),
+(58, 2, 'thêm', 'thẻ', 'sac vào Cây lau nh5555555 ', '2022-02-17 05:16:16'),
+(59, 2, 'thêm', 'thẻ', 'sa vào Cây lau nh5555555 ', '2022-02-17 05:16:16'),
+(60, 2, 'thêm', 'thẻ', 'ca vào Cây lau nh5555555 ', '2022-02-17 05:16:16'),
+(61, 2, 'thêm', 'thẻ', 'Nhà bếp vào Nồi cơm điện Sunhouse 1.8L SHD8602', '2022-02-17 05:25:01'),
+(62, 2, 'xóa', 'thẻ', 'Nhà bếp khỏi sản phẩm Cây lau nh5555555 ', '2022-02-17 05:28:41'),
+(63, 2, 'thêm', 'thẻ', 'Nhà bếp vào Cây lau nh5555555 ', '2022-02-17 05:30:28'),
+(64, 2, 'xóa', 'thẻ', 'Nhà bếp khỏi sản phẩm Cây lau nhà COTONG 90CM SIÊU SẠCH BODOCA', '2022-02-17 05:30:37');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admins`
+-- Cấu trúc bảng cho bảng `admins`
 --
 
 CREATE TABLE `admins` (
   `id` int NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `level` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `admins`
+-- Đang đổ dữ liệu cho bảng `admins`
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
@@ -152,21 +131,21 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
+-- Cấu trúc bảng cho bảng `customers`
 --
 
 CREATE TABLE `customers` (
   `id` int NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `gender` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `gender` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dob` date NOT NULL,
-  `email` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `token` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `customers`
+-- Đang đổ dữ liệu cho bảng `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `token`) VALUES
@@ -180,19 +159,19 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `to
 -- --------------------------------------------------------
 
 --
--- Table structure for table `manufacturers`
+-- Cấu trúc bảng cho bảng `manufacturers`
 --
 
 CREATE TABLE `manufacturers` (
   `id` int NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `address` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(200) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `manufacturers`
+-- Đang đổ dữ liệu cho bảng `manufacturers`
 --
 
 INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
@@ -209,20 +188,20 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
   `id` int NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
-  `image` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `manufacturer_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `products`
+-- Đang đổ dữ liệu cho bảng `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufacturer_id`) VALUES
@@ -241,7 +220,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_type`
+-- Cấu trúc bảng cho bảng `product_type`
 --
 
 CREATE TABLE `product_type` (
@@ -250,7 +229,7 @@ CREATE TABLE `product_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_type`
+-- Đang đổ dữ liệu cho bảng `product_type`
 --
 
 INSERT INTO `product_type` (`product_id`, `type_id`) VALUES
@@ -273,21 +252,21 @@ INSERT INTO `product_type` (`product_id`, `type_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receipts`
+-- Cấu trúc bảng cho bảng `receipts`
 --
 
 CREATE TABLE `receipts` (
   `id` int NOT NULL,
   `customer_id` int NOT NULL,
   `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `receiver_id` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `note` mediumtext COLLATE utf8mb4_general_ci,
+  `receiver_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `note` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `status` int NOT NULL,
   `total` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `receipts`
+-- Đang đổ dữ liệu cho bảng `receipts`
 --
 
 INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
@@ -305,7 +284,7 @@ INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receipt_detail`
+-- Cấu trúc bảng cho bảng `receipt_detail`
 --
 
 CREATE TABLE `receipt_detail` (
@@ -315,7 +294,7 @@ CREATE TABLE `receipt_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `receipt_detail`
+-- Đang đổ dữ liệu cho bảng `receipt_detail`
 --
 
 INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
@@ -333,20 +312,20 @@ INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receivers`
+-- Cấu trúc bảng cho bảng `receivers`
 --
 
 CREATE TABLE `receivers` (
   `customer_id` int NOT NULL,
   `id` int NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `address` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `receivers`
+-- Đang đổ dữ liệu cho bảng `receivers`
 --
 
 INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `status`) VALUES
@@ -360,16 +339,16 @@ INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `statu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `types`
+-- Cấu trúc bảng cho bảng `types`
 --
 
 CREATE TABLE `types` (
   `id` int NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `types`
+-- Đang đổ dữ liệu cho bảng `types`
 --
 
 INSERT INTO `types` (`id`, `name`) VALUES
@@ -380,148 +359,148 @@ INSERT INTO `types` (`id`, `name`) VALUES
 (36, 'Vệ sinh');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `activities`
+-- Chỉ mục cho bảng `activities`
 --
 ALTER TABLE `activities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `admins`
+-- Chỉ mục cho bảng `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customers`
+-- Chỉ mục cho bảng `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `manufacturers`
+-- Chỉ mục cho bảng `manufacturers`
 --
 ALTER TABLE `manufacturers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `manufacturer_id` (`manufacturer_id`);
 
 --
--- Indexes for table `product_type`
+-- Chỉ mục cho bảng `product_type`
 --
 ALTER TABLE `product_type`
   ADD PRIMARY KEY (`product_id`,`type_id`),
   ADD KEY `type_id` (`type_id`);
 
 --
--- Indexes for table `receipts`
+-- Chỉ mục cho bảng `receipts`
 --
 ALTER TABLE `receipts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- Indexes for table `receipt_detail`
+-- Chỉ mục cho bảng `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
   ADD PRIMARY KEY (`receipt_id`,`product_id`),
   ADD KEY `receipt_detail_ibfk_1` (`product_id`);
 
 --
--- Indexes for table `receivers`
+-- Chỉ mục cho bảng `receivers`
 --
 ALTER TABLE `receivers`
   ADD PRIMARY KEY (`customer_id`,`id`);
 
 --
--- Indexes for table `types`
+-- Chỉ mục cho bảng `types`
 --
 ALTER TABLE `types`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `admins`
+-- AUTO_INCREMENT cho bảng `admins`
 --
 ALTER TABLE `admins`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `customers`
+-- AUTO_INCREMENT cho bảng `customers`
 --
 ALTER TABLE `customers`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `manufacturers`
+-- AUTO_INCREMENT cho bảng `manufacturers`
 --
 ALTER TABLE `manufacturers`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `receipts`
+-- AUTO_INCREMENT cho bảng `receipts`
 --
 ALTER TABLE `receipts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `types`
+-- AUTO_INCREMENT cho bảng `types`
 --
 ALTER TABLE `types`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `products`
+-- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`id`);
 
 --
--- Constraints for table `product_type`
+-- Các ràng buộc cho bảng `product_type`
 --
 ALTER TABLE `product_type`
   ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `product_type_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `receipts`
+-- Các ràng buộc cho bảng `receipts`
 --
 ALTER TABLE `receipts`
   ADD CONSTRAINT `receipts_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
--- Constraints for table `receipt_detail`
+-- Các ràng buộc cho bảng `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
   ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `receipt_detail_ibfk_2` FOREIGN KEY (`receipt_id`) REFERENCES `receipts` (`id`);
 
 --
--- Constraints for table `receivers`
+-- Các ràng buộc cho bảng `receivers`
 --
 ALTER TABLE `receivers`
   ADD CONSTRAINT `receivers_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
