@@ -75,7 +75,6 @@ $type = mysqli_fetch_array($query_sql_select);
 			<th>Nhà sản xuất</th>
 			<th>Xóa thẻ khỏi sản phẩm</th>
 			<th>Sửa sản phẩm</th>
-			<th>Xóa sản phẩm</th>
 		</tr>
 		<?php foreach ($query_sql_select as $each_product): ?>
 		<tr>
@@ -91,9 +90,6 @@ $type = mysqli_fetch_array($query_sql_select);
 			</td>
 			<td>
 				<a href="../products/form_update_products.php?id=<?php echo $each_product['id'] ?>&type_id=<?php echo $each_product['type_id'] ?>">Sửa</a>
-			</td>
-			<td>
-				<a href="../products/process_delete_products.php?id=<?php echo $each_product['id'] ?>&type_id=<?php echo $each_product['type_id'] ?>">Xóa</a>
 			</td>
 		</tr>
 		<?php endforeach ?>

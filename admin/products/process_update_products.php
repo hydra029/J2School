@@ -43,8 +43,11 @@ mysqli_query($connect_database, $sql_command_update);
 
 
 //insert vào bảng activity
-$person = $_SESSION['name'];
-$activity_log = "$person đã cập nhật sản phẩm $name" ;
+$admin_id = $_SESSION['id'];
+$admin_name = $_SESSION['name'];
+$activity = "cập nhật";
+$object = "sản phẩm";
+$object_name = $name;
 require '../activity_log/insert_activity.php';
 
 

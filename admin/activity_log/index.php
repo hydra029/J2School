@@ -29,7 +29,10 @@ $activities_skipped = ( $index_page - 1 ) * $activities_per_page;
 $pages = ceil($count_activities / $activities_per_page);
 
 $sql_select_activity = "
-	SELECT * FROM activities ORDER BY id DESC
+	SELECT activities.*, admins.name as 'admin_name'
+	FROM activities 
+	LEFT JOIN admins on admins.id = activities.admin_id
+	ORDER BY id DESC
 	LIMIT $activities_per_page OFFSET $activities_skipped
 ";
 $query_sql_select_activity = mysqli_query($connect_database, $sql_select_activity);
@@ -63,13 +66,19 @@ $query_sql_select_activity = mysqli_query($connect_database, $sql_select_activit
 	<table class="table">
 		<tr>
 			<th>Mã</th>
-			<th>Hoạt động</th>
+			<th>Người thao tác</th>
+			<th>Hành động</th>
+			<th>Đối tượng</th>
+			<th>Tên đối tượng</th>
 			<th>Vào lúc</th>
 		</tr>
 		<?php foreach ($query_sql_select_activity as $each_activity): ?>
 		<tr>
 			<td><?php echo $each_activity['id'] ?></td>
-			<td><?php echo $each_activity['activity'] ?></td>
+			<td><?php echo $each_activity['admin_name'] ?></td>
+			<td><?php echo 'đã ' . $each_activity['activity'] ?></td>
+			<td><?php echo $each_activity['object'] ?></td>
+			<td><?php echo $each_activity['object_name'] ?></td>
 			<td><?php echo $each_activity['time'] ?></td>
 		</tr>
 		<?php endforeach ?>

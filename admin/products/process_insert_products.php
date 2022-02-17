@@ -29,8 +29,11 @@ mysqli_query($connect_database, $sql_command_insert);
 $product_id = mysqli_insert_id($connect_database);
 
 //insert vào bảng activity
-$person = $_SESSION['name'];
-$activity_log = "$person đã thêm sản phẩm $name" ;
+$admin_id = $_SESSION['id'];
+$admin_name = $_SESSION['name'];
+$activity = "thêm";
+$object = "sản phẩm";
+$object_name = $name;
 require '../activity_log/insert_activity.php';
 
 foreach ($types_name as $type_name) {
@@ -41,6 +44,12 @@ foreach ($types_name as $type_name) {
 		$sql_insert_type = "insert into types(name) values('$type_name')";
 		mysqli_query($connect_database, $sql_insert_type);
 		$type_id = mysqli_insert_id($connect_database);
+
+		//insert vào bảng activity
+		$activity = "thêm";
+		$object = "thẻ";
+		$object_name = $type_name;
+		require '../activity_log/insert_activity.php';
 	} else {
 		$type_id = $type['id'];
 	}

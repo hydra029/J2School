@@ -23,19 +23,31 @@ if ($status == 4) {
 	$sql_command_update = "update receipts set status = 4 where id = $id";
 	mysqli_query($connect_database, $sql_command_update);
 	//insert vào bảng activity
-	$activity_log = "$person đã cập nhật trạng thái của đơn hàng số $id thành trạng thái đang giao" ;
+	$admin_id = $_SESSION['id'];
+	$admin_name = $_SESSION['name'];
+	$activity = "duyệt";
+	$object = "đơn hàng";
+	$object_name = "số $id";
 	require '../activity_log/insert_activity.php';
 } else if ($status == 5 ) {
 	$sql_command_update = "update receipts set status = 5 where id = $id";
 	mysqli_query($connect_database, $sql_command_update);
 	//insert vào bảng activity
-	$activity_log = "$person đã cập nhật trạng thái của đơn hàng số $id thành trạng thái đã giao" ;
-require '../activity_log/insert_activity.php';
+	$admin_id = $_SESSION['id'];
+	$admin_name = $_SESSION['name'];
+	$activity = "hoàn thành";
+	$object = "đơn hàng";
+	$object_name = "số $id";
+	require '../activity_log/insert_activity.php';
 } else if ($status == 3 ) {
 	$sql_command_update = "update receipts set status = 3 where id = $id";
 	mysqli_query($connect_database, $sql_command_update);
 	//insert vào bảng activity
-	$activity_log = "$person đã hủy đơn hàng số $id" ;
+	$admin_id = $_SESSION['id'];
+	$admin_name = $_SESSION['name'];
+	$activity = "hủy";
+	$object = "đơn hàng";
+	$object_name = "số $id";
 	require '../activity_log/insert_activity.php';
 }
 

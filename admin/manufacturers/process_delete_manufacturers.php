@@ -27,11 +27,12 @@ $sql_command_delete = "delete from manufacturers where id = '$id'";
 mysqli_query($connect_database, $sql_command_delete);
 
 //insert vào bảng activity
-$person = $_SESSION['name'];
-$name = $array_manufacturers['name'];
-$activity_log = "$person đã xóa nhà sản xuất $name" ;
+$admin_id = $_SESSION['id'];
+$admin_name = $_SESSION['name'];
+$activity = "xóa";
+$object = "nhà cung cấp";
+$object_name = $array_manufacturers['name'];
 require '../activity_log/insert_activity.php';
-
 
 $error = mysqli_error($connect_database);
 mysqli_close($connect_database);
