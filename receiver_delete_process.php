@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
 $num = $_GET['id'];

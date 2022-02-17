@@ -160,7 +160,6 @@ require 'check_account.php';
 			require 'footer.php';
 			include 'receiver_form.php';
 			include 'receiver_form_change.php';
-			include 'receiver_delete_process.php';
 			?>
 		</div>
 	</div>
