@@ -12,6 +12,8 @@ if (isset($_SESSION['customer_id'])) {
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="notify/notify.js"></script>
+	<script src="notify/notify.min.js"></script>
 	<title></title>
 	<style type="text/css">
 		a {
@@ -117,31 +119,13 @@ if (isset($_SESSION['customer_id'])) {
 		<?php 
 		require 'connect.php';
 		require 'menu.php';
-		$id = $_GET['id'];
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+		} else {
+			header("location:index.php");
+		}
 		$sql = "select * from products where id = $id";
 		$result = mysqli_query($connect, $sql);
-		?>
-		<?php 
-		if (isset($_SESSION['error'])) {
-			?>
-			<span class="error">
-				<?php echo $_SESSION['error'] ?>
-			</span>
-			<?php 
-			unset($_SESSION['error']);	
-		}
-		?>
-		<?php
-		if (isset($_SESSION['success'])) {
-			?>
-			<span class="success">
-				<?php echo $_SESSION['success'] ?>
-			</span>
-			<?php 
-			unset($_SESSION['success'])	
-			?>
-			<?php
-		}
 		?>
 		<div id="div_tren" >
 			<h1 style="text-align: center; ">
@@ -208,9 +192,8 @@ if (isset($_SESSION['customer_id'])) {
 					data: {id, type},
 				})
 				.done(function() {
+					$.notify("Thêm vào giỏ hàng thành công", "success");
 				})
-				.fail(function() {
-				})		
 			});
 		});
 	</script>

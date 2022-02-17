@@ -115,23 +115,12 @@ require 'check_account.php';
 									</a>
 								</td>
 								<td>
-									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-type="change">
+									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>">
 										Sửa
 									</a>
 								</td>
 								<td class="center">
-									<?php if ($each['status'] == 0) { ?>
-										<button>
-											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
-												<span>
-													Chọn
-												</span>
-											</a>
-										</button>
-										<span style="display: none;" class="span-dfl">
-											Mặc định
-										</span>
-									<?php } else {?>
+									<?php if ($each['status'] == 2) { ?>
 										<button style="display: none;">
 											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
 												<span>
@@ -142,6 +131,18 @@ require 'check_account.php';
 										<span class="span-dfl">
 											Mặc định
 										</span>
+									<?php } else {?>
+										<button>
+											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
+												<span>
+													Chọn
+												</span>
+											</a>
+										</button>
+										<span style="display: none;" class="span-dfl">
+											Mặc định
+										</span>
+										
 									<?php } ?>
 								</td>
 							</tr>
@@ -182,6 +183,25 @@ require 'check_account.php';
 				parent_tr.find('button').hide();
 				parent_tb.find('.span-dfl').hide();
 				parent_tr.find('.span-dfl').show();
+			})
+		});
+		$(".btn-receiver-form").click(function() {
+			event.preventDefault();
+			let btn = $(this);
+			// let parent_tr = btn.parents("tr");
+			// let parent_tb = btn.parents("table");
+			let id = btn.data('id');
+			$.ajax({
+				url: 'receiver_form_change1.php',
+				type: 'GET',
+				data: {id},
+			})
+			.done(function(response) {
+				$("#div-body").append(response);
+				// parent_tb.find('button').show();
+				// parent_tr.find('button').hide();
+				// parent_tb.find('.span-dfl').hide();
+				// parent_tr.find('.span-dfl').show();
 			})
 		});
 	});

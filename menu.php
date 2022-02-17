@@ -32,8 +32,8 @@ if (empty($_SESSION['customer_id'])) {
 				Giỏ hàng
 			</a>
 			|
-			<a href="order.php?status=2">
-				Hoá đơn
+			<a href="order.php">
+				Dơn hàng
 			</a>
 			|
 			<a href="receiver.php">
@@ -61,8 +61,8 @@ if (empty($_SESSION['customer_id'])) {
 				Giỏ hàng
 			</a>
 			|
-			<a href="order.php?status=2">
-				Hoá đơn
+			<a href="order.php">
+				Đơn hàng
 			</a>
 			|
 			<a href="receiver.php">

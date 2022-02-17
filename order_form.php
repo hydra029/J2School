@@ -144,7 +144,7 @@ require 'connect.php';
 			})
 		});
 		if(window.location.href.indexOf('#modal-receiver') != -1) {
-			$('#modal-receiver').modal('show');
+			$('#modal-receiver').modal('toggle');
 		}
 
 	});

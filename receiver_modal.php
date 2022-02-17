@@ -79,13 +79,23 @@ mysqli_close($connect);
 								</td>
 								<td class="center">
 									<?php if ($each['status'] != 2) { ?>
-										<button>
-											<a data-toggle="modal" href="#modal-receiver" id="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="slc">
+										<button class="btn-rcv">
+											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="slc">
 												Chọn
 											</a>
 										</button>
+										<span style="display: none;" class="span-use">
+											Đang dùng
+										</span>
 									<?php } else {?>
-										Đang dùng
+										<button style="display: none;" class="btn-rcv">
+											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="slc">
+												Chọn
+											</a>
+										</button>
+										<span class="span-use">
+											Đang dùng
+										</span>
 									<?php } ?>
 								</td>
 							</tr>
@@ -97,7 +107,7 @@ mysqli_close($connect);
 				<br>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+				<button type="submit" id="btn-cancel" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
 					Cancel
 				</button>
 			</div>
@@ -109,9 +119,11 @@ include 'receiver_form.php';
 ?>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#btn-receiver").click(function() {
+		$(".btn-receiver").click(function() {
 			event.preventDefault();
 			let btn = $(this);
+			let parent_tr = btn.parents("tr");
+			let parent_tb = btn.parents("table");
 			let id = btn.data('id');
 			let type = btn.data('type');
 			$.ajax({
@@ -121,13 +133,23 @@ include 'receiver_form.php';
 				data: {id, type},
 			})
 			.done(function(response) {
-				alert(response);
-				// $("#modal-receiver").modal('hide');
+				$("#span-name").text(response["name"]);
+				$("#span-phone").text(response["phone"]);
+				$("#span-address").text(response["address"]);
+				parent_tb.find('.btn-rcv').show();
+				parent_tr.find('.btn-rcv').hide();
+				parent_tb.find('.span-use').hide();
+				parent_tr.find('.span-use').show();
 			})
 		});
 		$(".btn-receiver-form").click(function() {
 			event.preventDefault();
 			$('#modal-receiver-form').modal('show');
+		});
+		$("#btn-cancel").click(function(){
+			event.preventDefault();
+			$("#modal-receiver").modal('hide');
+			$('#modal-order').modal('show');
 		});
 	});
 </script>
