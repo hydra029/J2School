@@ -14,7 +14,6 @@ for ($i = $num + 1 ; $i <= $rows; $i++ ) {
 	$sql = "update receivers set id = '$id' where id = '$i'";
 	$result = mysqli_query($connect,$sql);
 }
-mysqli_close($connect);
-header('location:receiver.php');
-
+$sql = "update receivers set status = '2' where id = '1'";
+mysqli_query($connect,$sql);
 ?>

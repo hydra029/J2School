@@ -11,6 +11,8 @@ require 'check_account.php';
 	<link rel="stylesheet" type="text/css" href="menu.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="notify/notify.js"></script>
+	<script src="notify/notify.min.js"></script>
 	<style type="text/css">
 		td {
 			border: 1px solid black;
@@ -71,7 +73,7 @@ require 'check_account.php';
 									Số điện thoại:
 								</b>
 							</td>
-							<td width="200px" >
+							<td width="200px">
 								<b>
 									Địa chỉ:
 								</b>
@@ -98,19 +100,19 @@ require 'check_account.php';
 							?>
 							<tr>
 								<td>
-									<?php echo $num ?>
+									<span id="span-<?php echo $num ?>"><?php echo $num ?></span>
 								</td>
 								<td>
-									<?php echo $each['name'] ?>
+									<span class="span-name"><?php echo $each['name'] ?></span>
 								</td>
 								<td>
-									<?php echo $each['phone'] ?>
+									<span class="span-phone"><?php echo $each['phone'] ?></span>
 								</td>
 								<td height="70px">
-									<?php echo $each['address'] ?>
+									<span class="span-address"><?php echo $each['address'] ?></span>
 								</td>
 								<td>
-									<a href="receiver_delete_process.php?id=<?php echo $num ?>">
+									<a href="" id="btn-receiver-delete" data-id="<?php echo $num ?>">
 										Xoá
 									</a>
 								</td>
@@ -142,7 +144,6 @@ require 'check_account.php';
 										<span style="display: none;" class="span-dfl">
 											Mặc định
 										</span>
-										
 									<?php } ?>
 								</td>
 							</tr>
@@ -159,6 +160,7 @@ require 'check_account.php';
 			require 'footer.php';
 			include 'receiver_form.php';
 			include 'receiver_form_change.php';
+			include 'receiver_delete_process.php';
 			?>
 		</div>
 	</div>
@@ -185,23 +187,36 @@ require 'check_account.php';
 				parent_tr.find('.span-dfl').show();
 			})
 		});
-		$(".btn-receiver-form").click(function() {
+		$("#btn-receiver-delete").click(function() {
 			event.preventDefault();
 			let btn = $(this);
-			// let parent_tr = btn.parents("tr");
-			// let parent_tb = btn.parents("table");
+			let parent_tr = btn.parents("tr");
 			let id = btn.data('id');
 			$.ajax({
-				url: 'receiver_form_change1.php',
+				url: 'receiver_delete_process.php',
 				type: 'GET',
 				data: {id},
 			})
 			.done(function(response) {
-				$("#div-body").append(response);
-				// parent_tb.find('button').show();
-				// parent_tr.find('button').hide();
-				// parent_tb.find('.span-dfl').hide();
-				// parent_tr.find('.span-dfl').show();
+				
+			})
+		});
+		$("#btn-receiver-form").click(function() {
+			event.preventDefault();
+			let btn = $(this);
+			let id = btn.data('id');
+			$.ajax({
+				url: 'receiver_data.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {id},
+			})
+			.done(function(response) {
+				$("#span_rcv_id").text(response["id"]);
+				$("#rcv_id").attr('value', response["id"]);
+				$("#rcv_name").attr('value', response["name"]);
+				$("#rcv_phone").attr('value', response["phone"]);
+				$("#rcv_address").attr('value', response["address"]);
 			})
 		});
 	});

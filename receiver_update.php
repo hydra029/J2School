@@ -1,7 +1,7 @@
 <?php
+session_start();
 require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
-$page = $_SESSION['page'];
 
 $id = $_POST['id'];
 $name = $_POST['name'];
@@ -16,5 +16,9 @@ address = '$address'
 where
 id = '$id' and customer_id = '$customer_id'";
 mysqli_query($connect,$sql);
-
+$sql = "select * from receivers where id = '$id' and customer_id = '$customer_id'";
+$result = mysqli_query($connect,$sql);
+$rcv = mysqli_fetch_array($result);
+echo json_encode($rcv);
+exit;
 ?>
