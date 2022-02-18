@@ -21,5 +21,5 @@ $sql = "select * from customers where id = '$customer_id'";
 $result = mysqli_query($connect,$sql);
 $info = mysqli_fetch_array($result);
 echo json_encode($info);
-sexit();
+exit();
 ?>

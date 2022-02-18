@@ -67,8 +67,7 @@
 				data: $(this).serializeArray(),
 			})
 			.done(function(response) {
-				$("#modal-receiver-form-change").modal(hide);
-				$.notify("Thay đổi thành công", "success");
+				location.reload();
 			})
 		});
 	});

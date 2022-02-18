@@ -1,5 +1,4 @@
 <?php 
-
 require 'connect.php';
 $customer_email = '';
 $customer_password = '';

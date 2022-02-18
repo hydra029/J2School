@@ -2,7 +2,6 @@
 session_start();
 require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
-
 $name = $_POST['name'];
 $phone = $_POST['phone'];
 $address = $_POST['address'];
@@ -20,4 +19,5 @@ $sql = "insert into receivers(customer_id,id,name,phone,address,status)
 values ('$customer_id','$id','$name','$phone','$address','$status')";
 mysqli_query($connect,$sql);
 echo 1;
+$_SESSION['notify'] = "Thêm địa chỉ thành công";
 ?>

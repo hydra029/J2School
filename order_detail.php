@@ -8,20 +8,14 @@ require 'connect.php';
                 <h1 style="text-align: center; ">
                     Đơn hàng chi tiết
                 </h1>
-                <form>
-                    <input type="search" name="tim_kiem" value="" placeholder="tìm kiếm">
-                </form>
             </div>
             <div class="modal-body">
                 <?php
+                $customer_id = $_SESSION['customer_id'];
                 $sql = "select customer_id, receiver_id from receipts where id = '$receipt_id'";
                 $result = mysqli_query($connect,$sql);
                 $receipt = mysqli_fetch_array($result);
                 $receiver_id = $receipt['receiver_id'];
-                $id = $receipt['customer_id'];
-                if ($customer_id != $id) {
-                    // header('location:index.php');
-                }
                 $sql = "select * from receivers where customer_id= '$customer_id' and id = '$receiver_id'";
                 $result = mysqli_query($connect,$sql);
                 $receiver = mysqli_fetch_array($result);
@@ -39,7 +33,7 @@ require 'connect.php';
                         </th>
                     </tr>
                     <tr>
-                        <td colspan="2" class="border">
+                        <td colspan="2" class="border" style="text-align: left;">
                             Họ và Tên:
                             <?php echo $receiver['name'] ?>
                             <br>

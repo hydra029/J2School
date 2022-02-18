@@ -73,7 +73,7 @@ mysqli_close($connect);
 									<?php echo $each['address'] ?>
 								</td>
 								<td>
-									<a data-toggle="modal" href="#modal-receiver-form" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-type="change">
+									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>">
 										Sửa
 									</a>
 								</td>
@@ -116,6 +116,7 @@ mysqli_close($connect);
 </div>
 <?php 					
 include 'receiver_form.php';
+include 'receiver_form_change.php';
 ?>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -142,9 +143,24 @@ include 'receiver_form.php';
 				parent_tr.find('.span-use').show();
 			})
 		});
-		$(".btn-receiver-form").click(function() {
+		$("#btn-receiver-form").click(function() {
 			event.preventDefault();
-			$('#modal-receiver-form').modal('show');
+			<?php $_SESSION['modal'] = "rcv" ?>
+			let btn = $(this);
+			let id = btn.data('id');
+			$.ajax({
+				url: 'receiver_data.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {id},
+			})
+			.done(function(response) {
+				$("#span_rcv_id").text(response["id"]);
+				$("#rcv_id").attr('value', response["id"]);
+				$("#rcv_name").attr('value', response["name"]);
+				$("#rcv_phone").attr('value', response["phone"]);
+				$("#rcv_address").attr('value', response["address"]);
+			})
 		});
 		$("#btn-cancel").click(function(){
 			event.preventDefault();

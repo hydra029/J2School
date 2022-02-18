@@ -51,7 +51,7 @@ endforeach;
 $sql = "update receivers set status = '0' where id = '$receiver_id' and customer_id = '$customer_id'";
 mysqli_query($connect,$sql);
 
-$_SESSION['success'] = "Đơn hàng đang chờ xét duyệt";
-header('location:order.php?status=2');
+$_SESSION['notify'] = "Đơn hàng đang chờ xét duyệt";
+header('location:order.php');
 mysqli_close($connect);
 ?>

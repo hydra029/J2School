@@ -21,9 +21,6 @@ require 'check_account.php';
 	</style>
 </head>
 <body>
-	<?php 
-	require 'announce.php';
-	?>
 	<div id="div_tong" class="container">
 		<?php require 'menu.php'; ?>
 		<div id="div_tren">
@@ -123,7 +120,6 @@ require 'check_account.php';
 					Không có đơn hàng !!
 				</h4>
 				<?php
-
 			} else {	
 				$num = 0;
 				foreach ($result as $receipt):			
@@ -217,7 +213,7 @@ require 'check_account.php';
 									case '2':
 									case '3':
 									?>
-									<a href="delete_order.php?id=<?php echo $receipt_id ?>&status=<?php echo $status ?>">
+									<a href="" id="btn-order-delete" data-id="<?php echo $each['receipt_id'] ?>">
 										Huỷ
 									</a>
 									<?php
@@ -239,7 +235,7 @@ require 'check_account.php';
 								?>
 							</td>
 							<td>
-								<a  data-toggle="modal" href="#modal-order-detail" id="btn-order-detail" data-id="<?php echo $each['id'] ?>">
+								<a data-toggle="modal" href="#modal-order-detail" id="btn-order-detail" data-id="<?php echo $each['receipt_id'] ?>">
 									Xem chi tiết >>>
 								</a>
 							</td>
@@ -249,18 +245,13 @@ require 'check_account.php';
 					<br>
 					<?php
 				endforeach; 
-
 			} ?>
 		</div>
 		<div id="div_duoi">
 			<br>
 			<?php 
-
 			require 'footer.php';
-
 			include 'order_detail.php';
-			print_r($rows);
-			exit;
 			?>
 		</div>
 	</div>
@@ -277,15 +268,25 @@ require 'check_account.php';
 				dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
 				data: {id},
 			})
-			.done(function() {
-				console.log("success");
+		});
+		$("#btn-order-delete").click(function() {
+			let btn = $(this);
+			let id = btn.data('id');
+			let parent_tb = btn.parents('table');
+			$.ajax({
+				url: 'delete_order.php',
+				type: 'POST',
+				data: {id},
 			})
-			.fail(function() {
-				console.log("error");
+			.done(function(response) {
+				parent_tb.remove();
 			})
-			.always(function() {
-				console.log("complete");
-			});
 		});
 	});
+</script>
+<script type="text/javascript">
+	if ("<?php echo $_SESSION['notify'] ?>" != "") {
+		$.notify("<?php echo $_SESSION['notify'] ?>", "success");
+		<?php unset($_SESSION['notify']) ?>
+	}
 </script>

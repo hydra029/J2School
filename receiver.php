@@ -22,7 +22,6 @@ require 'check_account.php';
 <body>
 	<?php 
 	require 'connect.php';
-	require 'announce.php';
 	$customer_id = $_SESSION['customer_id'];
 	$sql = "select * from receivers where customer_id = '$customer_id'";
 	$result = mysqli_query($connect,$sql);
@@ -112,7 +111,7 @@ require 'check_account.php';
 									<span class="span-address"><?php echo $each['address'] ?></span>
 								</td>
 								<td>
-									<a href="" id="btn-receiver-delete" data-id="<?php echo $num ?>">
+									<a href="receiver_delete_process.php?id=<?php echo $num ?>">
 										Xoá
 									</a>
 								</td>
@@ -184,20 +183,20 @@ require 'check_account.php';
 				parent_tr.find('button').hide();
 				parent_tb.find('.span-dfl').hide();
 				parent_tr.find('.span-dfl').show();
+				$.notify("Thay đổi địa chỉ mặc định thành công", "success");
 			})
 		});
 		$("#btn-receiver-delete").click(function() {
 			event.preventDefault();
 			let btn = $(this);
-			let parent_tr = btn.parents("tr");
 			let id = btn.data('id');
 			$.ajax({
 				url: 'receiver_delete_process.php',
-				type: 'GET',
+				type: 'POST',
 				data: {id},
 			})
-			.done(function(response) {
-				
+			.done(function() {
+				location.reload();
 			})
 		});
 		$("#btn-receiver-form").click(function() {
@@ -219,4 +218,10 @@ require 'check_account.php';
 			})
 		});
 	});
+</script>
+<script type="text/javascript">
+	if ("<?php echo $_SESSION['notify'] ?>" != "") {
+		$.notify("<?php echo $_SESSION['notify'] ?>", "success");
+		<?php unset($_SESSION['notify']) ?>
+	}
 </script>

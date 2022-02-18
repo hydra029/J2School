@@ -271,3 +271,9 @@ if (isset($_SESSION['customer_id'])) {
 		});
 	});
 </script>
+<script type="text/javascript">
+	if ("<?php echo $_SESSION['notify'] ?>" != "") {
+		$.notify("<?php echo $_SESSION['notify'] ?>", "success");
+		<?php unset($_SESSION['notify']) ?>
+	}
+</script>

@@ -24,7 +24,6 @@ require 'check_account.php';
 	<div id="div_tong" class="container">
 		<?php
 		$total = 0;
-		require 'announce.php';
 		require 'connect.php';
 		require 'menu.php';
 		$status = '1';

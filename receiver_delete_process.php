@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
 $num = $_GET['id'];
@@ -16,4 +16,6 @@ for ($i = $num + 1 ; $i <= $rows; $i++ ) {
 }
 $sql = "update receivers set status = '2' where id = '1'";
 mysqli_query($connect,$sql);
+	$_SESSION['notify'] = "Xoá địa chỉ thành công thành công";
+header("location:receiver.php")
 ?>

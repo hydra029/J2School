@@ -19,6 +19,8 @@ mysqli_query($connect,$sql);
 $sql = "select * from receivers where id = '$id' and customer_id = '$customer_id'";
 $result = mysqli_query($connect,$sql);
 $rcv = mysqli_fetch_array($result);
+	$_SESSION['notify'] = "Thay đổi thông tin thành công";
+
 echo json_encode($rcv);
 exit;
 ?>
