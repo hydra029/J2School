@@ -80,6 +80,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 			<th>Số điện thoại</th>
 			<th>Địa chỉ</th>
 			<th>Hình ảnh</th>
+			<th>Xem chi tiết</th>
 			<th>Sửa</th>
 			<th>Xóa</th>
 		</tr>
@@ -90,6 +91,9 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				<td><?php echo $array_manufacturers['phone'] ?></td>
 				<td><?php echo $array_manufacturers['address'] ?></td>
 				<td><img src="<?php echo $array_manufacturers['image'] ?>" height = "100px"></td>
+				<td>
+					<a href="detail_manufacturer.php?id=<?php echo $array_manufacturers['id'] ?>">Xem</a>
+				</td>
 				<td>
 					<a href="form_update_manufacturers.php?id=<?php echo $array_manufacturers['id'] ?>">Sửa</a>
 				</td>
