@@ -38,6 +38,7 @@
 						<a href="../list_by_chart_cash_earn/index.php" class="collapse__sublink">Thống&nbspkê&nbspthu&nbspnhập</a>
 						<a href="../hashtags/index.php" class="collapse__sublink">Quản&nbsplí&nbspgắn&nbspthẻ</a>
 						<a href="../hashtags/index_insert_hashtags_to_product.php" class="collapse__sublink">Thêm&nbspthẻ&nbspvào&nbspsản&nbspphẩm</a>
+						<a href="../admins/index.php" class="collapse__sublink">Quản&nbsplí&nbspnhân&nbspviên</a>
 					</ul>
 
 				</div>
