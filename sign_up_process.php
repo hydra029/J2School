@@ -9,7 +9,7 @@ $password = $_POST['password'];
 $sql = "select count(*) as count from customers where email = '$email' and password = '$password' ";
 $result = mysqli_query($connect,$sql);
 $rows = mysqli_fetch_array($result);
-if (condition) {
+if ($rows == 1) {
 	echo 0;
 	exit();
 } else {
