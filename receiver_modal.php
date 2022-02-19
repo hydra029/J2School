@@ -78,9 +78,9 @@ mysqli_close($connect);
 									</a>
 								</td>
 								<td class="center">
-									<?php if ($each['status'] != 2) { ?>
+									<?php if ($each['status'] != 1) { ?>
 										<button class="btn-rcv">
-											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="slc">
+											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>">
 												Chọn
 											</a>
 										</button>
@@ -89,7 +89,7 @@ mysqli_close($connect);
 										</span>
 									<?php } else {?>
 										<button style="display: none;" class="btn-rcv">
-											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="slc">
+											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>">
 												Chọn
 											</a>
 										</button>
@@ -126,12 +126,11 @@ include 'receiver_form_change.php';
 			let parent_tr = btn.parents("tr");
 			let parent_tb = btn.parents("table");
 			let id = btn.data('id');
-			let type = btn.data('type');
 			$.ajax({
 				url: 'receiver_process.php',
 				type: 'GET',
 				dataType: 'json',
-				data: {id, type},
+				data: {id},
 			})
 			.done(function(response) {
 				$("#span-name").text(response["name"]);

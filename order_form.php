@@ -14,7 +14,7 @@ require 'connect.php';
 					<table width="700px" height="300px"	class="border left">
 						<tr>
 							<?php
-							$sql = "select * from receivers where status = '2' and customer_id = '$customer_id'";
+							$sql = "select * from receivers where status = '1' and customer_id = '$customer_id'";
 							$result = mysqli_query($connect,$sql);
 							$rows = mysqli_num_rows($result);
 							if ($rows == 0) { ?>
@@ -138,14 +138,10 @@ require 'connect.php';
 				data: $(this).serializeArray(),
 			})
 			.done(function(response) {
-				$('#modal-order').modal('hide');
-				$.notify("Đặt hàng thành công", "success");
-
 			})
 		});
 		if(window.location.href.indexOf('#modal-receiver') != -1) {
 			$('#modal-receiver').modal('toggle');
 		}
-
 	});
 </script>

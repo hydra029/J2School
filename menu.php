@@ -33,16 +33,19 @@ if (empty($_SESSION['customer_id'])) {
 			</a>
 			|
 			<a href="order.php">
-				Dơn hàng
+				Đơn hàng
 			</a>
 			|
 			<a href="receiver.php">
 				Địa chỉ giao hàng
 			</a>
 			| Xin chào 
-			<span style="color: red" id="span-name">
-				,
+			<a href="user.php">
+				<span style="color: red" id="span-name">
+				
 			</span>
+			</a>
+			| 
 			<a href="sign_out.php">
 				Đăng xuất
 			</a> 
@@ -71,9 +74,10 @@ if (empty($_SESSION['customer_id'])) {
 			| Xin chào 
 			<a href="user.php">
 				<span style="color: red">
-					<?php echo $_SESSION['customer_name']; ?>,
+					<?php echo $_SESSION['customer_name']; ?> 
 				</span> 
 			</a>
+			| 
 			<a href="sign_out.php">
 				Đăng xuất
 			</a> 

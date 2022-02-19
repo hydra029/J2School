@@ -1,59 +1,62 @@
 <?php 
+if (isset($_SESSION['customer_id'])) {
+	header('location:index.php');
+} else if (isset($_SESSION['admin_id'])) {
+	header('location:admin/root/index_admin.php');
+}
 require 'connect.php';
-$customer_id = $_SESSION['customer_id'];
+$customer_email = '';
+$customer_password = '';
+if (isset($_COOKIE['remember'])) {
+	$token = $_COOKIE['remember'];
+	$sql = "select * from customers where token = '$token'";
+	$result = mysqli_query($connect,$sql);
+	$customer = mysqli_fetch_array($result);
+	$rows = mysqli_num_rows($result);
+	if ($rows == 1) {
+		$customer_email = $customer['email'];
+		$customer_password = $customer['password'];
+		$customer_name = $customer['name'];
+	}
+}
 ?>
-<div class="modal fade" id="modal-receiver-form-change">
+<div class="modal" id="modal-signin">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<?php 
-				$num = $_GET['id'];
-				$sql = "select * from receivers where id = '$num' and customer_id = '$customer_id'";
-				$result = mysqli_query($connect,$sql);
-				$each = mysqli_fetch_array($result);
-				?>
-				<h3 style="text-align: center; ">
-					Sửa thông tin người nhận hàng
+				<h3>
+					Đăng nhập
 				</h3>
+				<div class="alert alert-danger" id="div-error" style="display: none;"></div>
 			</div>
 			<div class="modal-body">
-				<form id="form-receiver-change">
-					<table height="300px" class="border" width="400px">
-						<input type="hidden" name="id" value="<?php echo $num ?>">
+				<form id="form-signin">
+					<table class="border left" width="400px" >
 						<tr>
-							<th colspan="2" class="center">
-								Thông tin số <?php echo $num ?>
-							</th>
-						</tr>
-						<tr>
-							<td class="left">
-								Tên người nhận:
+							<td>
+								Tài khoản:
 							</td>
 							<td>
-								<input type="text" name="name" id="name" value="<?php echo $each['name'] ?>">
+								<input class="form-control" type="text" name="email" id="email" value="<?php echo $customer_email ?>">
 							</td>
 						</tr>
 						<tr>
-							<td class="left">
-								Số điện thoại người nhận:
+							<td>
+								Mật khẩu:
 							</td>
 							<td>
-								<input type="text" name="phone" id="phone" value="<?php echo $each['phone'] ?>">
+								<input class="form-control" type="password" name="password" id="password" value="<?php echo $customer_password ?>">
 							</td>
 						</tr>
 						<tr>
-							<td class="left">
-								Địa chỉ người nhận:
-							</td>
-							<td>
-								<textarea name="address" id="address"><?php echo $each['address'] ?></textarea>
-								<span id="address_error"></span>
+							<td colspan="2" class="left">
+								<input type="checkbox" name="remember"> Ghi nhớ đăng nhập
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" class="center">
+							<td colspan="2" class="right">
 								<button>
-									Xác nhận
+									Đăng nhập
 								</button>
 							</td>
 						</tr>
@@ -68,19 +71,54 @@ $customer_id = $_SESSION['customer_id'];
 		</div>
 	</div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script> -->
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#form-receiver-change').submit(function(event) {
-			event.preventDefault();
-			$.ajax({
-				url: 'receiver_update.php',
-				type: 'POST',
-				dataType: 'html',
-				data: $(this).serializeArray(),
-			})
-			.done(function(response) {
-				$("#modal-receiver").toggle();
-			})
+		if(window.location.href.indexOf('#modal-signin') != -1) {
+			$('#modal-signin').modal('show');
+		}
+		$("#form-signin").validate({
+			rules: {
+				"email": {
+					required: true,
+					email: true
+				},
+				"password": {
+					required: true,
+				}
+			},
+			messages: {
+				"email": {
+					required: "Bắt buộc nhập username",
+					email: "Hãy nhập đúng định dạng email"
+				},
+				"password": {
+					required: "Bắt buộc nhập password",
+				}
+			},
+			summitHandler: function(form) {
+				e.preventDefault();
+				alert(1);
+				$.ajax({
+					url: 'sign_in_process.php',
+					type: 'POST',
+					dataType: 'html',
+					data: $("#form-signin").serializeArray(),
+				})
+				.done(function(response) {
+					if (response == 1) {
+						$("$div-error").text() = "Sai thông tin đăng nhập";
+						$("$div-error").show();
+					} else {
+						$("#modal-signin").modal('toggle');
+						$("#menu-customer").show();
+						$("#menu-guest").hide();
+						$(".btn-cus").show();
+						$("#span-name").text(response);
+					}
+				})
+			}
 		});
 	});
 </script>

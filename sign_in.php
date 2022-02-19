@@ -1,4 +1,9 @@
 <?php 
+if (isset($_SESSION['customer_id'])) {
+	header('location:index.php');
+} else if (isset($_SESSION['admin_id'])) {
+	header('location:admin/root/index_admin.php');
+}
 require 'connect.php';
 $customer_email = '';
 $customer_password = '';
@@ -26,14 +31,13 @@ if (isset($_COOKIE['remember'])) {
 			</div>
 			<div class="modal-body">
 				<form id="form-signin">
-					<table class="border">
+					<table class="border left" width="400px" >
 						<tr>
-							<td id="aaa">
+							<td>
 								Tài khoản:
 							</td>
 							<td>
-								<input type="text" name="email" id="email" value="<?php echo $customer_email ?>">
-								<span class="error_span" id="email_error"></span>
+								<input class="form-control" type="text" name="email" id="email1" value="<?php echo $customer_email ?>">
 							</td>
 						</tr>
 						<tr>
@@ -41,18 +45,17 @@ if (isset($_COOKIE['remember'])) {
 								Mật khẩu:
 							</td>
 							<td>
-								<input type="password" name="password" id="password" value="<?php echo $customer_password ?>">
-								<span class="error_span" id="password_error"></span>
+								<input class="form-control" type="password" name="password" id="password1" value="<?php echo $customer_password ?>">
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" class="left">
-								<input type="checkbox" name="remember">Ghi nhớ đăng nhập
+								<input type="checkbox" name="remember" id="remember"> Ghi nhớ đăng nhập
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" class="right">
-								<button>
+								<button type="submit">
 									Đăng nhập
 								</button>
 							</td>
@@ -68,6 +71,7 @@ if (isset($_COOKIE['remember'])) {
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		if(window.location.href.indexOf('#modal-signin') != -1) {
@@ -75,26 +79,45 @@ if (isset($_COOKIE['remember'])) {
 		}
 		$('#form-signin').submit(function(event) {
 			event.preventDefault();
-			$.ajax({
-				url: 'sign_in_process.php',
-				type: 'POST',
-				dataType: 'html',
-				data: $(this).serializeArray(),
-			})
-			.done(function(response) {
-				if (response == 1) {
-					$("$div-error").text("Sai thông tin đăng nhập");
-					$("$div-error").show();
-				} else {
-					location.reload();
-					// $.notify("Đăng nhập thành công", "success");
-					// $("#modal-signin").modal('toggle');
-					// $("#menu-customer").show();
-					// $("#menu-guest").hide();
-					// $(".btn-cus").show();
-					// $("#span-name").text(response);
+		});
+		$("#form-signin").validate({
+			rules: {
+				"email": {
+					required: true,
+					email: true
+				},
+				"password": {
+					required: true,
 				}
-			})
+			},
+			messages: {
+				"email": {
+					required: "Bắt buộc nhập username",
+					email: "Hãy nhập đúng định dạng email"
+				},
+				"password": {
+					required: "Bắt buộc nhập password",
+				}
+			},
+			submitHandler: function(form) {
+				$.ajax({
+					url: 'sign_in_process.php',
+					type: 'POST',
+					dataType: 'html',
+					data: $("#form-signin").serializeArray(),
+				})
+				.done(function(response) {
+					if (response == 1) {
+						$.notify("Sai tài khoản hoặc mật khẩu", "error");
+					} else {
+						$("#modal-signin").modal('toggle');
+						$("#menu-customer").show();
+						$("#menu-guest").hide();
+						$(".btn-cus").show();
+						$("#span-name").text(response);
+					}
+				})
+			}
 		});
 	});
 </script>

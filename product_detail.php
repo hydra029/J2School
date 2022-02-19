@@ -124,8 +124,11 @@ if (isset($_SESSION['customer_id'])) {
 		} else {
 			header("location:index.php");
 		}
-		$sql = "select * from products where id = $id";
+		$sql = "select products.*, count(*) as count from products where id = $id";
 		$result = mysqli_query($connect, $sql);
+		if ($result["count"] = 0) {
+			header("location:index.php")
+		}
 		?>
 		<div id="div_tren" >
 			<h1 style="text-align: center; ">

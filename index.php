@@ -14,6 +14,8 @@ if (isset($_SESSION['customer_id'])) {
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
 	<script src="notify/notify.js"></script>
 	<script src="notify/notify.min.js"></script>
 	<title></title>
@@ -271,9 +273,11 @@ if (isset($_SESSION['customer_id'])) {
 		});
 	});
 </script>
-<script type="text/javascript">
-	if ("<?php echo $_SESSION['notify'] ?>" != "") {
-		$.notify("<?php echo $_SESSION['notify'] ?>", "success");
-		<?php unset($_SESSION['notify']) ?>
-	}
-</script>
+<?php if (isset($_SESSION["notify"])) { ?>
+	<script type="text/javascript">
+		if ("<?php echo $_SESSION['notify'] ?>" != "") {
+			$.notify("<?php echo $_SESSION['notify'] ?>", "success");
+			<?php unset($_SESSION['notify']) ?>
+		}
+	</script>
+	<?php } ?>

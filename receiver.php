@@ -121,9 +121,9 @@ require 'check_account.php';
 									</a>
 								</td>
 								<td class="center">
-									<?php if ($each['status'] == 2) { ?>
+									<?php if ($each['status'] == 1) { ?>
 										<button style="display: none;">
-											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
+											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>">
 												<span>
 													Chọn
 												</span>
@@ -134,7 +134,7 @@ require 'check_account.php';
 										</span>
 									<?php } else {?>
 										<button>
-											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>" data-type="dfl">
+											<a data-toggle="modal" href="#modal-receiver" class="btn-receiver" data-id="<?php echo $each['id'] ?>">
 												<span>
 													Chọn
 												</span>
@@ -172,11 +172,10 @@ require 'check_account.php';
 			let parent_tr = btn.parents("tr");
 			let parent_tb = btn.parents("table");
 			let id = btn.data('id');
-			let type = btn.data('type');
 			$.ajax({
 				url: 'receiver_process.php',
 				type: 'GET',
-				data: {id, type},
+				data: {id},
 			})
 			.done(function(response) {
 				parent_tb.find('button').show();
