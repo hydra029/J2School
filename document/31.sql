@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th2 17, 2022 lúc 08:37 AM
--- Phiên bản máy phục vụ: 8.0.27
--- Phiên bản PHP: 7.4.19
+-- Host: localhost
+-- Generation Time: Feb 19, 2022 at 11:01 AM
+-- Server version: 5.7.33
+-- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,26 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `31`
+-- Database: `31`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `activities`
+-- Table structure for table `activities`
 --
 
 CREATE TABLE `activities` (
-  `id` int NOT NULL,
-  `admin_id` int NOT NULL,
-  `activity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `object` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `object_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `activity` varchar(50) NOT NULL,
+  `object` varchar(50) NOT NULL,
+  `object_name` varchar(250) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `activities`
+-- Dumping data for table `activities`
 --
 
 INSERT INTO `activities` (`id`, `admin_id`, `activity`, `object`, `object_name`, `time`) VALUES
@@ -109,19 +109,19 @@ INSERT INTO `activities` (`id`, `admin_id`, `activity`, `object`, `object_name`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `admins`
+-- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
-  `id` int NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` mediumtext NOT NULL,
   `level` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `admins`
+-- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
@@ -131,21 +131,21 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
-  `id` int NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `gender` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `gender` varchar(200) NOT NULL,
   `dob` date NOT NULL,
-  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `token` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `email` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `token` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `customers`
+-- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `token`) VALUES
@@ -154,24 +154,25 @@ INSERT INTO `customers` (`id`, `name`, `gender`, `dob`, `email`, `password`, `to
 (3, 'My Mi', 'male', '2021-11-29', 'abc@abc.abc', 'Abcd1234', 'user_61cbc3291fd306.214497391640743721'),
 (4, 'My My', 'male', '2022-01-19', 'admin123@gmail.com', 'Admin123', 'user_61d014557d9238.626900311641026645'),
 (5, 'Ma Ma', 'male', '2018-06-08', 'njknjkn@gmail.com', '$Gl123456789', ''),
-(10, 'Tài Khoản Mới', 'male', '2022-01-31', 'taikhoanmoi@gmail.com', '$Glnjkjnjk@', '');
+(10, 'Tài Khoản Mới', 'male', '2022-01-31', 'taikhoanmoi@gmail.com', '$Glnjkjnjk@', ''),
+(11, 'Hydra', 'male', '2022-02-10', 'longthanh22@gmail.com', 'Long1234!', '');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `manufacturers`
+-- Table structure for table `manufacturers`
 --
 
 CREATE TABLE `manufacturers` (
-  `id` int NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `image` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `manufacturers`
+-- Dumping data for table `manufacturers`
 --
 
 INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
@@ -188,20 +189,20 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
-  `id` int NOT NULL,
-  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `price` int NOT NULL,
-  `image` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `manufacturer_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `description` mediumtext NOT NULL,
+  `price` int(11) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `manufacturer_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufacturer_id`) VALUES
@@ -220,16 +221,16 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `manufact
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_type`
+-- Table structure for table `product_type`
 --
 
 CREATE TABLE `product_type` (
-  `product_id` int NOT NULL,
-  `type_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `product_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `product_type`
+-- Dumping data for table `product_type`
 --
 
 INSERT INTO `product_type` (`product_id`, `type_id`) VALUES
@@ -252,49 +253,53 @@ INSERT INTO `product_type` (`product_id`, `type_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `receipts`
+-- Table structure for table `receipts`
 --
 
 CREATE TABLE `receipts` (
-  `id` int NOT NULL,
-  `customer_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
   `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `receiver_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `note` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `status` int NOT NULL,
-  `total` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `receiver_name` varchar(50) DEFAULT NULL,
+  `receiver_phone` varchar(20) DEFAULT NULL,
+  `receiver_address` varchar(200) DEFAULT NULL,
+  `note` mediumtext,
+  `status` int(11) NOT NULL,
+  `total` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `receipts`
+-- Dumping data for table `receipts`
 --
 
-INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
-(14, 1, '2022-01-03 14:01:12', '1', NULL, 5, 100000),
-(15, 2, '2022-01-11 14:02:19', '1', NULL, 2, 2000),
-(16, 2, '2022-01-04 14:02:19', '2', NULL, 2, 900000),
-(17, 3, '2022-01-05 14:02:19', '3', NULL, 2, 500000),
-(18, 4, '2022-01-10 14:02:19', '1', NULL, 2, 330000),
-(19, 1, '2022-01-11 15:28:03', '2', '							', 3, 11580000),
-(20, 1, '2022-01-11 15:28:24', '2', '							', 2, 6540000),
-(21, 1, '2022-01-30 08:25:46', '1', NULL, 5, 18330000),
-(22, 10, '2022-02-10 08:58:34', '', '								', 2, 11540000),
-(23, 10, '2022-02-10 08:59:43', '', '								', 2, 6540000);
+INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_name`, `receiver_phone`, `receiver_address`, `note`, `status`, `total`) VALUES
+(15, 2, '2022-01-11 14:02:19', NULL, NULL, NULL, NULL, 2, 2000),
+(16, 2, '2022-01-04 14:02:19', NULL, NULL, NULL, NULL, 2, 900000),
+(17, 3, '2022-01-05 14:02:19', NULL, NULL, NULL, NULL, 2, 500000),
+(18, 4, '2022-01-10 14:02:19', NULL, NULL, NULL, NULL, 2, 330000),
+(19, 1, '2022-01-11 15:28:03', NULL, NULL, NULL, '							', 7, 11580000),
+(20, 1, '2022-01-11 15:28:24', NULL, NULL, NULL, '							', 7, 6540000),
+(21, 1, '2022-01-30 08:25:46', NULL, NULL, NULL, NULL, 5, 18330000),
+(22, 10, '2022-02-10 08:58:34', NULL, NULL, NULL, '								', 2, 11540000),
+(23, 10, '2022-02-10 08:59:43', NULL, NULL, NULL, '								', 2, 6540000),
+(24, 1, '2022-02-17 14:30:04', NULL, NULL, NULL, 'a				', 7, 6540000),
+(25, 1, '2022-02-17 14:39:41', NULL, NULL, NULL, '								', 7, 11500000),
+(26, 1, '2022-02-17 14:54:50', NULL, NULL, NULL, NULL, 1, 11500000);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `receipt_detail`
+-- Table structure for table `receipt_detail`
 --
 
 CREATE TABLE `receipt_detail` (
-  `receipt_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `quantity` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `receipt_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `receipt_detail`
+-- Dumping data for table `receipt_detail`
 --
 
 INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
@@ -307,30 +312,33 @@ INSERT INTO `receipt_detail` (`receipt_id`, `product_id`, `quantity`) VALUES
 (21, 6, 1),
 (22, 2, 3),
 (22, 4, 6),
-(23, 5, 1);
+(23, 5, 1),
+(24, 5, 1),
+(25, 4, 1),
+(26, 4, 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `receivers`
+-- Table structure for table `receivers`
 --
 
 CREATE TABLE `receivers` (
-  `customer_id` int NOT NULL,
-  `id` int NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `address` varchar(200) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `receivers`
+-- Dumping data for table `receivers`
 --
 
 INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `status`) VALUES
-(1, 1, 'Mi Mi', '0951847632', 'Le Loi', 0),
-(1, 2, 'Hang Nga', '0369852147', 'Nguyen Trai', 1),
+(1, 1, 'Mi Miaaa', '0951847632', 'Le Loi', 1),
+(1, 2, 'Mi Mi1', '0951847632', 'Le Loi', 0),
 (3, 1, '1', '1', '1', 0),
 (3, 2, '2', '2', '2', 0),
 (4, 1, 'Bui Huu Loc', '0987614523', 'Le Loi', 0),
@@ -339,16 +347,16 @@ INSERT INTO `receivers` (`customer_id`, `id`, `name`, `phone`, `address`, `statu
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `types`
+-- Table structure for table `types`
 --
 
 CREATE TABLE `types` (
-  `id` int NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `types`
+-- Dumping data for table `types`
 --
 
 INSERT INTO `types` (`id`, `name`) VALUES
@@ -359,148 +367,148 @@ INSERT INTO `types` (`id`, `name`) VALUES
 (36, 'Vệ sinh');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `activities`
+-- Indexes for table `activities`
 --
 ALTER TABLE `activities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `admins`
+-- Indexes for table `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Chỉ mục cho bảng `manufacturers`
+-- Indexes for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Chỉ mục cho bảng `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `manufacturer_id` (`manufacturer_id`);
 
 --
--- Chỉ mục cho bảng `product_type`
+-- Indexes for table `product_type`
 --
 ALTER TABLE `product_type`
   ADD PRIMARY KEY (`product_id`,`type_id`),
   ADD KEY `type_id` (`type_id`);
 
 --
--- Chỉ mục cho bảng `receipts`
+-- Indexes for table `receipts`
 --
 ALTER TABLE `receipts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- Chỉ mục cho bảng `receipt_detail`
+-- Indexes for table `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
   ADD PRIMARY KEY (`receipt_id`,`product_id`),
   ADD KEY `receipt_detail_ibfk_1` (`product_id`);
 
 --
--- Chỉ mục cho bảng `receivers`
+-- Indexes for table `receivers`
 --
 ALTER TABLE `receivers`
   ADD PRIMARY KEY (`customer_id`,`id`);
 
 --
--- Chỉ mục cho bảng `types`
+-- Indexes for table `types`
 --
 ALTER TABLE `types`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `admins`
+-- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT cho bảng `manufacturers`
+-- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT cho bảng `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `receipts`
+-- AUTO_INCREMENT for table `receipts`
 --
 ALTER TABLE `receipts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT cho bảng `types`
+-- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`id`);
 
 --
--- Các ràng buộc cho bảng `product_type`
+-- Constraints for table `product_type`
 --
 ALTER TABLE `product_type`
-  ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `product_type_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`),
+  ADD CONSTRAINT `product_type_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Các ràng buộc cho bảng `receipts`
+-- Constraints for table `receipts`
 --
 ALTER TABLE `receipts`
   ADD CONSTRAINT `receipts_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
--- Các ràng buộc cho bảng `receipt_detail`
+-- Constraints for table `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
   ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `receipt_detail_ibfk_2` FOREIGN KEY (`receipt_id`) REFERENCES `receipts` (`id`);
 
 --
--- Các ràng buộc cho bảng `receivers`
+-- Constraints for table `receivers`
 --
 ALTER TABLE `receivers`
   ADD CONSTRAINT `receivers_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
