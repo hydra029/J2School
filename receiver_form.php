@@ -80,11 +80,6 @@ $customer_id = $_SESSION['customer_id'];
 				data: $(this).serializeArray(),
 			})
 			.done(function() {
-				$.ajax({
-					url: 'notify.php',
-					type: ' POST',
-					data: {notify: 'Thêm địa chỉ thành công'},
-				})
 				location.reload();
 			})
 		});

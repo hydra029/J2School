@@ -25,6 +25,7 @@ require 'check_account.php';
 		<?php
 		$total = 0;
 		require 'connect.php';
+		require 'notify.php';
 		require 'menu.php';
 		$status = '1';
 		$sql = "select

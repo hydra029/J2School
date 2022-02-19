@@ -8,26 +8,20 @@ $note = $_POST['note'];
 $order_time = date("d-m-Y h:i:s");
 
 $status = 1;
-$sql = "select id from receipts where customer_id = '$customer_id' and status = '$status'";
-$result = mysqli_query($connect,$sql);
-$receipt = mysqli_fetch_array($result);
-$receipt_id = $receipt['id'];
-
 $sql = "select * from receivers where customer_id = '$customer_id' and status = '$status'";
 $result = mysqli_query($connect,$sql);
-$rows = mysqli_num_rows($result);
-
-$status = 2;
-if ($rows = 0) {
-    $sql = "select * from receivers where customer_id = '$customer_id' and status = '$status'";
-    $result = mysqli_query($connect,$sql);
-}
 $receiver = mysqli_fetch_array($result);
-$receiver_id = $receiver['id'];
+$receiver_name = $receiver['name'];
+$receiver_phone = $receiver['phone'];
+$receiver_address = $receiver['address'];
+
+$status = 1;
 $sql = "update receipts
 set 
 order_time = CURRENT_TIMESTAMP,
-receiver_id = '$receiver_id',
+receiver_name = '$receiver_name',
+receiver_phone = '$receiver_phone',
+receiver_address = '$receiver_address',
 note = '$note',
 status = '$status'
 where

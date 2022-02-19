@@ -55,8 +55,8 @@ ul li {
 	min-height: 800px;
 	max-height: 6000px;
 	position: relative;
-	margin: 0px 324px;
-	padding: 0px 15px;
+	margin: auto;
+	padding: auto;
 	min-width: 800px;
 }
 #div_tren {

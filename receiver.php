@@ -22,6 +22,7 @@ require 'check_account.php';
 <body>
 	<?php 
 	require 'connect.php';
+	require 'notify.php';
 	$customer_id = $_SESSION['customer_id'];
 	$sql = "select * from receivers where customer_id = '$customer_id'";
 	$result = mysqli_query($connect,$sql);
@@ -217,10 +218,4 @@ require 'check_account.php';
 			})
 		});
 	});
-</script>
-<script type="text/javascript">
-	if ("<?php echo $_SESSION['notify'] ?>" != "") {
-		$.notify("<?php echo $_SESSION['notify'] ?>", "success");
-		<?php unset($_SESSION['notify']) ?>
-	}
 </script>

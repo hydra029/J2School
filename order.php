@@ -110,6 +110,7 @@ require 'check_account.php';
 		<div id="div_giua" >
 			<?php 
 			require 'connect.php';
+			require 'notify.php';
 			$customer_id = $_SESSION['customer_id'];
 			$sql = "select * from receipts where customer_id = '$customer_id' and status = '$status'";
 			$result = mysqli_query($connect,$sql);
@@ -283,10 +284,4 @@ require 'check_account.php';
 			})
 		});
 	});
-</script>
-<script type="text/javascript">
-	if ("<?php echo $_SESSION['notify'] ?>" != "") {
-		$.notify("<?php echo $_SESSION['notify'] ?>", "success");
-		<?php unset($_SESSION['notify']) ?>
-	}
 </script>
