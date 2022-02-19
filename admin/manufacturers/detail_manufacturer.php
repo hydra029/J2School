@@ -66,16 +66,18 @@ $each_manufacturer = mysqli_fetch_array($query_sql_select_manufacturers);
 		<h1><?php echo $each_manufacturer['name'] ?></h1>
 			
 		<div class="control">
-			<form action = "form_update_products.php" method = "get">
-			<button class="btn">
-				<input type="hidden" name="id" value = "<?php echo $each_manufacturer['id'] ?>">
-				<span class="buy">Thống kê sản phẩm của <?php echo $each_manufacturer['name'] ?></span>
-			</button>
-			<br><br><br>
-			<button class="btn">
-				<input type="hidden" name="id" value = "<?php echo $each_manufacturer['id'] ?>">
-				<span class="buy">Sửa nhà sản xuất</span>
-			</button>
+			<form action = "view_products_in_manufacturer.php" method = "get">
+				<button class="btn">
+					<input type="hidden" name="id" value = "<?php echo $each_manufacturer['id'] ?>">
+					<span class="buy">Thống kê sản phẩm của <?php echo $each_manufacturer['name'] ?></span>
+				</button>
+			</form>
+			<br>
+			<form action = "form_update_manufacturers.php" method = "get">
+				<button class="btn">
+					<input type="hidden" name="id" value = "<?php echo $each_manufacturer['id'] ?>">
+					<span class="buy">Sửa nhà sản xuất</span>
+				</button>
 			</form>
 		</div>
 				
