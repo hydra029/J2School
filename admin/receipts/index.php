@@ -68,7 +68,8 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 
 <div class = "bot">
 	<div class = "header">
-		<h1 class =  "header" >ĐƠN HÀNG</h1>			
+		<h1 class =  "header" >ĐƠN HÀNG CHƯA XỬ LÍ</h1>
+		-> <a href = "view_receipts_finished.php">XEM ĐƠN HÀNG ĐÃ XỬ LÍ</a>
 	</div>
 	<br>
 
