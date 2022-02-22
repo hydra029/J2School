@@ -50,7 +50,6 @@ ul li {
 
 }
 #div_tong {
-	padding-bottom: 50px;
 	background: aliceblue;
 	min-height: 800px;
 	max-height: 6000px;
@@ -72,7 +71,7 @@ ul li {
 	height: 100px;
 	background: sandybrown;
 	text-align: center;
-	bottom: 5px;
+	bottom: 0px;
 	position: relative;
 }
 

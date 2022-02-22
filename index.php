@@ -39,7 +39,7 @@ if (isset($_SESSION['customer_id'])) {
 		#div_tong {
 			padding-bottom: 15px;
 			background: aliceblue;
-			min-height: 700px;
+			min-height: 740px;
 			max-height: 6000px;
 			position: relative;
 			margin: auto;
@@ -247,7 +247,6 @@ if (isset($_SESSION['customer_id'])) {
 	</div>
 	<div id="div_duoi" class="container" style="background: sandybrown;">
 		<br>
-		
 		<div>
 			<?php
 			mysqli_close($connect);

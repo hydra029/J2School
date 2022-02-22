@@ -73,7 +73,7 @@ mysqli_close($connect);
 									<?php echo $each['address'] ?>
 								</td>
 								<td>
-									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>">
+									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-num="<?php echo $num ?>">
 										Sửa
 									</a>
 								</td>
@@ -147,14 +147,15 @@ include 'receiver_form_change.php';
 			<?php $_SESSION['modal'] = "rcv" ?>
 			let btn = $(this);
 			let id = btn.data('id');
+			let num = btn.data('num');
 			$.ajax({
 				url: 'receiver_data.php',
 				type: 'POST',
 				dataType: 'json',
-				data: {id},
-			})
+				data: {id, num,
+				})
 			.done(function(response) {
-				$("#span_rcv_id").text(response["id"]);
+				$("#span_rcv_id").text(response["num"]);
 				$("#rcv_id").attr('value', response["id"]);
 				$("#rcv_name").attr('value', response["name"]);
 				$("#rcv_phone").attr('value', response["phone"]);

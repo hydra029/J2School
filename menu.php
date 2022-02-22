@@ -73,7 +73,7 @@ if (empty($_SESSION['customer_id'])) {
 			</a>
 			| Xin chào 
 			<a href="user.php">
-				<span style="color: red">
+				<span style="color: red" id="span-name">
 					<?php echo $_SESSION['customer_name']; ?> 
 				</span> 
 			</a>

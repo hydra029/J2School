@@ -182,8 +182,8 @@ require 'check_account.php';
 			?>
 		</div>
 		<div id="div_duoi">
+			<br>
 			<?php
-			mysqli_close($connect);
 			require 'footer.php';
 			?>
 		</div>

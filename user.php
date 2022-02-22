@@ -78,7 +78,7 @@
 				</table>
 			</form>
 		</div>
-		<div id="div_duoi" class="container">
+		<div id="div_duoi">
 			<div>
 				<?php
 				mysqli_close($connect);
@@ -96,10 +96,12 @@
 			$.ajax({
 				url: 'user_process.php',
 				type: 'POST',
+				dataType: 'json',
 				data: $(this).serializeArray(),
 			})
-			.done(function() {
+			.done(function(response) {
 				$.notify("Thay đổi thành công", "success");
+				$("#span-name").text(response['name']);
 			})
 		});
 	});

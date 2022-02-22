@@ -24,7 +24,7 @@ require 'check_account.php';
 	require 'connect.php';
 	require 'notify.php';
 	$customer_id = $_SESSION['customer_id'];
-	$sql = "select * from receivers where customer_id = '$customer_id'";
+	$sql = "select * from receivers where customer_id = '$customer_id' and status <> '2'";
 	$result = mysqli_query($connect,$sql);
 	$rows = mysqli_num_rows($result);
 	$num = 0;
@@ -100,7 +100,7 @@ require 'check_account.php';
 							?>
 							<tr>
 								<td>
-									<span id="span-<?php echo $num ?>"><?php echo $num ?></span>
+									<span><?php echo $num ?></span>
 								</td>
 								<td>
 									<span class="span-name"><?php echo $each['name'] ?></span>
@@ -112,12 +112,12 @@ require 'check_account.php';
 									<span class="span-address"><?php echo $each['address'] ?></span>
 								</td>
 								<td>
-									<a href="receiver_delete_process.php?id=<?php echo $num ?>">
+									<a href="receiver_delete_process.php?id=<?php echo $each['id'] ?>">
 										Xoá
 									</a>
 								</td>
 								<td>
-									<a data-toggle="modal" href="#modal-receiver-form-change" class="btn-receiver-form" data-id="<?php echo $each['id'] ?>">
+									<a data-toggle="modal" href="#modal-receiver-form-change" class="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-num="<?php echo $num ?>">
 										Sửa
 									</a>
 								</td>
@@ -153,13 +153,13 @@ require 'check_account.php';
 					?>
 				</table>
 			</div>
-			<br>
 		</div>
 		<div id="div_duoi">
+			<br>
 			<?php 
-			require 'footer.php';
 			include 'receiver_form.php';
 			include 'receiver_form_change.php';
+			require 'footer.php';
 			?>
 		</div>
 	</div>
@@ -203,14 +203,15 @@ require 'check_account.php';
 			event.preventDefault();
 			let btn = $(this);
 			let id = btn.data('id');
+			let num = btn.data('num');
 			$.ajax({
 				url: 'receiver_data.php',
 				type: 'POST',
 				dataType: 'json',
-				data: {id},
+				data: {id, num},
 			})
 			.done(function(response) {
-				$("#span_rcv_id").text(response["id"]);
+				$("#span_rcv_id").text(response["num"]);
 				$("#rcv_id").attr('value', response["id"]);
 				$("#rcv_name").attr('value', response["name"]);
 				$("#rcv_phone").attr('value', response["phone"]);

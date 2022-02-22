@@ -7,7 +7,7 @@ $customer_id = $_SESSION['customer_id'];
 		<div class="modal-content">
 			<div class="modal-header">
 				<?php 
-				$sql = "select * from receivers where customer_id = '$customer_id'";
+				$sql = "select * from receivers where customer_id = '$customer_id' and status <> '2'";
 				$result = mysqli_query($connect,$sql);
 				$rows = mysqli_num_rows($result);
 				$rows = (int)$rows;
