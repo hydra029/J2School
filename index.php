@@ -38,7 +38,7 @@ if (isset($_SESSION['customer_id'])) {
 		}
 		#div_tong {
 			padding-bottom: 15px;
-			background: aliceblue;
+			background: Cornsilk;
 			min-height: 740px;
 			max-height: 6000px;
 			position: relative;
@@ -119,61 +119,63 @@ if (isset($_SESSION['customer_id'])) {
 	</style>
 	<link rel="stylesheet" href="card.css">
 </head>
-<body>
+<body style="background: WhiteSmoke">
 	<div id="div_tong" class="container">
 		<div id="div_tren">
-			<?php 
-			require 'connect.php';
-			$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
-			mysqli_query($connect, $sql);
-			$trang = 1;
-			if (isset($_GET['trang'])) {
-				$trang = $_GET['trang'];
-			}  
-			$tim_kiem = '';
-			$type_id = '';
-			if (isset($_GET['tim_kiem'])) {
-				$tim_kiem = $_GET['tim_kiem'];
-			}
-			if (isset($_GET['type_id'])) {
-				$type_id = $_GET['type_id'];
-			}
-			if ($type_id == "") {
-				$sql_so_san_pham = "select count(*) from products
-				where
-				name like '%$tim_kiem%'";
-			} else {
-				$sql_so_san_pham = "select count(*)
-				from products join product_type on product_type.product_id = products.id
-				where
-				products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
-				group by products.name";
-			}
-			$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
-			$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
-			$so_san_pham = $ket_qua_so_san_pham['count(*)'];
-			$so_san_pham_1_trang = 8;
-			$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
-			$bo_qua = $so_san_pham_1_trang*($trang-1);
-			require 'menu.php';
-			?>
-			<div class="left" style="padding: 20px 0px;">
-				Phân loại sản phẩm: 
-				<span>
-					<a href="index.php">Tất cả</a>
-				</span>
+			<div style="background: sandybrown; padding: 5px;">
 				<?php 
-				require "connect.php";
-				$sql = "select * from types";
-				$result = mysqli_query($connect,$sql);
-				foreach ($result as $each) {
-					?>
-					<a href="index.php?tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $each['id'] ?>">
-						| <?php echo $each["name"] ?>
-					</a>
-					<?php
+				require 'connect.php';
+				$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
+				mysqli_query($connect, $sql);
+				$trang = 1;
+				if (isset($_GET['trang'])) {
+					$trang = $_GET['trang'];
+				}  
+				$tim_kiem = '';
+				$type_id = '';
+				if (isset($_GET['tim_kiem'])) {
+					$tim_kiem = $_GET['tim_kiem'];
 				}
+				if (isset($_GET['type_id'])) {
+					$type_id = $_GET['type_id'];
+				}
+				if ($type_id == "") {
+					$sql_so_san_pham = "select count(*) from products
+					where
+					name like '%$tim_kiem%'";
+				} else {
+					$sql_so_san_pham = "select count(*)
+					from products join product_type on product_type.product_id = products.id
+					where
+					products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
+					group by products.name";
+				}
+				$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
+				$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
+				$so_san_pham = $ket_qua_so_san_pham['count(*)'];
+				$so_san_pham_1_trang = 8;
+				$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
+				$bo_qua = $so_san_pham_1_trang*($trang-1);
+				require 'menu.php';
 				?>
+				<div class="left" style="padding: 20px 5px 5px;">
+					Phân loại sản phẩm: 
+					<span>
+						<a href="index.php">Tất cả</a>
+					</span>
+					<?php 
+					require "connect.php";
+					$sql = "select * from types";
+					$result = mysqli_query($connect,$sql);
+					foreach ($result as $each) {
+						?>
+						<a href="index.php?tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $each['id'] ?>">
+							| <?php echo $each["name"] ?>
+						</a>
+						<?php
+					}
+					?>
+				</div>
 			</div>
 			<?php
 			if ($type_id == "") {
@@ -194,7 +196,7 @@ if (isset($_SESSION['customer_id'])) {
 			}
 			$result = mysqli_query($connect, $sql);
 			?>
-			<form style="width: 300px; margin: auto; ">
+			<form style="width: 300px; margin: auto; padding: 20px 5px;">
 				<input  class="form-control" type="search" name="tim_kiem" value="" placeholder="Tìm kiếm">
 			</form>
 		</div>
