@@ -153,7 +153,7 @@ if (isset($_SESSION['customer_id'])) {
 				$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
 				$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
 				$so_san_pham = $ket_qua_so_san_pham['count(*)'];
-				$so_san_pham_1_trang = 8;
+				$so_san_pham_1_trang = 10;
 				$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
 				$bo_qua = $so_san_pham_1_trang*($trang-1);
 				require 'menu.php';
@@ -210,7 +210,7 @@ if (isset($_SESSION['customer_id'])) {
 						<?php echo $each['name'] ?>
 					</div>
 					<div class="card_img">
-						<img height="180px" width="180px" src="admin/products/<?php echo $each['image']; ?>">
+						<img  height="180px" width="180px" src="admin/products/<?php echo $each['image']; ?>">
 					</div>
 					<div class="card_price">
 						<?php echo number_format($each['price']) ?> VNĐ

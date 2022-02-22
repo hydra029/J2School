@@ -10,6 +10,7 @@ if (isset($_SESSION['customer_id'])) {
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="menu.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
@@ -17,104 +18,7 @@ if (isset($_SESSION['customer_id'])) {
 	<script src="notify/notify.js"></script>
 	<script src="notify/notify.min.js"></script>
 	<title></title>
-	<style type="text/css">
-		a {
-			text-decoration: none;
-		}
-		a:link {
-			color: blue;
-		}
-		a:visited {
-			color: blue;
-		}
-		a:hover {
-			color: red;			
-			text-decoration: underline;
-		}
-		a:active {
-			color: yellow;
-		}
-		#div_tong {
-			padding-bottom: 50px;
-			background: aliceblue;
-			min-height: 800px;
-			max-height: 6000px;
-			position: relative;
-			margin: auto;
-		}
-		#div_tren {
-			text-align: center;
-			height: 150px;
-		}
-		#div_giua {
-			max-height: 4900px;
-			padding-bottom: 50px;
-		}
-		#div_duoi {
-			height: 100px;
-			background: aliceblue;
-			text-align: center;
-			bottom: 5px;
-		}
-		.right {
-			text-align: right;
-		}	
-		.left {
-			text-align: left;
-		}
-		.center {
-			text-align: center;
-		}
-		.border {
-			border: 1px solid black;
-		}
-		.no_border {
-			border: none;
-		}
-		table {
-			margin: auto	;
-		}
-		.error {
-			color: red;
-			text-align: left;
-		}
-		.success {
-			color: green;
-		}
-		ul {
-			list-style-type: none;
-			padding: 0;
-		}
-		ul li ul li {
-			background: ghostwhite;
-			border-color: black;
-			text-align: center;
-		}
-		ul li ul {
-			width: 700px;
-			text-align: center;
-			position: absolute;
-		}
-		ul > li:hover ul {
-			margin-top: 0;
-			position: absolute;
-			top: 51px;
-			left: -153px;
-			text-align: center;
-		}
-		ul li {	
-			float: left;
-			position:  relative;
-			background: lightgray;
-			width: 150px;
-			border: 1px solid black;
-			height: 50px;
-			text-align: center;
-		}
-		td {
-			height: 40px;
-		}
-	</style>
+	
 </head>
 <body>
 	<div id="div_tong" class="container">
@@ -176,7 +80,7 @@ if (isset($_SESSION['customer_id'])) {
 	</div>
 	<div id="div_duoi" class="container" style="background: sandybrown;">
 		<br>
-		<br>
+
 		<div>
 			<?php
 			mysqli_close($connect);
