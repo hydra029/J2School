@@ -76,7 +76,7 @@ $each_customer = mysqli_fetch_array($query_sql_select_customers);
 				<form action = "view_receipt.php" method = "get">
 					<button class="btn">
 						<input type="hidden" name="id" value = "<?php echo $each_customer['id'] ?>">
-						<span class="buy">Xem chi tiết hóa đơn khách đã đặt</span>
+							<span class="buy">Xem chi tiết các hóa đơn khách đã đặt</span>
 					</button>
 				</form>
 			</div>
