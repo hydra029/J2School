@@ -12,17 +12,16 @@ require 'connect.php';
             <div class="modal-body">
                 <?php
                 $customer_id = $_SESSION['customer_id'];
-                $sql = "select customer_id, receiver_id from receipts where id = '$receipt_id'";
+                $sql = "select customer_id, receiver_name, receiver_phone, receiver_address from receipts where id = '$receipt_id'";
                 $result = mysqli_query($connect,$sql);
                 $receipt = mysqli_fetch_array($result);
-                $receiver_id = $receipt['receiver_id'];
-                $sql = "select * from receivers where customer_id= '$customer_id' and id = '$receiver_id'";
-                $result = mysqli_query($connect,$sql);
-                $receiver = mysqli_fetch_array($result);
+                $receiver_name = $receipt['receiver_name'];
+                $receiver_phone = $receipt['receiver_phone'];
+                $receiver_address = $receipt['receiver_address'];
                 $sql = "select note
                 from receipts
                 where
-                receipts.id = '$receipt_id' and receipts.receiver_id = '$receiver_id'";
+                id = '$receipt_id'";
                 $result = mysqli_query($connect,$sql);
                 $note = mysqli_fetch_array($result);
                 ?>
@@ -35,13 +34,13 @@ require 'connect.php';
                     <tr>
                         <td colspan="2" class="border" style="text-align: left;">
                             Họ và Tên:
-                            <?php echo $receiver['name'] ?>
+                            <?php echo $receiver_name ?>
                             <br>
                             Số điện thoại:
-                            <?php echo $receiver['phone'] ?>
+                            <?php echo $receiver_phone ?>
                             <br>  
                             Địa chỉ:
-                            <?php echo $receiver['address'] ?>
+                            <?php echo $receiver_address ?>
                             <br>
                             Note:
                             <?php echo $note['note'];

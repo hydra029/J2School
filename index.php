@@ -247,7 +247,7 @@ if (isset($_SESSION['customer_id'])) {
 	</div>
 	<div id="div_duoi" class="container" style="background: sandybrown;">
 		<br>
-		<br>
+		
 		<div>
 			<?php
 			mysqli_close($connect);

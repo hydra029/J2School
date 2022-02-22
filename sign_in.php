@@ -115,6 +115,8 @@ if (isset($_COOKIE['remember'])) {
 						$("#menu-guest").hide();
 						$(".btn-cus").show();
 						$("#span-name").text(response);
+						$.notify("Đăng nhập thành công", "success");
+
 					}
 				})
 			}

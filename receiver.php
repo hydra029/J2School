@@ -117,7 +117,7 @@ require 'check_account.php';
 									</a>
 								</td>
 								<td>
-									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>">
+									<a data-toggle="modal" href="#modal-receiver-form-change" class="btn-receiver-form" data-id="<?php echo $each['id'] ?>">
 										Sửa
 									</a>
 								</td>
@@ -199,7 +199,7 @@ require 'check_account.php';
 				location.reload();
 			})
 		});
-		$("#btn-receiver-form").click(function() {
+		$(".btn-receiver-form").click(function() {
 			event.preventDefault();
 			let btn = $(this);
 			let id = btn.data('id');

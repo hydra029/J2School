@@ -57,7 +57,7 @@
 							Email:
 						</td>
 						<td>
-							<input type="text" name="email" id="email" value="<?php echo $user['email'] ?>">
+							<?php echo $user['email'] ?>
 						</td>
 					</tr>
 					<tr>

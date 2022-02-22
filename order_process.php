@@ -14,8 +14,11 @@ $receiver = mysqli_fetch_array($result);
 $receiver_name = $receiver['name'];
 $receiver_phone = $receiver['phone'];
 $receiver_address = $receiver['address'];
-
-$status = 1;
+$sql = "select * from receipts where customer_id = '$customer_id' and status = '$status'";
+$result = mysqli_query($connect,$sql);
+$receipt = mysqli_fetch_array($result);
+$receipt_id = $receipt['id'];
+$status = 2;
 $sql = "update receipts
 set 
 order_time = CURRENT_TIMESTAMP,
@@ -25,13 +28,10 @@ receiver_address = '$receiver_address',
 note = '$note',
 status = '$status'
 where
-id = $receipt_id";
+id = '$receipt_id'";
 mysqli_query($connect,$sql);
 
-$sql = "select * from receipts where customer_id = '$customer_id' and status = '$status'";
-$result = mysqli_query($connect,$sql);
-$receipt = mysqli_fetch_array($result);
-$receipt_id = $receipt['id'];
+
 $sql = "select * from receipt_detail where receipt_id = '$receipt_id'";
 $result = mysqli_query($connect,$sql);
 
@@ -42,8 +42,6 @@ foreach ($result as $product_id => $each):
     values ('$receipt_id','$product_id','$quantity')";
     mysqli_query($connect, $sql);
 endforeach;
-$sql = "update receivers set status = '0' where id = '$receiver_id' and customer_id = '$customer_id'";
-mysqli_query($connect,$sql);
 
 $_SESSION['notify'] = "Đơn hàng đang chờ xét duyệt";
 header('location:order.php');
