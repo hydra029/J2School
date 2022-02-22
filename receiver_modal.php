@@ -1,11 +1,10 @@
 <?php 
 require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
-$sql = "select * from receivers where customer_id = '$customer_id'";
+$sql = "select * from receivers where customer_id = '$customer_id' and status <> '2'";
 $result = mysqli_query($connect,$sql);
 $rows = mysqli_num_rows($result);
 $num = 0;
-mysqli_close($connect);
 ?>
 <div class="modal fade" id="modal-receiver">
 	<div class="modal-dialog" style="width: 700px;">
@@ -152,8 +151,8 @@ include 'receiver_form_change.php';
 				url: 'receiver_data.php',
 				type: 'POST',
 				dataType: 'json',
-				data: {id, num,
-				})
+				data: {id, num},
+			})
 			.done(function(response) {
 				$("#span_rcv_id").text(response["num"]);
 				$("#rcv_id").attr('value', response["id"]);

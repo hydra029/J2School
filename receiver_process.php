@@ -4,7 +4,7 @@ require 'connect.php';
 $customer_id = $_SESSION['customer_id'];
 $status = 1;
 $id = $_GET['id'];
-$sql = "update receivers set status = 0 where id <> '2'";
+$sql = "update receivers set status = 0 where status <> '2'";
 mysqli_query($connect,$sql);
 $sql = "update receivers set status = '$status' where id = '$id' and customer_id = '$customer_id'";
 mysqli_query($connect,$sql);

@@ -71,7 +71,6 @@ if (isset($_COOKIE['remember'])) {
 		</div>
 	</div>
 </div>
-
 <script type="text/javascript">
 	$(document).ready(function() {
 		if(window.location.href.indexOf('#modal-signin') != -1) {
@@ -114,9 +113,8 @@ if (isset($_COOKIE['remember'])) {
 						$("#menu-customer").show();
 						$("#menu-guest").hide();
 						$(".btn-cus").show();
-						$("#span-name").text(response);
+						$("#user-name").text(response);
 						$.notify("Đăng nhập thành công", "success");
-
 					}
 				})
 			}

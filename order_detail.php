@@ -12,12 +12,12 @@ require 'connect.php';
             <div class="modal-body">
                 <?php
                 $customer_id = $_SESSION['customer_id'];
-                $sql = "select customer_id, receiver_name, receiver_phone, receiver_address from receipts where id = '$receipt_id'";
+                $sql = "select customer_id, name, phone, address from receivers where id = '$receipt_id'";
                 $result = mysqli_query($connect,$sql);
                 $receipt = mysqli_fetch_array($result);
-                $receiver_name = $receipt['receiver_name'];
-                $receiver_phone = $receipt['receiver_phone'];
-                $receiver_address = $receipt['receiver_address'];
+                $receiver_name = $receipt['name'];
+                $receiver_phone = $receipt['phone'];
+                $receiver_address = $receipt['address'];
                 $sql = "select note
                 from receipts
                 where

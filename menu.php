@@ -1,7 +1,7 @@
 <?php 
 if (empty($_SESSION['customer_id'])) {
 	?>
-	<div style="height: 20px; background: none;" class="center" id="menu-guest">
+	<div style="height: 20px; background: none; padding: 10px 0px;" class="center" id="menu-guest">
 		<div class="left" style="float: left;">
 			<a href="index.php" class="left">
 				Trang chủ
@@ -21,7 +21,7 @@ if (empty($_SESSION['customer_id'])) {
 			?>
 		</div>
 	</div>
-	<div style="height: 20px; background: none; display: none;" class="center" id="menu-customer">
+	<div style="height: 20px; background: none; display: none; padding: 10px 0px;" class="center" id="menu-customer">
 		<div class="left" style="float: left;">
 			<a href="index.php" class="left">
 				Trang chủ
@@ -41,9 +41,9 @@ if (empty($_SESSION['customer_id'])) {
 			</a>
 			| Xin chào 
 			<a href="user.php">
-				<span style="color: red" id="span-name">
-				
-			</span>
+				<span style="color: red" id="user-name">
+
+				</span>
 			</a>
 			| 
 			<a href="sign_out.php">
@@ -53,7 +53,7 @@ if (empty($_SESSION['customer_id'])) {
 	</div>
 	<?php
 } else { ?>
-	<div style="height: 20px; background: none;" class="center">
+	<div style="height: 20px; background: none; padding: 10px 0px;" class="center">
 		<div class="left" style="float: left;">
 			<a href="index.php" class="left">
 				Trang chủ
@@ -73,7 +73,7 @@ if (empty($_SESSION['customer_id'])) {
 			</a>
 			| Xin chào 
 			<a href="user.php">
-				<span style="color: red" id="span-name">
+				<span style="color: red" id="user-name">
 					<?php echo $_SESSION['customer_name']; ?> 
 				</span> 
 			</a>
