@@ -12,4 +12,3 @@ $sql_insert_activities = "
 	VALUES('$activity_id', '$admin_id', '$activity', '$object', '$object_name')
 ";
 mysqli_query($connect_database, $sql_insert_activities);
-mysqli_close($connect_database);
