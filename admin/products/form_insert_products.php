@@ -17,6 +17,7 @@
 require '../connect_database.php';
 $sql_select_manufacturees = "select * from manufacturers";
 $query_sql_select_manufacturees = mysqli_query($connect_database, $sql_select_manufacturees);
+mysqli_close($connect_database);
 
 
 
@@ -49,7 +50,7 @@ $query_sql_select_manufacturees = mysqli_query($connect_database, $sql_select_ma
 
 
 	<?php require '../validate.php' ?>
-	<form method="post" action = "process_insert_products.php" enctype="multipart/form-data" id = "form-insert-products">
+	<form method="post" action = "process_insert_products.php" enctype="multipart/form-data" id = "form-insert-products"  style="float: right;">
 		Tên sản phẩm
 		<input type="text" name="name"><br>
 		Mô tả
@@ -109,7 +110,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$.validator.addMethod("validate_name", function (value, element) {
-        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ 0-9]+$/.test(value);
+        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ 0-9]+$/.test(value);
     }, "Tên nhà sản phẩm sai định dạng");
 
 	$.validator.addMethod("validate_price", function (value, element) {

@@ -44,6 +44,7 @@ $count_skip_products = ($index_page - 1) * $products_per_page;
 
 $sql_command_select = "select products.*, manufacturers.name as 'manufacturers_name' from products join manufacturers on manufacturers.id = products.manufacturer_id where products.name like '%$content_search%' limit $products_per_page offset $count_skip_products ";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
+mysqli_close($connect_database);
 
 
 ?>

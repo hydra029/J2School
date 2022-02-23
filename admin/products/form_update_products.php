@@ -1,4 +1,6 @@
-<?php require '../check_admin_login.php' ?>
+<?php require '../check_admin_login.php';
+require '../validate.php';
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,12 @@
 
 <?php 
 require '../connect_database.php';
+if (empty($_GET['id'])){
+	$_SESSION['error'] = 'Chưa nhập id sản phẩm cần sửa';
+	header('location:index_products.php');
+	exit;
+}
+
 $id = $_GET['id'];
 if ( isset($_GET['type_id']) ) {
 	$type_id = $_GET['type_id'];
@@ -22,7 +30,6 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 $array_products = mysqli_fetch_array($query_sql_command_select);
 $check = mysqli_num_rows($query_sql_command_select);
 if ( $check !== 1 ) {
-	echo $check;
 	$_SESSION['error'] = 'Sai id sẩn phẩm';
 	header('location:index_products.php');
 	exit();
@@ -37,6 +44,7 @@ $query_sql_command_select_manufacturers = mysqli_query($connect_database, $sql_c
 
 $array_products = mysqli_fetch_array($query_sql_command_select_products);
 
+mysqli_close($connect_database);
 
  ?>
 
@@ -110,7 +118,7 @@ $array_products = mysqli_fetch_array($query_sql_command_select_products);
 <script type="text/javascript">
 $(document).ready(function() {
 	$.validator.addMethod("validate_name", function (value, element) {
-        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ 0-9]+$/.test(value);
+        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ 0-9]+$/.test(value);
     }, "Tên nhà sản phẩm sai định dạng");
 
 	$.validator.addMethod("validate_price", function (value, element) {

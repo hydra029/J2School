@@ -3,7 +3,7 @@
 
 if (empty($_GET['id'])){
 	$_SESSION['error'] = 'Chưa nhập id sản phẩm cần xóa';
-	header('location:form_insert_products.php');
+	header('location:index_products.php');
 	exit;
 }
 
@@ -25,14 +25,6 @@ if ( $check !== 1 ) {
 $sql_command_delete = "delete from products where id = $id";
 mysqli_query($connect_database, $sql_command_delete);
 
-//insert vào bảng activity
-$admin_id = $_SESSION['id'];
-$admin_name = $_SESSION['name'];
-$activity = "xóa";
-$object = "sản phẩm";
-$object_name = $array_products['name'];
-require '../activity_log/insert_activity.php';
-
 
 
 $error = mysqli_error($connect_database);
@@ -53,6 +45,16 @@ if ( isset($_GET['type_id']) ) {
 	header($header);
 	exit();
 }
+//insert vào bảng activity
+$admin_id = $_SESSION['id'];
+$admin_name = $_SESSION['name'];
+$activity = "xóa";
+$object = "sản phẩm";
+$object_name = $array_products['name'];
+require '../activity_log/insert_activity.php';
+
+
+
 $_SESSION['success'] = 'Xóa sản phẩm thành công';
 header('location:index_products.php');
 

@@ -1,4 +1,4 @@
-<?php require '../check_super_admin_login.php'; ?>
+<?php require '../check_admin_login.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +11,11 @@
 </head>
 
 <?php require '../connect_database.php';
+if (empty($_GET['id'])){
+	$_SESSION['error'] = 'Chưa nhập id sản phẩm cần xem';
+	header('location:index_products.php');
+	exit;
+}
 $id = $_GET['id'];
 
 $sql_select_customers = "
@@ -37,8 +42,15 @@ $sql_select_customers = "
 	GROUP BY types.name
 ";
 $query_sql_select_products = mysqli_query($connect_database, $sql_select_customers);
-$each_product = mysqli_fetch_array($query_sql_select_products);
+$check = mysqli_num_rows($query_sql_select_products);
+if ( $check == 0 ) {
+	$_SESSION['error'] = 'Sai id sẩn phẩm';
+	header('location:index_products.php');
+	exit();
+}
 
+$each_product = mysqli_fetch_array($query_sql_select_products);
+mysqli_close($connect_database);
 ?>
 
 <body> 
