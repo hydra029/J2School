@@ -11,6 +11,11 @@
 </head>
 
 <?php require '../connect_database.php';
+if (empty($_GET['id'])){
+	$_SESSION['error'] = 'Chưa nhập id nhà sản xuất cần sửa';
+	header('location:index_manufacturers.php');
+	exit;
+}
 $id = $_GET['id'];
 
 $sql_select_manufacturers = "
@@ -32,6 +37,12 @@ $sql_select_manufacturers = "
 	GROUP BY products.manufacturer_id
 ";
 $query_sql_select_manufacturers = mysqli_query($connect_database, $sql_select_manufacturers);
+$validate_rows = mysqli_num_rows($query_sql_select_manufacturers);
+if ( empty($validate_rows) ) {
+	$_SESSION['error'] = 'Sai id nhà sản xuất';
+	header('location:index_manufacturers.php');
+	exit();
+}
 $each_manufacturer = mysqli_fetch_array($query_sql_select_manufacturers);
 
 ?>

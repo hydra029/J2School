@@ -23,23 +23,26 @@ $sql_command_insert = "insert into manufacturers (name, phone, address, image)
 values ('$name', '$phone', '$address', '$image')";
 mysqli_query($connect_database, $sql_command_insert);
 
-//insert vào bảng activity
-$admin_id = $_SESSION['id'];
-$admin_name = $_SESSION['name'];
-$activity = "thêm";
-$object = "nhà cung cấp";
-$object_name = $name;
-require '../activity_log/insert_activity.php';
+
 
 //kiểm tra xem có lỗi
 $error = mysqli_error($connect_database);
 mysqli_close($connect_database);
 if (empty($error)) {
 	$_SESSION['success'] = 'Thêm nhà sản xuất thành công';
-	header('location:index_manufacturers.php');	
+	header('location:index_manufacturers.php');
+
+	//insert vào bảng activity
+	$admin_id = $_SESSION['id'];
+	$admin_name = $_SESSION['name'];
+	$activity = "thêm";
+	$object = "nhà cung cấp";
+	$object_name = $name;
+	require '../activity_log/insert_activity.php';
 }else {
 	$_SESSION['error'] = 'Lỗi truy vấn';
-	header('location:index_manufacturers.php');	
+	header('location:form_insert_manufacturers.php');	
+	exit();
 }
  
  ?>

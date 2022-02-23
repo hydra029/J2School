@@ -29,13 +29,7 @@ address = '$address',
 image = '$image' where id = '$id' ";
 mysqli_query($connect_database, $sql_command_update);
 
-//insert vào bảng activity
-$admin_id = $_SESSION['id'];
-$admin_name = $_SESSION['name'];
-$activity = "cập nhật";
-$object = "nhà cung cấp";
-$object_name = $name;
-require '../activity_log/insert_activity.php';
+
 
 
 $error = mysqli_error($connect_database);
@@ -44,6 +38,13 @@ mysqli_close($connect_database);
 if (empty($error)) {
 	$_SESSION['success'] = 'Sửa thành công';
 	header('location:index_manufacturers.php');
+	//insert vào bảng activity
+	$admin_id = $_SESSION['id'];
+	$admin_name = $_SESSION['name'];
+	$activity = "cập nhật";
+	$object = "nhà cung cấp";
+	$object_name = $name;
+	require '../activity_log/insert_activity.php';
 	exit();
 }else {
 	$_SESSION['success'] = 'Lỗi truy vấn';

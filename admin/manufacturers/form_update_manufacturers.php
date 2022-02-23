@@ -10,7 +10,11 @@
 
 
 <?php require '../connect_database.php';
-
+if (empty($_GET['id'])){
+	$_SESSION['error'] = 'Chưa nhập id nhà sản xuất cần sửa';
+	header('location:index_manufacturers.php');
+	exit;
+}
 $id = $_GET['id'];
 $sql_command_select = "select * from manufacturers where id = '$id'";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
@@ -19,7 +23,8 @@ $array_manufacturers = mysqli_fetch_array($query_sql_command_select);
 //validate nếu nhập id sai
 $count_rows = mysqli_num_rows($query_sql_command_select);
 if ($count_rows === 1){
- ?>
+
+?>
  
 
 <body> 
@@ -62,9 +67,11 @@ if ($count_rows === 1){
 </div>
 
 
-<?php }else{ ?>
-<h1>Không tìm thấy nhà sản xuất theo mã này</h1>
-<?php } ?>
+<?php }else{ 
+	$_SESSION['error'] = 'Chưa nhập id nhà sản xuất cần sửa';
+	header('location:index_manufacturers.php');
+	exit;
+} ?>
 
 <?php mysqli_close($connect_database); ?>
 
@@ -74,7 +81,7 @@ if ($count_rows === 1){
 <script type="text/javascript">
 $(document).ready(function() {
 	$.validator.addMethod("validate_name", function (value, element) {
-        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ 0-9]+$/.test(value);
+        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ 0-9]+$/.test(value);
     }, "Tên nhà sản xuất sai định dạng");
 
 	$.validator.addMethod("validate_phone", function (value, element) {
@@ -120,7 +127,7 @@ $(document).ready(function() {
 				minlength: "Hãy nhập ít nhất 3 ký tự"
 			},
 			"image": {
-				required: "Bat buoc chon hinh anh"
+				required: "Bắt buộc chọn hình ảnh"
 			},
 		}
 	});

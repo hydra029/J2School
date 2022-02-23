@@ -53,7 +53,7 @@ require '../validate.php';
 <script type="text/javascript">
 $(document).ready(function() {
 	$.validator.addMethod("validate_name", function (value, element) {
-        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ 0-9]+$/.test(value);
+        return this.optional(element) || /^[a-zA-Zzàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ 0-9]+$/.test(value);
     }, "Tên nhà sản xuất sai định dạng");
 
 	$.validator.addMethod("validate_phone", function (value, element) {
@@ -99,7 +99,7 @@ $(document).ready(function() {
 				minlength: "Hãy nhập ít nhất 8 ký tự"
 			},
 			"image": {
-				required: "Bat buoc chon hinh anh"
+				required: "Bắt buộc chọn hình ảnh"
 			},
 		}
 	});

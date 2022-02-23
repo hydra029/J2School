@@ -26,23 +26,25 @@ if ($count_rows !== 1){
 $sql_command_delete = "delete from manufacturers where id = '$id'";
 mysqli_query($connect_database, $sql_command_delete);
 
-//insert vào bảng activity
-$admin_id = $_SESSION['id'];
-$admin_name = $_SESSION['name'];
-$activity = "xóa";
-$object = "nhà cung cấp";
-$object_name = $array_manufacturers['name'];
-require '../activity_log/insert_activity.php';
 
 $error = mysqli_error($connect_database);
 mysqli_close($connect_database);
 if ( empty($error) ) {
 	$_SESSION['success'] = 'Xóa nhà sản xuất thành công';
 	header('location:index_manufacturers.php');	
+
+	//insert vào bảng activity
+	$admin_id = $_SESSION['id'];
+	$admin_name = $_SESSION['name'];
+	$activity = "xóa";
+	$object = "nhà cung cấp";
+	$object_name = $array_manufacturers['name'];
+	require '../activity_log/insert_activity.php';
 	exit();
 } else {
-	echo '<h1>Lỗi câu truy vấn</h1>';
-	exit();
+	$_SESSION['error'] = 'Lỗi câu truy vấn';
+	header('location:index_manufacturers.php');
+	exit;
 }
 
 
