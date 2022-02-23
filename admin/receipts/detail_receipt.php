@@ -9,6 +9,12 @@
 </head>
 
 <?php 
+if ( empty($_GET['id']) ){
+	$_SESSION['error'] = 'Chưa nhập id hóa đơn';
+	header('location:index.php');
+	exit;
+}
+
 $id = $_GET['id'];
 
 require '../connect_database.php';
@@ -19,7 +25,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 $check = mysqli_num_rows($query_sql_command_select);
 if ( $check !== 1 ) {
 	$_SESSION['error'] = 'Không tồn tại hóa đơn này';
-	header('location:index_receipts.php');
+	header('location:index.php');
 	exit();
 }
 

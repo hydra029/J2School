@@ -13,6 +13,23 @@ if (empty($_GET['status'])){
 	exit;
 }
 
+//kiểm tra xem có id hóa đơn đó không
+$sql_command_select = "select * from receipts where id = '$id' ";
+$query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
+$check = mysqli_num_rows($query_sql_command_select);
+if ( $check !== 1 ) {
+	$_SESSION['error'] = 'Không tồn tại hóa đơn này';
+	header('location:index.php');
+	exit();
+}
+
+//kiểm tra trạng thái của hóa đơn có hợp lệ
+if ( $status != '4a' && $status != '0' && $status != 1 && $status != 2 && $status != 3 && $status != 4 && $status != 5 && $status != 6 && $status != 7 && $status != 8 && $status != '0' ) {
+	$_SESSION['error'] = 'Trạng thái hóa đơn không hợp lệ';
+	header('location:index.php');
+	exit();
+}
+
 $id = $_GET['id'];
 $status = $_GET['status'];
 $person = $_SESSION['name'];
