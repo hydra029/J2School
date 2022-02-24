@@ -39,24 +39,48 @@ if (isset($_SESSION['customer_id'])) {
 		#div_tong {
 			padding-bottom: 15px;
 			background: Cornsilk;
-			min-height: 740px;
+			min-height: 100vh;
 			max-height: 6000px;
 			position: relative;
 			margin: auto;
 		}
+		#div_search {
+			width: 200px;
+			float: right;
+			height: 100%;
+		}
+		#div_content {
+			width: 75%;
+		}
 		#div_tren {
 			text-align: center;
-			height: 100px;
+			min-height: 10vh;
 		}
 		#div_giua {
 			max-height: 4900px;
-			margin-top: 20px;
+			min-height: 84vh;
 		}
 		#div_duoi {
-			height: 100px;
+			height: 10vh;
 			background: aliceblue;
 			text-align: center;
 			bottom: 5px;
+		}
+		#div_giua > .search {
+			width: 19%;
+			float: left;
+			min-height: 735px;
+			background: NavajoWhite;
+			height: 100%;
+			border-radius: 20px;
+			border: 1px solid Sienna;
+			padding: 0.5%;
+			margin: 0.5%;
+		}
+		#div_giua > .content {
+			width: 80%;
+			height: 98%;
+			float: left;
 		}
 		.right {
 			text-align: right;
@@ -83,38 +107,19 @@ if (isset($_SESSION['customer_id'])) {
 		.success {
 			color: green;
 		}
-		ul {
-			list-style-type: none;
-			padding: 0;
-		}
-		ul li ul li {
-			background: ghostwhite;
-			border-color: black;
-			text-align: center;
-		}
-		ul li ul {
-			width: 700px;
-			text-align: center;
-			position: absolute;
-		}
-		ul > li:hover ul {
-			margin-top: 0;
-			position: absolute;
-			top: 51px;
-			left: -153px;
-			text-align: center;
-		}
-		ul li {	
-			float: left;
-			position:  relative;
-			background: lightgray;
-			width: 150px;
-			border: 1px solid black;
-			height: 50px;
-			text-align: center;
-		}
+		
 		td {
 			height: 40px;
+		}
+		button:hover {
+			transform: scale(0.95);
+			border-radius: 5px;
+		}
+		.tags {
+			background: Cornsilk;
+		}
+		.tag {
+			background: Bisque;
 		}
 	</style>
 	<link rel="stylesheet" href="card.css">
@@ -158,7 +163,7 @@ if (isset($_SESSION['customer_id'])) {
 				$bo_qua = $so_san_pham_1_trang*($trang-1);
 				require 'menu.php';
 				?>
-				<div class="left" style="padding: 20px 5px 5px;">
+				<div class="left" style="padding: 5px 5px 5px;">
 					Phân loại sản phẩm: 
 					<span>
 						<a href="index.php">Tất cả</a>
@@ -177,73 +182,112 @@ if (isset($_SESSION['customer_id'])) {
 					?>
 				</div>
 			</div>
-			<?php
-			if ($type_id == "") {
-				$sql = "select * from products
-				where
-				products.name like '%$tim_kiem%'
-				limit $so_san_pham_1_trang offset $bo_qua";
-			} else {
-				$sql = "select
-				products.*,
-				product_type.type_id as type_id
-				from products
-				join product_type on product_type.product_id = products.id
-				where
-				products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
-				group by products.name
-				limit $so_san_pham_1_trang offset $bo_qua";
-			}
-			$result = mysqli_query($connect, $sql);
-			?>
+			
 			<form style="width: 300px; margin: auto; padding: 20px 5px;">
 				<input  class="form-control" type="search" name="tim_kiem" value="" placeholder="Tìm kiếm">
 			</form>
 		</div>
 		<div id="div_giua">
-			<br>
-			<?php foreach ($result as $each): ?>
-				<?php
-				?>
-				<div class="card">
-					<div class="card_name">
-						<?php echo $each['name'] ?>
-					</div>
-					<div class="card_img">
-						<img height="180px" width="180px" src="admin/products/<?php echo $each['image']; ?>">
-					</div>
-					<div class="card_price">
-						<?php echo number_format($each['price']) ?> VNĐ
-					</div>
-					<div class="card_detail">
-						<a href="product_detail.php?id=<?php echo $each['id'] ?>">
-							Xem chi tiết >>>
-						</a>
-					</div>
-					<?php 
-					if (isset($_SESSION['customer_id'])) { 
+			<div class="search">
+				<h4 class="center">
+					<b>
+						Lọc sản phẩm
+					</b>
+				</h4>
+				<form form="search" method="get" action="index.php">
+					<div>
+						<div class="form-control center tag">
+							Thương hiệu
+						</div>
+						<?php 
+						$sql = "select * from manufacturers";
+						$result = mysqli_query($connect,$sql);
+						foreach ($result as $each) { ?>
+							<div class="form-control tags">
+								<input type="checkbox" name="brand" class="brand" value="<?php echo $each['name'] ?>">
+								<?php echo $each['name'] ?>
+							</div>
+							<?php
+						}
 						?>
-						<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
-							Thêm vào giỏ hàng
-						</button>
-						<?php
-					}
-					?>
-					<div class="btn-cus" style="height: 9%; display: none;">
-						<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
-							Thêm vào giỏ hàng
-						</button>
 					</div>
-				</div>	
-			<?php endforeach ?>
-			<div style="text-align: center; ">
+					<button class="form-control" type="submit">Lọc</button>
+				</form>
+			</div>
+			<div class="content">
+				<?php
+				if ($type_id == "") {
+					$sql = "select
+					products.*,
+					ifnull(sum(receipt_detail.quantity),0) as sold
+					from products
+					left join receipt_detail on receipt_detail.product_id = products.id
+					where
+					products.name like '%$tim_kiem%'
+					group by products.id
+					order by sold desc
+					limit $so_san_pham_1_trang offset $bo_qua";
+				} else {
+					$sql = "select
+					products.*,
+					product_type.type_id as type_id,
+					ifnull(sum(receipt_detail.quantity),0) as sold
+					from products
+					join product_type on product_type.product_id = products.id
+					left join receipt_detail on receipt_detail.product_id = products.id
+					where
+					products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
+					group by products.id
+					order by sold desc
+					limit $so_san_pham_1_trang offset $bo_qua";
+				}
+				$result = mysqli_query($connect, $sql);
+				?>
+				<?php foreach ($result as $each): ?>
+
+					<div class="card">
+						<div class="card_name">
+							<?php if (strlen($each['name']) > 50 ) {
+								echo substr(($each['name']), 0, 50) . '...';
+							} else {
+								echo $each['name'];
+							}?>
+						</div>
+						<div >
+							<img  class="card_img" height="180px" width="180px" src="admin/products/<?php echo $each['image']; ?>">
+						</div>
+						<div class="card_price">
+							<?php echo number_format($each['price']) ?> VNĐ
+						</div>
+						<div class="card_detail">
+							<a href="product_detail.php?id=<?php echo $each['id'] ?>">
+								Xem chi tiết >>>
+							</a>
+						</div>
+						<?php 
+						if (isset($_SESSION['customer_id'])) { 
+							?>
+							<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
+								Thêm vào giỏ hàng
+							</button>
+							<?php
+						}
+						?>
+						<div class="btn-cus" style="height: 9%; display: none;">
+							<button class="btn-add-to-cart" data-id="<?php echo $each['id'] ?>"" data-type="increase">
+								Thêm vào giỏ hàng
+							</button>
+						</div>
+					</div>	
+				<?php endforeach ?>
+			</div>
+			<div style="text-align: center;" class="page">
 				<?php for ($i = 1; $i <= $so_trang ; $i++) { ?>
 					<a href="?trang=<?php echo $i ?>&tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $type_id ?>">
 						<?php echo $i ?>
 					</a>
 				<?php } ?>
 			</div>
-			<br>
 		</div>
 		<div id="div_duoi" style="background: sandybrown;">
 			<br>
@@ -270,6 +314,10 @@ if (isset($_SESSION['customer_id'])) {
 			.done(function(response) {
 				$.notify("Thêm vào giỏ hàng thành công", "success");
 			})
+		});
+		$("#search").submit(function(event) {
+			event.preventDefault();
+			var content = $(".brand").val();
 		});
 	});
 </script>

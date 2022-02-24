@@ -30,23 +30,27 @@ require 'check_account.php';
 	$num = 0;
 	?>
 	<div id="div_tong" class="container">
-		<?php require 'menu.php'; ?>
+		
 		<div id="div_tren">
-			<h1 style="text-align: center ">
+			<div style="background: sandybrown; padding: 10px 20px 10px 10px;">
+				<?php require 'menu.php'; ?>
+			</div>
+			<br>
+			<h3 style="text-align: center ">
 				Quản lý thông tin người nhận hàng
-			</h1>
+			</h3>
 		</div>
 		<div id="div_giua">
 			<?php 
 			if ($rows == 0) { ?>
-				<h3 class="center">
+				<h4 class="center">
 					Chưa có thông tin người nhận, 
 					<span>
 						<a  data-toggle="modal" href="#modal-receiver-form" id="btn-crt-rcv">
 							mời tạo thêm !
 						</a>
 					</span>
-				</h3>
+				</h4>
 				<?php
 			} else { 
 				?>

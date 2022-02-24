@@ -22,11 +22,14 @@ require 'check_account.php';
 </head>
 <body>
 	<div id="div_tong" class="container">
-		<?php require 'menu.php'; ?>
+		
 		<div id="div_tren">
+			<div style="background: sandybrown; padding: 10px 20px 10px 10px;">
+				<?php require 'menu.php'; ?>
+			</div>
 			<br>
 			<br>
-			<table class="border" width="900px">
+			<table class="border" width="90%">
 				<tr>
 					<td width="16.6%">
 						<a href="order.php?status=2">Chờ xét duyệt</a>
@@ -48,7 +51,10 @@ require 'check_account.php';
 					</td>
 				</tr>
 			</table>
-			<?php 
+		</div>
+		<div id="div_giua" >
+			<div style="text-align: center; margin: 0px;">
+				<?php 
 			if (empty($_GET['status'])) {
 				$status = 2;
 			} else {
@@ -58,56 +64,57 @@ require 'check_account.php';
 				case '2': 
 				?>
 				<h3>
-					Đây là đơn hàng đang chờ xét duyệt !
+					Đơn hàng đang chờ xét duyệt !
 				</h3>
 				<?php 
 				break;
 				case '3': 
 				?>
 				<h3>
-					Đây là đơn hàng không qua xét duyệt !
+					Đơn hàng không qua xét duyệt !
 				</h3>
 				<?php 
 				break;
 				case '4': 
 				?>
 				<h3>
-					Đây là đơn hàng đang giao hàng !
+					Đơn hàng đang giao hàng !
 				</h3>
 				<?php 
 				break;
 				case '5': 
 				?>
 				<h3>					
-					Đây là đơn hàng đã giao hàng!
+					Đơn hàng đã giao hàng!
 				</h3>				
 				<?php 
 				break;
 				case '6': 
 				?>
 				<h3>
-					Đây là đơn hàng thành công!
+					Đơn hàng thành công!
 				</h3>
 				<?php 
 				break;
 				case '7': 
 				?>
 				<h3>
-					Đây là đơn hàng đã huỷ !
+					Đơn hàng đã huỷ !
 				</h3>
 				<?php 
 				break;
 				default:
 				?>
 				<h3>
-					Đây là đơn hàng đang chờ xét duyệt !
+					Đơn hàng đang chờ xét duyệt !
 				</h3>
 				<?php
 				break;
 			}
 			?>
-		</div>
-		<div id="div_giua" >
+			</div>
+
+			<br>
 			<?php 
 			require 'connect.php';
 			require 'notify.php';
@@ -142,7 +149,9 @@ require 'check_account.php';
 					$order = mysqli_fetch_array($result);
 					$total = $order['total'];
 					?>
-					<table class="border" width="900px">
+					<br>
+					<br>
+					<table class="border" width="100%">
 						<tr>
 							<th colspan="6">
 								<?php echo "Đơn hàng số " . $num ?>

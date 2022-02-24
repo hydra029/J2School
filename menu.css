@@ -1,7 +1,5 @@
-
 a {
 	text-decoration: none;
-
 }
 a:link {
 	color: blue;
@@ -24,13 +22,11 @@ ul li ul li {
 	background: ghostwhite;
 	border-color: black;
 	text-align: center;
-	
 }
 ul li ul {
 	display: none;
 	width: 700px;
 	text-align: center;
-
 }
 ul > li:hover ul {
 	margin-top: 0;
@@ -39,7 +35,6 @@ ul > li:hover ul {
 	top: 51px;
 	left: -153px;
 	text-align: center;
-
 }
 ul li {	
 	float: left;
@@ -47,11 +42,11 @@ ul li {
 	background: lightgray;
 	border: 1px solid black;
 	text-align: center;
-
 }
 #div_tong {
-	background: aliceblue;
-	min-height: 800px;
+	padding-bottom: 15px;
+	background: Cornsilk;
+	min-height: 100vh;
 	max-height: 6000px;
 	position: relative;
 	margin: auto;
@@ -60,21 +55,19 @@ ul li {
 }
 #div_tren {
 	text-align: center;
-	height: 150px;
+	min-height: 10vh;
+	max-height: 250px;
 }
 #div_giua {
 	max-height: 4900px;
-	padding-bottom: 50px;
-	min-height: 550px;
+	min-height: 80vh;
 }
 #div_duoi {
-	height: 100px;
-	background: Moccasin;
+	height: 10vh;
+	background: sandybrown;
 	text-align: center;
-	bottom: 0px;
-	position: relative;
+	margin: auto;
 }
-
 .right {
 	text-align: right;
 }	
@@ -97,8 +90,10 @@ table {
 	color: red;
 	text-align: left;
 }
-
 .success {
 	color: green;
 }
-#menu-
+button:hover {
+	transform: scale(0.95);
+	border-radius: 10px;
+}
