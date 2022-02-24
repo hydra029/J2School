@@ -1,7 +1,7 @@
 <?php 
 if (empty($_SESSION['customer_id'])) {
 	?>
-	<div style="height: 20px; background: none; padding: 10px 0px;" class="center" id="menu-guest">
+	<div style=" background: none; padding: 10px 0px;" class="center" id="menu-guest">
 		<div class="left" style="float: left;">
 			<a href="index.php" class="left">
 				Trang chủ
@@ -21,7 +21,7 @@ if (empty($_SESSION['customer_id'])) {
 			?>
 		</div>
 	</div>
-	<div style="height: 20px; background: none; display: none; padding: 10px 0px;" class="center" id="menu-customer">
+	<div style=" background: none; display: none; padding: 10px 0px;" class="center" id="menu-customer">
 		<div class="left" style="float: left;">
 			<a href="index.php" class="left">
 				Trang chủ
@@ -53,7 +53,7 @@ if (empty($_SESSION['customer_id'])) {
 	</div>
 	<?php
 } else { ?>
-	<div style="height: 20px; background: none; padding: 10px 0px;" class="center">
+	<div style=" background: none; padding: 10px 0px;" class="center">
 		<div class="left" style="float: left;">
 			<a href="index.php" class="left">
 				Trang chủ

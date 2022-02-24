@@ -11,6 +11,8 @@ require 'check_account.php';
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
 	<script src="notify/notify.js"></script>
 	<script src="notify/notify.min.js"></script>
 	<style type="text/css">
@@ -22,31 +24,33 @@ require 'check_account.php';
 </head>
 <body>
 	<div id="div_tong" class="container">
-		<?php
-		$total = 0;
-		require 'connect.php';
-		require 'notify.php';
-		require 'menu.php';
-		$status = '1';
-		$sql = "select
-		products.id as id,
-		products.name as name,
-		products.image as image,
-		manufacturers.name as manufacturer_name,
-		products.price as price,
-		receipt_detail.quantity as quantity,
-		receipts.customer_id as customer_id,
-		receipts.id as receipt_id,
-		receipts.status as status	
-		from receipt_detail
-		join receipts on receipts.id = receipt_detail.receipt_id
-		join products on products.id = receipt_detail.product_id
-		join manufacturers on products.manufacturer_id = manufacturers.id
-		where receipts.customer_id = $customer_id and receipts.status = '$status'";
-		$result = mysqli_query($connect,$sql);
-		$rows = mysqli_num_rows($result);
-		?>
 		<div id="div_tren">
+			<div style="background: sandybrown; padding: 10px 20px 10px 10px;">
+				<?php
+				$total = 0;
+				require 'connect.php';
+				require 'notify.php';
+				require 'menu.php';
+				$status = '1';
+				$sql = "select
+				products.id as id,
+				products.name as name,
+				products.image as image,
+				manufacturers.name as manufacturer_name,
+				products.price as price,
+				receipt_detail.quantity as quantity,
+				receipts.customer_id as customer_id,
+				receipts.id as receipt_id,
+				receipts.status as status	
+				from receipt_detail
+				join receipts on receipts.id = receipt_detail.receipt_id
+				join products on products.id = receipt_detail.product_id
+				join manufacturers on products.manufacturer_id = manufacturers.id
+				where receipts.customer_id = $customer_id and receipts.status = '$status'";
+				$result = mysqli_query($connect,$sql);
+				$rows = mysqli_num_rows($result);
+				?>
+			</div>
 			<h3>
 				Đây là giỏ hàng cá nhân
 			</h3>

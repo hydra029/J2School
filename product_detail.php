@@ -38,8 +38,8 @@ if (isset($_SESSION['customer_id'])) {
 			<h1 style="text-align: center; ">
 				Thông tin sản phẩm
 			</h1>
-			<form>
-				<input type="search" name="tim_kiem" value="" placeholder="tìm kiếm">
+			<form style="width: 300px; margin: auto; padding: 20px 5px;">
+				<input  class="form-control" type="search" name="tim_kiem" value="" placeholder="Tìm kiếm">
 			</form>
 		</div>
 		<div id="div_giua" class="center">
