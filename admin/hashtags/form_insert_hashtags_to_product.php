@@ -1,4 +1,5 @@
-<?php require '../check_super_admin_login.php'; 
+<?php 
+require '../check_admin_login.php';
 
 ?>
 <!DOCTYPE html>
@@ -16,9 +17,23 @@
 
 
 <?php 
-require '../connect_database.php';
+if (empty($_GET['id'])){
+	$_SESSION['error'] = 'Chưa nhập id sản phẩm để thêm thẻ vào sản phẩm';
+	header('location:index_insert_hashtags_to_product.php');
+	exit;
+}
+
 $id = $_GET['id'];
+
+require '../connect_database.php';
 $sql_select_products = "SELECT * FROM products WHERE id = '$id'";
+$query_select_products = mysqli_query($connect_database, $sql_select_products);
+$check_num_rows = mysqli_num_rows($query_select_products);
+if ( $check_num_rows != 1 ) {
+	$_SESSION['error'] = 'Sai id thẻ để thêm thẻ vào sản phẩm';
+	header('location:index_insert_hashtags_to_product.php');
+	exit;
+}
 $product_name = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_products))['name'];
 ?>
 
