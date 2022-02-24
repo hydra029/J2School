@@ -1,5 +1,5 @@
 <?php 
-
+require '../check_admin_login.php';
 $q = $_GET['q'];
 
 require '../connect_database.php';

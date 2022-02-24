@@ -57,6 +57,7 @@ if (empty($error)) {
 	if ( isset($_POST['type_id']) ) {
 		$type_id = $_POST['type_id'];
 		$header = "location:../hashtags/products_linked_hashtag.php?id=$type_id";
+		$_SESSION['success'] = 'Sửa sản phẩm thành công';
 		header($header);
 		exit();
 	}

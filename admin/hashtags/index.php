@@ -1,4 +1,5 @@
-<?php require '../check_super_admin_login.php'; 
+<?php 
+require '../check_admin_login.php';
 
 ?>
 <!DOCTYPE html>
@@ -14,8 +15,31 @@
 
 <?php 
 require '../connect_database.php';
+if ( isset($_GET['page']) ) {
+	$index_page = $_GET['page'];
+} else {
+	$index_page = 1;
+}
+
+if ( isset($_GET['search']) ) {
+	$content_search = $_GET['search'];
+} else {
+	$content_search = '';
+}
+
+$sql_count_hashtags = "SELECT count(*) FROM types WHERE name LIKE '%$content_search%'";
+$count_hashtags = mysqli_fetch_array(mysqli_query($connect_database, $sql_count_hashtags))['count(*)'] ;
+$limit_hashtags_per_page = 7;
+$count_pages = ceil($count_hashtags / $limit_hashtags_per_page );
+$hashtags_skip_by_page = ( $index_page - 1 ) * $limit_hashtags_per_page;
+
+
 $sql_select = "
-	SELECT * FROM types ORDER BY id DESC
+	SELECT * FROM types 
+	WHERE name LIKE '%$content_search%'
+	ORDER BY id DESC
+	LIMIT $limit_hashtags_per_page
+	OFFSET $hashtags_skip_by_page
 ";
 $query_sql_select = mysqli_query($connect_database, $sql_select);
 
@@ -86,6 +110,10 @@ $query_sql_select = mysqli_query($connect_database, $sql_select);
 		</tr>
 		<?php } ?>
 	</table>
+
+	<?php for ($i=1; $i <= $count_pages ; $i++) { ?>
+		<a href="index.php?page=<?php echo $i ?>&search=<?php echo $content_search ?>"><?php echo $i ?></a>
+	<?php } ?>
 </div>
 
 
