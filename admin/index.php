@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" href="style_validate1.css">
 </head>
 <body>
 <form action = "process_login_admin.php" method="post">
