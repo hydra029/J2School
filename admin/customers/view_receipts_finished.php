@@ -10,8 +10,22 @@
 
 
 <?php 
-$id = $_GET['id'];
 require '../connect_database.php';
+
+if (empty($_GET['id'])){
+	$_SESSION['error'] = 'Chưa nhập id khách hàng';
+	header('location:index.php');
+	exit;
+}
+$id = $_GET['id'];
+
+$check = mysqli_num_rows(mysqli_query($connect_database, "SELECT id FROM customers WHERE id = '$id' "));
+if ( empty($check) ) {
+	$_SESSION['error'] = 'Sai id khách hàng';
+	header('location:index.php');
+	exit;
+}
+
 
 $sql_select_name = "SELECT name FROM customers WHERE id = '$id'";
 $name = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_name))['name'] ;

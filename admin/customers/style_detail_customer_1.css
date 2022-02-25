@@ -1,7 +1,6 @@
 /* fonts  */
 @import url('https://fonts.googleapis.com/css?family=Abel|Aguafina+Script|Artifika|Athiti|Condiment|Dosis|Droid+Serif|Farsan|Gurajada|Josefin+Sans|Lato|Lora|Merriweather|Noto+Serif|Open+Sans+Condensed:300|Playfair+Display|Rasa|Sahitya|Share+Tech|Text+Me+One|Titillium+Web');
 
-
 #container{
 	box-shadow: 0 15px 30px 1px rgba(128, 128, 128, 0.31);
 	background: rgba(255, 255, 255, 0.90);
@@ -13,8 +12,6 @@
 	width: 910px;
 	
 }
-
-
 
 /* 	Product details  */
 .product-details {
@@ -39,30 +36,13 @@
 	
 }
 
-#container .product-details h1:before{
-	position: absolute;
-	content: '';
-	right: 0%; 
-	top: 0%;
-	transform: translate(25px, -15px);
-	font-family: 'Farsan', cursive;
-	display: inline-block;
-	background: #FFA69E;
-	border-radius: 5px;
-	font-size: 14px;
-	padding: 5px;
-	color: #FFF;
-	margin: 0;
-	animation: chan-sh 6s ease infinite;
-
-}
 
 
 /*Product Rating  */
 .hint-star {
 	display: inline-block;
 	margin-left: 0.5em;
-	color: gold;
+	color: #AA8F00;
 	width: 50%;
 }
 

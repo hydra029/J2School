@@ -9,9 +9,14 @@
 	<link rel="stylesheet" href="../style_validate1.css">
 	<link rel="stylesheet" type="text/css" href="../style_table.css">
 </head>
-
-
 <?php require '../connect_database.php';
+
+if (isset($_GET['search'])) {
+	$content_search = $_GET['search'];
+} else {
+	$content_search = '';
+}
+
 if ( empty($_GET['index_page']) ) {
 	$index_page = 1;
 } else {
@@ -20,7 +25,7 @@ if ( empty($_GET['index_page']) ) {
 
 
 //lấy ra tổng số khách hàng
-$sql_count_customers = "SELECT count(*) FROM customers";
+$sql_count_customers = "SELECT count(*) FROM customers WHERE name LIKE '%$content_search%' ";
 $count_customers = mysqli_fetch_array(mysqli_query($connect_database, $sql_count_customers))['count(*)'];
 //lấy ra số khách hàng trên 1 trang
 $customers_per_page = 14;
@@ -34,6 +39,7 @@ $sql_select_customers = "
 	SELECT customers.id as 'id', customers.name as 'name', IFNULL(sum(receipts.total),0) as 'money', IFNULL(MAX(receipts.order_time), 'Chưa mua lần nào') as 'last_time'
 	FROM receipts
 	RIGHT JOIN customers ON receipts.customer_id = customers.id
+	WHERE name LIKE '%$content_search%'
 	GROUP BY customers.id
 	LIMIT $customers_per_page
 	OFFSET $customers_skipped
@@ -87,7 +93,7 @@ $query_sql_select_customers = mysqli_query($connect_database, $sql_select_custom
 		<?php } ?>
 	</table>
 	<?php for ( $i = 1; $i <= $pages; $i++) {  ?>
-		<a href="?index_page=<?php echo $i ?>"><?php echo $i ?></a>
+		<a href="?index_page=<?php echo $i ?>&search=<?php echo $content_search ?>"><?php echo $i ?></a>
 	<?php } ?>
 
 </div>
