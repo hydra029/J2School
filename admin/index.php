@@ -3,8 +3,10 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="style_validate1.css">
+	<link rel="stylesheet" href="index3.css">
 </head>
 <body>
+<?php require 'validate.php'; ?>
 <form action = "process_login_admin.php" method="post">
 	Tài khoản
 	<input type="text" name="email"><br>
