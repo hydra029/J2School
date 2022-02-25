@@ -8,6 +8,7 @@ if (empty($_GET['id'])){
 }
 $id = $_GET['id'];
 
+require '../connect_database.php';
 $check = mysqli_num_rows(mysqli_query($connect_database, "SELECT id FROM admins WHERE id = '$id' "));
 if ( empty($check) ) {
 	$_SESSION['error'] = 'Sai id nhân viên';
@@ -15,7 +16,6 @@ if ( empty($check) ) {
 	exit;
 }
 
-require '../connect_database.php';
 $sql_delete_admin = "UPDATE admins SET status = 0 WHERE id = '$id' ";
 
 $query_sql_delete_admin = mysqli_query($connect_database, $sql_delete_admin);

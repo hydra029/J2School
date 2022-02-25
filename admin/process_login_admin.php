@@ -4,6 +4,9 @@ session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
 
+$email = addslashes($email);
+$password = addslashes($password);
+
 require 'connect_database.php';
 
 $sql_command_select = "select * from admins where email = '$email' and password = '$password' limit 1";

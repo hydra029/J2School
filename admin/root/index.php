@@ -5,10 +5,13 @@
 	<link rel="stylesheet" href="../index3.css">
 	<link rel="stylesheet" type="text/css" href="style_chart.css">
 	<link rel="stylesheet" type="text/css" href="../style_table.css">
+	<link rel="stylesheet" href="../style_validate1.css">
+
 </head>
 
 <body> 
 <?php require '../menu.php'; ?>
+<?php require '../validate.php' ?>
 <div class="top">
 	<div class = "search">
 		<form class = "form_search">
