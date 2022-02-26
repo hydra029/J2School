@@ -7,7 +7,7 @@ if (isset($_POST['remember']) ) {
 } else {
 	$remember = false;
 }
-$email = preg_replace("/[^A-Za-z0-9@.]/", "", $email);
+$email = preg_replace("/[^A-Za-z0-9@\.]/", "", $email);
 $password = preg_replace("/[^A-Za-z0-9]/", "", $password);
 //email_check
 $email_regex = "/^\w([\.]?\w)*@[a-z]*\.[a-z]*/";
