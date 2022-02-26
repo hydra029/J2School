@@ -86,6 +86,7 @@ if (isset($_COOKIE['remember'])) {
 			</div>
 			<div class="modal-body">
 				<form id="form-code">
+					<input type="hidden" name="type" id="type" value="code">
 					<table class="border left" width="400px" >
 						<tr>
 							<td>
@@ -93,7 +94,6 @@ if (isset($_COOKIE['remember'])) {
 							</td>
 							<td>
 								<input class="form-control" type="text" name="email" id="email2">
-								<input type="hidden" name="type" id="type" value="code">
 							</td>
 						</tr>
 						<tr>
@@ -172,9 +172,11 @@ if (isset($_COOKIE['remember'])) {
 		if(window.location.href.indexOf('#modal-signin') != -1) {
 			$('#modal-signin').modal('show');
 		}
-		$('#code').click(function(event) {
-			$('#modal-code').show();
-			$('#modal-signin').modal('hide');
+		if(window.location.href.indexOf('#modal-code') != -1) {
+			$('#modal-code').modal('show');
+		}
+		$('#code').click(function() {
+			$('#modal-signin').modal('toggle');
 		});
 		$('#form-code').submit(function(event) {
 			event.preventDefault();
@@ -195,26 +197,27 @@ if (isset($_COOKIE['remember'])) {
 			submitHandler: function(form) {
 				$.ajax({
 					url: 'forgot.php',
-					type: 'POST',
+					type: 'GET',
 					dataType: 'html',
-					data: $("#code").serializeArray(),
+					data: $("#form-code").serializeArray(),
 				})
 				.done(function(response) {
+					let email = $('#email2').val();
+					$('#email3').val(email);
 					if (response == 1) {
-						$('#modal-forgot').show();
+						$('#modal-forgot').modal('show');
 						$('#modal-code').modal('hide');
-						$('#email3').text($('#email1').text());
 						$.notify("Mời kiểm tra email của bạn", "info");
 					} else {
-						$.notify("Sai tài khoản hoặc mật khẩu", "error");
+						$.notify("Mời nhập đúng email", "error");
 					}
 				})
 			}
 		});
-		$('#forgot').submit(function(event) {
+		$('#form-forgot').submit(function(event) {
 			event.preventDefault();
 		});
-		$("#forgot").validate({
+		$("#form-forgot").validate({
 			rules: {
 				"email": {
 					required: true,
@@ -240,27 +243,24 @@ if (isset($_COOKIE['remember'])) {
 					required: "Bắt buộc nhập password"
 				}
 			},
-		},
-		submitHandler: function(form) {
-			$.ajax({
-				url: 'forgot.php',
-				type: 'POST',
-				dataType: 'html',
-				data: $("#forgot").serializeArray(),
-			})
-			.done(function(response) {
-				if (response == 1) {
-					$.notify("Sai tài khoản hoặc mật khẩu", "error");
-				} else {
-					$("#modal-signin").modal('toggle');
-					$("#menu-customer").show();
-					$("#menu-guest").hide();
-					$(".btn-cus").show();
-					$("#user-name").text(response);
-					$.notify("Đăng nhập thành công", "success");
-				}
-			})
-		}
+			submitHandler: function(form) {
+				$.ajax({
+					url: 'forgot.php',
+					type: 'POST',
+					dataType: 'html',
+					data: $("#form-forgot").serializeArray(),
+				})
+				.done(function(response) {
+					if (response == 2) {
+						$.notify("Thay đổi mật khẩu thành công", "success");
+						$("#modal-signin").modal('toggle');
+						$("#modal-forgot").modal('toggle');
+					} else {
+						$.notify("Mật khẩu không hợp lệ", "error");
+					}
+				})
+			}
+		});
 		$('#form-signin').submit(function(event) {
 			event.preventDefault();
 		});
@@ -306,7 +306,7 @@ if (isset($_COOKIE['remember'])) {
 			}
 		});
 	});
-		$.validator.addMethod("validpass", function (value, element) {
-			return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test(value);
-		}, "Hãy nhập password từ 8 đến 16 ký tự bao gồm chữ hoa, chữ thường và ít nhất một chữ số");
-	</script>
+	$.validator.addMethod("validpass", function (value, element) {
+		return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test(value);
+	}, "Hãy nhập password từ 8 đến 16 ký tự bao gồm chữ hoa, chữ thường và ít nhất một chữ số");
+</script>

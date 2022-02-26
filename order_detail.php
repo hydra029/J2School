@@ -1,7 +1,11 @@
-<?php 
-require 'connect.php';
-?>
-<div class="modal fade" id="modal-order-detail">
+ <script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuidv4.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+ <script src="https://unpkg.com/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
+ <?php 
+ require 'connect.php';
+ ?>
+ <div class="modal fade" id="modal-order-detail">
     <div class="modal-dialog" style="width: 700px;">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +15,6 @@ require 'connect.php';
             </div>
             <div class="modal-body">
                 <?php
-
                 $customer_id = $_SESSION['customer_id'];
                 $sql = "select receivers.*, receipts.note from receivers join receipts on receipts.receiver_id = receivers.id where receipts.customer_id = '$customer_id' and receipts.id = '$receipt_id'";
                 $result = mysqli_query($connect,$sql);
@@ -92,6 +95,8 @@ require 'connect.php';
                     </tr>
                 </table>
             </div>
+            <button id = "js-download-pdf">In PDF</button>
+            <script src="pdf.js"></script>
             <div class="modal-footer">
                 <button type="submit" id="btn-cancel" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
                     Cancel
