@@ -12,14 +12,12 @@ $password = preg_replace("/[^A-Za-z0-9]/", "", $password);
 //email_check
 $email_regex = "/^\w([\.]?\w)*@[a-z]*\.[a-z]*/";
 if (preg_match($email_regex, $email) == 0) {
-	$_SESSION['error'] = 'Email không hợp lệ';
 	echo 1;
 	exit;
 }
 //password_check
 $password_regex = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})/";
 if (preg_match($password_regex, $password) == 0) {
-	$_SESSION['error'] = 'Mật khẩu ít nhất 8 kí tự, bao gồm chữ hoa, chữ thường, số';
 	echo 1;
 	exit;
 }

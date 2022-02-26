@@ -55,8 +55,13 @@ ul li {
 }
 #div_tren {
 	text-align: center;
-	min-height: 10vh;
+	min-height: 50px;
 	max-height: 250px;
+}
+#div_menu {
+	background: sandybrown;
+	padding: 10px;
+	height: 60px;
 }
 #div_giua {
 	max-height: 4900px;

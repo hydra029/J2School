@@ -20,6 +20,18 @@ if (isset($_SESSION['customer_id'])) {
 	<script src="notify/notify.min.js"></script>
 	<title></title>
 	<style type="text/css">
+		table tr td{
+			background: Moccasin;
+			border: 1px solid Sienna;
+			border-style: hidden; /* hide standard table (collapsed) border */
+			box-shadow: 0 0 0 1px #A0522D; /* this draws the table border  */ 
+			padding: 5px;
+		}table tr th{
+			background: Moccasin;
+			border: 1px solid Sienna;
+			border-style: hidden; /* hide standard table (collapsed) border */
+			box-shadow: 0 0 0 1px #A0522D; /* this draws the table border  */ 
+		}
 		a {
 			text-decoration: none;
 		}
@@ -54,7 +66,13 @@ if (isset($_SESSION['customer_id'])) {
 		}
 		#div_tren {
 			text-align: center;
-			min-height: 10vh;
+			min-height: 50px;
+			padding: ;
+		}
+		#div_menu {
+			background: sandybrown;
+			padding: 10px;
+			height: 60px;
 		}
 		#div_giua {
 			max-height: 4900px;
@@ -126,7 +144,7 @@ if (isset($_SESSION['customer_id'])) {
 <body style="background: WhiteSmoke">
 	<div id="div_tong" class="container">
 		<div id="div_tren">
-			<div style="background: sandybrown; padding: 5px;">
+			<div id="div_menu">
 				<?php 
 				require 'connect.php';
 				$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
@@ -266,12 +284,6 @@ if (isset($_SESSION['customer_id'])) {
 			</div>
 			<div style="text-align: center;" class="page">
 				<?php
-				$location = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
-				if ($_SERVER["SERVER_PORT"] != "80") {
-					$location .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-				} else {
-					$location .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-				}
 				for ($i = 1; $i <= $so_trang ; $i++) { 
 					?>
 					<a href="?tim_kiem=<?php echo $tim_kiem ?>&brand=<?php echo $brand ?>&type=<?php echo $type ?>&trang=<?php echo $i ?>">
@@ -340,4 +352,4 @@ if (isset($_SESSION['customer_id'])) {
 			<?php unset($_SESSION['error']) ?>
 		}
 	</script>
-<?php } ?>
+	<?php } ?>

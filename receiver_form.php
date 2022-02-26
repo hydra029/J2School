@@ -38,7 +38,7 @@ $customer_id = $_SESSION['customer_id'];
 							<td class="left">
 								Số điện thoại người nhận:
 							</td>
-							<td>
+							<td width="200px">
 								<input type="text" name="phone" id="phone" class="form-control">
 							</td>
 						</tr>

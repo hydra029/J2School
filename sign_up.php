@@ -11,7 +11,7 @@
 				<form id="form-signup" method="POST">
 					<table class="border left" width="500px">
 						<tr>
-							<th colspan="2" class="center">
+							<th colspan="2" class="center" height="50px">
 								Điền đầy đủ các thông tin
 							</th>
 						</tr>
@@ -27,7 +27,7 @@
 							<td>
 								Giới tính
 							</td>
-							<td>
+							<td class="center">
 								<input type="radio" name="gender" value="male"> Nam
 								<input type="radio" name="gender" value="female"> Nữ
 							</td>
@@ -52,7 +52,7 @@
 							<td>
 								Mật khẩu:
 							</td>
-							<td>
+							<td width="350px">
 								<input class="form-control" type="password" name="password" id="password">
 							</td>
 						</tr>
@@ -65,12 +65,13 @@
 						</tr>
 					</table>
 				</form>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
-						Cancel
-					</button>
-				</div>
 			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+					Cancel
+				</button>
+			</div>
+
 		</div>
 	</div>
 </div>
@@ -133,14 +134,14 @@
 						$("#modal-signup").modal('hide');
 						$.notify("Đăng ký thành công", "success");
 					} else {
-						$.notify("Tài khoản đã tồn tại", "error");
+						$.notify(response, "error");
 					}
 				})
 			}
 		});
 	});
 	$.validator.addMethod("validpass", function (value, element) {
-		return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test(value);
+		return this.optional(element) || /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,16})$/.test(value);
 	}, "Hãy nhập password từ 8 đến 16 ký tự bao gồm chữ hoa, chữ thường và ít nhất một chữ số");
 	$.validator.addMethod("validname", function (value, element) {
 		return this.optional(element) || /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]+(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]+)*$/.test(value);

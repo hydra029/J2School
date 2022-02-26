@@ -15,13 +15,14 @@ if (isset($_GET['code'])) {
 }
 if (isset($_GET['password'])) {
 	$password = $_GET['password'];
+	$password_regex = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})/";
+	if (preg_match($password_regex, $password) == 0) {
+		$_SESSION['error'] = 'Mật khẩu không hợp lệ';
+		echo 0;
+		exit;
+	}
 }
-$password_regex = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})/";
-if (preg_match($password_regex, $password) == 0) {
-	$_SESSION['error'] = 'Mật khẩu không hợp lệ';
-	echo 0;
-	exit;
-}
+
 $sql = "select *, count(*) as count from customers where email = '$email'";
 $result = mysqli_query($connect, $sql);
 $cus = mysqli_fetch_array($result);

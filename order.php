@@ -23,7 +23,7 @@ require 'check_account.php';
 <body>
 	<div id="div_tong" class="container">
 		<div id="div_tren">
-			<div style="background: sandybrown; padding: 10px 20px 10px 10px;">
+			<div id="div_menu">
 				<?php require 'menu.php'; ?>
 			</div>
 			<br>

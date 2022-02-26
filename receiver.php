@@ -32,9 +32,8 @@ require 'check_account.php';
 	$num = 0;
 	?>
 	<div id="div_tong" class="container">
-		
 		<div id="div_tren">
-			<div style="background: sandybrown; padding: 10px 20px 10px 10px;">
+			<div id="div_menu">
 				<?php require 'menu.php'; ?>
 			</div>
 			<br>
@@ -163,14 +162,16 @@ require 'check_account.php';
 		<div id="div_duoi">
 			<br>
 			<?php 
-			include 'receiver_form.php';
-			include 'receiver_form_change.php';
 			require 'footer.php';
 			?>
 		</div>
 	</div>
 </body>
 </html>
+<?php 
+include 'receiver_form.php';
+include 'receiver_form_change.php';
+?>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".btn-receiver").click(function() {

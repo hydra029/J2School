@@ -59,7 +59,7 @@ $num = 0;
 							$num ++;
 							?>
 							<tr>
-								<td>
+								<td width="200px">
 									<?php echo $num ?>
 								</td>
 								<td>
