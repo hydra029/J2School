@@ -59,7 +59,7 @@
 							Email:
 						</td>
 						<td>
-							<?php echo $user['email'] ?>
+							<input disabled type="text" name="email" value="<?php echo $user['email'] ?>" disabled >
 						</td>
 					</tr>
 					<tr>

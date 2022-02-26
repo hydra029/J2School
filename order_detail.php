@@ -6,9 +6,9 @@
  require 'connect.php';
  ?>
  <style type="text/css">
-   .tr {
-    padding: 5px;
-}
+     .tr {
+        padding: 5px;
+    }
 </style>
 <div class="modal fade" id="modal-order-detail">
     <div class="modal-dialog" style="width: 700px;">
@@ -32,14 +32,14 @@
                     $receiver_address = $receipt['address'];
                     $note = $receipt['note'];
                     ?>
-                    <table width="600px" class="border left">
+                    <table width="600px" class=" left">
                         <tr>
-                            <th colspan="3" class="border">
+                            <th colspan="3" >
                                 Người nhận:
                             </th>
                         </tr>
                         <tr>
-                            <td colspan="3" class="border" style="text-align: left;">
+                            <td colspan="3"  style="text-align: left;">
                                 Họ và Tên:
                                 <?php echo $receiver_name ?>
                                 <br>
@@ -54,7 +54,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="border" colspan="3">
+                            <th  colspan="3">
                                 Sản phẩm:
                             </th>
                         </tr>
@@ -76,14 +76,14 @@
                             $sum = $each['quantity'] * $each['product_price'];
                             ?>
                             <tr>
-                                <td class="border" style=" text-align: left;">
-                                 <img width="75px" height="75px" src="admin/products/<?php echo $each['product_image']; ?>">
-                             </td>
-                             <td class="border" style=" text-align: left;">
+                                <td  style=" text-align: left;">
+                                   <img width="75px" height="75px" src="admin/products/<?php echo $each['product_image']; ?>">
+                               </td>
+                               <td  style=" text-align: left;">
                                 <?php echo $each['product_name'] ?>
                             </td>
 
-                            <td class="border" style=" text-align: right; width: 150px;">
+                            <td  style=" text-align: right; width: 150px;">
                                 <?php echo number_format($each['product_price']) ?> VNĐ
                                 <br>
                                 x
@@ -96,10 +96,10 @@
                     }
                     ?>
                     <tr>
-                        <th class="border" colspan="2">
+                        <th  colspan="2">
                             Tổng tiền
                         </th>
-                        <td class="border right">
+                        <td class=" right">
                             <?php echo number_format($receipt['total']) ?> VNĐ
                         </td>
                     </tr>
