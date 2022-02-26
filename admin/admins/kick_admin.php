@@ -18,8 +18,10 @@ if ( empty($check) ) {
 
 //kiểm tra xem có phải là quản lí
 $sql_check_manager = "SELECT level FROM admins WHERE id = '$id' ";
+
 $check_magager = mysqli_fetch_array(mysqli_query($connect_database, $sql_check_manager))['level'] ;
-if ( $check_magager = 1 ) {
+
+if ( $check_magager == 1 ) {
 	$_SESSION['error'] = 'Không thể sa thải quản lí';
 	header('location:index.php');
 	exit;
