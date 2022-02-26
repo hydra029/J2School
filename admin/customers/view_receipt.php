@@ -130,7 +130,7 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 				</td>
 				<td><?php echo $each_receipt['total'] ?></td>
 				<td>
-					<a href="detail_receipt.php?id=<?php echo $each_receipt['id'] ?>">Xem</a>
+					<a href="../receipts/detail_receipt.php?id=<?php echo $each_receipt['id'] ?>">Xem</a>
 				</td>
 				<td>
 					<?php if ( $each_receipt['status'] == 2 ) { ?>
