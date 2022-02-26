@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 21, 2022 at 03:45 PM
+-- Generation Time: Feb 26, 2022 at 08:37 AM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.19
 
@@ -82,7 +82,26 @@ INSERT INTO `activities` (`id`, `admin_id`, `activity`, `object`, `object_name`,
 (39, 2, 'thêm', 'sản phẩm', 'Thùng rác inox 15 lít đạp vuông thấp thùng rác nhà bếp', '2022-02-21 15:19:27'),
 (40, 2, 'thêm', 'sản phẩm', 'Nồi Cơm Điện Tử Sharp KS-COM186EV-GL (1.8L) - Hàng chính hãng', '2022-02-21 15:24:44'),
 (41, 2, 'duyệt', 'đơn hàng', 'số 32', '2022-02-21 15:30:09'),
-(42, 2, 'duyệt', 'đơn hàng', 'số 33', '2022-02-21 15:30:35');
+(42, 2, 'duyệt', 'đơn hàng', 'số 33', '2022-02-21 15:30:35'),
+(43, 2, 'thêm', 'nhà cung cấp', 'ca1sc65as1c65a', '2022-02-23 07:52:18'),
+(44, 2, 'xóa', 'nhà cung cấp', 'ca1sc65as1c65a', '2022-02-23 07:52:27'),
+(45, 2, 'thêm', 'sản phẩm', 'ascsacasc', '2022-02-23 09:28:55'),
+(46, 2, 'thêm', 'thẻ', '15', '2022-02-23 09:28:55'),
+(47, 2, 'xóa', 'sản phẩm', 'ascsacasc', '2022-02-23 09:29:08'),
+(48, 2, 'thêm', 'sản phẩm', 'csacsacascasc', '2022-02-23 09:30:18'),
+(49, 2, 'thêm', 'thẻ', 'csac', '2022-02-23 09:30:18'),
+(50, 2, 'xóa', 'sản phẩm', 'csacsacascasc', '2022-02-23 09:32:26'),
+(51, 2, 'xóa', 'thẻ', 'Khẩu trang khỏi sản phẩm Khẩu Trang Y Tế Hafaco 4 lớp ( Hộp 50 cái)', '2022-02-24 15:55:00'),
+(52, 2, 'thêm', 'thẻ', 'Khẩu trang vào sản phẩm Cây lau nhà tự vắt thông minh HAMA', '2022-02-24 15:55:03'),
+(53, 2, 'cập nhật', 'nhà cung cấp', 'Sennaii', '2022-02-26 04:17:38'),
+(54, 2, 'cập nhật', 'nhà cung cấp', 'Sennai', '2022-02-26 04:17:50'),
+(55, 2, 'hoàn thành', 'đơn hàng', 'số 32', '2022-02-26 04:51:45'),
+(56, 2, 'hoàn thành', 'đơn hàng', 'số 33', '2022-02-26 04:51:48'),
+(57, 2, 'sửa trạng thái', 'đơn hàng', 'số 32', '2022-02-26 04:51:50'),
+(58, 2, 'sửa trạng thái', 'đơn hàng', 'số 33', '2022-02-26 04:51:51'),
+(59, 2, 'hoàn thành', 'đơn hàng', 'số 32', '2022-02-26 05:01:03'),
+(60, 2, 'hoàn thành', 'đơn hàng', 'số 33', '2022-02-26 05:01:04'),
+(61, 2, 'duyệt', 'đơn hàng', 'số 34', '2022-02-26 05:03:12');
 
 -- --------------------------------------------------------
 
@@ -95,16 +114,22 @@ CREATE TABLE `admins` (
   `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `level` tinyint(1) NOT NULL
+  `level` tinyint(1) NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`) VALUES
-(1, 'admin', 'admin@gmail.com', 'qwer1234', 0),
-(2, 'superadmin', 'superadmin@gmail.com', 'qwer1234', 1);
+INSERT INTO `admins` (`id`, `name`, `email`, `password`, `level`, `status`) VALUES
+(1, 'Phạm Đình Thái Ngân', 'admin@gmail.com', 'qwer1234', 0, 1),
+(2, 'Bùi Anh Tuấn', 'superadmin@gmail.com', 'qwer1234', 1, 1),
+(3, 'Quân AP', 'quanap@gmail.com', 'qwer1234', 0, 1),
+(4, 'Hoa Vinh', 'hoavinh@gmail.com', 'qwer1234', 0, 1),
+(5, 'Mít Tờ Si Rô', 'mrsiro@gmail.com', 'qwer1234', 0, 1),
+(6, 'Trung Quân', 'trungquan@gmail.com', 'qwer1234', 0, 1),
+(7, 'Hoàng Dũng', 'hoangdung@gmail.com', 'qwer1234', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -230,7 +255,7 @@ INSERT INTO `product_type` (`product_id`, `type_id`) VALUES
 (45, 46),
 (46, 47),
 (47, 48),
-(48, 49);
+(35, 49);
 
 -- --------------------------------------------------------
 
@@ -253,9 +278,9 @@ CREATE TABLE `receipts` (
 --
 
 INSERT INTO `receipts` (`id`, `customer_id`, `order_time`, `receiver_id`, `note`, `status`, `total`) VALUES
-(32, 15, '2022-02-21 15:29:41', '1', '								', 4, 837299),
-(33, 15, '2022-02-21 15:30:25', '2', '								', 4, 1480000),
-(34, 15, '2022-02-21 15:30:57', '1', '								', 2, 1329000),
+(32, 15, '2022-02-21 15:29:41', '1', '								', 5, 837299),
+(33, 15, '2022-02-21 15:30:25', '2', '								', 5, 1480000),
+(34, 15, '2022-02-21 15:30:57', '1', '								', 4, 1329000),
 (35, 16, '2022-02-21 15:33:52', '2', '								', 2, 723297),
 (36, 16, '2022-02-21 15:34:14', '1', '								', 2, 6341000),
 (37, 16, '2022-02-21 15:37:52', '1', '								', 2, 8067000),
@@ -369,7 +394,8 @@ INSERT INTO `types` (`id`, `name`) VALUES
 -- Indexes for table `activities`
 --
 ALTER TABLE `activities`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`);
 
 --
 -- Indexes for table `admins`
@@ -440,7 +466,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -452,13 +478,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `receipts`
@@ -475,6 +501,12 @@ ALTER TABLE `types`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `activities`
+--
+ALTER TABLE `activities`
+  ADD CONSTRAINT `activities_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `products`

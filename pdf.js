@@ -10,7 +10,7 @@
             unit: "mm"
         });
 
-        html2canvas(document.getElementById("table")).then((canvas) => {
+        html2canvas(document.getElementById("element_to_print")).then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
             const imgProps= doc.getImageProperties(imgData);
             const pdfWidth = doc.internal.pageSize.getWidth();
