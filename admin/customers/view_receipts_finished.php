@@ -54,15 +54,16 @@ $skip_receipts_page = ( $i - 1 ) * $receipts_on_page;
 
 
 $sql_command_select = "
-	SELECT receipts.*, customers.name as 'customer_name', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address'
-	from receipts
-	left JOIN receivers on receivers.id = receipts.receiver_id
-	join customers on customers.id = receipts.customer_id
-	WHERE receipts.customer_id = '$id' and receipts.status in (3, 5, 7)
+	SELECT receipts.id as 'id', receipts.order_time as 'order_time', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address', customers.name as 'customer_name', receipts.status, receipts.total, receipts.customer_id
+	FROM receipts
+	LEFT JOIN receivers ON receivers.customer_id = receipts.customer_id
+	LEFT JOIN customers ON customers.id = receivers.customer_id
+	WHERE receipts.status in (3, 5, 7) AND receipts.customer_id = '$id'
 	GROUP BY receipts.id
 	ORDER BY receipts.order_time desc
 	limit $receipts_on_page offset $skip_receipts_page
 ";
+
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 if ( mysqli_num_rows($query_sql_command_select) != 0 ) {
 	$customer_id = mysqli_fetch_array($query_sql_command_select)['customer_id'];
