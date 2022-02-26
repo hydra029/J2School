@@ -61,14 +61,48 @@
 	$(document).ready(function() {
 		$('#form-receiver-change').submit(function(event) {
 			event.preventDefault();
-			$.ajax({
-				url: 'receiver_update.php',
-				type: 'POST',
-				data: $(this).serializeArray(),
-			})
-			.done(function(response) {
-				location.reload();
-			})
+		});
+		$("#form-receiver").validate({
+			rules: {
+				"name": {
+					required: true,
+					validname: true
+				},
+				"phone": {
+					required: true,
+					validphone: true
+				},
+				"address": {
+					required: true
+				}
+			},
+			messages: {
+				"name": {
+					required: "Bắt buộc nhập họ và tên"
+				},
+				"phone": {
+					required: "Bắt buộc nhập số điện thoại"
+				},
+				"address": {
+					required: "Bắt buộc nhập địa chỉ",
+				}
+			},
+			submitHandler: function(form) {
+				$.ajax({
+					url: 'receiver_update.php',
+					type: 'POST',
+					data: $('#form-receiver-change').serializeArray(),
+				})
+				.done(function(response) {
+					location.reload();
+				})
+			}
 		});
 	});
+	$.validator.addMethod("validname", function (value, element) {
+		return this.optional(element) || /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]+(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]+)*$/.test(value);
+	}, "Hãy nhập họ và tên đầy đủ, viết hoa chữ cái đầu của họ và tên");
+	$.validator.addMethod("validphone", function (value, element) {
+		return this.optional(element) || /^(\+84|84|0|0084)(([3[2-9])|(5[6|8|9])|(7[0|6|7|8|9])|(8[1-9])|(9[1-4|6-9])){2}[0-9]{7}$/.test(value);
+	}, "Hãy nhập đúng số điện thoại");
 </script>

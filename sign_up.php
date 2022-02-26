@@ -111,10 +111,10 @@
 					required: "Bắt buộc nhập giới tính"
 				},
 				"dob": {
-					required: "Bắt buộc nhập username",
+					required: "Bắt buộc nhập ngày sinh",
 				},
 				"email": {
-					required: "Bắt buộc nhập username",
+					required: "Bắt buộc nhập eamil",
 					email: "Hãy nhập đúng định dạng email"
 				},
 				"password": {

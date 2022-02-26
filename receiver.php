@@ -11,6 +11,8 @@ require 'check_account.php';
 	<link rel="stylesheet" type="text/css" href="menu.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
 	<script src="notify/notify.js"></script>
 	<script src="notify/notify.min.js"></script>
 	<style type="text/css">
@@ -116,7 +118,7 @@ require 'check_account.php';
 									<span class="span-address"><?php echo $each['address'] ?></span>
 								</td>
 								<td>
-									<a href="receiver_delete_process.php?id=<?php echo $each['id'] ?>">
+									<a href="#" class="btn-receiver-delete" data-id="<?php echo $each['id']; ?>">
 										Xoá
 									</a>
 								</td>
@@ -190,13 +192,13 @@ require 'check_account.php';
 				$.notify("Thay đổi địa chỉ mặc định thành công", "success");
 			})
 		});
-		$("#btn-receiver-delete").click(function() {
+		$(".btn-receiver-delete").click(function() {
 			event.preventDefault();
 			let btn = $(this);
 			let id = btn.data('id');
 			$.ajax({
 				url: 'receiver_delete_process.php',
-				type: 'POST',
+				type: 'GET',
 				data: {id},
 			})
 			.done(function() {

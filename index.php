@@ -58,7 +58,7 @@ if (isset($_SESSION['customer_id'])) {
 		}
 		#div_giua {
 			max-height: 4900px;
-			min-height: 84vh;
+			min-height: 1100px;
 		}
 		#div_duoi {
 			height: 10vh;
@@ -69,7 +69,7 @@ if (isset($_SESSION['customer_id'])) {
 		#div_giua > .search {
 			width: 19%;
 			float: left;
-			min-height: 735px;
+			min-height: 1090px;
 			background: NavajoWhite;
 			height: 100%;
 			border-radius: 20px;
@@ -107,7 +107,6 @@ if (isset($_SESSION['customer_id'])) {
 		.success {
 			color: green;
 		}
-		
 		td {
 			height: 40px;
 		}
@@ -133,68 +132,48 @@ if (isset($_SESSION['customer_id'])) {
 				$sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
 				mysqli_query($connect, $sql);
 				$trang = 1;
+				$tim_kiem = '';
+				$type = '';
+				$brand = '';
 				if (isset($_GET['trang'])) {
 					$trang = $_GET['trang'];
-				}  
-				$tim_kiem = '';
-				$type_id = '';
+				}
 				if (isset($_GET['tim_kiem'])) {
 					$tim_kiem = $_GET['tim_kiem'];
 				}
-				if (isset($_GET['type_id'])) {
-					$type_id = $_GET['type_id'];
+				if (isset($_GET['type'])) {
+					$type = $_GET['type'];
 				}
-				if ($type_id == "") {
-					$sql_so_san_pham = "select count(*) from products
-					where
-					name like '%$tim_kiem%'";
-				} else {
-					$sql_so_san_pham = "select count(*)
-					from products join product_type on product_type.product_id = products.id
-					where
-					products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
-					group by products.name";
+				if (isset($_GET['brand'])) {
+					$brand = $_GET['brand'];
 				}
+				$sql_so_san_pham = "select products.*
+				from products 
+				left join product_type on product_type.product_id = products.id
+				join manufacturers on manufacturers.id = products.manufacturer_id
+				where
+				products.name like '%$tim_kiem%' and product_type.type_id like '%$type%' and products.manufacturer_id like '%$brand%'
+				group by products.id";
 				$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
-				$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
-				$so_san_pham = $ket_qua_so_san_pham['count(*)'];
-				$so_san_pham_1_trang = 8;
+				$so_san_pham = mysqli_num_rows($mang_so_san_pham);
+				$so_san_pham_1_trang = 12;
 				$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
 				$bo_qua = $so_san_pham_1_trang*($trang-1);
 				require 'menu.php';
 				?>
-				<div class="left" style="padding: 5px 5px 5px;">
-					Phân loại sản phẩm: 
-					<span>
-						<a href="index.php">Tất cả</a>
-					</span>
-					<?php 
-					require "connect.php";
-					$sql = "select * from types";
-					$result = mysqli_query($connect,$sql);
-					foreach ($result as $each) {
-						?>
-						<a href="index.php?tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $each['id'] ?>">
-							| <?php echo $each["name"] ?>
-						</a>
-						<?php
-					}
-					?>
-				</div>
 			</div>
-			
 			<form style="width: 300px; margin: auto; padding: 20px 5px;">
-				<input  class="form-control" type="search" name="tim_kiem" value="" placeholder="Tìm kiếm">
+				<input  class="form-control" type="search" name="tim_kiem" placeholder="Tìm kiếm">
 			</form>
 		</div>
 		<div id="div_giua">
 			<div class="search">
-				<h4 class="center">
+				<h4 class="center" id="abc">
 					<b>
 						Lọc sản phẩm
 					</b>
 				</h4>
-				<form form="search" method="get" action="index.php">
+				<form id="search">
 					<div>
 						<div class="form-control center tag">
 							Thương hiệu
@@ -204,7 +183,21 @@ if (isset($_SESSION['customer_id'])) {
 						$result = mysqli_query($connect,$sql);
 						foreach ($result as $each) { ?>
 							<div class="form-control tags">
-								<input type="checkbox" name="brand" class="brand" value="<?php echo $each['name'] ?>">
+								<input type="radio" name="brand" class="brand" value="<?php echo $each['id'] ?>"  <?php if($brand == $each['id']){ echo "checked=checked";}  ?>>
+								<?php echo $each['name'] ?>
+							</div>
+							<?php
+						}
+						?>
+						<div class="form-control center tag">
+							Thể loại
+						</div>
+						<?php 
+						$sql = "select * from types";
+						$result = mysqli_query($connect,$sql);
+						foreach ($result as $each) { ?>
+							<div class="form-control tags">
+								<input type="radio" name="type" class="type" value="<?php echo $each['id'] ?>" <?php if($type == $each['id']){ echo "checked=checked";}  ?>>
 								<?php echo $each['name'] ?>
 							</div>
 							<?php
@@ -212,39 +205,29 @@ if (isset($_SESSION['customer_id'])) {
 						?>
 					</div>
 					<button class="form-control" type="submit">Lọc</button>
+					<button class="form-control" type="button" id="uncheck">Bỏ lọc</button>
 				</form>
 			</div>
 			<div class="content">
 				<?php
-				if ($type_id == "") {
-					$sql = "select
-					products.*,
-					ifnull(sum(receipt_detail.quantity),0) as sold
-					from products
-					left join receipt_detail on receipt_detail.product_id = products.id
-					where
-					products.name like '%$tim_kiem%'
-					group by products.id
-					order by sold desc
-					limit $so_san_pham_1_trang offset $bo_qua";
-				} else {
-					$sql = "select
-					products.*,
-					product_type.type_id as type_id,
-					ifnull(sum(receipt_detail.quantity),0) as sold
-					from products
-					join product_type on product_type.product_id = products.id
-					left join receipt_detail on receipt_detail.product_id = products.id
-					where
-					products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
-					group by products.id
-					order by sold desc
-					limit $so_san_pham_1_trang offset $bo_qua";
-				}
+				mysqli_close($connect);
+				require 'connect.php';
+				$sql = "select
+				products.*,
+				product_type.type_id as type_id,
+				ifnull(sum(receipt_detail.quantity),0) as sold
+				from products
+				left join receipt_detail on receipt_detail.product_id = products.id
+				left join product_type on product_type.product_id = products.id
+				join manufacturers on manufacturers.id = products.manufacturer_id
+				where
+				products.name like '%$tim_kiem%' and product_type.type_id like '%$type%' and products.manufacturer_id like '%$brand%'
+				group by products.id
+				order by sold desc
+				limit $so_san_pham_1_trang offset $bo_qua";
 				$result = mysqli_query($connect, $sql);
 				?>
 				<?php foreach ($result as $each): ?>
-
 					<div class="card">
 						<div class="card_name">
 							<?php if (strlen($each['name']) > 50 ) {
@@ -282,8 +265,16 @@ if (isset($_SESSION['customer_id'])) {
 				<?php endforeach ?>
 			</div>
 			<div style="text-align: center;" class="page">
-				<?php for ($i = 1; $i <= $so_trang ; $i++) { ?>
-					<a href="?trang=<?php echo $i ?>&tim_kiem=<?php echo $tim_kiem ?>&type_id=<?php echo $type_id ?>">
+				<?php
+				$location = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+				if ($_SERVER["SERVER_PORT"] != "80") {
+					$location .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+				} else {
+					$location .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+				}
+				for ($i = 1; $i <= $so_trang ; $i++) { 
+					?>
+					<a href="?tim_kiem=<?php echo $tim_kiem ?>&brand=<?php echo $brand ?>&type=<?php echo $type ?>&trang=<?php echo $i ?>">
 						<?php echo $i ?>
 					</a>
 				<?php } ?>
@@ -293,7 +284,6 @@ if (isset($_SESSION['customer_id'])) {
 			<br>
 			<div>
 				<?php
-				mysqli_close($connect);
 				require 'footer.php';
 				?>
 			</div>
@@ -317,7 +307,21 @@ if (isset($_SESSION['customer_id'])) {
 		});
 		$("#search").submit(function(event) {
 			event.preventDefault();
-			var content = $(".brand").val();
+			let brand = "";
+			let type = "";
+			if ($('input[name="brand').is(':checked')) {
+				brand = $('input[name="brand"]:checked').val();
+			}
+			if ($('input[name="type"]').is(':checked')) {
+				type = $('input[name="type"]:checked').val();
+			}
+			let header = "index.php?search=<?php echo $tim_kiem ?>&brand=" + brand + "&type=" + type;
+			window.location = header;
+		});
+		$("#uncheck").click(function(event) {
+			event.preventDefault();
+			$('.brand').prop('checked', false);
+			$('.type').prop('checked', false);
 		});
 	});
 </script>
@@ -328,4 +332,12 @@ if (isset($_SESSION['customer_id'])) {
 			<?php unset($_SESSION['notify']) ?>
 		}
 	</script>
-	<?php } ?>
+<?php } ?>
+<?php if (isset($_SESSION["error"])) { ?>
+	<script type="text/javascript">
+		if ("<?php echo $_SESSION['error'] ?>" != "") {
+			$.error("<?php echo $_SESSION['error'] ?>", "error");
+			<?php unset($_SESSION['error']) ?>
+		}
+	</script>
+<?php } ?>

@@ -245,7 +245,7 @@ require 'check_account.php';
 								?>
 							</td>
 							<td>
-								<a data-toggle="modal" href="#modal-order-detail" id="btn-order-detail" data-id="<?php echo $each['receipt_id'] ?>">
+								<a data-toggle="modal" href="#modal-order-detail" id="btn-order-detail">
 									Xem chi tiết >>>
 								</a>
 							</td>
@@ -269,16 +269,7 @@ require 'check_account.php';
 </html>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#btn-order-detail").click(function() {
-			let btn = $(this);
-			let id = btn.data('id');
-			$.ajax({
-				url: 'order_detail.php',
-				type: 'default GET (Other values: POST)',
-				dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-				data: {id},
-			})
-		});
+
 		$("#btn-order-delete").click(function() {
 			let btn = $(this);
 			let id = btn.data('id');

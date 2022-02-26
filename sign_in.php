@@ -24,7 +24,7 @@ if (isset($_COOKIE['remember'])) {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3>
+				<h3 class="center">
 					Đăng nhập
 				</h3>
 				<div class="alert alert-danger" id="div-error" style="display: none;"></div>
@@ -49,8 +49,13 @@ if (isset($_COOKIE['remember'])) {
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" class="left">
+							<td class="left">
 								<input type="checkbox" name="remember" id="remember"> Ghi nhớ đăng nhập
+							</td>
+							<td class="right">
+								<a data-toggle="modal" href="#modal-code" id="code">
+									Quên mật khẩu
+								</a>
 							</td>
 						</tr>
 						<tr>
@@ -71,11 +76,191 @@ if (isset($_COOKIE['remember'])) {
 		</div>
 	</div>
 </div>
+<div class="modal" id="modal-code">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="center">
+					Quên mật khẩu
+				</h3>
+			</div>
+			<div class="modal-body">
+				<form id="form-code">
+					<input type="hidden" name="type" id="type" value="code">
+					<table class="border left" width="400px" >
+						<tr>
+							<td>
+								Tài khoản:
+							</td>
+							<td>
+								<input class="form-control" type="text" name="email" id="email2">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="center">
+								<button type="submit">
+									Nhận mã xác nhận
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="modal-forgot">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>
+					Quên mật khẩu
+				</h3>
+			</div>
+			<div class="modal-body">
+				<form id="form-forgot">
+					<table class="border left" width="400px" >
+						<tr>
+							<td>
+								Tài khoản:
+							</td>
+							<td>
+								<input class="form-control" type="text" name="email" id="email3">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Mã xác nhận:
+							</td>
+							<td>
+								<input class="form-control" type="text" name="code" id="code">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Mật khẩu mới:
+							</td>
+							<td>
+								<input class="form-control" type="password" name="password" id="password3">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="right">
+								<button type="submit">
+									Thay đổi
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		if(window.location.href.indexOf('#modal-signin') != -1) {
 			$('#modal-signin').modal('show');
 		}
+		if(window.location.href.indexOf('#modal-code') != -1) {
+			$('#modal-code').modal('show');
+		}
+		$('#code').click(function() {
+			$('#modal-signin').modal('toggle');
+		});
+		$('#form-code').submit(function(event) {
+			event.preventDefault();
+		});
+		$("#form-code").validate({
+			rules: {
+				"email": {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				"email": {
+					required: "Bắt buộc nhập email",
+					email: "Hãy nhập đúng định dạng email"
+				}
+			},
+			submitHandler: function(form) {
+				$.ajax({
+					url: 'forgot.php',
+					type: 'GET',
+					dataType: 'html',
+					data: $("#form-code").serializeArray(),
+				})
+				.done(function(response) {
+					let email = $('#email2').val();
+					$('#email3').val(email);
+					if (response == 1) {
+						$('#modal-forgot').modal('show');
+						$('#modal-code').modal('hide');
+						$.notify("Mời kiểm tra email của bạn", "info");
+					} else {
+						$.notify("Mời nhập đúng email", "error");
+					}
+				})
+			}
+		});
+		$('#form-forgot').submit(function(event) {
+			event.preventDefault();
+		});
+		$("#form-forgot").validate({
+			rules: {
+				"email": {
+					required: true,
+					email: true
+				},
+				"code": {
+					required: true
+				},
+				"password": {
+					required: true,
+					validpass: true
+				}
+			},
+			messages: {
+				"email": {
+					required: "Bắt buộc nhập email",
+					email: "Hãy nhập đúng định dạng email"
+				},
+				"code": {
+					required: "Bắt buộc nhập mã xác nhận"
+				},
+				"password": {
+					required: "Bắt buộc nhập password"
+				}
+			},
+			submitHandler: function(form) {
+				$.ajax({
+					url: 'forgot.php',
+					type: 'POST',
+					dataType: 'html',
+					data: $("#form-forgot").serializeArray(),
+				})
+				.done(function(response) {
+					if (response == 2) {
+						$.notify("Thay đổi mật khẩu thành công", "success");
+						$("#modal-signin").modal('toggle');
+						$("#modal-forgot").modal('toggle');
+					} else {
+						$.notify("Mật khẩu không hợp lệ", "error");
+					}
+				})
+			}
+		});
 		$('#form-signin').submit(function(event) {
 			event.preventDefault();
 		});
@@ -87,11 +272,12 @@ if (isset($_COOKIE['remember'])) {
 				},
 				"password": {
 					required: true,
+					validpass: true
 				}
 			},
 			messages: {
 				"email": {
-					required: "Bắt buộc nhập username",
+					required: "Bắt buộc nhập email",
 					email: "Hãy nhập đúng định dạng email"
 				},
 				"password": {
@@ -120,4 +306,7 @@ if (isset($_COOKIE['remember'])) {
 			}
 		});
 	});
+	$.validator.addMethod("validpass", function (value, element) {
+		return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/i.test(value);
+	}, "Hãy nhập password từ 8 đến 16 ký tự bao gồm chữ hoa, chữ thường và ít nhất một chữ số");
 </script>

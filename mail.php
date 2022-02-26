@@ -15,11 +15,11 @@ use PHPMailer\PHPMailer\Exception;
 
 function send_mail($email, $name, $title, $content) {
     //Create an instance; passing `true` enables exceptions
-    $mail = new PHPMailer(true);
+    $mail = new PHPMailer(false);
     try {
         $mail->CharSet = "UTF-8";
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->SMTPDebug = 0;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -30,7 +30,7 @@ function send_mail($email, $name, $title, $content) {
         $mail->SMTPSecure = "tls";
 
         //Recipients
-        $mail->setFrom('feature453@gmail.com', 'Huu Loc');
+        $mail->setFrom('feature453@gmail.com', 'Huu Loc & hydra');
         $mail->addAddress($email, $name);     //Add a recipient
 
 
@@ -40,7 +40,6 @@ function send_mail($email, $name, $title, $content) {
         $mail->Body    = $content;
 
         $mail->send();
-        echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }    
