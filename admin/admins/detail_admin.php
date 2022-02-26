@@ -130,12 +130,14 @@ $last_time = mysqli_fetch_array(mysqli_query($connect_database, $sql_select_last
 			</button>
 			</form>
 			<br>
-			<form action = "kick_admin.php" method = "get">
-			<button class="btn">
-				<input type="hidden" name="id" value = "<?php echo $id ?>">
-				<span class="buy">Sa thải</span>
-			</button>
-			</form>
+			<?php if ( $each_admin['level'] == 0 ) { ?>
+				<form action = "kick_admin.php" method = "get">
+				<button class="btn">
+					<input type="hidden" name="id" value = "<?php echo $id ?>">
+					<span class="buy">Sa thải</span>
+				</button>
+				</form>
+			<?php } ?>
 		</div>
 				
 		</div>
