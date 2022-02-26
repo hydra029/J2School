@@ -64,37 +64,37 @@ require 'check_account.php';
 				<div id="div_table">
 					<table width="700px" class="border" id="table1">
 						<tr>
-							<td>
+							<td class="center">
 								<b>
 									STT
 								</b>
 							</td>
-							<td>
+							<td class="center">
 								<b>
 									Tên người nhận:
 								</b>
 							</td>
-							<td>
+							<td class="center">
 								<b>
 									Số điện thoại:
 								</b>
 							</td>
-							<td width="200px">
+							<td width="200px" class="center">
 								<b>
 									Địa chỉ:
 								</b>
 							</td>
-							<td>
+							<td class="center">
 								<b>
 									Xoá
 								</b>
 							</td>
-							<td>
+							<td class="center">
 								<b>
 									Sửa
 								</b>
 							</td>
-							<td>
+							<td class="center">
 								<b>
 									Mặc định
 								</b>
@@ -105,7 +105,7 @@ require 'check_account.php';
 							$num ++;
 							?>
 							<tr>
-								<td>
+								<td class="center">
 									<span><?php echo $num ?></span>
 								</td>
 								<td>
@@ -117,12 +117,12 @@ require 'check_account.php';
 								<td height="70px">
 									<span class="span-address"><?php echo $each['address'] ?></span>
 								</td>
-								<td>
+								<td class="center">
 									<a href="#" class="btn-receiver-delete" data-id="<?php echo $each['id']; ?>">
 										Xoá
 									</a>
 								</td>
-								<td>
+								<td class="center">
 									<a data-toggle="modal" href="#modal-receiver-form-change" class="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-num="<?php echo $num ?>">
 										Sửa
 									</a>

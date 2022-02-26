@@ -185,7 +185,7 @@ require 'check_account.php';
 										<?php echo $each['name'] ?>
 									</a>
 								</td>
-								<td>
+								<td height="155px">
 									<img width="200px" height="150px" src="admin/products/<?php echo $each['image']; ?>">
 								</td>
 								<td>

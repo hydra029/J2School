@@ -61,7 +61,7 @@ if (isset($_SESSION['customer_id'])) {
 			min-height: 1100px;
 		}
 		#div_duoi {
-			height: 10vh;
+			height: 90px;
 			background: aliceblue;
 			text-align: center;
 			bottom: 5px;

@@ -6,18 +6,18 @@
 	height: 350px;
 	text-align: center;
 	float: left;
-	border: 1px solid Sienna;
 	border-radius: 20px;
 	padding: 0.5%;
 	margin: 0.5%;
 	width: 24%;
 	background: Moccasin;
+	border: 1px solid Sienna;
 }
 .card :hover > .card_img {
 	transform: translateY(-10px) scale(1.15) ;
 }
- .card_name {
- 	padding: 0px 10px;
+.card_name {
+	padding: 0px 10px;
 	margin-top: 5px;
 	height: 60px;
 	width: 100%;

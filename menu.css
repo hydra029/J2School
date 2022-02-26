@@ -97,3 +97,15 @@ button:hover {
 	transform: scale(0.95);
 	border-radius: 10px;
 }
+table tr td{
+	background: Moccasin;
+	border: 1px solid Sienna;
+	border-style: hidden; /* hide standard table (collapsed) border */
+	box-shadow: 0 0 0 1px #A0522D; /* this draws the table border  */ 
+	padding: 5px;
+}table tr th{
+	background: Moccasin;
+	border: 1px solid Sienna;
+	border-style: hidden; /* hide standard table (collapsed) border */
+	box-shadow: 0 0 0 1px #A0522D; /* this draws the table border  */ 
+}
