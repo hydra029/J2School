@@ -35,15 +35,16 @@ $count_pages = ceil ($count_receipts / $receipts_on_page);
 $skip_receipts_page = ( $i - 1 ) * $receipts_on_page;
 
 
-$sql_command_select = "SELECT receipts.*, customers.name as 'customer_name', customers.email as 'customer_email', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address'
-from receipts
-left JOIN receivers on receivers.id = receipts.receiver_id
-JOIN customers on customers.id = receipts.customer_id
-WHERE receipts.status in (3, 5, 7)
-GROUP BY receipts.id
-ORDER BY receipts.order_time desc
-limit $receipts_on_page offset $skip_receipts_page";
-
+$sql_command_select = "
+	SELECT receipts.id as 'id', receipts.order_time as 'order_time', receivers.name as 'receiver_name', receivers.phone as 'receiver_phone', receivers.address as 'receiver_address', customers.name as 'customer_name', receipts.status, receipts.total
+	FROM receipts
+	LEFT JOIN receivers ON receivers.customer_id = receipts.customer_id
+	LEFT JOIN customers ON customers.id = receivers.customer_id
+	WHERE receipts.status in (3, 5, 7)
+	GROUP BY receipts.id
+	ORDER BY receipts.order_time desc
+	limit $receipts_on_page offset $skip_receipts_page
+";
 $query_sql_command_select = mysqli_query($connect_database, $sql_command_select);
 
 
@@ -79,8 +80,8 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 		<tr>
 			<th>Mã</th>
 			<th>Thời gian đặt</th>
-			<th>Người đặt</th>
 			<th>Người nhận</th>
+			<th>Người đặt</th>
 			<th>Trạng thái</th>
 			<th>Tổng tiền</th>
 			<th>Xem chi tiết</th>
