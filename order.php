@@ -13,7 +13,6 @@ require 'check_account.php';
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="notify/notify.js"></script>
 	<script src="notify/notify.min.js"></script>
-
 	<style type="text/css">
 		th, td {
 			border:  1px solid black;
@@ -23,7 +22,6 @@ require 'check_account.php';
 </head>
 <body>
 	<div id="div_tong" class="container">
-		
 		<div id="div_tren">
 			<div style="background: sandybrown; padding: 10px 20px 10px 10px;">
 				<?php require 'menu.php'; ?>
@@ -56,65 +54,64 @@ require 'check_account.php';
 		<div id="div_giua" >
 			<div style="text-align: center; margin: 0px;">
 				<?php 
-			if (empty($_GET['status'])) {
-				$status = 2;
-			} else {
-				$status = $_GET['status'];
-			}
-			switch ($status) {
-				case '2': 
+				if (empty($_GET['status'])) {
+					$status = 2;
+				} else {
+					$status = $_GET['status'];
+				}
+				switch ($status) {
+					case '2': 
+					?>
+					<h3>
+						Đơn hàng đang chờ xét duyệt !
+					</h3>
+					<?php 
+					break;
+					case '3': 
+					?>
+					<h3>
+						Đơn hàng không qua xét duyệt !
+					</h3>
+					<?php 
+					break;
+					case '4': 
+					?>
+					<h3>
+						Đơn hàng đang giao hàng !
+					</h3>
+					<?php 
+					break;
+					case '5': 
+					?>
+					<h3>					
+						Đơn hàng đã giao hàng!
+					</h3>				
+					<?php 
+					break;
+					case '6': 
+					?>
+					<h3>
+						Đơn hàng thành công!
+					</h3>
+					<?php 
+					break;
+					case '7': 
+					?>
+					<h3>
+						Đơn hàng đã huỷ !
+					</h3>
+					<?php 
+					break;
+					default:
+					?>
+					<h3>
+						Đơn hàng đang chờ xét duyệt !
+					</h3>
+					<?php
+					break;
+				}
 				?>
-				<h3>
-					Đơn hàng đang chờ xét duyệt !
-				</h3>
-				<?php 
-				break;
-				case '3': 
-				?>
-				<h3>
-					Đơn hàng không qua xét duyệt !
-				</h3>
-				<?php 
-				break;
-				case '4': 
-				?>
-				<h3>
-					Đơn hàng đang giao hàng !
-				</h3>
-				<?php 
-				break;
-				case '5': 
-				?>
-				<h3>					
-					Đơn hàng đã giao hàng!
-				</h3>				
-				<?php 
-				break;
-				case '6': 
-				?>
-				<h3>
-					Đơn hàng thành công!
-				</h3>
-				<?php 
-				break;
-				case '7': 
-				?>
-				<h3>
-					Đơn hàng đã huỷ !
-				</h3>
-				<?php 
-				break;
-				default:
-				?>
-				<h3>
-					Đơn hàng đang chờ xét duyệt !
-				</h3>
-				<?php
-				break;
-			}
-			?>
 			</div>
-
 			<br>
 			<?php 
 			require 'connect.php';
@@ -152,7 +149,7 @@ require 'check_account.php';
 					?>
 					<br>
 					<br>
-					<table class="border" width="100%" id="element_to_print">
+					<table class="border" width="100%">
 						<tr>
 							<th colspan="6">
 								<?php echo "Đơn hàng số " . $num ?>
@@ -258,7 +255,6 @@ require 'check_account.php';
 				endforeach; 
 			} ?>
 		</div>
-		<button id = "js-download-pdf">In PDF</button>
 		<div id="div_duoi">
 			<br>
 			<?php 
@@ -275,7 +271,6 @@ require 'check_account.php';
 <script src="https://unpkg.com/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		$("#btn-order-delete").click(function() {
 			let btn = $(this);
 			let id = btn.data('id');
@@ -290,30 +285,5 @@ require 'check_account.php';
 			})
 		});
 	});
-
-
-        (() => {
-
-    const downloadPDFElement = document.getElementById("js-download-pdf");
-
-    downloadPDFElement.addEventListener("click", (event) => {
-        const doc = new jspdf.jsPDF({
-            format: "a4",
-            orientation: "portrait",
-            unit: "mm"
-        });
-
-        html2canvas(document.getElementById("element_to_print")).then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            const imgProps= doc.getImageProperties(imgData);
-            const pdfWidth = doc.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            doc.save(`Order-${new Date().toLocaleDateString("vi-VN")}.pdf`);
-        })
-    })
-
-})();
-
 
 </script>
