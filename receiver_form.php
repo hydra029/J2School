@@ -19,7 +19,7 @@ $customer_id = $_SESSION['customer_id'];
 			</div>
 			<div class="modal-body">
 				<form id="form-receiver">
-					<table height="300px" class="border" width="400px">
+					<table height="300px" class="border left" width="400px">
 						<input type="hidden" name="id" value="<?php echo $num ?>">
 						<tr>
 							<th colspan="2" class="center">
@@ -31,7 +31,7 @@ $customer_id = $_SESSION['customer_id'];
 								Tên người nhận:
 							</td>
 							<td>
-								<input type="text" name="name" id="name"">
+								<input type="text" name="name" id="name" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -39,7 +39,7 @@ $customer_id = $_SESSION['customer_id'];
 								Số điện thoại người nhận:
 							</td>
 							<td>
-								<input type="text" name="phone" id="phone">
+								<input type="text" name="phone" id="phone" class="form-control">
 							</td>
 						</tr>
 						<tr>
@@ -47,7 +47,7 @@ $customer_id = $_SESSION['customer_id'];
 								Địa chỉ người nhận:
 							</td>
 							<td>
-								<textarea name="address" id="address"></textarea>
+								<textarea name="address" id="address" class="form-control"></textarea>
 								<span id="address_error"></span>
 							</td>
 						</tr>
@@ -73,15 +73,49 @@ $customer_id = $_SESSION['customer_id'];
 	$(document).ready(function() {
 		$('#form-receiver').submit(function(event) {
 			event.preventDefault();
-			$.ajax({
-				url: 'receiver_process_create.php',
-				type: 'POST',
-				dataType: 'html',
-				data: $(this).serializeArray(),
-			})
-			.done(function() {
-				location.reload();
-			})
+		});
+		$("#form-receiver").validate({
+			rules: {
+				"name": {
+					required: true,
+					validname: true
+				},
+				"phone": {
+					required: true,
+					validphone: true
+				},
+				"address": {
+					required: true
+				}
+			},
+			messages: {
+				"name": {
+					required: "Bắt buộc nhập họ và tên"
+				},
+				"phone": {
+					required: "Bắt buộc nhập số điện thoại"
+				},
+				"address": {
+					required: "Bắt buộc nhập địa chỉ",
+				}
+			},
+			submitHandler: function(form) {
+				$.ajax({
+					url: 'receiver_process_create.php',
+					type: 'POST',
+					dataType: 'html',
+					data: $('#form-receiver').serializeArray(),
+				})
+				.done(function() {
+					location.reload();
+				})
+			}
 		});
 	});
+	$.validator.addMethod("validname", function (value, element) {
+		return this.optional(element) || /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]+(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]+)*$/.test(value);
+	}, "Hãy nhập họ và tên đầy đủ, viết hoa chữ cái đầu của họ và tên");
+	$.validator.addMethod("validphone", function (value, element) {
+		return this.optional(element) || /^(\+84|84|0|0084)(([3[2-9])|(5[6|8|9])|(7[0|6|7|8|9])|(8[1-9])|(9[1-4|6-9])){2}[0-9]{7}$/.test(value);
+	}, "Hãy nhập đúng số điện thoại");
 </script>

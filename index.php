@@ -58,7 +58,7 @@ if (isset($_SESSION['customer_id'])) {
 		}
 		#div_giua {
 			max-height: 4900px;
-			min-height: 84vh;
+			min-height: 1100px;
 		}
 		#div_duoi {
 			height: 10vh;
@@ -140,15 +140,6 @@ if (isset($_SESSION['customer_id'])) {
 				}
 				if (isset($_GET['tim_kiem'])) {
 					$tim_kiem = $_GET['tim_kiem'];
-					$sql_so_san_pham = "select count(*) from products
-					where
-					name like '%$tim_kiem%'";
-				} else {
-					$sql_so_san_pham = "select count(*)
-					from products join product_type on product_type.product_id = products.id
-					where
-					products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
-					group by products.name";
 				}
 				if (isset($_GET['type'])) {
 					$type = $_GET['type'];
@@ -156,10 +147,15 @@ if (isset($_SESSION['customer_id'])) {
 				if (isset($_GET['brand'])) {
 					$brand = $_GET['brand'];
 				}
-				
+				$sql_so_san_pham = "select products.*
+				from products 
+				left join product_type on product_type.product_id = products.id
+				join manufacturers on manufacturers.id = products.manufacturer_id
+				where
+				products.name like '%$tim_kiem%' and product_type.type_id like '%$type%' and products.manufacturer_id like '%$brand%'
+				group by products.id";
 				$mang_so_san_pham = mysqli_query($connect,$sql_so_san_pham);
-				$ket_qua_so_san_pham = mysqli_fetch_array($mang_so_san_pham);
-				$so_san_pham = $ket_qua_so_san_pham['count(*)'];
+				$so_san_pham = mysqli_num_rows($mang_so_san_pham);
 				$so_san_pham_1_trang = 12;
 				$so_trang = ceil($so_san_pham/$so_san_pham_1_trang);
 				$bo_qua = $so_san_pham_1_trang*($trang-1);
@@ -167,7 +163,7 @@ if (isset($_SESSION['customer_id'])) {
 				?>
 			</div>
 			<form style="width: 300px; margin: auto; padding: 20px 5px;">
-				<input  class="form-control" type="search" name="tim_kiem" value="" placeholder="Tìm kiếm">
+				<input  class="form-control" type="search" name="tim_kiem" placeholder="Tìm kiếm">
 			</form>
 		</div>
 		<div id="div_giua">
@@ -187,7 +183,7 @@ if (isset($_SESSION['customer_id'])) {
 						$result = mysqli_query($connect,$sql);
 						foreach ($result as $each) { ?>
 							<div class="form-control tags">
-								<input type="radio" name="brand" class="brand" value="<?php echo $each['id'] ?>">
+								<input type="radio" name="brand" class="brand" value="<?php echo $each['id'] ?>"  <?php if($brand == $each['id']){ echo "checked=checked";}  ?>>
 								<?php echo $each['name'] ?>
 							</div>
 							<?php
@@ -201,7 +197,7 @@ if (isset($_SESSION['customer_id'])) {
 						$result = mysqli_query($connect,$sql);
 						foreach ($result as $each) { ?>
 							<div class="form-control tags">
-								<input type="radio" name="type" class="type" value="<?php echo $each['id'] ?>">
+								<input type="radio" name="type" class="type" value="<?php echo $each['id'] ?>" <?php if($type == $each['id']){ echo "checked=checked";}  ?>>
 								<?php echo $each['name'] ?>
 							</div>
 							<?php
@@ -214,31 +210,21 @@ if (isset($_SESSION['customer_id'])) {
 			</div>
 			<div class="content">
 				<?php
-				if ($type == "") {
-					$sql = "select
-					products.*,
-					ifnull(sum(receipt_detail.quantity),0) as sold
-					from products
-					left join receipt_detail on receipt_detail.product_id = products.id
-					where
-					products.name like '%$tim_kiem%'
-					group by products.id
-					order by sold desc
-					limit $so_san_pham_1_trang offset $bo_qua";
-				} else {
-					$sql = "select
-					products.*,
-					product_type.type_id as type_id,
-					ifnull(sum(receipt_detail.quantity),0) as sold
-					from products
-					join product_type on product_type.product_id = products.id
-					left join receipt_detail on receipt_detail.product_id = products.id
-					where
-					products.name like '%$tim_kiem%' and product_type.type_id like '%$type_id%'
-					group by products.id
-					order by sold desc
-					limit $so_san_pham_1_trang offset $bo_qua";
-				}
+				mysqli_close($connect);
+				require 'connect.php';
+				$sql = "select
+				products.*,
+				product_type.type_id as type_id,
+				ifnull(sum(receipt_detail.quantity),0) as sold
+				from products
+				left join receipt_detail on receipt_detail.product_id = products.id
+				left join product_type on product_type.product_id = products.id
+				join manufacturers on manufacturers.id = products.manufacturer_id
+				where
+				products.name like '%$tim_kiem%' and product_type.type_id like '%$type%' and products.manufacturer_id like '%$brand%'
+				group by products.id
+				order by sold desc
+				limit $so_san_pham_1_trang offset $bo_qua";
 				$result = mysqli_query($connect, $sql);
 				?>
 				<?php foreach ($result as $each): ?>
@@ -288,7 +274,7 @@ if (isset($_SESSION['customer_id'])) {
 				}
 				for ($i = 1; $i <= $so_trang ; $i++) { 
 					?>
-					<a href="?tim_kiem=<?php echo $tim_kiem ?>&trang=<?php echo $i ?>">
+					<a href="?tim_kiem=<?php echo $tim_kiem ?>&brand=<?php echo $brand ?>&type=<?php echo $type ?>&trang=<?php echo $i ?>">
 						<?php echo $i ?>
 					</a>
 				<?php } ?>
@@ -321,9 +307,15 @@ if (isset($_SESSION['customer_id'])) {
 		});
 		$("#search").submit(function(event) {
 			event.preventDefault();
-			let brand = $('input[name="brand"]:checked').val();
-			let type = $('input[name="type"]:checked').val();
-			let header = "index.php?brand=" + brand + "&type=" + type;
+			let brand = "";
+			let type = "";
+			if ($('input[name="brand').is(':checked')) {
+				brand = $('input[name="brand"]:checked').val();
+			}
+			if ($('input[name="type"]').is(':checked')) {
+				type = $('input[name="type"]:checked').val();
+			}
+			let header = "index.php?search=<?php echo $tim_kiem ?>&brand=" + brand + "&type=" + type;
 			window.location = header;
 		});
 		$("#uncheck").click(function(event) {

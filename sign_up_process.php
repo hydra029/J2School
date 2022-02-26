@@ -6,7 +6,7 @@ $gender = $_POST['gender'];
 $dob = $_POST['dob'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$sql = "select count(*) as count from customers where email = '$email' and password = '$password' ";
+$sql = "select count(*) as count from customers where email = '$email'";
 $result = mysqli_query($connect,$sql);
 $rows = mysqli_fetch_array($result);
 if ($rows == 1) {
@@ -17,6 +17,10 @@ if ($rows == 1) {
 	values ('$name', '$gender', '$dob', '$email', '$password', '')";
 	$result = mysqli_query($connect,$sql);
 	$_SESSION['notify'] = "Đăng ký thành công";
+	require 'mail.php';
+	$title = 'Chúc mừng bạn đăng ký tài khoản thành công';
+	$content = 'Bạn đã đăng ký thành công tài khoản Website ABC !!';
+	send_mail($email, $name, $title, $content);
 	echo 1;
 	exit();
 }
