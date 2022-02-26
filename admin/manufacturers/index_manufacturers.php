@@ -63,8 +63,8 @@ $query_sql_command_select = mysqli_query($connect_database, $sql_command_select)
 	</div>
 
 	<div class = "login">
-		<a class = "login" href="https://google.com">Đăng nhập</a>
-	</div> 
+		<span>Xin chào <?php echo $_SESSION['name'] ?></span>
+	</div>
 </div>
 
 <div class = "bot">

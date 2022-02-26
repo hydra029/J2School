@@ -64,8 +64,8 @@ mysqli_close($connect_database);
 	</div>
 
 	<div class = "login">
-		<a class = "login" href="https://google.com">Đăng nhập</a>
-	</div> 
+		<span>Xin chào <?php echo $_SESSION['name'] ?></span>
+	</div>
 </div>
 
 <div class = "bot">

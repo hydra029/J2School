@@ -39,7 +39,7 @@ $type_name = mysqli_fetch_array($query_sql_select)['name'];
 <body> 
 <?php require '../menu.php'; ?>
 <div class="top">
-	<div class = "search">
+	<!-- <div class = "search">
 		<form class = "form_search">
 			Tìm kiếm
 			<input type="search" name="search" value = "<?php echo $content_search ?>">
@@ -47,11 +47,11 @@ $type_name = mysqli_fetch_array($query_sql_select)['name'];
 				<img src="../style/style_image/icon_search.png" width="50px">
 			</button>
 		</form>
-	</div>
+	</div> -->
 
 	<div class = "login">
-		<a class = "login" href="https://google.com">Đăng nhập</a>
-	</div> 
+		<span>Xin chào <?php echo $_SESSION['name'] ?></span>
+	</div>
 </div>
 
 <div class = "bot">
