@@ -114,13 +114,13 @@ $manufacturer_name = mysqli_fetch_array($query_sql_command_select)['manufacturer
 				<img src="../products/<?php echo $array_products['image'] ?>" height = "100px">
 			</td>
 			<td>
-				<a href = "detail_product.php?id=<?php echo $array_products['id'] ?>">Xem chi tiết</a>
+				<a href = "../products/detail_product.php?id=<?php echo $array_products['id'] ?>">Xem chi tiết</a>
 			</td>
 			<td>
-				<a href="form_update_products.php?id=<?php echo $array_products['id'] ?>">Sửa</a>
+				<a href="../products/form_update_products.php?id=<?php echo $array_products['id'] ?>">Sửa</a>
 			</td>
 			<td>
-				<a href="process_delete_products.php?id=<?php echo $array_products['id'] ?>">Xóa</a>
+				<a href="../products/process_delete_products.php?id=<?php echo $array_products['id'] ?>">Xóa</a>
 			</td>
 		</tr>
 		<?php endforeach ?>

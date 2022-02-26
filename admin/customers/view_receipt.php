@@ -55,6 +55,7 @@ $sql_command_select = "
 	join customers on customers.id = receipts.customer_id
 	WHERE receipts.customer_id = '$id' and receipts.status in (2, 4)
 	GROUP BY receipts.id
+	ORDER BY receipts.order_time desc
 	limit $receipts_on_page offset $skip_receipts_page
 ";
 

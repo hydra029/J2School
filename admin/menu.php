@@ -33,10 +33,10 @@
 						<a href="../receipts/index.php" class="collapse__sublink">Quản&nbsplí&nbsphóa&nbspđơn</a>
 						<a href="../list_by_chart_receipts/index.php" class="collapse__sublink">Thống&nbspkê&nbsphóa&nbspđơn</a>
 						<a href="../list_by_chart_cash_earn/index.php" class="collapse__sublink">Thống&nbspkê&nbspthu&nbspnhập</a>
-						<a href="../hashtags/index.php" class="collapse__sublink">Quản&nbsplí&nbspgắn&nbspthẻ</a>
 						<a href="../products/index_products.php" class="collapse__sublink">Quản&nbsplí&nbspsản&nbspphẩm</a>
 						<a href="../products/form_insert_products.php" class="collapse__sublink">Thêm&nbspsản&nbspphẩm</a>
 						<a href="../list_by_chart_products/index.php" class="collapse__sublink">Thống&nbspkê&nbspsản&nbspphẩm</a>
+						<a href="../hashtags/index.php" class="collapse__sublink">Quản&nbsplí&nbspgắn&nbspthẻ</a>
 						<a href="../hashtags/index_insert_hashtags_to_product.php" class="collapse__sublink">Thêm&nbspthẻ&nbspvào&nbspsản&nbspphẩm</a>
 						<a href="../admins/index.php" class="collapse__sublink">Quản&nbsplí&nbspnhân&nbspviên</a>
 					</ul>

@@ -99,17 +99,20 @@ if (empty($error)) {
 	if ( isset($_GET['from']) ) {
 		$from = $_GET['from'];
 		$customer_id = $_GET['customer_id'];
+		$_SESSION['success'] = 'Cập nhật hóa đơn thành công';
 		$header = "location:../customers/view_receipts_finished.php?id=$customer_id";
 		header($header);
 		exit();
 	}
 	if ( isset($_GET['customer_id']) ) {
 		$customer_id = $_GET['customer_id'];
+		$_SESSION['success'] = 'Cập nhật hóa đơn thành công';
 		$header = "location:../customers/view_receipt.php?id=$customer_id";
 		header($header);
 		exit();
 	}
 	if ( $_GET['status'] == 2 || $_GET['status'] == '4a' ) {
+		$_SESSION['success'] = 'Cập nhật hóa đơn thành công';
 		header('location:view_receipts_finished.php');
 		exit();
 	}
