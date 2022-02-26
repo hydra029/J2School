@@ -6,8 +6,7 @@ $gender = $_POST['gender'];
 $dob = $_POST['dob'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$email = preg_replace("/[^A-Za-z0-9@.]/", "", $email);
-$password = preg_replace("/[^A-Za-z0-9]/", "", $password);
+
 
 //name_check
 $name_regex = "/^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]*)*$/";
@@ -30,7 +29,8 @@ if (preg_match($password_regex, $password) == 0) {
 	echo 0;	
 	exit;
 }
-
+$email = preg_replace("/[^A-Za-z0-9@\.]/", "", $email);
+$password = preg_replace("/[^A-Za-z0-9]/", "", $password);
 $sql = "select count(*) as count from customers where email = '$email'";
 $result = mysqli_query($connect,$sql);
 $rows = mysqli_fetch_array($result);
