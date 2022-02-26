@@ -39,6 +39,7 @@
 						<a href="../hashtags/index.php" class="collapse__sublink">Quản&nbsplí&nbspgắn&nbspthẻ</a>
 						<a href="../hashtags/index_insert_hashtags_to_product.php" class="collapse__sublink">Thêm&nbspthẻ&nbspvào&nbspsản&nbspphẩm</a>
 						<a href="../admins/index.php" class="collapse__sublink">Quản&nbsplí&nbspnhân&nbspviên</a>
+						<a href="../print_pdf/index.php" class="collapse__sublink">In&nbspbáo&nbspcáo</a>
 					</ul>
 
 				</div>
