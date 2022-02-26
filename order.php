@@ -13,6 +13,7 @@ require 'check_account.php';
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="notify/notify.js"></script>
 	<script src="notify/notify.min.js"></script>
+
 	<style type="text/css">
 		th, td {
 			border:  1px solid black;
@@ -151,7 +152,7 @@ require 'check_account.php';
 					?>
 					<br>
 					<br>
-					<table class="border" width="100%">
+					<table class="border" width="100%" id="element_to_print">
 						<tr>
 							<th colspan="6">
 								<?php echo "Đơn hàng số " . $num ?>
@@ -257,6 +258,7 @@ require 'check_account.php';
 				endforeach; 
 			} ?>
 		</div>
+		<button id = "js-download-pdf">In PDF</button>
 		<div id="div_duoi">
 			<br>
 			<?php 
@@ -267,6 +269,10 @@ require 'check_account.php';
 	</div>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuidv4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -284,4 +290,30 @@ require 'check_account.php';
 			})
 		});
 	});
+
+
+        (() => {
+
+    const downloadPDFElement = document.getElementById("js-download-pdf");
+
+    downloadPDFElement.addEventListener("click", (event) => {
+        const doc = new jspdf.jsPDF({
+            format: "a4",
+            orientation: "portrait",
+            unit: "mm"
+        });
+
+        html2canvas(document.getElementById("element_to_print")).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const imgProps= doc.getImageProperties(imgData);
+            const pdfWidth = doc.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            doc.save(`Order-${new Date().toLocaleDateString("vi-VN")}.pdf`);
+        })
+    })
+
+})();
+
+
 </script>
