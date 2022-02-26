@@ -11,19 +11,15 @@ require 'connect.php';
             </div>
             <div class="modal-body">
                 <?php
+
                 $customer_id = $_SESSION['customer_id'];
-                $sql = "select customer_id, name, phone, address from receivers where id = '$receipt_id'";
+                $sql = "select receivers.*, receipts.note from receivers join receipts on receipts.receiver_id = receivers.id where receipts.customer_id = '$customer_id' and receipts.id = '$receipt_id'";
                 $result = mysqli_query($connect,$sql);
                 $receipt = mysqli_fetch_array($result);
                 $receiver_name = $receipt['name'];
                 $receiver_phone = $receipt['phone'];
                 $receiver_address = $receipt['address'];
-                $sql = "select note
-                from receipts
-                where
-                id = '$receipt_id'";
-                $result = mysqli_query($connect,$sql);
-                $note = mysqli_fetch_array($result);
+                $note = $receipt['note'];
                 ?>
                 <table width="600px" height="300px" class="border left">
                     <tr>
@@ -43,8 +39,7 @@ require 'connect.php';
                             <?php echo $receiver_address ?>
                             <br>
                             Note:
-                            <?php echo $note['note'];
-                            ?>
+                            <?php echo $note ?>
                         </td>
                     </tr>
                     <tr>

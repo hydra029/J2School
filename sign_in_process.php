@@ -7,6 +7,8 @@ if (isset($_POST['remember']) ) {
 } else {
 	$remember = false;
 }
+$email = preg_replace("/[^A-Za-z0-9]/", "", $email);
+$password = preg_replace("/[^A-Za-z0-9]/", "", $password);
 
 //check tài khoản khách hàng
 $sql = "select customers.*, count(*) as count from customers where email = '$email' and password = '$password'";

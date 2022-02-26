@@ -66,7 +66,7 @@ require 'check_account.php';
 				$receipt_id = $cart['receipt_id'];
 				?>
 				<h4 class="center" id="empty"></h4>
-				<table id="table" class="border" width="100%" style="border: 1px solid black; margin: auto;">
+				<table class="border" width="100%" style="border: 1px solid black; margin: auto;" id="cart">
 					<tr>
 						<td width="20%">
 							<b>
@@ -111,7 +111,9 @@ require 'check_account.php';
 						<tr>
 							<td>
 								<a href="product_detail.php?id=<?php echo $each['id'] ?>">
-									<?php echo $each['name'] ?>
+									<span class="span-name">
+										<?php echo $each['name'] ?>
+									</span>
 								</a>
 							</td>
 							<td>
@@ -173,10 +175,8 @@ require 'check_account.php';
 						<td colspan="6" class="right" >
 						</td>
 						<td>
-							<button>
-								<a data-toggle="modal" href="#modal-order" id="btn-order-form">
-									Đặt hàng
-								</a>
+							<button id="btn-order-form" type="button" data-toggle="modal" data-target="#modal-order">
+								Đặt hàng
 							</button>
 						</td>
 					</tr>
@@ -207,6 +207,7 @@ require 'check_account.php';
 			})
 			.done(function() {
 				let parent_tr = btn.parents("tr");
+				let name = parseFloat(parent_tr.find('.span-name').text());
 				let quantity = parseFloat(parent_tr.find('.span-quantity').text());
 				let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
 				quantity ++;
@@ -219,7 +220,14 @@ require 'check_account.php';
 					total += parseFloat(($(this).text()).replace(/,/g, ''));
 				});
 				total = total.toLocaleString();
+				$('#form_order .span_total').text(total);
 				$('.span-total').text(total);
+				for (var i = 0; i < $('#cart tr').length - 3; i++) {
+					let quantity = $('#cart .span-quantity').eq(i).text();
+					let sum = $('#cart .span-sum').eq(i).text();
+					$('#form_order .span_quantity').eq(i).text(quantity);
+					$('#form_order .span_sum').eq(i).text(sum);
+				}
 				$.notify("Đã thêm một sản phẩm", "success");
 			})
 		});
@@ -238,9 +246,6 @@ require 'check_account.php';
 				let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
 				quantity --;
 				let sum = price * quantity;
-				if (sum == 0) {
-					parent_tr.remove();
-				}
 				sum = sum.toLocaleString();
 				parent_tr.find('.span-quantity').text(quantity);
 				parent_tr.find('.span-sum').text(sum);
@@ -249,11 +254,25 @@ require 'check_account.php';
 					total += parseFloat(($(this).text()).replace(/,/g, ''));
 				});
 				total = total.toLocaleString();
+				for (var i = 0; i < $('#cart tr').length - 3; i++) {
+					let quantity = $('#cart .span-quantity').eq(i).text();
+					let sum = $('#cart .span-sum').eq(i).text();
+					$('#form_order .span_quantity').eq(i).text(quantity);
+					$('#form_order .span_sum').eq(i).text(sum);
+					if (quantity == 0) {
+						let j = i+3;
+						$('#form_order tr').eq(j).remove();
+					}
+				}
+				$('#form_order .span_total').text(total);
+				$('.span-total').text(total);
+				if (sum == 0) {
+					parent_tr.remove();
+				}
 				if (total == 0) {
 					$("#table").hide();
 					$("#empty").text("Giỏ hàng không có gì !!!" );
 				}
-				$('.span-total').text(total);
 				$.notify("Đã giảm một sản phẩm", "success");
 			})
 		});
@@ -271,9 +290,6 @@ require 'check_account.php';
 				let quantity = 0;
 				let price = parseFloat((parent_tr.find('.span-price').text()).replace(/,/g, ''));
 				let sum = price * quantity;
-				if (sum == 0) {
-					parent_tr.remove();
-				}
 				sum = sum.toLocaleString();
 				parent_tr.find('.span-quantity').text(quantity);
 				parent_tr.find('.span-sum').text(sum);
@@ -281,11 +297,25 @@ require 'check_account.php';
 				$(".span-sum").each(function() {
 					total += parseFloat(($(this).text()).replace(/,/g, ''));
 				});
+				for (var i = 0; i < $('#cart tr').length - 3; i++) {
+					let quantity = $('#cart .span-quantity').eq(i).text();
+					let sum = $('#cart .span-sum').eq(i).text();
+					$('#form_order .span_quantity').eq(i).text(quantity);
+					$('#form_order .span_sum').eq(i).text(sum);
+					if (quantity == 0) {
+						let j = i+3;
+						$('#form_order tr').eq(j).remove();
+					}
+				}
+				if (sum == 0) {
+					parent_tr.remove();
+				}
 				if (total == 0) {
-					$("#table").hide();
+					$("#cart").hide();
 					$("#empty").text("Giỏ hàng không có gì !!!" );
 				}
 				total = total.toLocaleString();
+				$('#form_order .span_total').text(total);
 				$('.span-total').text(total);
 				$.notify("Xoá khỏi giỏ thành công", "success");
 			})

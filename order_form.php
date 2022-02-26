@@ -11,7 +11,7 @@ require 'connect.php';
 			</div>
 			<div class="modal-body">
 				<form method="post" action="order_process.php">
-					<table width="700px" height="300px"	class="border left">
+					<table width="700px" height="300px"	class="border left" id="form_order">
 						<tr>
 							<?php
 							$sql = "select * from receivers where status = '1' and customer_id = '$customer_id'";
@@ -79,17 +79,25 @@ require 'connect.php';
 							?>
 							<tr>
 								<td class="border" style=" vertical-align: text-top; text-align: left;">
-									<?php echo $each['product_name'] ?>
+									<span class="span_name">
+										<?php echo $each['product_name'] ?>
+									</span>
 									<br>
-									<img width="100px" height="50px" src="admin/products/<?php echo $each['product_image']; ?>">
+									<img width="100px" height="50px" class="img" src="admin/products/<?php echo $each['product_image']; ?>">
 								</td>
 								<td class="border" style="vertical-align: text-top; text-align: right;">
-									<?php echo number_format($each['product_price']) ?> VNĐ
+									<span class="span_price">
+										<?php echo number_format($each['product_price']) ?>
+									</span> VNĐ
 									<br>
 									x
-									<?php echo $each['quantity'] ?>
+									<span class="span_quantity">
+										<?php echo $each['quantity'] ?>
+									</span>
 									<br>
-									<?php echo number_format($sum) ?> VNĐ
+									<span class="span_sum">
+										<?php echo number_format($sum)  ?>
+									</span> VNĐ
 								</td>
 							</tr>
 							<?php  
@@ -100,7 +108,10 @@ require 'connect.php';
 								Tổng tiền
 							</td>
 							<td class="border right">
-								<?php echo number_format($receipt['total']) ?> VNĐ
+								<span class="span_total">
+									<?php echo number_format($receipt['total']) ?>
+								</span>
+								 VNĐ
 							</td>
 						</tr>
 						<tr>
@@ -123,20 +134,20 @@ require 'connect.php';
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".btn-order-form").click(function() {
-			$('#modal-order').modal('show');
-		});
+		
+			
 		$("#btn-chg-rcv").click(function() {
 			$('#modal-order').modal('hide');
 		});
 		$('#form-order').submit(function(event) {
 			event.preventDefault();
-			$.ajax({
-				url: 'order_process.php',
-				type: 'POST',
-				dataType: 'html',
-				data: $(this).serializeArray(),
-			})
+			if ($('#btn-receiver').text)
+				$.ajax({
+					url: 'order_process.php',
+					type: 'POST',
+					dataType: 'html',
+					data: $(this).serializeArray(),
+				})
 			.done(function(response) {
 			})
 		});
