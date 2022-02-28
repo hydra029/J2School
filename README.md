@@ -1,6 +1,6 @@
 <h1 align="center">ĐỒ ÁN TRANG WEB BÁN HÀNG</h1>
 
-## Sở hữu: Hydra & Mao Leng
+## Sở hữu: <a href="https://github.com/hydra029">Hydra</a> & <a href="https://github.com/maoleng">Mao Leng</a>
 
 ## Mô tả
 - [1. Lời mở đầu](#1-Loi-mo-dau)
