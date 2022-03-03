@@ -221,7 +221,7 @@ require 'check_account.php';
 									case '2':
 									case '3':
 									?>
-									<a href="" id="btn-order-delete" data-id="<?php echo $each['receipt_id'] ?>">
+									<a href="" class="btn-order-delete" data-id="<?php echo $each['receipt_id'] ?>">
 										Huỷ
 									</a>
 									<?php
@@ -243,7 +243,7 @@ require 'check_account.php';
 								?>
 							</td>
 							<td>
-								<a data-toggle="modal" href="#modal-order-detail" id="btn-order-detail">
+								<a href="#" class="btn-order-detail" data-id="<?php echo $each['receipt_id'] ?>">
 									Xem chi tiết >>>
 								</a>
 							</td>
@@ -271,7 +271,7 @@ require 'check_account.php';
 <script src="https://unpkg.com/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#btn-order-delete").click(function() {
+		$(".btn-order-delete").click(function() {
 			let btn = $(this);
 			let id = btn.data('id');
 			let parent_tb = btn.parents('table');
@@ -285,5 +285,4 @@ require 'check_account.php';
 			})
 		});
 	});
-
 </script>

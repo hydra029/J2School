@@ -59,10 +59,10 @@ $num = 0;
 							$num ++;
 							?>
 							<tr>
-								<td width="200px">
+								<td>
 									<?php echo $num ?>
 								</td>
-								<td>
+								<td width="200px">
 									<?php echo $each['name'] ?>
 								</td>
 								<td>
@@ -72,11 +72,11 @@ $num = 0;
 									<?php echo $each['address'] ?>
 								</td>
 								<td>
-									<a data-toggle="modal" href="#modal-receiver-form-change" id="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-num="<?php echo $num ?>">
+									<a data-toggle="modal" href="#modal-receiver-form-change" class="btn-receiver-form" data-id="<?php echo $each['id'] ?>" data-num="<?php echo $num ?>">
 										Sửa
 									</a>
 								</td>
-								<td class="center">
+								<td class="center" width="100px">
 									<?php if ($each['status'] != 1) { ?>
 										<button class="btn-rcv">
 											<a class="btn-receiver" data-id="<?php echo $each['id'] ?>">
@@ -141,9 +141,8 @@ include 'receiver_form_change.php';
 				parent_tr.find('.span-use').show();
 			})
 		});
-		$("#btn-receiver-form").click(function() {
+		$(".btn-receiver-form").click(function() {
 			event.preventDefault();
-			<?php $_SESSION['modal'] = "rcv" ?>
 			let btn = $(this);
 			let id = btn.data('id');
 			let num = btn.data('num');

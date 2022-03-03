@@ -51,12 +51,12 @@ require 'connect.php';
 							<td class="left" colspan="2">
 								Ghi chú:
 								<br>
-								<textarea name="note">
+								<textarea name="note" class="form-control">
 								</textarea>
 							</td>	
 						</tr>
 						<tr>
-							<td>
+							<td colspan="2">
 								Sản phẩm:
 							</td>
 						</tr>
@@ -111,7 +111,7 @@ require 'connect.php';
 								<span class="span_total">
 									<?php echo number_format($receipt['total']) ?>
 								</span>
-								 VNĐ
+								VNĐ
 							</td>
 						</tr>
 						<tr>
@@ -134,8 +134,6 @@ require 'connect.php';
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
-			
 		$("#btn-chg-rcv").click(function() {
 			$('#modal-order').modal('hide');
 		});
