@@ -1869,4 +1869,5 @@ Tài khoản: admin@gmail.com <br>
 Mật khẩu: qwer1234 <br>
 Mong các bạn không spam dữ liệu, xin cảm ơn <br>
 
-
+Chúng mình bảo vệ đồ án như thế nào ? <br>
+https://www.youtube.com/watch?v=K_N9Ek6S6SY&t=1950s
