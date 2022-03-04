@@ -47,6 +47,5 @@ if ($rows == 1) {
 } else {
 	session_start();
 	echo 1;
-		// header('location:sign_in.php');
 }
 ?>

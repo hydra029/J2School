@@ -11,8 +11,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
-
 function send_mail($email, $name, $title, $content) {
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(false);
@@ -32,7 +30,6 @@ function send_mail($email, $name, $title, $content) {
         //Recipients
         $mail->setFrom('feature453@gmail.com', 'Huu Loc & hydra');
         $mail->addAddress($email, $name);     //Add a recipient
-
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML

@@ -34,7 +34,5 @@ for ($i = 0; $i < $arr['num']; $i++) {
 		$arr[$i]['price'] = number_format($arr[$i]['product']['price']);
 	}
 }
-
-
 echo json_encode($arr);
 ?>

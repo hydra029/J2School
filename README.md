@@ -12,7 +12,7 @@
 
 ## 1 Loi mo dau
 
-Trong quá trinh làm đồ án do hạn chế về thời gian và điều kiện nên nhóm em khó tránh khỏi sai sót, mong thầy giúp đỡ em hoàn thành tốt nhiệm vụ thiết kế tốt nghiệp<br>
+Trong quá trình làm đồ án do hạn chế về thời gian và điều kiện nên nhóm em khó tránh khỏi sai sót, mong thầy giúp đỡ em hoàn thành tốt nhiệm vụ thiết kế tốt nghiệp<br>
 Hiện nay, đất nước ta đang trong giai đoạn phát triển, thực hiện công nghiệp hóa, hiện đại hóa. Cùng với sự phát triển của nền kinh tế thị trường, việc giao lưu buôn bán, trao đổi hàng hóa là một nhu cầu thiết yếu của người dân, các cơ quan xí nghiệp, các tổ chức kinh tế và toan xã hội. <br>
 Là học sinh của J2SCHOOL, sau 5, 6 tháng học tập và rèn luyện dưới sự chỉ bảo tận tinh của thầy Nguyễn Nam Long, em đã học hỏi rất nhiều điều bổ ích từ kiến thức trong ngành cho đến đời sống. Đề tài đồ án của nhôm em là: Thiết kế trang web bán đồ gia dụng <br>
 Em xin chân thanh cảm ơn thầy Nguyễn Nam Long đã giúp đỡ em trong quá trinh làm đồ án này. <br><br>
@@ -207,14 +207,14 @@ Dễ hiểu, giao diện đẹp, đầy đủ tinh năng, dùng được trên t
 					<ul>
 						<li>Về sản phẩm: mã, tên, giá, hình ảnh, nhà sản xuất</li>
 						<li>
-								Tác động lên sản phẩm: Xem chi tiết, sửa, xóa
+							Tác động lên sản phẩm: Xem chi tiết, sửa, xóa
 							<ul>
-									-> Xem chi tiết:
-									<ul>
-										<li>Xem ở trang đẹp hơn, có những thông tin cơ bản ở trang Quản lí sản phẩm</li>
-										<li>
-											Có thêm những thông tin:
-Các thẻ được gắn, Số sản phẩm bán được, Số tiền thu được từ sản phẩm, Lần cuối cùng sản phẩm được mua, Mô tả sản phẩm
+								-> Xem chi tiết:
+								<ul>
+									<li>Xem ở trang đẹp hơn, có những thông tin cơ bản ở trang Quản lí sản phẩm</li>
+									<li>
+										Có thêm những thông tin:
+										Các thẻ được gắn, Số sản phẩm bán được, Số tiền thu được từ sản phẩm, Lần cuối cùng sản phẩm được mua, Mô tả sản phẩm
 									</ul>
 								</li>
 							</ul>
@@ -239,7 +239,6 @@ Các thẻ được gắn, Số sản phẩm bán được, Số tiền thu đư
 		</td>
 	</tr>
 </table>
-
 
 <h4 align="center">Thêm sản phẩm</h4>
 <table border="1px solid white">
@@ -352,10 +351,10 @@ Các thẻ được gắn, Số sản phẩm bán được, Số tiền thu đư
 	<tr>
 		<td>Lưu ý</td>
 		<td>
-		<ul>
-			<li>Để dùng được chức năng này phải là Quản lí hoặc Nhân viên</li>
-			<li>Các tệp ảnh sản phẩm sẽ được lưu trong Máy chủ, ảnh cũ không được xóa đi</li>
-		</ul>
+			<ul>
+				<li>Để dùng được chức năng này phải là Quản lí hoặc Nhân viên</li>
+				<li>Các tệp ảnh sản phẩm sẽ được lưu trong Máy chủ, ảnh cũ không được xóa đi</li>
+			</ul>
 		</td>
 	</tr>
 </table>
@@ -636,7 +635,7 @@ Các thẻ được gắn, Số sản phẩm bán được, Số tiền thu đư
 	<tr>
 		<td>Đầu vào</td>
 		<td>Thời gian: Từ ngày x tới ngày y hoặc x ngày gần đây
-hoặc Tháng x</td>
+		hoặc Tháng x</td>
 	</tr>
 	<tr>
 		<td>Trình tự xử lí</td>
@@ -652,9 +651,9 @@ hoặc Tháng x</td>
 							<ul>
 								<li>Ví dụ ở hình thức thống kê ngày x tới ngày y: Từ 12-05-2021 đến 12-7-2022, ….</li>
 								<li>Ví dụ ở hình thức thống kê số ngày gần đây:
-14 ngày gần đây, 30 ngày gần đây, …</li>
+								14 ngày gần đây, 30 ngày gần đây, …</li>
 								<li>Ví dụ ở hình thức thống kê theo tháng:
-Tháng 1, Tháng 7, ….</li>
+								Tháng 1, Tháng 7, ….</li>
 							</ul>
 						</li>
 					</ul>
@@ -695,7 +694,7 @@ Tháng 1, Tháng 7, ….</li>
 	<tr>
 		<td>Đầu vào</td>
 		<td>Thời gian: Từ ngày x tới ngày y hoặc x ngày gần đây
-hoặc Tháng x</td>
+		hoặc Tháng x</td>
 	</tr>
 	<tr>
 		<td>Trình tự xử lí</td>
@@ -711,9 +710,9 @@ hoặc Tháng x</td>
 							<ul>
 								<li>Ví dụ ở hình thức thống kê ngày x tới ngày y: Từ 12-05-2021 đến 12-7-2022, ….</li>
 								<li>Ví dụ ở hình thức thống kê số ngày gần đây:
-14 ngày gần đây, 30 ngày gần đây, …</li>
+								14 ngày gần đây, 30 ngày gần đây, …</li>
 								<li>Ví dụ ở hình thức thống kê theo tháng:
-Tháng 1, Tháng 7, ….</li>
+								Tháng 1, Tháng 7, ….</li>
 							</ul>
 						</li>
 					</ul>
@@ -753,7 +752,7 @@ Tháng 1, Tháng 7, ….</li>
 	<tr>
 		<td>Đầu vào</td>
 		<td>Thời gian: Theo năm x hoặc x ngày gần đây
-hoặc Tháng x</td>
+		hoặc Tháng x</td>
 	</tr>
 	<tr>
 		<td>Trình tự xử lí</td>
@@ -768,11 +767,11 @@ hoặc Tháng x</td>
 							Giá trị theo hình thức thống kê đã chọn:
 							<ul>
 								<li>Ví dụ ở hình thức thống kê theo năm:
-Năm 2022, năm 2021, …</li>
+								Năm 2022, năm 2021, …</li>
 								<li>Ví dụ ở hình thức thống kê số ngày gần đây:
-14 ngày gần đây, 30 ngày gần đây, …</li>
+								14 ngày gần đây, 30 ngày gần đây, …</li>
 								<li>Ví dụ ở hình thức thống kê theo tháng:
-Tháng 1, Tháng 7, ….</li>
+								Tháng 1, Tháng 7, ….</li>
 							</ul>
 						</li>
 					</ul>
@@ -794,7 +793,6 @@ Tháng 1, Tháng 7, ….</li>
 		</td>
 	</tr>
 </table>
-
 
 <h4 align="center">Xem thống kê khách hàng thân thiết</h4>
 <table border="1px solid white">
@@ -974,7 +972,7 @@ Tháng 1, Tháng 7, ….</li>
 					Kiểm tra xem giỏ hàng có sản phẩm nào chưa
 					<ul>
 						<li>
-						    Chưa có:
+							Chưa có:
 							<ul>
 								<li>Thêm vào hoá đơn mới(mã khách hàng, trạng thái hoá đơn: mặc định là 1 tức đang trong giỏ hàng)</li>
 								<li>Lấy mã hoá đơn vừa thêm vào</li>
@@ -983,7 +981,7 @@ Tháng 1, Tháng 7, ….</li>
 							</ul>
 						</li>
 						<li>
-						    Đã có:
+							Đã có:
 							<ul>
 								<li>Lấy mã hoá đơn có trạng thái bằng 1.</li>
 								<li>Lấy thông tin sản phẩm theo mã sản phẩm</li>
@@ -1296,7 +1294,6 @@ Tháng 1, Tháng 7, ….</li>
 		<td>Hiển thị các địa chỉ giao hàng</td>
 	</tr>
 </table>
-
 
 <h4 align="center">Thêm địa chỉ nhận hàng</h4>
 <table border="1px solid white">
@@ -1853,7 +1850,6 @@ Tháng 1, Tháng 7, ….</li>
 <img src="https://github.com/maoleng/store-website/blob/huuloc/document/s%C6%A1%20%C4%91%E1%BB%93%20trang%20web%20qu%E1%BA%A3n%20l%C3%AD.png?raw=true">
 <h4>Sơ đồ trang khách hàng</h4>
 <img src="https://github.com/maoleng/store-website/blob/huuloc/document/s%C6%A1%20%C4%91%E1%BB%93%20trang%20web%20kh%C3%A1ch%20h%C3%A0ng.png?raw=true">
-
 
 ## 5 Ket luan
 Nhóm em đã làm được cơ bản về 1 trang web bán hàng, có đầy đủ các tinh năng cần thiết để quản lí từ nhà cung cấp cho đến quản lí hóa đơn.

@@ -30,7 +30,6 @@
 		</div>
 		<div id="div_giua">
 			<div style="padding: 150px;">
-
 				<form id="form-user-change">
 					<table class="border" width="300px">
 						<tr>
@@ -100,7 +99,6 @@
 	$(document).ready(function() {
 		$("#form-user-change").submit(function(event) {
 			event.preventDefault();
-			
 		});
 		$("#form-user-change").validate({
 			rules: {

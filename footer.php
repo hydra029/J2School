@@ -1,4 +1,4 @@
 <br>
-	<p>
-		Website được thiết kế bởi _.hydra__ & MaoLeng !!!
-	</p>
+<p>
+	Website được thiết kế bởi _.hydra__ & MaoLeng !!!
+</p>
